@@ -18,10 +18,10 @@ Large elements drift right one adjacent swap at a time, like bubbles moving to t
 
 ```mermaid
 flowchart LR
-  A[array] --> B[scan adjacent pairs]
-  B --> C{out of order?}
-  C -- yes --> D[swap and count]
-  C -- no --> E[continue]
+  A["array"] --> B["scan adjacent pairs"]
+  B --> C{"out of order?"}
+  C -- yes --> D["swap and count"]
+  C -- no --> E["continue"]
   D --> E
 ```
 
