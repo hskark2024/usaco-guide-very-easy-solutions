@@ -18,8 +18,8 @@ The prefix array is a ruler of cumulative sums; a query cuts out the segment bet
 
 ```mermaid
 flowchart LR
-  A[a0 a1 a2 ...] --> B[pref0 pref1 pref2 ...]
-  B --> C[sum l..r-1 = pref[r]-pref[l]]
+  A["a0 a1 a2 ..."] --> B["pref0 pref1 pref2 ..."]
+  B --> C["sum l..r-1 = pref[r]-pref[l]"]
 ```
 
 ## Approach
