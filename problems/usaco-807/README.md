@@ -18,9 +18,9 @@ Place the four points on a number line. The teleporter folds x and y together, s
 
 ```mermaid
 flowchart LR
-  A[direct a to b] --> M[min]
-  B[a to x, teleport, y to b] --> M
-  C[a to y, teleport, x to b] --> M
+  A["direct a to b"] --> M["min"]
+  B["a to x, teleport, y to b"] --> M
+  C["a to y, teleport, x to b"] --> M
 ```
 
 ## Approach
