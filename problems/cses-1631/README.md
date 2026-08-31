@@ -18,9 +18,9 @@ The longest book can dominate the schedule; otherwise the total workload dominat
 
 ```mermaid
 flowchart LR
-  A[sum all times] --> C[max]
-  B[longest time] --> D[2*longest]
-  C --> E[answer]
+  A["sum all times"] --> C["max"]
+  B["longest time"] --> D["2*longest"]
+  C --> E["answer"]
   D --> E
 ```
 
