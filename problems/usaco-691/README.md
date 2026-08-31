@@ -18,10 +18,10 @@ Imagine a vertical cut through the games. Left of the cut gets one best gesture;
 
 ```mermaid
 flowchart LR
-  A[count H/P/S prefixes] --> B[try split i]
-  B --> C[best gesture left]
-  B --> D[best gesture right]
-  C --> E[max total]
+  A["count H/P/S prefixes"] --> B["try split i"]
+  B --> C["best gesture left"]
+  B --> D["best gesture right"]
+  C --> E["max total"]
   D --> E
 ```
 
