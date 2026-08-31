@@ -18,11 +18,11 @@ Raise each candidate's bar just above the tallest competing bar.
 
 ```mermaid
 flowchart LR
-  A[votes a,b,c] --> B[current max]
-  B --> C[for each candidate]
-  C --> D{strictly alone at max?}
-  D -- yes --> E[0]
-  D -- no --> F[max+1-votes]
+  A["votes a,b,c"] --> B["current max"]
+  B --> C["for each candidate"]
+  C --> D{"strictly alone at max?"}
+  D -- yes --> E["0"]
+  D -- no --> F["max+1-votes"]
 ```
 
 ## Approach
