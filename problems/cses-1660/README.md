@@ -18,11 +18,11 @@ A flexible window slides over the array, stretching to include new values and sh
 
 ```mermaid
 flowchart LR
-  A[extend right] --> B[sum too large?]
-  B -- yes --> C[move left]
+  A["extend right"] --> B["sum too large?"]
+  B -- yes --> C["move left"]
   C --> B
-  B -- no --> D{sum == x?}
-  D -- yes --> E[count]
+  B -- no --> D{"sum == x?"}
+  D -- yes --> E["count"]
 ```
 
 ## Approach
