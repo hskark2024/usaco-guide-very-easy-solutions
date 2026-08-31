@@ -18,10 +18,10 @@ A window expands over consecutive books until it exceeds the time budget, then s
 
 ```mermaid
 flowchart LR
-  A[add next book] --> B{sum > t?}
-  B -- yes --> C[drop left book]
+  A["add next book"] --> B{"sum > t?"}
+  B -- yes --> C["drop left book"]
   C --> B
-  B -- no --> D[update best length]
+  B -- no --> D["update best length"]
 ```
 
 ## Approach
