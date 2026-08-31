@@ -18,9 +18,9 @@ Slide a length-K frame over the road. The best frame is the one containing the f
 
 ```mermaid
 flowchart LR
-  A[broken positions] --> B[0/1 road array]
-  B --> C[length K window sums]
-  C --> D[min repairs]
+  A["broken positions"] --> B["0/1 road array"]
+  B --> C["length K window sums"]
+  C --> D["min repairs"]
 ```
 
 ## Approach
