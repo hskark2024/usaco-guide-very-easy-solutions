@@ -18,11 +18,11 @@ The known opposite pair fixes the diameter length; rotating that same diameter t
 
 ```mermaid
 flowchart LR
-  A[a,b,c] --> B[d=abs(a-b)]
-  B --> C[n=2d]
-  C --> D{labels valid?}
-  D -- no --> E[-1]
-  D -- yes --> F[c opposite by +/- d]
+  A["a,b,c"] --> B["d=abs(a-b)"]
+  B --> C["n=2d"]
+  C --> D{"labels valid?"}
+  D -- no --> E["-1"]
+  D -- yes --> F["c opposite by +/- d"]
 ```
 
 ## Approach
