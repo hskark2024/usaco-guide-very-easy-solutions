@@ -18,10 +18,10 @@ Each breed has its own cumulative counter line; an interval answer is the rise b
 
 ```mermaid
 flowchart LR
-  A[breed sequence] --> B[prefix count breed 1]
-  A --> C[prefix count breed 2]
-  A --> D[prefix count breed 3]
-  B --> E[query subtract]
+  A["breed sequence"] --> B["prefix count breed 1"]
+  A --> C["prefix count breed 2"]
+  A --> D["prefix count breed 3"]
+  B --> E["query subtract"]
   C --> E
   D --> E
 ```
