@@ -18,9 +18,9 @@ Reserve 2 for one person; the remainder must also be positive and even.
 
 ```mermaid
 flowchart LR
-  A[w] --> B{w even and w > 2?}
-  B -- yes --> C[YES]
-  B -- no --> D[NO]
+  A["w"] --> B{"w even and w > 2?"}
+  B -- yes --> C["YES"]
+  B -- no --> D["NO"]
 ```
 
 ## Approach
