@@ -18,12 +18,12 @@ Picture a sliding prefix-match window. Positions inside the current window can b
 
 ```mermaid
 flowchart LR
-  A[Position i] --> B{inside current Z box?}
-  B -- yes --> C[copy clipped value from prefix]
-  B -- no --> D[start with 0]
-  C --> E[extend by comparing new chars]
+  A["Position i"] --> B{"inside current Z box?"}
+  B -- yes --> C["copy clipped value from prefix"]
+  B -- no --> D["start with 0"]
+  C --> E["extend by comparing new chars"]
   D --> E
-  E --> F[update l,r if match goes farther]
+  E --> F["update l,r if match goes farther"]
 ```
 
 ## Approach
