@@ -18,8 +18,8 @@ Banana prices form a staircase; sum the staircase and compare it to the wallet.
 
 ```mermaid
 flowchart LR
-  A[k,n,w] --> B[total = k*w*(w+1)/2]
-  B --> C[max 0 total-n]
+  A["k,n,w"] --> B["total = k*w*(w+1)/2"]
+  B --> C["max 0 total-n"]
 ```
 
 ## Approach
