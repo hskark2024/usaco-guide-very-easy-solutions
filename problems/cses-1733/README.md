@@ -18,10 +18,10 @@ Shift the string left by p. If every overlapping character still matches, p is a
 
 ```mermaid
 flowchart LR
-  A[compute Z array] --> B[try p from 1 to n-1]
-  B --> C{z[p] >= n-p?}
-  C -- yes --> D[print p]
-  D --> E[print n]
+  A["compute Z array"] --> B["try p from 1 to n-1"]
+  B --> C{"z[p] >= n-p?"}
+  C -- yes --> D["print p"]
+  D --> E["print n"]
 ```
 
 ## Approach
