@@ -18,11 +18,11 @@ A selected edge gives every destination below it one extra bit of identity. At e
 
 ```mermaid
 flowchart LR
-  A[node u] --> B[count marked child subtrees]
-  B --> C{u is marked?}
-  C -- yes --> D[select every marked child edge]
-  C -- no --> E[leave one unselected, select rest]
-  D --> F[recurse]
+  A["node u"] --> B["count marked child subtrees"]
+  B --> C{"u is marked?"}
+  C -- yes --> D["select every marked child edge"]
+  C -- no --> E["leave one unselected, select rest"]
+  D --> F["recurse"]
   E --> F
 ```
 
