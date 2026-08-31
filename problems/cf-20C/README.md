@@ -18,10 +18,10 @@ The priority queue repeatedly commits the currently closest unsettled node, grow
 
 ```mermaid
 flowchart LR
-  A[dist[1]=0] --> B[pq min distance]
-  B --> C[relax outgoing edges]
-  C --> D[store parent on improvement]
-  D --> E[reconstruct path to n]
+  A["dist[1]=0"] --> B["pq min distance"]
+  B --> C["relax outgoing edges"]
+  C --> D["store parent on improvement"]
+  D --> E["reconstruct path to n"]
 ```
 
 ## Approach
