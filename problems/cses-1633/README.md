@@ -18,9 +18,9 @@ A path to sum s ends by jumping from one of the previous six sums.
 
 ```mermaid
 flowchart LR
-  A[dp[0]=1] --> B[sum s]
-  B --> C[last roll 1..6]
-  C --> D[add dp[s-roll]]
+  A["dp[0]=1"] --> B["sum s"]
+  B --> C["last roll 1..6"]
+  C --> D["add dp[s-roll]"]
 ```
 
 ## Approach
