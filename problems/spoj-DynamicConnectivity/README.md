@@ -18,12 +18,12 @@ Think of the forest as flexible paths. Access operations expose exactly the path
 
 ```mermaid
 flowchart LR
-  A[add u v] --> B[makeroot u]
-  B --> C[link u under v]
-  D[rem u v] --> E[makeroot u]
-  E --> F[expose v path]
-  F --> G[cut edge]
-  H[conn u v] --> I[findroot u == findroot v]
+  A["add u v"] --> B["makeroot u"]
+  B --> C["link u under v"]
+  D["rem u v"] --> E["makeroot u"]
+  E --> F["expose v path"]
+  F --> G["cut edge"]
+  H["conn u v"] --> I["findroot u == findroot v"]
 ```
 
 ## Approach

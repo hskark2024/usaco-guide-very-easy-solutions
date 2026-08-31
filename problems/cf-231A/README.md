@@ -18,9 +18,9 @@ Each problem is a three-vote ballot; two or more votes pass it.
 
 ```mermaid
 flowchart LR
-  A[three votes] --> B[sum]
-  B --> C{sum >= 2?}
-  C -- yes --> D[count]
+  A["three votes"] --> B["sum"]
+  B --> C{"sum >= 2?"}
+  C -- yes --> D["count"]
 ```
 
 ## Approach

@@ -18,11 +18,11 @@ Walk toward the only side that is too heavy. Once no side is too heavy, the curr
 
 ```mermaid
 flowchart LR
-  A[compute subtree sizes] --> B[start at 1]
-  B --> C{child subtree > n/2?}
-  C -- yes --> D[move to that child]
+  A["compute subtree sizes"] --> B["start at 1"]
+  B --> C{"child subtree > n/2?"}
+  C -- yes --> D["move to that child"]
   D --> C
-  C -- no --> E[current node is centroid]
+  C -- no --> E["current node is centroid"]
 ```
 
 ## Approach

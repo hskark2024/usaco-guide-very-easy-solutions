@@ -18,10 +18,10 @@ The table is a stack of interval layers: length 1, 2, 4, 8, and so on. A query g
 
 ```mermaid
 flowchart LR
-  A[array] --> B[build power-of-two minima]
-  B --> C[query length len]
-  C --> D[k=floor log2 len]
-  D --> E[min left block, right block]
+  A["array"] --> B["build power-of-two minima"]
+  B --> C["query length len"]
+  C --> D["k=floor log2 len"]
+  D --> E["min left block, right block"]
 ```
 
 ## Approach

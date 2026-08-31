@@ -1467,6 +1467,50 @@ def slug(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
+def quote_mermaid_labels(diagram):
+    """Quote flowchart node labels so GitHub Mermaid accepts punctuation safely."""
+    out_lines = []
+    for line in diagram.splitlines():
+        rebuilt = []
+        i = 0
+        while i < len(line):
+            if (
+                line[i].isalpha()
+                and (i == 0 or line[i - 1].isspace() or line[i - 1] == ">")
+            ):
+                j = i + 1
+                while j < len(line) and (line[j].isalnum() or line[j] == "_"):
+                    j += 1
+                if j < len(line) and line[j] in "[{":
+                    opener = line[j]
+                    closer = "]" if opener == "[" else "}"
+                    k = j + 1
+                    end = -1
+                    while True:
+                        k = line.find(closer, k)
+                        if k == -1:
+                            break
+                        tail = line[k + 1 :].lstrip()
+                        if not tail or tail.startswith("--"):
+                            end = k
+                            break
+                        k += 1
+                    if end != -1:
+                        label = line[j + 1 : end]
+                        if label.startswith('"') and label.endswith('"'):
+                            rebuilt.append(line[i : end + 1])
+                        elif opener == "[":
+                            rebuilt.append(f'{line[i:j]}["{label}"]')
+                        else:
+                            rebuilt.append(f'{line[i:j]}{{"{label}"}}')
+                        i = end + 1
+                        continue
+            rebuilt.append(line[i])
+            i += 1
+        out_lines.append("".join(rebuilt))
+    return "\n".join(out_lines)
+
+
 def render_readme(p):
     tags = ", ".join(p["tags"])
     return f"""# {p['name']}
@@ -1488,7 +1532,7 @@ This is a paraphrase for study notes. Use the original problem link for the offi
 {p['visualization']}
 
 ```mermaid
-{p['diagram']}
+{quote_mermaid_labels(p['diagram'])}
 ```
 
 ## Approach

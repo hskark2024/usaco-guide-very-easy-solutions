@@ -18,11 +18,11 @@ Each segment has a tallest bar and a second-tallest bar. If the new ceiling only
 
 ```mermaid
 flowchart LR
-  A[range chmin x] --> B{segment outside or max <= x?}
-  B -- yes --> C[stop]
-  B -- no --> D{x > second max and fully covered?}
-  D -- yes --> E[lower only max bars]
-  D -- no --> F[push to children]
+  A["range chmin x"] --> B{"segment outside or max <= x?"}
+  B -- yes --> C["stop"]
+  B -- no --> D{"x > second max and fully covered?"}
+  D -- yes --> E["lower only max bars"]
+  D -- no --> F["push to children"]
 ```
 
 ## Approach

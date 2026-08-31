@@ -18,10 +18,10 @@ Following pointers creates a tail leading into a cycle; the first repeated node 
 
 ```mermaid
 flowchart LR
-  A[start i] --> B[follow p[u]]
-  B --> C{seen in this walk?}
+  A["start i"] --> B["follow p[u]"]
+  B --> C{"seen in this walk?"}
   C -- no --> B
-  C -- yes --> D[answer u]
+  C -- yes --> D["answer u"]
 ```
 
 ## Approach

@@ -18,9 +18,9 @@ Read the score log as score tokens: A2, B1, A1, and so on. Each token adds to on
 
 ```mermaid
 flowchart LR
-  A[score string] --> B[token player+points]
-  B --> C[score A / score B]
-  C --> D[winner]
+  A["score string"] --> B["token player+points"]
+  B --> C["score A / score B"]
+  C --> D["winner"]
 ```
 
 ## Approach

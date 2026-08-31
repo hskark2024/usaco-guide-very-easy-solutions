@@ -18,10 +18,10 @@ The current element is a hinge; the left pan holds all previous values and the r
 
 ```mermaid
 flowchart LR
-  A[total sum] --> B[scan i]
-  B --> C[left]
-  B --> D[total-left-a[i]]
-  C --> E{equal?}
+  A["total sum"] --> B["scan i"]
+  B --> C["left"]
+  B --> D["total-left-a[i]"]
+  C --> E{"equal?"}
   D --> E
 ```
 

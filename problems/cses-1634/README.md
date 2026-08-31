@@ -18,9 +18,9 @@ Every sum is a node; a coin creates an edge from s-c to s with cost one coin.
 
 ```mermaid
 flowchart LR
-  A[dp[0]=0] --> B[for sum 1..x]
-  B --> C[try each coin]
-  C --> D[min previous + 1]
+  A["dp[0]=0"] --> B["for sum 1..x"]
+  B --> C["try each coin"]
+  C --> D["min previous + 1"]
 ```
 
 ## Approach

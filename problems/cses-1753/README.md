@@ -18,9 +18,9 @@ The prefix function measures how much of the pattern is currently matched as the
 
 ```mermaid
 flowchart LR
-  A[pattern#text] --> B[prefix function]
-  B --> C{value == pattern length?}
-  C -- yes --> D[count occurrence]
+  A["pattern#text"] --> B["prefix function"]
+  B --> C{"value == pattern length?"}
+  C -- yes --> D["count occurrence"]
 ```
 
 ## Approach

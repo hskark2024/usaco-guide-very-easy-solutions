@@ -18,9 +18,9 @@ Pack the smallest time blocks into the budget bar before considering larger bloc
 
 ```mermaid
 flowchart LR
-  A[durations] --> B[sort ascending]
-  B --> C[take while total <= X]
-  C --> D[count]
+  A["durations"] --> B["sort ascending"]
+  B --> C["take while total <= X"]
+  C --> D["count"]
 ```
 
 ## Approach

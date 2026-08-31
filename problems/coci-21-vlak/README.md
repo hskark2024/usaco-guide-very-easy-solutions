@@ -18,11 +18,11 @@ The trie is the game board. Nina can move only along edges into Nina-marked pref
 
 ```mermaid
 flowchart LR
-  A[combined trie] --> B[mark valid prefixes per player]
-  B --> C[DFS from leaves]
-  C --> D{exists legal child losing for opponent?}
-  D -- yes --> E[winning]
-  D -- no --> F[losing]
+  A["combined trie"] --> B["mark valid prefixes per player"]
+  B --> C["DFS from leaves"]
+  C --> D{"exists legal child losing for opponent?"}
+  D -- yes --> E["winning"]
+  D -- no --> F["losing"]
 ```
 
 ## Approach
