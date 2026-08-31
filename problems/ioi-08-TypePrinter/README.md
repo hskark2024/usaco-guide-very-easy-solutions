@@ -18,11 +18,11 @@ The trie is a keyboard travel map. Side branches are round trips; the longest fi
 
 ```mermaid
 flowchart LR
-  A[insert words in trie] --> B[mark path to longest word]
-  B --> C[DFS side children first]
-  C --> D[type letter / recurse / backspace]
-  C --> E[follow longest path last]
-  E --> F[no final backspaces]
+  A["insert words in trie"] --> B["mark path to longest word"]
+  B --> C["DFS side children first"]
+  C --> D["type letter / recurse / backspace"]
+  C --> E["follow longest path last"]
+  E --> F["no final backspaces"]
 ```
 
 ## Approach
