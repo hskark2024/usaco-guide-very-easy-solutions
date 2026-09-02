@@ -1,0 +1,7 @@
+Associative Array	Represent a gigantic sparse array with a hash map
+Why a normal array fails	Keys can reach 10^18|Only up to Q positions can be updated
+Store only what changes	Hash map entry = key plus latest value|Every unstored key still means zero
+Update	values[key] = value|Insert a new key or overwrite the old value
+Lookup	Use find without inserting|Present: stored value|Missing: zero
+C++ details	uint64_t keys and values|Reserve space|Use a mixed hash
+Result	O(1) expected time per operation|O(U) space for updated keys

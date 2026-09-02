@@ -1,0 +1,27 @@
+Hey everyone. In this video, we are solving Unionfind from the USACO Guide Easy list. This problem teaches one of the most useful graph data structures: disjoint set union, usually shortened to D S U.
+
+We begin with N vertices and no edges. A type zero operation adds an edge between two vertices. A type one operation asks whether two vertices are connected, meaning we can travel from one to the other through any chain of added edges.
+
+One slow idea is to run a graph search for every question. But with up to two hundred thousand operations, repeatedly exploring the graph could cost too much. DSU gives us a faster view. It cares about which connected component each vertex belongs to, not the exact path inside that component.
+
+Imagine each component as a team with one captain. Every vertex stores a parent pointer. Following parent pointers eventually reaches the captain, which we call the representative or root. Two vertices are connected exactly when they reach the same root.
+
+At the beginning, every vertex is alone, so every vertex is its own parent and every component has size one.
+
+The find operation returns a vertex's root. We follow parent pointers until we reach a vertex whose parent is itself. On the way back, we apply path compression: every visited vertex points directly to the root. The next search from those vertices becomes much faster.
+
+The union operation joins two components. First, find both roots. If they match, the vertices are already connected and there is nothing to change. Otherwise, attach the smaller component's root under the larger component's root. This strategy is called union by size. It prevents tall parent trees.
+
+Let us trace an example with vertices zero through four. A query on zero and two first returns false because their roots differ. Add zero-one, then add one-two. The second union finds that one already belongs to zero's component, so it joins vertex two to that same root. Now a query on zero and two returns true.
+
+Suppose we call find on two. If its path is two to one to zero, path compression changes two's parent directly to zero. The component membership never changes; only our shortcut improves.
+
+The C++ class stores two vectors: parent and size. The constructor fills parent with zero, one, two, and so on, and initializes every size to one. Find is recursive: if x is already a root, return x. Otherwise, recursively find the root and assign it back to parent of x.
+
+Unite finds both roots, swaps them if the first component is smaller, points the second root to the first, and adds their sizes. Connected simply compares the two roots.
+
+Why is this correct? The DSU sets initially match the isolated graph vertices. Adding an edge merges exactly the components containing its endpoints. Path compression and union by size only rearrange parent pointers inside a component. So the DSU partition always matches the graph's connected components, and equal roots give exactly the correct answer.
+
+With both optimizations, all operations take almost constant time. The formal bound uses the inverse Ackermann function, but for every practical input you can think of it as extremely close to O of one per operation. Space is O of N.
+
+Check the description for the official problem and GitHub code. Once DSU clicks, you will see it everywhere in connectivity and minimum spanning tree problems.
