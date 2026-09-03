@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Static RMQ from the Easy list in USACO Guide. RMQ means range minimum query. We get an array that never changes, and each question asks for the smallest number between a left index and a right index.
+
+The word static is the key. There are no updates. That lets us spend extra time before the questions begin, building information we can reuse. Our goal is to answer every question in constant time with a sparse table.
+
+Suppose our array is seven, two, five, one, nine, three. A query from index two up to, but not including, index five looks at five, one, and nine. The answer is one. Remember that the right endpoint is excluded, just like a C++ iterator range.
+
+A sparse table stores answers for blocks whose lengths are powers of two: one, two, four, eight, and so on. Level zero stores every block of length one, so it is just the original array. Level one stores the minimum of every length-two block. Level two stores every length-four block.
+
+How do we build a new level? A block of length two to the power k consists of two neighboring blocks of length two to the power k minus one. Take the minimum of those two saved answers. This recurrence fills the whole table in O of N log N time.
+
+Now consider a query interval of length five. The largest power of two no greater than five is four. Take a length-four block from the left edge and another length-four block ending at the right edge. Those blocks overlap, but together they cover the entire query.
+
+Usually double-counting sounds dangerous. For sums it would be wrong, because an overlap would be added twice. For minimum it is harmless. The minimum of x and x is still x. This property is called idempotence, but you only need to remember the practical rule: overlapping blocks are safe for minimum.
+
+For a query from l to r, let k be floor log base two of r minus l. The left block answer is table k at l. The right block begins at r minus two to the k. The answer is the smaller of those two values.
+
+We also precompute floor logs. Log of length one is zero. For every larger length, its floor log equals one plus the floor log of half that length. Then each query finds k with one array lookup instead of calling floating-point math.
+
+Let us trace the array seven, two, five, one, nine, three. At level one, the length-two minima begin two, two, one, one, and three. At level two, the length-four blocks beginning at zero, one, and two all have minimum one except the first, which also includes one and is one. For query zero to three, the length is three, so k is one. We compare the block zero to two, whose minimum is two, with the block one to three, also two. The answer is two.
+
+Why is the method correct? First, every stored block is correct because it joins two correct half-blocks. Second, the two query blocks stay inside the requested interval. Each block is more than half the interval length, so they must meet or overlap, leaving no gap. Every requested value is covered, no outside value is included, and the smaller block answer is exactly the range minimum.
+
+In C++, we store a vector for the floor logs and a two-dimensional vector for the sparse table. Copy the input into level zero. For each higher level, combine two half-blocks wherever the whole block fits. During a query, compute k, compute the block length, and print the minimum of the two table entries.
+
+Preprocessing takes O of N log N time and space. Each query takes O of one time. This trade is excellent when the array never changes and there are many questions.
+
+Check the description for the official problem and full GitHub solution. The big idea is simple: precompute power-of-two blocks, then cover every range with two blocks in constant time.

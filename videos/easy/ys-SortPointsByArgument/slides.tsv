@@ -1,0 +1,8 @@
+Sort Points by Argument	Order rays counterclockwise from the negative x-axis|Use exact integer comparisons
+Why avoid atan2?	Very close decimal angles can round incorrectly|The statement warns about double precision
+Cross product	cross(a, b) = a.x*b.y - a.y*b.x|Positive means b is counterclockwise from a locally
+Cut the circle into regions	0: y is negative|1: nonnegative x-axis and origin|2: everything else
+Comparator	First compare regions|Inside one region, positive cross means a comes first
+Compass walkthrough	Down, then right, then up, then left|This matches the required counterclockwise sweep
+Equal directions	Cross product is zero|Either order is allowed; stable_sort is consistent
+C++ and complexity	Use long long for the cross product|O(N log N) time and O(N) storage

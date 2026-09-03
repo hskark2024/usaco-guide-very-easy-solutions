@@ -1,0 +1,8 @@
+Static RMQ	Find the minimum in many ranges|The array never changes
+Half-open query [l, r)	Includes l through r - 1|Example [2, 5) looks at 5, 1, 9
+Sparse-table levels	Level k stores blocks of length 2^k|Level 0 is the original array
+Build a block	minimum[k][i] = min of two half-blocks|Precompute all valid starts
+Answer one query	k = floor(log2(r - l))|Compare a left block and a right block
+Why overlap is safe	The two blocks cover the entire range|min(x, x) is still x
+C++ plan	Precompute integer logs|Two table lookups and one min per query
+Complexity	O(N log N) preprocessing and space|O(1) time per query

@@ -1,0 +1,29 @@
+Hey everyone. Today we are sorting points by their angle from the origin. The official task calls this Sort Points by Argument, and it appears on the Easy list in USACO Guide.
+
+Imagine standing at the origin and turning counterclockwise. Every point defines a ray that you see at a certain moment during the turn. We need to print the points in that order, starting from the negative x-axis.
+
+The first idea might be to call atan2 for every point and sort the decimal angles. The problem warns that ordinary double precision can compare extremely close directions incorrectly. We can avoid that entire issue by using integer arithmetic.
+
+Our main tool is the cross product. For vectors a and b, compute a x times b y minus a y times b x. If this value is positive, b lies counterclockwise from a, as long as the two directions are inside a region spanning less than 180 degrees. If it is zero, the rays have the same direction or one vector is the origin.
+
+There is one catch. Angles wrap around. A direction just before the starting ray and a direction just after it cannot be compared correctly by the cross-product sign alone. We first divide the circle into ordered regions.
+
+Region zero contains points below the x-axis. Starting from the negative x direction, these are encountered first as we turn counterclockwise through the lower half-plane. Region one contains the nonnegative x-axis and the origin. Region two contains everything else: the upper half-plane and the negative x-axis at the end.
+
+The region function is short. If y is negative, return zero. If y is zero and x is nonnegative, return one. Otherwise return two. This exactly matches the circular cut requested by the problem.
+
+Our sort comparator first compares region numbers. Smaller region comes first. If both points have the same region, calculate the cross product and put a before b when the result is positive.
+
+Let us test the four compass directions. The downward point zero, negative one is in region zero, so it comes first. The rightward point one, zero is in region one. The upward point zero, one and the leftward point negative one, zero are in region two. Their cross product is positive in the order up then left. The final order is down, right, up, left, which is a counterclockwise turn beginning just after the negative x-axis and ending on it.
+
+What about the origin? The problem defines its angle as zero, so we place it in region one with the positive x-axis. Its cross product with those points is zero, which makes the directions equivalent for sorting. A stable sort keeps a consistent allowed order.
+
+What about points on the same ray, such as one, one and two, two? Their cross product is zero. The statement allows either order, so again the comparator returns false in both directions. Duplicate points work the same way.
+
+We use long long for coordinates and the cross product. Each coordinate has absolute value at most one billion. Each multiplication is at most ten to the eighteenth, and the final difference stays within signed 64-bit range for these limits. No rounding is involved.
+
+Why is the comparator correct? Different regions are already arranged in the requested circular order. Inside one region, the angular gap never crosses the wraparound cut, so a positive cross product exactly means a comes before b counterclockwise. Equal rays may stay tied. Therefore the sorted list follows every direction in the required order.
+
+In C++, define a Point with x and y. Write the region function and the angle-less comparator. Read the vector, call stable sort, and print the coordinates. The running time is O of N log N, and the stored points use O of N space.
+
+Check the description for the official task and the full GitHub solution. The reusable geometry lesson is this: when angle precision is risky, split the circle at a known ray and compare directions with cross products.
