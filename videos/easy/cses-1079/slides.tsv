@@ -1,0 +1,7 @@
+Binomial Coefficients	How many groups of b can we choose from a items?|Example: 5 choose 3 equals 10
+The factorial identity	C(a,b) = a! / (b! (a-b)!)|One hundred thousand queries require reuse
+Precompute factorials	fact[0] = 1|fact[i] = fact[i-1] times i modulo P
+Division modulo a prime	Replace division by multiplication with an inverse|x inverse = x to power P-2 modulo P
+One inverse, then backward	Compute inverse factorial of the largest a|invFact[i-1] = invFact[i] times i
+Answer every query	fact[a] times invFact[b] times invFact[a-b]|O(1) per query
+Edge cases and complexity	C(a,0) = C(a,a) = 1|O(A + Q + log P) time and O(A + Q) space

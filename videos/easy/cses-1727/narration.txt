@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Candy Lottery from the USACO Guide Easy list. This problem asks for an expected maximum, which sounds complicated, but a threshold trick makes the solution short.
+
+There are n children. Each child independently receives a random whole number of candies from one through k, with every number equally likely. We want the average value of the largest candy count if we repeated this experiment many times.
+
+For the official example, two children each get a number from one to three. There are nine equally likely pairs. Their maximum values are one, two, three, two, two, three, three, three, and three. These add to twenty-two, so the expectation is twenty-two ninths, or about two point four four four four four four.
+
+Listing every outcome works only for tiny values. There are k to the power n outcomes, which grows very quickly. Instead, think of the maximum as a stack of threshold levels.
+
+If the maximum is four, it reaches thresholds one, two, three, and four. That value four is therefore the sum of four yes-or-no indicators: is the maximum at least one, at least two, at least three, and at least four?
+
+Expected values add, so the expected maximum equals the sum, for x from one through k, of the probability that the maximum is at least x. This is called the tail-sum identity.
+
+How do we find that probability? It is easier to calculate the opposite event. The maximum is below x exactly when every child receives one of the x minus one values from one through x minus one. One child is below x with probability x minus one divided by k.
+
+The choices are independent, so the probability that all n children are below x is that fraction raised to power n. Therefore, the probability that the maximum reaches x is one minus the quantity x minus one divided by k, raised to n.
+
+Now sum that expression for every x from one through k. The constraints are only one hundred, so this direct loop is easily fast enough.
+
+Let us check the boundary thresholds. At x equals one, nobody can be below one because the smallest result is one. The reach probability is one, so every maximum contributes its first unit. At x equals k, the maximum reaches k unless every child chooses one through k minus one. The formula handles that too.
+
+When n equals one, the answer should be the average of one through k, which is k plus one divided by two. Our threshold sum also produces that average. When k equals one, every child receives exactly one candy, so every term gives an expected maximum of one.
+
+In C++, use long double for extra precision. Start expected at zero. For each value from one through maximum candies, compute below as value minus one divided by maximum candies. Add one minus pow of below to the number of children. Finally, print with fixed and set precision six.
+
+The proof follows directly from the indicator view. A maximum of M reaches exactly M thresholds, so the threshold indicators sum to the maximum in every outcome. Taking expectations turns that into a sum of probabilities. Independence gives the probability that everyone stays below a threshold, and subtracting from one gives the probability we need. Therefore, the computed sum is the expected maximum.
+
+The loop has O of k time and O of one extra space. Check the description for the official problem and GitHub solution. This threshold method is a powerful way to handle expected values of nonnegative integer random variables.

@@ -1,6 +1,7 @@
 from bisect import insort
 from collections import Counter
 from math import atan2
+from itertools import product
 from pathlib import Path
 import random
 import subprocess
@@ -86,8 +87,53 @@ def verify_depq() -> None:
         assert actual == expected
 
 
+def verify_binomial_coefficients() -> None:
+    queries = [(a, b) for a in range(31) for b in range(a + 1)]
+    input_text = str(len(queries)) + "\n" + "".join(
+        f"{a} {b}\n" for a, b in queries
+    )
+    actual = list(map(int, run("cses-1079", input_text).split()))
+
+    expected = []
+    for a, b in queries:
+        row = [1]
+        for _ in range(a):
+            row = [1] + [row[i - 1] + row[i] for i in range(1, len(row))] + [1]
+        expected.append(row[b])
+    assert actual == expected
+
+
+def verify_distributing_apples() -> None:
+    def enumerate_distributions(children: int, apples: int) -> int:
+        return sum(
+            sum(shares) == apples
+            for shares in product(range(apples + 1), repeat=children)
+        )
+
+    for children in range(1, 6):
+        for apples in range(1, 7):
+            actual = int(run("cses-1716", f"{children} {apples}\n"))
+            assert actual == enumerate_distributions(children, apples)
+
+
+def verify_candy_lottery() -> None:
+    for children in range(1, 5):
+        for maximum in range(1, 7):
+            outcomes = list(product(range(1, maximum + 1), repeat=children))
+            expected = sum(max(outcome) for outcome in outcomes) / len(outcomes)
+            actual = float(run("cses-1727", f"{children} {maximum}\n"))
+            assert abs(actual - expected) <= 0.5e-6 + 1e-12
+
+
 if __name__ == "__main__":
-    for verifier in (verify_static_rmq, verify_angle_sort, verify_depq):
+    for verifier in (
+        verify_static_rmq,
+        verify_angle_sort,
+        verify_depq,
+        verify_binomial_coefficients,
+        verify_distributing_apples,
+        verify_candy_lottery,
+    ):
         verifier()
         print(f"passed {verifier.__name__}")
     sys.exit(0)

@@ -25,6 +25,9 @@ The official statements remain at their original judge links. These notes intent
 | `ys-StaticRMQ` | YS | [Static RMQ](problems/ys-StaticRMQ/README.md) | [Sparse Table, RMQ] | [C++](solutions/ys-StaticRMQ.cpp) | [Package](videos/easy/ys-StaticRMQ/README.md) |
 | `ys-SortPointsByArgument` | YS | [Sort Points by Argument](problems/ys-SortPointsByArgument/README.md) | [Geometry, Sorting] | [C++](solutions/ys-SortPointsByArgument.cpp) | [Package](videos/easy/ys-SortPointsByArgument/README.md) |
 | `ys-DEPQ` | YS | [Double-Ended Priority Queue](problems/ys-DEPQ/README.md) | [Multiset] | [C++](solutions/ys-DEPQ.cpp) | [Package](videos/easy/ys-DEPQ/README.md) |
+| `cses-1079` | CSES | [Binomial Coefficients](problems/cses-1079/README.md) | [Combinatorics, Modular Arithmetic] | [C++](solutions/cses-1079.cpp) | [Package](videos/easy/cses-1079/README.md) |
+| `cses-1716` | CSES | [Distributing Apples](problems/cses-1716/README.md) | [Combinatorics, Stars and Bars] | [C++](solutions/cses-1716.cpp) | [Package](videos/easy/cses-1716/README.md) |
+| `cses-1727` | CSES | [Candy Lottery](problems/cses-1727/README.md) | [Probability, Expected Value] | [C++](solutions/cses-1727.cpp) | [Package](videos/easy/cses-1727/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

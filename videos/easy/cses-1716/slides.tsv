@@ -1,0 +1,7 @@
+Distributing Apples	n different children|m identical apples|Zero apples is allowed
+Turn apples into stars	Each star represents one apple|The order of identical apples does not matter
+Add divider bars	n minus 1 bars create n sections|Stars in section i are child i's apples
+Why empty shares work	Adjacent bars make an empty section|Bars at the ends also allow zero
+Count the sequences	m plus n minus 1 total positions|Choose n minus 1 bar positions
+Compute modulo a prime	Answer is C(m+n-1,n-1)|Use factorials and a modular inverse
+Official example	n = 3 and m = 2 gives C(4,2) = 6|O(n+m+log MOD) time

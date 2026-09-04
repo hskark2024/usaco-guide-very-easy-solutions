@@ -1,0 +1,7 @@
+Candy Lottery	n independent children|Each gets a random integer from 1 through k|Find the expected maximum
+Why enumeration fails	There are k to the n possible outcomes|Use thresholds instead
+Break a maximum into levels	A maximum of M reaches thresholds 1 through M|M equals the number of reached thresholds
+Tail-sum identity	E[max] is the sum of P(max at least x)|Sum x from 1 through k
+Use the complement	max below x means every child is below x|One child is below with probability (x-1)/k
+Independence	All are below with probability ((x-1)/k)^n|Reach probability is one minus that
+C++ and complexity	Sum with long double and print six decimals|O(k) time and O(1) space

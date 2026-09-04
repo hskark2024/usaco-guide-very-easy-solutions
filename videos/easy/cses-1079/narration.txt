@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Binomial Coefficients from the USACO Guide Easy list. The goal is to answer lots of questions like: how many different teams of three can we choose from five students?
+
+That number is read as five choose three, and it equals ten. In general, a choose b counts the ways to select b items from a different items when order does not matter.
+
+The usual formula is a factorial divided by b factorial times a minus b factorial. Factorial means multiplying every positive whole number down to one. For example, five factorial is five times four times three times two times one.
+
+One query would be easy to calculate directly, but this problem can give us one hundred thousand queries, and a can reach one million. Recomputing factorials for every query would be far too slow. Instead, we do the shared work once.
+
+First, read all queries and find the largest value of a. Build an array called factorial where factorial of i stores i factorial modulo one billion seven. Each entry is just the previous entry times i, so the whole array takes linear time.
+
+Now comes the interesting part. We need division, but modular arithmetic does not allow ordinary division. We replace division by multiplication with a modular inverse. A modular inverse of x is a number that behaves like one divided by x under the modulus.
+
+Our modulus is prime. Fermat's little theorem tells us that the inverse of a nonzero x is x raised to the modulus minus two. We calculate that large power quickly with binary exponentiation. Binary exponentiation repeatedly squares the base and uses the binary bits of the exponent, so it needs only logarithmic time.
+
+We could run that exponentiation for every factorial, but there is an even faster trick. Calculate the inverse of the largest factorial once. Then walk backward. Because i factorial equals i times i minus one factorial, the inverse of i minus one factorial equals the inverse of i factorial times i. One backward pass gives every inverse factorial.
+
+Now each query is constant time. Multiply factorial of a, inverse factorial of b, and inverse factorial of a minus b. Reduce modulo one billion seven after each multiplication.
+
+Let us trace five choose three. The formula is five factorial divided by three factorial and two factorial. That is one hundred twenty divided by six times two, giving ten. Our modular version represents those two divisions with inverse factorials and reaches the same result modulo the prime.
+
+The boundary cases work naturally. Choosing zero objects has one result: choose nothing. Choosing all a objects also has one result. In both cases one of the denominator factorials is zero factorial, which we define as one.
+
+In C++, store each query as a pair while finding the largest a. Use long long for modular products. Build factorial forward, compute one inverse factorial with mod pow, and build inverse factorial backward. Finally, loop through the saved queries and print the three-factor product.
+
+Why is it correct? The ordinary factorial identity counts every selection. Fermat's theorem gives the correct modular version of division. The backward recurrence produces the true inverse of every factorial, so substituting those values into the identity gives the right answer for every query.
+
+If A is the largest input, preprocessing takes O of A plus log modulus time. Every query then takes O of one time, and the arrays use O of A memory. Check the description for the official problem and GitHub solution. You now have a reusable combination template for many contest problems.

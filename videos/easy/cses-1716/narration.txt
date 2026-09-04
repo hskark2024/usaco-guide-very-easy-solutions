@@ -1,0 +1,29 @@
+Hey everyone. Today we are solving Distributing Apples, an Easy problem from the USACO Guide list. It teaches a classic counting idea called stars and bars.
+
+We have n different children and m identical apples. Different means child one and child two are not interchangeable. Identical means swapping two apples does not create a new distribution. A child is allowed to get zero apples.
+
+For three children and two apples, one possible distribution is two, zero, zero. Another is one, one, zero. The official example has six total distributions.
+
+Trying to list every distribution is impossible when n and m can each reach one million. We need to turn the problem into one combination.
+
+Represent every apple with a star. Then insert n minus one divider bars to split the row into n sections, one section per child. The number of stars in a section is how many apples that child receives.
+
+For example, with three children and four apples, the picture star, star, bar, bar, star, star means the shares are two, zero, and two. The adjacent bars create an empty middle section, so child two gets zero. A bar at the beginning or end works too, which lets the first or last child receive zero.
+
+This encoding goes both directions. Any distribution tells us exactly how many stars to place in each section. Any row of stars and bars tells us exactly how many apples each child receives. So there is a one-to-one match, also called a bijection.
+
+The row contains m stars and n minus one bars, for m plus n minus one total positions. We only need to choose which n minus one positions contain bars. That gives the combination m plus n minus one choose n minus one. Choosing the star positions instead gives the equivalent expression m plus n minus one choose m.
+
+Now we must calculate that combination modulo one billion seven. Use the factorial formula: total factorial divided by the factorial of n minus one and the factorial of m. Since the modulus is prime, division becomes multiplication by a modular inverse. Fermat's little theorem says the inverse of a nonzero number x is x to the power modulus minus two.
+
+Build factorials from zero through m plus n minus one. Multiply the two denominator factorials together, find that product's modular inverse with binary exponentiation, and multiply it by the total factorial.
+
+Let us trace the official example with three children and two apples. We have two stars and two divider bars, so there are four positions. Choose two positions for the bars. Four choose two equals six, exactly matching the six distributions.
+
+The edge case of one child is simple. We need zero bars, so there is only one sequence and one distribution: that child gets every apple. With one apple and many children, choosing which child receives it gives n distributions, which our formula also produces.
+
+In C++, read children and apples. Set slots to children plus apples minus one. Fill a long long factorial vector. Compute the denominator using factorial of children minus one and factorial of apples. Use mod pow to invert it, multiply by factorial of slots, and print the answer.
+
+The correctness proof has two pieces. First, the stars-and-bars mapping pairs every valid distribution with exactly one sequence. Second, choosing the bar positions counts every such sequence exactly once. The modular factorial formula correctly evaluates that combination.
+
+The running time is O of n plus m plus log modulus, and the memory use is O of n plus m. Check the description for the official problem and GitHub solution. Once you can see the stars and dividers, many distribution problems collapse into one combination.

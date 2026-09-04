@@ -1,9 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last live listing check: 2026-09-03
-- Completed Easy solutions: 6
-- Complete video packages: 6
+- Last live listing check: 2026-09-04
+- Listing snapshot: USACO Guide source commit [`f7abdff`](https://github.com/cpinitiative/usaco-guide/commit/f7abdff1c097a159894f200e214e48231dae837c) (420 unique Easy IDs)
+- Completed Easy solutions: 9
+- Complete video packages: 9
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -16,3 +17,6 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `ys-StaticRMQ` | Static RMQ | complete | complete | complete | generated |
 | `ys-SortPointsByArgument` | Sort Points by Argument | complete | complete | complete | generated |
 | `ys-DEPQ` | Double-Ended Priority Queue | complete | complete | complete | generated |
+| `cses-1079` | Binomial Coefficients | complete | complete | complete | generated |
+| `cses-1716` | Distributing Apples | complete | complete | complete | generated |
+| `cses-1727` | Candy Lottery | complete | complete | complete | generated |
