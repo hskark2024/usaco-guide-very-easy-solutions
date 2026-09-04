@@ -1,0 +1,7 @@
+Union-Find / DSU	Maintain connected groups as edges are added
+The key observation	Queries need component identity|We do not need to store every possible path
+Parent forest	Each vertex points toward one component root|Same root means connected
+Find with path compression	Follow parents to the root|Make every visited vertex point straight to it
+Union by size	Find both roots|Attach the smaller tree below the larger root
+Walkthrough	Add 0-1, then 1-2|Now find(0) equals find(2)
+C++ plan	parent and size vectors|Almost O(1) amortized time per operation
