@@ -1,6 +1,6 @@
-# USACO Guide Very Easy Solutions
+# USACO Guide Solutions
 
-This repository contains study notes and C++ solutions for every problem currently returned by the USACO Guide problems page with `difficulty=Very Easy`.
+This repository contains study notes and C++ solutions selected from the live USACO Guide problem listings. The original Very Easy collection is preserved, and daily work now advances through problems currently labeled `Easy`.
 
 Each problem folder includes:
 
@@ -14,6 +14,21 @@ Each problem folder includes:
 The official statements remain at their original judge links. These notes intentionally avoid copying full problem statements.
 
 ## Problem Index
+
+### Easy
+
+| ID | Source | Problem | Tags | Solution | Video assets |
+| --- | --- | --- | --- | --- | --- |
+| `ys-montmort` | YS | [Montmort Number](problems/ys-montmort/README.md) | [Combinatorics, DP] | [C++](solutions/ys-montmort.cpp) | [Package](videos/easy/ys-montmort/README.md) |
+| `ys-UnionFind` | YS | [Unionfind](problems/ys-UnionFind/README.md) | [DSU] | [C++](solutions/ys-UnionFind.cpp) | [Package](videos/easy/ys-UnionFind/README.md) |
+| `ys-AssociativeArray` | YS | [Associative Array](problems/ys-AssociativeArray/README.md) | [Map, Hashing] | [C++](solutions/ys-AssociativeArray.cpp) | [Package](videos/easy/ys-AssociativeArray/README.md) |
+| `ys-StaticRMQ` | YS | [Static RMQ](problems/ys-StaticRMQ/README.md) | [Sparse Table, RMQ] | [C++](solutions/ys-StaticRMQ.cpp) | [Package](videos/easy/ys-StaticRMQ/README.md) |
+| `ys-SortPointsByArgument` | YS | [Sort Points by Argument](problems/ys-SortPointsByArgument/README.md) | [Geometry, Sorting] | [C++](solutions/ys-SortPointsByArgument.cpp) | [Package](videos/easy/ys-SortPointsByArgument/README.md) |
+| `ys-DEPQ` | YS | [Double-Ended Priority Queue](problems/ys-DEPQ/README.md) | [Multiset] | [C++](solutions/ys-DEPQ.cpp) | [Package](videos/easy/ys-DEPQ/README.md) |
+
+See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
+
+### Very Easy archive
 
 | ID | Source | Problem | Tags | Solution |
 | --- | --- | --- | --- | --- |
