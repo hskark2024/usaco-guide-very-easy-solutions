@@ -1,0 +1,8 @@
+Double-Ended Priority Queue	Insert values|Remove either the minimum or the maximum
+Why multiset?	Always ordered|Keeps duplicate copies|Supports both endpoints
+Insert x	values.insert(x)|Balanced tree finds the position in logarithmic time
+Pop minimum	values.begin() points to one smallest value|Print it, then erase that iterator
+Pop maximum	values.end() is past the data|prev(values.end()) points to one largest value
+Duplicates matter	Two copies of 3 need two removals|A plain set would lose information
+Correctness invariant	The multiset contains exactly the current collection|Each query preserves that fact
+Complexity	O(log(N + Q)) per query|O(N + Q) worst-case space

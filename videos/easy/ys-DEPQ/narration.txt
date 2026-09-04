@@ -1,0 +1,29 @@
+Hey everyone. Today we are building a double-ended priority queue, an Easy problem from the USACO Guide list. The name sounds specialized, but C++ already gives us the right tool: multiset.
+
+We begin with a collection of numbers. Then we process three kinds of queries. Type zero inserts one number. Type one prints and removes one smallest number. Type two prints and removes one largest number. The problem promises the collection is not empty during a removal.
+
+A normal priority queue is great at one end. It can quickly reveal the maximum, or with a different comparison, the minimum. But we need both ends from the same changing collection. We could try using two heaps, but keeping them synchronized after deletions adds extra bookkeeping.
+
+A multiset is an ordered tree. It always keeps its values sorted, and unlike set, it keeps duplicate copies. Insertion, lookup at either end, and erasing one known position are efficient.
+
+Picture the multiset as a sorted shelf. If it contains negative three, zero, one, three, then the leftmost item is negative three and the rightmost item is three. Insert another three, and the shelf now has two separate copies. Remove the maximum once, and one three remains.
+
+For an insertion query, call values dot insert with x. This takes logarithmic time because the balanced tree finds the correct position while keeping itself balanced.
+
+For a minimum removal, values dot begin gives an iterator to the first, smallest element. Print the value by dereferencing the iterator, then erase that iterator. Erasing by iterator is important: it removes exactly one occurrence.
+
+For a maximum removal, values dot end points one position after the final element, so we cannot dereference it. Call prev on end to move back to the actual last, largest element. Print and erase that iterator.
+
+Let us walk through the official operation pattern. Start with negative three, zero, one, and three. Insert another three. A max removal prints three, and the other three stays. The next max removal prints three again. Insert negative two and one. The collection is now negative three, negative two, zero, one, one. Two minimum removals print negative three and negative two. This example shows why duplicate support matters.
+
+Why not use a plain set? A set would collapse the two threes into one stored key. After one maximum removal, it would incorrectly lose both logical copies. Multiset keeps each occurrence, matching the problem's collection.
+
+Why is the algorithm correct? At the beginning, we insert every starting value, so the multiset matches the required collection. For type zero, both collections gain exactly one x. For type one, begin is guaranteed to be a minimum; printing and erasing it removes exactly one minimum. For type two, the iterator before end is guaranteed to be a maximum, and again we remove exactly one. After every query, the multiset still matches the problem state. Therefore every output is correct.
+
+Let M be the current number of stored values. Each insert costs O of log M. Finding begin is constant time, finding the previous iterator is constant time for this bidirectional tree iterator, and erasing the selected node is logarithmic by the standard complexity bound. We can summarize every query as O of log of N plus Q. Space is O of N plus Q in the worst case if every query inserts.
+
+The C++ code is short. Read N and Q. Create multiset of int. Insert the N starting values. Loop through Q operations. Branch on the type, read x only for type zero, and use the correct endpoint iterator for types one and two.
+
+The official limits allow negative one billion through positive one billion, which fit in int. The query guarantee means we do not need an empty check before removal, though in another application we would add one.
+
+Check the description for the official problem and complete GitHub solution. The lesson is practical: when you need sorted data, duplicates, and access to both extremes, C++ multiset is often the cleanest answer.
