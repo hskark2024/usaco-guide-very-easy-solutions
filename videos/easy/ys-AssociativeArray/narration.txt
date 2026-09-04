@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Associative Array from the USACO Guide Easy list. This problem looks like an array problem, but the possible index is so large that a normal array is impossible. The solution is a hash map.
+
+The problem describes an array with infinitely many positions, all starting at zero. An update gives a key k and value v and sets that position to v. A lookup gives a key and asks us to print its current value.
+
+The official keys and values can be as large as ten to the eighteenth power. If we tried to allocate an array with that many positions, we would need more memory than any real computer has. But there can be at most one million operations, so only a tiny number of positions can ever be changed.
+
+This is called sparse data: the possible range is huge, but the used part is small. Instead of storing every zero, we store only key-value pairs that were assigned.
+
+In C++, unordered map fits that job. The key is the giant array index, and the mapped value is the current number stored there. For an update, write values at key equals value. This automatically inserts a new key or overwrites its old value.
+
+For a lookup, use find. If find reaches the end iterator, the key has never been assigned, so its array value is still zero. Otherwise, print the stored value.
+
+There is a subtle C++ detail here. Using square brackets during a lookup would insert a missing key with value zero. That answer would be correct, but it would grow the map for every missing query and waste memory. Find checks without inserting.
+
+Let us trace an example. First, look up key eight. It is absent, so print zero. Next, assign key eight the value twelve. Looking up eight now prints twelve. Assign eight again with ninety-nine, and the next lookup prints ninety-nine because updates replace the previous value.
+
+Now assign a very large key, such as ten to the eighteenth power, the value seven. The hash map handles that key just like the small key eight. We use unsigned long long for both key and value so every official value fits.
+
+Average hash-map operations are O of one, but poor collision patterns can sometimes hurt an unordered map. The solution uses a small custom SplitMix64 hash with a runtime seed. It mixes the key bits before choosing a bucket, making deliberately clustered inputs much less likely. We also reserve space up front to avoid repeated rebuilding as the map grows.
+
+The correctness invariant is simple: the map contains exactly the keys that were assigned, each paired with its most recent value. An update makes that true for its key and leaves every other key alone. During a lookup, a present key returns the latest value. A missing key was never assigned, so its value is the original zero. Therefore every answer is correct.
+
+If U distinct keys are updated, the space usage is O of U. The expected time is O of one per operation, or O of Q total. Remember that the word expected comes from hashing; the mixing step makes that expectation robust in practice.
+
+In the final C++ code, read Q, create and reserve the unordered map, then loop through the operations. Type zero reads one extra value and assigns it. Type one searches and prints either the stored result or zero.
+
+Check the description for the official problem and GitHub solution. The main lesson is bigger than this one problem: when an array's possible range is huge but only a few positions matter, think sparse storage and use a map.
