@@ -1,0 +1,7 @@
+Montmort Number	Count rearrangements where nothing stays in its original position
+DP state	D[k] counts derangements of k items|Base cases: D[0] = 1 and D[1] = 0
+Choose item k's destination	There are k - 1 legal positions|Now follow the item displaced from that position
+Two complete cases	It returns to k: D[k - 2]|It goes elsewhere: D[k - 1]
+The recurrence	D[k] = (k - 1) * (D[k - 1] + D[k - 2])|Apply modulo M at each step
+Small walkthrough	D[2] = 1|D[3] = 2|D[4] = 9
+C++ plan	Keep only two previous values|O(N) time and O(1) extra space

@@ -1,0 +1,25 @@
+Hey everyone. Today we are solving Montmort Number, an Easy problem from the USACO Guide list. The big word here is derangement, but the idea is simple: rearrange a group so that nobody gets their original spot.
+
+Imagine four students hand in four notebooks. We shuffle the notebooks and return them. A derangement is a shuffle where no student receives their own notebook. Our job is to count how many derangements exist for every size from one through N, and print each answer modulo M.
+
+Let D of k mean the number of valid derangements of k items. We start with two base cases. D of zero is one, because there is exactly one empty arrangement. D of one is zero, because one item has nowhere else to go.
+
+Now let us derive the recurrence. Look at the item that began in position k. It cannot stay there, so choose one of the other k minus one positions for it. Call that chosen position j.
+
+Next, consider the item that originally belonged at j. There are two cases. It might move back to position k. Then those two items are completely handled, and the remaining k minus two items must form a derangement. That gives D of k minus two possibilities.
+
+Or the item from j does not move to position k. That situation can be transformed into a derangement problem on k minus one items. That gives D of k minus one possibilities.
+
+The cases do not overlap, so we add them. And there were k minus one choices for j. Therefore, D of k equals k minus one times the sum of D of k minus one and D of k minus two.
+
+Let us test the first few values. D zero is one and D one is zero. D two is one times zero plus one, which is one. D three is two times one plus zero, which is two. D four is three times two plus one, which is nine. So the printed sequence begins zero, one, two, nine.
+
+The input can ask for up to one million values, so we should not build a slow recursive solution. Fortunately, each new answer needs only the previous two. We store those in two long long variables, compute the next value, shift the variables forward, and print as we go. This uses constant extra space.
+
+Modulo arithmetic matters. We reduce the sum before multiplying, and reduce the product again. A 64-bit long long safely holds the intermediate product for the official limits. Even when M equals one, every result correctly becomes zero.
+
+In C++, read N and M. Initialize the two-back value to D zero modulo M and the one-back value to D one. Print D one for k equals one. Starting at k equals two, apply the recurrence, update the two saved values, and continue.
+
+The correctness proof follows the derivation. Every derangement chooses one of k minus one destinations for item k. After that choice, exactly one of our two cases occurs. Each case is counted once, and together they cover every valid arrangement. Since the base cases are correct, induction proves every computed value is correct.
+
+The final complexity is O of N time and O of one extra space. Check the description for the official problem and the full GitHub solution. Nice work turning a scary combinatorics name into a short dynamic program.
