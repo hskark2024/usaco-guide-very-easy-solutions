@@ -6,6 +6,12 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "ys-montmort": ("10 100\n", "0 1 2 9 44 65 54 33 96 61\n"),
+    "ys-UnionFind": ("5 9\n1 0 1\n0 0 1\n1 0 1\n0 1 2\n1 0 2\n0 0 2\n1 3 4\n0 3 4\n1 3 4\n", "0\n1\n1\n0\n1\n"),
+    "ys-AssociativeArray": ("9\n1 8\n0 8 12\n1 8\n0 8 99\n1 8\n0 1000000000000000000 7\n1 1000000000000000000\n0 3 0\n1 3\n", "0\n12\n99\n7\n0\n"),
+    "ys-StaticRMQ": ("6 5\n7 2 5 1 9 3\n0 1\n0 3\n2 5\n3 6\n0 6\n", "7\n2\n1\n1\n1\n"),
+    "ys-SortPointsByArgument": ("5\n-1 0\n0 1\n1 0\n0 -1\n0 0\n", "0 -1\n1 0\n0 0\n0 1\n-1 0\n"),
+    "ys-DEPQ": ("4 10\n-3 0 1 3\n0 3\n2\n2\n0 -2\n0 1\n1\n1\n2\n1\n2\n", "3\n3\n-3\n-2\n1\n0\n1\n"),
     "cf-4A": ("8\n", "YES\n"),
     "cf-546A": ("3 17 4\n", "13\n"),
     "cfgym-102951B": ("6 15\n4 3 8 4 7 3\n", "4\n"),
