@@ -1,0 +1,7 @@
+Creating Strings II	How many visibly different strings use all the letters?|Repeated copies make some swaps invisible
+Label every occurrence	Pretend a copies are A1, A2, A3, and so on|Now n factorial counts every labeled ordering
+Remove fake distinctions	A letter appearing c times contributes c factorial duplicate labels|Divide by every frequency factorial
+The counting formula	answer = n! / product(count[x]!)|For aabac: 5! / 3! = 20
+Division modulo a prime	Ordinary division does not work after remainders|Multiply by denominator to power P minus 2
+C++ implementation	Count 26 letters and precompute factorials|Use binary exponentiation for one inverse
+Why it works	Every visible string has exactly product(count factorial) labelings|O(n + log P) time and O(n) space

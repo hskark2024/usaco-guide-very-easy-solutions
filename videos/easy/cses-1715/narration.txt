@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Creating Strings Two, an Easy problem from the USACO Guide. We receive one lowercase string, and we need to count how many different strings can be made by rearranging all its characters.
+
+The interesting part is repeated letters. If the string is A B C, all six permutations look different. But if the string is A A B, swapping the two A copies does not produce a new visible string. We need a counting method that removes those invisible swaps.
+
+Let us begin with an imagination trick. Pretend every copy has a name tag. If our string is A A B A C, rename the three A copies A one, A two, and A three. Now all five objects are distinct, so there are five factorial possible orders. Five factorial is one hundred twenty.
+
+Next, remove the fake name tags. For any one visible arrangement, the three A labels can be assigned to the three A positions in three factorial, or six, different ways. Those six labeled arrangements all collapse into the same ordinary string. Therefore, divide five factorial by three factorial. The answer is twenty, matching the official example.
+
+This idea works for every letter. If a character appears c times, its labels can be reordered in c factorial ways without changing what we see. The number of distinct strings is n factorial divided by the product of all twenty-six frequency factorials.
+
+There is one programming complication. The answer can be enormous, so the problem asks for it modulo one billion seven. Once we take remainders, we cannot use normal division. Instead, division by a nonzero number becomes multiplication by its modular inverse.
+
+Our modulus is prime, which lets us use Fermat's little theorem. The inverse of x modulo this prime equals x raised to the modulus minus two. We compute that power with binary exponentiation. Rather than multiplying x billions of times, binary exponentiation repeatedly squares it and follows the bits of the exponent. That takes only logarithmic time.
+
+The C plus plus implementation follows the formula closely. First, read the string. Use an array of twenty-six integers and increment the position for every letter. Next, create a factorial array from zero through n. Set factorial zero to one. For each i from one through n, factorial i equals factorial i minus one times i, reduced modulo the prime.
+
+Now build one denominator. Start it at one. For each letter count c, multiply the denominator by factorial c and reduce again. Letters that do not occur have count zero, and zero factorial is one, so they change nothing.
+
+Use the fast power function to raise the denominator to the modulus minus two. This gives its inverse. Finally, multiply factorial n by that inverse and print the result modulo the prime.
+
+Let us test a few boundaries. For A A A A, the numerator and denominator are both four factorial, so there is only one distinct string. For A B C D, every frequency is one. The denominator is one, leaving four factorial, or twenty-four. For A A B B, the formula gives four factorial divided by two factorial times two factorial, which equals six.
+
+Why is the algorithm correct? Labeling every occurrence creates exactly n factorial orders. Every visible string corresponds to exactly count A factorial times count B factorial, and so on, labeled orders. Dividing by that same duplicate factor leaves every visible arrangement exactly once. Fermat's theorem performs the same division inside modular arithmetic, so the printed remainder is correct.
+
+Counting the letters and building factorials take linear time. Binary exponentiation takes logarithmic time in the modulus. The factorial array uses linear memory. Since n is at most one million and remains smaller than the modulus, every factorial in the denominator is nonzero and invertible.
+
+The official problem and the fully commented C plus plus solution are linked in the description. The big lesson is simple: start with factorial arrangements, then divide away the reorderings of identical objects.

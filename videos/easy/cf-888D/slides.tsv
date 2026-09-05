@@ -1,0 +1,7 @@
+Almost Identity Permutations	Count permutations with at most k incorrect positions|Here k is never larger than four
+Group by exact mismatches	Let m be the exact number of positions that change|Different m groups cannot overlap
+Choose the changed slots	There are C(n,m) possible position sets|Every unchosen position stays fixed
+Derange their values	No chosen value may return to its own slot|D(0 through 4) = 1, 0, 1, 2, 9
+Combine the choices	Exactly m mismatches gives C(n,m) times D(m)|Sum from m equals zero through k
+Example: n=5, k=3	1 + 10 times 1 + 10 times 2|The answer is 31
+C++ and complexity	Compute tiny combinations exactly with long long|At most constant-size work because k <= 4

@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last live listing check: 2026-09-04
-- Listing snapshot: USACO Guide source commit [`f7abdff`](https://github.com/cpinitiative/usaco-guide/commit/f7abdff1c097a159894f200e214e48231dae837c) (420 unique Easy IDs)
-- Completed Easy solutions: 9
-- Complete video packages: 9
+- Last live listing check: 2026-09-05
+- Listing snapshot: USACO Guide source commit [`0d95de8`](https://github.com/cpinitiative/usaco-guide/commit/0d95de886beabe5f04a393de97a98aa3efec2adb) (420 unique module-listed Easy IDs)
+- Completed Easy solutions: 12
+- Complete video packages: 12
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -20,3 +20,6 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cses-1079` | Binomial Coefficients | complete | complete | complete | generated |
 | `cses-1716` | Distributing Apples | complete | complete | complete | generated |
 | `cses-1727` | Candy Lottery | complete | complete | complete | generated |
+| `cses-1715` | Creating Strings II | complete | complete | complete | generated |
+| `cf-888D` | Almost Identity Permutations | complete | complete | complete | generated |
+| `cf-1462E2` | Close Tuples | complete | complete | complete | generated |

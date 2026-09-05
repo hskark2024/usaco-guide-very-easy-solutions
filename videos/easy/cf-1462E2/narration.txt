@@ -1,0 +1,31 @@
+Hey everyone. Today we are solving Close Tuples, the hard version, from the USACO Guide Easy list. We are given an array and must count groups of m indices where the largest chosen value minus the smallest chosen value is at most k. Array values can repeat, and the answer is modulo one billion seven.
+
+Trying every group is impossible. Even an array of two hundred thousand elements can have an enormous number of size-m groups. We need to count whole groups at once.
+
+The first move is sorting. After sorting, if we know the index of a tuple's smallest chosen value, all other chosen values must lie to its right and be no more than k larger. That turns the condition into a window.
+
+Fix an index called left. Treat it as the first selected index in sorted order. Move another pointer called right to the first position where value right minus value left is greater than k. Then every index from left plus one through right minus one is allowed to join the tuple.
+
+The minimum at left is already selected. If there are right minus left minus one available later positions, we need to choose exactly m minus one of them. That contributes the binomial coefficient C of available choose m minus one.
+
+Repeat for every left index and add the contributions. The right pointer never needs to move backward. As left increases, the limit value left plus k never decreases. This gives a linear two-pointer scan after sorting.
+
+Let us trace the first official example. The values are one, two, four, three, and we need triples with difference at most two. Sort them to one, two, three, four. If left is the value one, its window contains one, two, and three. We keep one and choose both later positions, so that contributes one. If left is the value two, its window contains two, three, and four, contributing one more. Later windows are too short. The answer is two.
+
+Why do we fix an index instead of only a minimum value? Duplicates matter. Suppose the array is four copies of one and we choose pairs. All six pairs of indices are different answers. With the first index fixed, there are three choices after it. With the second, there are two. Then one, then zero. Three plus two plus one equals six. Each pair is assigned to its unique leftmost selected index.
+
+We still need fast binomial coefficients. The hard version allows m up to one hundred and many test cases, so a loop inside every window would be too slow. Precompute factorials and inverse factorials through two hundred thousand.
+
+The formula for n choose r is n factorial times inverse factorial r times inverse factorial n minus r, all modulo the prime. We compute the inverse of the largest factorial with Fermat's little theorem, then fill every smaller inverse factorial backward. After that, each combination takes constant time.
+
+The C plus plus program performs this preprocessing once. For each test case, it reads n, m, and k, sorts the values, and initializes right. In the loop over left, it makes sure right is at least left plus one. Then it advances right while the difference stays within k. The number of later choices is right minus left minus one, and the contribution is choose available, m minus one.
+
+Our combination helper returns zero if there are not enough positions. This naturally handles windows that are too short. When m equals one, it asks us to choose zero later positions. C of anything choose zero is one, so every array index contributes once, exactly as it should.
+
+Now for the proof. For a fixed left, every later index inside the window has value at most k above value left. Any selected group from those indices is valid. Indices outside the window are too large, so none can belong to a tuple whose first selected index is left.
+
+Every valid tuple has exactly one leftmost selected index after sorting. When the algorithm processes that index, its other m minus one indices all lie inside the window and appear in exactly one combination choice. This proves we count every valid tuple once and never count an invalid one.
+
+Sorting takes O of n log n time. The two pointers take O of n time because right only advances. Factorial preprocessing is linear and shared across all tests. The arrays use linear memory.
+
+The official Codeforces problem and the fully commented C plus plus solution are linked in the description. The reusable pattern is: sort, fix one unique endpoint, slide a valid window, and use combinations to choose everything inside.

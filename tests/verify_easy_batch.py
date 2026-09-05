@@ -1,7 +1,7 @@
 from bisect import insort
 from collections import Counter
 from math import atan2
-from itertools import product
+from itertools import combinations, permutations, product
 from pathlib import Path
 import random
 import subprocess
@@ -125,6 +125,54 @@ def verify_candy_lottery() -> None:
             assert abs(actual - expected) <= 0.5e-6 + 1e-12
 
 
+def verify_creating_strings_ii() -> None:
+    # These short cases cover one copy, all-equal letters, all-distinct
+    # letters, and several independent repeated-frequency groups.
+    for letters in ("a", "aaaa", "abcd", "aabb", "aabac", "aabbcc", "aaabbc"):
+        expected = len(set(permutations(letters)))
+        actual = int(run("cses-1715", letters + "\n"))
+        assert actual == expected
+
+
+def verify_almost_identity_permutations() -> None:
+    # Exhaustively generate the entire permutation space for small n. This
+    # independently checks the subtle requirement that selected moved slots
+    # must form a derangement instead of an arbitrary permutation.
+    for n in range(4, 9):
+        mismatch_histogram = [0] * (n + 1)
+        for permutation in permutations(range(n)):
+            mismatches = sum(value != index for index, value in enumerate(permutation))
+            mismatch_histogram[mismatches] += 1
+
+        for k in range(1, 5):
+            expected = sum(mismatch_histogram[: k + 1])
+            actual = int(run("cf-888D", f"{n} {k}\n"))
+            assert actual == expected
+
+
+def verify_close_tuples() -> None:
+    # Direct combination enumeration is slow on large arrays but is an ideal
+    # oracle for these deterministic small random cases.
+    for _ in range(300):
+        n = RNG.randint(1, 10)
+        tuple_size = RNG.randint(1, n)
+        allowed_difference = RNG.randint(1, n)
+        values = [RNG.randint(1, n) for _ in range(n)]
+
+        expected = 0
+        for picked_indices in combinations(range(n), tuple_size):
+            picked_values = [values[index] for index in picked_indices]
+            expected += max(picked_values) - min(picked_values) <= allowed_difference
+
+        input_text = (
+            f"1\n{n} {tuple_size} {allowed_difference}\n"
+            + " ".join(map(str, values))
+            + "\n"
+        )
+        actual = int(run("cf-1462E2", input_text))
+        assert actual == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -133,6 +181,9 @@ if __name__ == "__main__":
         verify_binomial_coefficients,
         verify_distributing_apples,
         verify_candy_lottery,
+        verify_creating_strings_ii,
+        verify_almost_identity_permutations,
+        verify_close_tuples,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

@@ -28,6 +28,9 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1079` | CSES | [Binomial Coefficients](problems/cses-1079/README.md) | [Combinatorics, Modular Arithmetic] | [C++](solutions/cses-1079.cpp) | [Package](videos/easy/cses-1079/README.md) |
 | `cses-1716` | CSES | [Distributing Apples](problems/cses-1716/README.md) | [Combinatorics, Stars and Bars] | [C++](solutions/cses-1716.cpp) | [Package](videos/easy/cses-1716/README.md) |
 | `cses-1727` | CSES | [Candy Lottery](problems/cses-1727/README.md) | [Probability, Expected Value] | [C++](solutions/cses-1727.cpp) | [Package](videos/easy/cses-1727/README.md) |
+| `cses-1715` | CSES | [Creating Strings II](problems/cses-1715/README.md) | [Combinatorics, Modular Arithmetic] | [C++](solutions/cses-1715.cpp) | [Package](videos/easy/cses-1715/README.md) |
+| `cf-888D` | CF | [Almost Identity Permutations](problems/cf-888D/README.md) | [Combinatorics, Derangements] | [C++](solutions/cf-888D.cpp) | [Package](videos/easy/cf-888D/README.md) |
+| `cf-1462E2` | CF | [Close Tuples](problems/cf-1462E2/README.md) | [Sorting, Two Pointers, Combinatorics] | [C++](solutions/cf-1462E2.cpp) | [Package](videos/easy/cf-1462E2/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

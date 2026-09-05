@@ -1,0 +1,7 @@
+Close Tuples	Choose m indices whose maximum minus minimum is at most k|Values may repeat, but indices are distinct
+Sort first	The chosen minimum and maximum become ordered endpoints|Every valid value range is now continuous
+Fix the minimum index	Pin one leftmost selected index|Move right through values no more than k larger
+Choose the remaining indices	There are right minus left minus one available later positions|Add C(available, m minus 1)
+Why no duplicates?	Every tuple has one unique leftmost selected sorted index|Equal values still have different indices
+Fast combinations	Precompute factorials and inverse factorials once|Each C(n,r) takes O(1) time
+C++ and complexity	Right only moves forward; sorting dominates|O(n log n) per test case and linear extra space

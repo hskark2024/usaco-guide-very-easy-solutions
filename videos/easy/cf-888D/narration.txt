@@ -1,0 +1,29 @@
+Hey everyone. Today we are solving Almost Identity Permutations from the USACO Guide Easy list. The problem asks us to count permutations that differ from the identity in at most k positions. Here n can be one thousand, but k is at most four. That tiny k is our biggest clue.
+
+The identity permutation is one, two, three, and so on, with every value sitting in the position with the same number. A mismatch happens when position i contains something other than i.
+
+Instead of building permutations, group them by their exact number of mismatches. Call that number m. For one group, first choose which m positions will be wrong. There are n choose m possible sets.
+
+What happens to the values in those selected positions? The unselected positions stay fixed, so the selected values must be rearranged among their selected slots. More importantly, none of those values may return to its original slot. If one did, that position would not actually be a mismatch.
+
+A permutation in which no object remains in its original position is called a derangement. Therefore, after choosing m positions, we have D of m ways to derange their values. The count for exactly m mismatches is n choose m times D of m.
+
+We only need derangement counts from zero through four. D zero is one: there is one empty arrangement. D one is zero because a single selected value has nowhere else to go. D two is one because the two values must swap. D three is two, the two possible three-cycles. D four is nine. We store these five numbers directly.
+
+Now sum n choose m times D of m for every m from zero through k. These groups do not overlap because one permutation cannot have two different exact mismatch counts.
+
+Let us work through n equals five and k equals three. With zero mismatches, we get the identity, so the first term is one. With one mismatch, the derangement count is zero. With two mismatches, choose two of the five positions in ten ways, and those two values have one forced swap. That contributes ten. With three mismatches, choose three positions in ten ways and use either of two derangements, contributing twenty. One plus ten plus twenty equals thirty-one.
+
+This also explains why a permutation with exactly one mismatch is impossible. If a value leaves its home, another value must enter that home, and the chain cannot stop with just one changed position.
+
+The C plus plus code is short, but each line has a clear counting meaning. Read n and k. Store the array one, zero, one, two, nine. Write a choose function. Because r is at most four, we can calculate combinations with a tiny product: multiply by n minus r plus picked, then divide by picked at each step. The division is exact because every intermediate result is another binomial coefficient.
+
+Use long long for the combination, product, and answer. For each moved count from zero through k, multiply choose n moved by derangements moved and add it to the total. There is no modulus in this problem. Even at n equals one thousand and k equals four, the answer fits comfortably in a signed sixty-four-bit integer.
+
+Let us prove the formula more carefully. Take any valid permutation. Its mismatching positions form one unique set of size m. Our choose step selects that set exactly once. All other values are fixed. Within the set, no value can stay home, so its arrangement is one of the D of m derangements. Therefore, the algorithm includes this permutation once.
+
+In the other direction, choose any m positions and apply any derangement to their values. Every chosen position becomes wrong, and every unchosen position stays correct. The result has exactly m mismatches, so when m is at most k, it is valid. This proves that the count has no missing cases and no duplicates.
+
+The official statement allows only four values of k, so the loop does constant-size work. The choose function also performs at most four iterations. Extra memory is constant.
+
+The official Codeforces problem and the commented C plus plus solution are linked below. Remember the reusable pattern: when a few positions must change, choose those positions first, then count arrangements that force every chosen position to change.
