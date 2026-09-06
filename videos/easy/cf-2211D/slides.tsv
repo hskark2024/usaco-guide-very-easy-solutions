@@ -1,0 +1,7 @@
+AND-array reconstruction	Given every subsequence-size AND sum|Build any 29-bit array that matches
+Split into independent bits	Treat each bit as an on or off switch|Only its frequency across the array matters
+One bit's contribution	A bit occurring m times survives C(m,k) size-k subsequences|Contribution is two to the bit times C(m,k)
+Start from k equals n	Only bits present in every position can survive|The residual directly reveals their mask
+Peel frequencies downward	Subtract the discovered mask times C(k,j)|Then move to the next smaller k
+Construct any valid array	Put each bit in the first count positions|Matching frequencies means matching every AND sum
+C++ and complexity	At most 29 nonzero frequency groups are processed|O(29n) time after factorial preprocessing

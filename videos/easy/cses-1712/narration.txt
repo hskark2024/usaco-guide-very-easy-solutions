@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving CSES Exponentiation Two from the USACO Guide Easy list. Each query asks for a raised to the power b raised to c, modulo one billion seven. The numbers a, b, and c can each be as large as one billion.
+
+The tower is evaluated from the top: first imagine b to the c, then use that entire number as the exponent on a. Even b to the c can have billions of digits, so storing the exponent is completely impossible.
+
+Our first tool is binary exponentiation. Suppose we need three to the thirteenth. Thirteen in binary is eight plus four plus one. We repeatedly square the base to get powers one, two, four, and eight, and multiply only the powers corresponding to set binary digits. That turns thirteen multiplications into only logarithmically many steps. Reducing modulo a number after every multiplication prevents the values from growing.
+
+Binary exponentiation alone is not enough, because the outer exponent is itself too large to pass into the function. We need to shrink that exponent without changing the answer.
+
+The answer modulus, one billion seven, is prime. Fermat's little theorem tells us that for a positive base smaller than this prime, powers repeat in a cycle of length one billion six. In other words, adding one billion six to the exponent does not change the final remainder.
+
+So the inner calculation does not need the full value of b to the c. It only needs b to the c modulo one billion six. We use binary exponentiation once with modulus one billion six to find a reduced exponent. Then we use binary exponentiation a second time with modulus one billion seven to compute the answer.
+
+Notice the two different moduli. The inner power uses answer modulus minus one because it is measuring a position inside an exponent cycle. The outer power uses the actual answer modulus. Mixing them up is the most common mistake in this problem.
+
+Let us trace the first official query: three, seven, one. The inner exponent is seven to the first power, which is seven. Then three to the seventh is two thousand one hundred eighty-seven. The result is small here, but the same two-step process handles enormous towers.
+
+There is one subtle corner: a can be zero. Fermat's theorem requires a base that is not divisible by the prime, so zero needs direct reasoning. The true exponent b to the c is zero exactly when b is zero and c is positive. Remember that the problem defines zero to the zero as one. Therefore, if the outer base is zero and the true exponent is positive, the answer is zero. If the true exponent is zero, the answer is one.
+
+The C plus plus solution has one reusable mod pow function with base, exponent, and modulus parameters. It initializes result to one. While the exponent is positive, it multiplies result by base when the low bit is set, squares the base, and shifts the exponent right.
+
+For each query, the program first computes reduced exponent as mod pow of b, c, and one billion six. It separately records whether the true exponent is zero. That Boolean makes the zero-base case clear and safe. Every other case goes through the second mod pow call.
+
+Why is the method correct? For a positive base, Fermat's theorem proves that only the exponent modulo one billion six matters. The first binary-power call calculates exactly that residue. The second calculates the desired modular power. The zero cases are handled from their definitions, so no invalid cancellation or division is used.
+
+Each binary exponentiation takes logarithmic time. One uses about the number of bits in c, and the other uses at most the number of bits in the modulus. Extra memory stays constant. With up to one hundred thousand queries, this is easily fast enough.
+
+The official CSES problem and the fully commented C plus plus solution are linked in the description. The big idea to remember is: for a power tower modulo a prime, reduce the exponent by the prime minus one, then exponentiate again.

@@ -1,0 +1,31 @@
+Hey everyone. Today we are solving Santa's Bot from the USACO Guide Easy list. This problem looks like probability, but the fastest solution comes from counting successful choices.
+
+There are n children. Each child writes a list of gifts they would accept. The bot first chooses one child x uniformly. Then it chooses one gift y uniformly from x's list. Finally, it independently chooses a recipient child z uniformly. The decision is valid when z also has gift y on their list.
+
+A direct simulation would not give an exact answer, and looping through every possible triple could be far too slow. The total list size can reach one million, while there can also be one million children.
+
+Focus on the chosen gift. Suppose gift number seven appears on forty children's lists. Once the bot chooses gift seven, exactly forty of the n possible recipients create a valid decision. Its success probability at that last stage is forty divided by n.
+
+This suggests preprocessing one simple number for every gift: frequency of y equals the number of children who asked for y. We read all lists, save them, and increase the frequency of every listed gift.
+
+Now fix the first child x. If x has k gifts, each gift has probability one over k of being selected. For every gift y in this list, frequency y recipient choices succeed. So the weighted number of successful recipient choices for this child is the sum of those frequencies, divided by k.
+
+We still need the bot's first and third random choices. Child x is selected with probability one over n, and recipient z is also selected with probability one over n. These events are independent, so they provide a final factor of one over n squared.
+
+The full formula is one over n squared, times the sum over every child x of one over k x, times the sum of frequency y for gifts y on x's list.
+
+Let us trace the first official example. There are two children. The first asks for gifts two and one. The second asks only for gift one. Gift one has frequency two, and gift two has frequency one.
+
+For the first child, the accepting-recipient total is one plus two, or three. Divide by the list size two. For the second child, the total is two and the list size is one. Add those child contributions, then divide by two squared for the two independent uniform child choices. That probability is seven eighths, printed in the required modular form.
+
+Modular probability does not use decimal numbers. Under prime modulus nine hundred ninety-eight million two hundred forty-four thousand three hundred fifty-three, dividing by a nonzero number x means multiplying by x to the power modulus minus two. Fermat's little theorem guarantees that this is the modular inverse.
+
+The C plus plus program reads every list into a vector of vectors and fills a frequency array indexed by gift number. In the second pass, it adds the frequencies for one child's gifts, multiplies by the inverse of that child's list size, and adds the result to a running total.
+
+After all children, it computes inverse n once and multiplies the total by inverse n twice. Every multiplication and addition is reduced modulo the prime. Sixty-four-bit integers safely hold each product before reduction.
+
+Why is this exact? Every possible bot decision has one specific first child, one gift from that child's list, and one recipient. For a fixed child and gift, the frequency array counts exactly the recipient choices that make the decision valid. The modular inverse factors assign the exact probability of each random stage. Because the decision triples are distinct, adding their probabilities counts every valid decision once.
+
+Let S be the total number of gift entries. Reading, counting, and scanning the lists takes O of S time, besides logarithmic modular inverses. The program uses O of S memory for the stored lists and a frequency array through gift ID one million.
+
+The official problem and fully commented C plus plus solution are linked in the description. The reusable lesson is: when a random final choice asks whether it belongs to a group, precompute the size of that group and count the successful branches all at once.

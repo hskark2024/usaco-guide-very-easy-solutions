@@ -1,5 +1,6 @@
 from bisect import insort
 from collections import Counter
+from fractions import Fraction
 from math import atan2
 from itertools import combinations, permutations, product
 from pathlib import Path
@@ -173,6 +174,94 @@ def verify_close_tuples() -> None:
         assert actual == expected
 
 
+def verify_exponentiation_ii() -> None:
+    modulus = 1_000_000_007
+
+    # Small exact towers form an independent oracle: Python constructs b^c
+    # first, while the C++ solution must reduce that exponent safely.
+    queries = [
+        (a, b, c)
+        for a in range(8)
+        for b in range(6)
+        for c in range(6)
+    ]
+    input_text = str(len(queries)) + "\n" + "".join(
+        f"{a} {b} {c}\n" for a, b, c in queries
+    )
+    actual = list(map(int, run("cses-1712", input_text).split()))
+    expected = [pow(a, pow(b, c), modulus) for a, b, c in queries]
+    assert actual == expected
+
+
+def verify_santas_bot() -> None:
+    modulus = 998_244_353
+
+    for _ in range(250):
+        child_count = RNG.randint(1, 7)
+        lists = []
+        for _ in range(child_count):
+            item_count = RNG.randint(1, 6)
+            lists.append(RNG.sample(range(1, 9), item_count))
+
+        # Enumerate the three random decisions directly as rational numbers.
+        # Each valid (x, y, z) path has probability 1/(n*k_x*n).
+        probability = Fraction(0, 1)
+        wanted_sets = [set(items) for items in lists]
+        for first_child, items in enumerate(lists):
+            for item in items:
+                for recipient in range(child_count):
+                    if item in wanted_sets[recipient]:
+                        probability += Fraction(
+                            1, child_count * len(lists[first_child]) * child_count
+                        )
+
+        expected = (
+            probability.numerator
+            * pow(probability.denominator, modulus - 2, modulus)
+            % modulus
+        )
+        input_text = str(child_count) + "\n" + "".join(
+            f"{len(items)} {' '.join(map(str, items))}\n" for items in lists
+        )
+        actual = int(run("cf-1279D", input_text))
+        assert actual == expected
+
+
+def verify_and_array() -> None:
+    modulus = 1_000_000_007
+
+    def compute_and_array(values: list[int]) -> list[int]:
+        result = []
+        for length in range(1, len(values) + 1):
+            total = 0
+            for selected in combinations(values, length):
+                current = selected[0]
+                for value in selected[1:]:
+                    current &= value
+                total = (total + current) % modulus
+            result.append(total)
+        return result
+
+    cases = []
+    for _ in range(180):
+        n = RNG.randint(1, 8)
+        cases.append([RNG.randrange(1 << 7) for _ in range(n)])
+
+    encoded_cases = [compute_and_array(values) for values in cases]
+    input_text = str(len(cases)) + "\n" + "".join(
+        f"{len(values)}\n{' '.join(map(str, encoded))}\n"
+        for values, encoded in zip(cases, encoded_cases)
+    )
+
+    output_lines = run("cf-2211D", input_text).strip().splitlines()
+    assert len(output_lines) == len(cases)
+    for source, expected_b, line in zip(cases, encoded_cases, output_lines):
+        reconstructed = list(map(int, line.split()))
+        assert len(reconstructed) == len(source)
+        assert all(0 <= value < (1 << 29) for value in reconstructed)
+        assert compute_and_array(reconstructed) == expected_b
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -184,6 +273,9 @@ if __name__ == "__main__":
         verify_creating_strings_ii,
         verify_almost_identity_permutations,
         verify_close_tuples,
+        verify_exponentiation_ii,
+        verify_santas_bot,
+        verify_and_array,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

@@ -1,0 +1,35 @@
+Hey everyone. Today we are solving AND-array, Codeforces twenty-two eleven D, from the current USACO Guide Easy list. This is a construction problem: we are given information about every subsequence size and must rebuild any array that matches it.
+
+For each k from one through n, b k is the sum of the bitwise AND of every size-k subsequence of an unknown array a, modulo one billion seven. A valid 29-bit array is guaranteed to exist.
+
+Trying to recover whole numbers at once feels mysterious. Bitwise AND becomes much easier when we separate the numbers into independent bits. Imagine each bit position as its own light switch.
+
+Choose one bit, say the four's bit. Suppose this switch is on in exactly m array positions. A subsequence's AND keeps the switch on only when every selected position has it. For a size-k subsequence, that means choosing all k indices from those m positions. There are m choose k such subsequences.
+
+Therefore this bit contributes four times m choose k to b k. In general, bit l contributes two to the l times count l choose k, where count l is how many array elements contain the bit.
+
+Now we need to reverse those contributions. Start with the largest subsequence size, k equals n. A bit survives the AND of all n numbers only if it appears in all n positions. Since n choose n is one, b n directly reveals the mask of bits with frequency n.
+
+Record those frequencies. Then subtract their effect from every smaller b value. If a discovered mask occurs n times, its contribution to subsequences of length j is the mask times n choose j.
+
+Move down to k equals n minus one. All bits with greater frequency have already been removed. Bits with smaller frequency cannot survive an AND of k elements at all. So the residual at b k is exactly the mask of bits appearing in k positions.
+
+Repeat this sweep down to one. This is like peeling transparent layers from largest frequency to smallest frequency. Each step exposes the next group of bits.
+
+Why can we read a modular residue as an ordinary bitmask? After the higher contributions are removed, the remaining value is a sum of distinct powers of two from bit zero through bit twenty-eight. That value is below two to the twenty-nine, which is smaller than the modulus. The valid-input guarantee ensures the residual really has this form.
+
+Once we know how often each bit appears, arranging the bits is surprisingly flexible. All the AND sums depend only on those frequencies. For a simple canonical answer, put each bit into the first count positions. If a bit has frequency four, set it in answer positions zero through three. Different bits can overlap without causing trouble.
+
+Take the second official example. One valid original array has the one's bit in four positions and the two's and four's bits in three positions each. Our canonical construction puts all three bits at the front, producing seven, seven, seven, one, zero. It looks different from the sample output, but it has identical bit frequencies and therefore the same AND-array.
+
+The C plus plus solution first precomputes factorials and inverse factorials through one hundred thousand. That lets the choose function calculate any binomial coefficient in constant time modulo the prime.
+
+For each test case, residual stores the given b values. The main loop moves k downward. It treats residual k as the discovered mask, records k as the frequency of every set bit, and subtracts mask times choose k length from each smaller residual.
+
+At first, that nested loop might look quadratic. It is not. There are only twenty-nine possible bits. A nonzero mask can appear at no more than twenty-nine distinct frequency levels, because each bit is discovered exactly once. Therefore the total update work is at most about twenty-nine times n.
+
+For correctness, use a descending invariant. Before step k, all contributions from bits with frequency greater than k are gone. Lower-frequency bits contribute zero to size k. That leaves exactly the frequency-k bits, so we identify them correctly. Subtracting their contributions establishes the invariant for the next step. Induction recovers every frequency.
+
+The final construction realizes those exact frequencies, so every bit contributes the same amount to every b k as in the unknown source array. Adding the independent bit contributions proves the complete AND sums match.
+
+The official problem and fully commented C plus plus solution are linked in the description. The pattern worth remembering is: split bitwise sums into independent bits, express each bit with a binomial coefficient, then peel frequencies from largest to smallest.

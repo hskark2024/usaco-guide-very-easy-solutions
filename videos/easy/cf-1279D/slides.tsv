@@ -1,0 +1,7 @@
+Santa's Bot	Choose a child, one gift from that child's list, then a recipient|The decision succeeds if the recipient also wants the gift
+Count instead of simulate	There can be one million total gift entries|We need the exact probability, not an estimate
+Gift frequency	frequency of y is the number of children accepting gift y|It counts successful recipient choices at once
+One child's contribution	Sum frequencies of gifts in child x's list|Divide by list size k x
+Complete formula	Sum every child's weighted contribution|Multiply by one over n squared for two uniform child choices
+Official example	Gift one appears twice and gift two once|The exact probability is seven eighths
+C++ and complexity	Two passes over all list entries and modular inverses|Linear list scanning with O(S) storage

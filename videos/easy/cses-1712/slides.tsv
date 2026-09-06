@@ -1,0 +1,7 @@
+Exponentiation II	Compute a raised to b raised to c modulo a prime|The exponent is far too large to store
+Binary exponentiation	Read the exponent through its binary digits|Square the base and multiply selected powers
+Fermat's exponent cycle	For positive a, powers repeat every MOD minus 1|Only b raised to c modulo MOD minus 1 matters
+Two nested power calls	Inner: b to c modulo MOD minus 1|Outer: a to reduced exponent modulo MOD
+Official example	Three, seven, one gives exponent seven|Three to the seventh equals 2187
+Zero needs care	The true exponent is zero only when b is zero and c is positive|Honor the stated zero-to-zero convention
+C++ and complexity	Reuse one mod_pow function with two moduli|O(log c plus log MOD) time and O(1) space

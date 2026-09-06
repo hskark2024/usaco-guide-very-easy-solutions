@@ -31,6 +31,9 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1715` | CSES | [Creating Strings II](problems/cses-1715/README.md) | [Combinatorics, Modular Arithmetic] | [C++](solutions/cses-1715.cpp) | [Package](videos/easy/cses-1715/README.md) |
 | `cf-888D` | CF | [Almost Identity Permutations](problems/cf-888D/README.md) | [Combinatorics, Derangements] | [C++](solutions/cf-888D.cpp) | [Package](videos/easy/cf-888D/README.md) |
 | `cf-1462E2` | CF | [Close Tuples](problems/cf-1462E2/README.md) | [Sorting, Two Pointers, Combinatorics] | [C++](solutions/cf-1462E2.cpp) | [Package](videos/easy/cf-1462E2/README.md) |
+| `cf-2211D` | CF | [AND-array](problems/cf-2211D/README.md) | [Bitmasks, Combinatorics, Construction] | [C++](solutions/cf-2211D.cpp) | [Package](videos/easy/cf-2211D/README.md) |
+| `cses-1712` | CSES | [Exponentiation II](problems/cses-1712/README.md) | [Modular Arithmetic, Binary Exponentiation] | [C++](solutions/cses-1712.cpp) | [Package](videos/easy/cses-1712/README.md) |
+| `cf-1279D` | CF | [Santa's Bot](problems/cf-1279D/README.md) | [Probability, Modular Arithmetic, Counting] | [C++](solutions/cf-1279D.cpp) | [Package](videos/easy/cf-1279D/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 
