@@ -1,0 +1,7 @@
+Counting Divisors	Up to one hundred thousand queries|Trying every possible divisor is too slow
+Prime factorization	Seventy-two equals two cubed times three squared|Every divisor uses only these primes
+Exponent choices	Choose zero through three copies of two|Choose zero through two copies of three
+The counting formula	Multiply exponent plus one for every prime|Four times three gives twelve divisors of seventy-two
+Smallest prime factors	Sieve one helpful prime label for every number|Reuse the table for all queries
+Important edge cases	One has an empty factorization and one divisor|A prime has exponent one and two divisors
+C++ and complexity	Sieve once, then divide out prime groups|O(M log log M plus total factors) time

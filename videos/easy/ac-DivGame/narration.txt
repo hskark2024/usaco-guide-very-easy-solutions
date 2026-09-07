@@ -1,0 +1,33 @@
+Hey everyone. Today we are solving Div Game from AtCoder and the USACO Guide Easy list. We start with a positive integer N. In one move, we choose a prime power that divides the current N, divide by it, and we are never allowed to choose that same numeric prime power again. We want the maximum number of moves.
+
+At first, this sounds like a search problem. There may be many possible powers to choose, and every division changes what is available. Prime factorization turns the choices into a much simpler counting problem.
+
+Take N equal to twenty-four. Its factorization is two cubed times three to the first. For prime two, we have three copies of its exponent available. We can spend one copy to choose two to the first power. We still have two copies, so we can spend both to choose two squared. Those are two different numeric powers, two and four.
+
+For prime three, we spend its one copy to choose three to the first. That gives three moves total. One possible order is divide by two, then three, then four.
+
+The important part is the cost of distinct prime powers. Choosing p to the first costs one copy of p. Choosing p squared costs two copies. Choosing p cubed costs three copies. Since the same numeric power cannot be reused, the exponent costs we choose must be distinct positive integers.
+
+Suppose one prime appears with exponent e. To get the most operations, we should pick the cheapest distinct costs: one, then two, then three, and so on. We keep subtracting the next cost while it fits.
+
+Why is smallest-first truly optimal? Any set of k distinct positive integers has sum at least one plus two plus all the way through k. Therefore no strategy can make k moves unless that triangular number fits inside exponent e. When it does fit, choosing powers p to the one, p to the two, through p to the k constructs exactly k legal moves. That is both an upper bound and a matching construction.
+
+Now consider sixty-four, which equals two to the sixth. Spend one exponent copy for two, two more for four, and three more for eight. The total cost is one plus two plus three equals six, so the answer is three.
+
+Leftover exponent copies are allowed. If an exponent is eight, costs one, two, and three use six copies. Cost four does not fit in the remaining two. Those two copies cannot create another distinct cost cheaper than four because one, two, and three have already been used. So three moves is optimal.
+
+Different primes are independent. Copies of two can only pay for powers of two. Copies of three can only pay for powers of three. A power of two is never numerically equal to a power of three. We can optimize each prime separately and add the results.
+
+Let us look at the factorization loop. N can be as large as one trillion, whose square root is one million. Trying candidates from two upward through the current square root is fast enough.
+
+When a candidate divides the number, the code repeatedly divides by it and counts the exponent. Then it runs the small staircase loop. The next cost begins at one. While the available exponent is at least that cost, subtract it, add one operation, and increase the next cost.
+
+Dividing factors out makes the remaining number shrink, so the factorization condition uses candidate squared less than or equal to the current number. We use sixty-four-bit integers for both values and the product.
+
+After the loop, the remaining number may be greater than one. If so, it is a prime factor with exponent exactly one. If it had exponent two or more, its square would be no larger than the current number and the loop would not have ended. That last prime supports one more operation.
+
+There are two clean edge cases. If N is one, there are no prime factors and the answer stays zero. If N itself is a large prime, the loop finds no smaller divisor, the leftover check sees the prime, and the answer is one.
+
+The worst-case factorization time is order square root of N, and the algorithm uses constant extra space. The staircase work is tiny because an exponent for a number up to one trillion cannot be large.
+
+The official AtCoder problem and the fully commented C plus plus solution are linked in the description. Remember the main picture: each prime exponent is a pile of tokens, and distinct powers cost one token, then two, then three. Build the longest staircase that fits.

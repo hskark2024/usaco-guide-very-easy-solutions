@@ -1,0 +1,33 @@
+Hey everyone. Today we are solving CSES Counting Divisors from the USACO Guide Easy list. We receive as many as one hundred thousand numbers, and for each one we must print how many positive divisors it has.
+
+We could try every possible divisor from one through the number. For a value near one million, that is one million checks. Repeating that for one hundred thousand queries would be far too much work.
+
+The key idea comes from prime factorization. Let us use seventy-two. Its factorization is two cubed times three squared. Every divisor of seventy-two must choose some copies of two and some copies of three.
+
+For the prime two, a divisor can use exponent zero, one, two, or three. That is four choices. For the prime three, it can use exponent zero, one, or two. That is three choices. The choices are independent, so seventy-two has four times three, or twelve, divisors.
+
+In general, if x equals p one to exponent e one, times p two to exponent e two, and so on, the divisor count is the product of every exponent plus one.
+
+Why does this count every divisor exactly once? A divisor cannot introduce a new prime because then it would not divide x. It also cannot use more than the available exponent of any prime. So choosing one allowed exponent for every prime builds a valid divisor. Unique prime factorization guarantees that two different choices build two different numbers.
+
+We still need to factor many queries quickly. Every value is at most one million, so we preprocess a smallest-prime-factor table. Think of it as attaching a helpful label to every number greater than one. The label tells us one prime that divides that number.
+
+The sieve visits candidate numbers from two upward. If a candidate has no label yet, it is prime, so we label it with itself. Then we visit its multiples starting at the candidate squared. Any unlabeled multiple gets this prime as its smallest factor.
+
+Why start at the square? A smaller multiple of p can be written p times something less than p. That smaller part has a prime factor below p, so the multiple was already handled earlier. Starting at the square avoids repeated work.
+
+After the sieve, factorization is simple. Suppose the remaining value is seventy-two. Its table entry says two. Divide by two repeatedly and count three divisions. Multiply the answer by three plus one. The remaining value is nine; its factor is three. Divide twice and multiply by two plus one. The result becomes twelve.
+
+The value one deserves attention. It has no prime factors, but it does have exactly one positive divisor: itself. Our divisor count starts at one, the factorization loop does nothing, and we print one. This is the empty-product idea.
+
+Prime values work too. Their smallest prime factor is the number itself. We divide once, record exponent one, and get one plus one equals two divisors.
+
+Look at the C plus plus solution. It first stores all input values and remembers the maximum. This lets the sieve stop at the exact largest value instead of always allocating more than necessary.
+
+The smallest-prime-factor vector starts with zeros. A zero means the number has not been marked. When we discover a prime, we set its own entry and then mark its multiples. A sixty-four-bit product is used when checking candidate squared, even though table indexes are integers, so the multiplication is always safe.
+
+For each query, remaining starts as the value and divisor count starts as one. The outer while loop picks a prime factor. The inner loop divides out every copy and records its exponent. Then divisor count is multiplied by exponent plus one.
+
+The sieve costs about M log log M time for maximum M, and each query then takes only as many divisions as there are prime factors. Extra space is linear in M. Here M is no more than one million, so the approach easily fits.
+
+The official CSES problem and the fully commented C plus plus solution are linked in the description. The formula to remember is simple: factor the number, add one to each prime exponent, and multiply those values.

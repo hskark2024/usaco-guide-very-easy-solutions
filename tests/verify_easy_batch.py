@@ -1,6 +1,7 @@
 from bisect import insort
 from collections import Counter
 from fractions import Fraction
+from functools import lru_cache
 from math import atan2
 from itertools import combinations, permutations, product
 from pathlib import Path
@@ -262,6 +263,68 @@ def verify_and_array() -> None:
         assert compute_and_array(reconstructed) == expected_b
 
 
+def verify_exponentiation() -> None:
+    modulus = 1_000_000_007
+    queries = [(a, b) for a in range(13) for b in range(18)]
+    queries += [
+        (0, 0),
+        (0, 1_000_000_000),
+        (1_000_000_000, 1_000_000_000),
+        (999_999_937, 987_654_321),
+    ]
+    input_text = str(len(queries)) + "\n" + "".join(
+        f"{base} {exponent}\n" for base, exponent in queries
+    )
+    actual = list(map(int, run("cses-1095", input_text).split()))
+    expected = [pow(base, exponent, modulus) for base, exponent in queries]
+    assert actual == expected
+
+
+def verify_counting_divisors() -> None:
+    values = list(range(1, 2001))
+    input_text = str(len(values)) + "\n" + "\n".join(map(str, values)) + "\n"
+    actual = list(map(int, run("cses-1713", input_text).split()))
+    expected = [
+        sum(value % divisor == 0 for divisor in range(1, value + 1))
+        for value in values
+    ]
+    assert actual == expected
+
+
+def verify_div_game() -> None:
+    def prime_powers_up_to(limit: int) -> list[int]:
+        powers = []
+        for prime in range(2, limit + 1):
+            if any(
+                prime % divisor == 0
+                for divisor in range(2, int(prime**0.5) + 1)
+            ):
+                continue
+            power = prime
+            while power <= limit:
+                powers.append(power)
+                power *= prime
+        return powers
+
+    for original in range(1, 81):
+        possible_powers = prime_powers_up_to(original)
+
+        @lru_cache(maxsize=None)
+        def brute(current: int, used_mask: int) -> int:
+            best = 0
+            for index, power in enumerate(possible_powers):
+                if used_mask & (1 << index) or current % power != 0:
+                    continue
+                best = max(
+                    best,
+                    1 + brute(current // power, used_mask | (1 << index)),
+                )
+            return best
+
+        actual = int(run("ac-DivGame", f"{original}\n"))
+        assert actual == brute(original, 0)
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -276,6 +339,9 @@ if __name__ == "__main__":
         verify_exponentiation_ii,
         verify_santas_bot,
         verify_and_array,
+        verify_exponentiation,
+        verify_counting_divisors,
+        verify_div_game,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

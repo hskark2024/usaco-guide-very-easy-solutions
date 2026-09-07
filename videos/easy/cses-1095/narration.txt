@@ -1,0 +1,29 @@
+Hey everyone. Today we are solving CSES Exponentiation from the USACO Guide Easy list. We receive many pairs a and b, and for each pair we need a raised to the power b, modulo one billion seven.
+
+The direct method is to multiply by a exactly b times. That is fine when b is ten. But b can be one billion, and there can be two hundred thousand queries. A loop with one billion steps cannot finish in time.
+
+Binary exponentiation fixes this by using the binary digits of the exponent. Every nonnegative integer is a sum of powers of two. For example, thirteen is eight plus four plus one. Therefore a to the thirteenth equals a to the eighth times a to the fourth times a to the first.
+
+We can create those powers very cheaply. Start with a to the first. Square it to get a squared. Square again to get a to the fourth, then a to the eighth, and so on. Each square doubles the exponent, which is why the number of steps is logarithmic.
+
+Let us trace three to the thirteenth. The binary form of thirteen is eleven-oh-one. Start result at one and current base at three. The low bit is one, so result becomes three. Square the base to get nine and divide the exponent by two, giving six.
+
+The low bit of six is zero, so we skip multiplying. Square nine to get eighty-one and halve six to get three. Three has a low bit of one, so multiply result by eighty-one. Square again for the next power and halve the exponent. The final low bit is also one, so that last power is included. We selected exactly exponents one, four, and eight, whose sum is thirteen.
+
+The modulo operation can happen after every multiplication. If two values have the same remainder modulo one billion seven, replacing one with the other does not change the remainder of future products. This keeps every stored number manageable.
+
+The key invariant is simple. At every loop, result times current base raised to the remaining exponent equals the original power, modulo the answer modulus. When the low bit is one, we move one current base into result. The remaining exponent is now even. Then squaring the base and halving the exponent preserves the same product.
+
+When the exponent finally reaches zero, the base-to-the-zero part equals one. That leaves result as the complete answer.
+
+Now look at the C plus plus helper. It receives base and exponent. Result begins at one. While exponent is positive, an ampersand with one checks the low binary bit. If that bit is set, we multiply result by base and reduce modulo one billion seven.
+
+Next, we square base modulo the same number. Shifting exponent right by one is integer division by two. The loop repeats once per binary digit, so even an exponent of one billion needs only about thirty iterations.
+
+There are two useful corner cases. Any nonzero base to exponent zero is one. The problem also explicitly defines zero to the zero as one. Our code handles both automatically because result starts at one and the loop does not run when exponent is zero. Zero to any positive exponent becomes zero after the first selected multiplication.
+
+For the official example three to the fourth, binary four has only one set bit. Repeated squaring reaches three squared equals nine, then nine squared equals eighty-one. That is the answer. Two to the eighth similarly reaches two hundred fifty-six.
+
+Each query takes order log b time and constant extra space. Across many queries, that is fast enough because the exponent has only around thirty binary digits.
+
+The official CSES problem and the fully commented C plus plus solution are linked in the description. Remember the picture: build the powers one, two, four, eight by squaring, and multiply only the powers selected by the exponent's binary bits.

@@ -1,0 +1,7 @@
+Exponentiation	Finding a raised to b modulo one billion seven|A direct loop can require one billion multiplications
+Binary decomposition	Thirteen equals eight plus four plus one|Select powers using the exponent's set bits
+Repeated squaring	Build a to 1, 2, 4, 8, and so on|Each square doubles the represented exponent
+Loop invariant	result times base to remaining stays equal to the original power|Modulo after every product is safe
+Three to the thirteenth	Low bits select powers one, four, and eight|The selected exponent costs add to thirteen
+Corner cases	Result starts at one for exponent zero|The stated zero-to-zero answer is also one
+C++ and complexity	Multiply, square, and shift once per bit|O(log b) time and O(1) space per query

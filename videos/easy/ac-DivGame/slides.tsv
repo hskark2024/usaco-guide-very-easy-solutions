@@ -1,0 +1,7 @@
+Div Game	Divide by distinct prime powers|Maximize the number of legal operations
+Factor twenty-four	Two cubed times three to the first|Prime exponents become independent supplies
+Prime-power costs	p to 1 costs one exponent copy|p to 2 costs two, then p to 3 costs three
+Greedy staircase	Spend costs one, two, three, and onward|Stop when the next cost no longer fits
+Why greedy is optimal	Any k distinct positive costs sum to at least 1 through k|Choosing those exact costs reaches the bound
+Examples	Sixty-four fits costs one plus two plus three|One gives zero and a prime gives one
+C++ and complexity	Trial divide, count exponents, and handle one leftover prime|O(sqrt N) time and O(1) space
