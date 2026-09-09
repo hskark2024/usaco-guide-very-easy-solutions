@@ -37,6 +37,9 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1095` | CSES | [Exponentiation](problems/cses-1095/README.md) | [Modular Arithmetic, Binary Exponentiation] | [C++](solutions/cses-1095.cpp) | [Package](videos/easy/cses-1095/README.md) |
 | `cses-1713` | CSES | [Counting Divisors](problems/cses-1713/README.md) | [Divisibility, Prime Factorization, Sieve] | [C++](solutions/cses-1713.cpp) | [Package](videos/easy/cses-1713/README.md) |
 | `ac-DivGame` | AC | [Div Game](problems/ac-DivGame/README.md) | [Prime Factorization, Greedy] | [C++](solutions/ac-DivGame.cpp) | [Package](videos/easy/ac-DivGame/README.md) |
+| `cf-1514C` | CF | [Product 1 Modulo N](problems/cf-1514C/README.md) | [Divisibility, Modular Arithmetic, Greedy] | [C++](solutions/cf-1514C.cpp) | [Package](videos/easy/cf-1514C/README.md) |
+| `cf-1225D` | CF | [Power Products](problems/cf-1225D/README.md) | [Number Theory, Prime Factorization, Maps] | [C++](solutions/cf-1225D.cpp) | [Package](videos/easy/cf-1225D/README.md) |
+| `cf-1536C` | CF | [Diluc and Kaeya](problems/cf-1536C/README.md) | [Divisibility, GCD, Prefix Counting] | [C++](solutions/cf-1536C.cpp) | [Package](videos/easy/cf-1536C/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

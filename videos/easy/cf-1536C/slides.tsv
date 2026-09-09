@@ -1,0 +1,7 @@
+Diluc and Kaeya	For every prefix, maximize equal-ratio pieces|Track D to K ratios
+Prefix as a point	Count D on one axis and K on the other|Each new character moves one step
+Reduce the ratio	Divide both counts by their gcd|Points on the same ray get the same key
+Frequency equals pieces	First visit means one piece|The q-th visit means q equal-ratio chunks
+Why it works	Consecutive points on one ray differ by the primitive ratio|Those differences are the pieces
+Examples	DDK gives one, two, one|DKDK finishes with two balanced chunks
+C++ and complexity	Use cumulative counts, gcd, and a map of pairs|One scan with logarithmic map updates

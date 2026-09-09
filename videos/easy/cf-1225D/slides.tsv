@@ -1,0 +1,7 @@
+Power Products	Count pairs whose product is a perfect k-th power|Prime exponents reveal the answer
+Perfect-power rule	Every prime exponent must be divisible by k|Only exponent remainders matter
+Number signature	Factor the value and reduce exponents modulo k|Drop every zero remainder
+Complement signature	Remainder r needs k minus r|All prime entries must match exactly
+Count once	Look up the needed signature among earlier values|Then store the current signature
+Examples	For cubes, two and four complement each other|One and eight both have empty signatures
+C++ and complexity	Use a smallest-prime-factor sieve and map of vectors|64-bit answer handles all index pairs

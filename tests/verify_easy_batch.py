@@ -325,6 +325,108 @@ def verify_div_game() -> None:
         assert actual == brute(original, 0)
 
 
+def verify_product_one_modulo_n() -> None:
+    for modulus in range(2, 101):
+        output = list(map(int, run("cf-1514C", f"{modulus}\n").split()))
+        printed_size = output[0]
+        selected = output[1:]
+
+        assert printed_size == len(selected)
+        assert selected == sorted(set(selected))
+        assert all(1 <= value < modulus for value in selected)
+
+        product_modulo_n = 1
+        for value in selected:
+            product_modulo_n = product_modulo_n * value % modulus
+        assert product_modulo_n == 1
+
+        units = [
+            value
+            for value in range(1, modulus)
+            if __import__("math").gcd(value, modulus) == 1
+        ]
+        all_units_product = 1
+        for value in units:
+            all_units_product = all_units_product * value % modulus
+        expected_size = len(units) - (all_units_product != 1)
+        assert printed_size == expected_size
+
+        # For tiny moduli, independently enumerate every subset and prove no
+        # larger valid selection exists.
+        if modulus <= 12:
+            brute_best = 0
+            for mask in range(1 << (modulus - 1)):
+                product = 1
+                picked = 0
+                for offset in range(modulus - 1):
+                    if mask & (1 << offset):
+                        product = product * (offset + 1) % modulus
+                        picked += 1
+                if product == 1:
+                    brute_best = max(brute_best, picked)
+            assert printed_size == brute_best
+
+
+def verify_power_products() -> None:
+    def is_perfect_kth_power(value: int, power: int) -> bool:
+        candidate = 1
+        while candidate**power < value:
+            candidate += 1
+        return candidate**power == value
+
+    for _ in range(350):
+        size = RNG.randint(2, 12)
+        power = RNG.randint(2, 6)
+        values = [RNG.randint(1, 50) for _ in range(size)]
+        expected = sum(
+            is_perfect_kth_power(values[left] * values[right], power)
+            for left in range(size)
+            for right in range(left + 1, size)
+        )
+        input_text = f"{size} {power}\n" + " ".join(map(str, values)) + "\n"
+        actual = int(run("cf-1225D", input_text))
+        assert actual == expected
+
+
+def verify_diluc_and_kaeya() -> None:
+    def same_ratio(left: str, right: str) -> bool:
+        left_d = left.count("D")
+        left_k = len(left) - left_d
+        right_d = right.count("D")
+        right_k = len(right) - right_d
+        return left_d * right_k == left_k * right_d
+
+    def brute_prefix(prefix: str) -> int:
+        if len(prefix) == 1:
+            return 1
+        best = 1
+        for cuts in range(1 << (len(prefix) - 1)):
+            pieces = []
+            start = 0
+            for index in range(len(prefix) - 1):
+                if cuts & (1 << index):
+                    pieces.append(prefix[start : index + 1])
+                    start = index + 1
+            pieces.append(prefix[start:])
+            if all(same_ratio(pieces[0], piece) for piece in pieces[1:]):
+                best = max(best, len(pieces))
+        return best
+
+    cases = [
+        "".join(RNG.choice("DK") for _ in range(RNG.randint(1, 10)))
+        for _ in range(220)
+    ]
+    input_text = str(len(cases)) + "\n" + "".join(
+        f"{len(case)}\n{case}\n" for case in cases
+    )
+    output_lines = run("cf-1536C", input_text).strip().splitlines()
+    assert len(output_lines) == len(cases)
+    for case, output_line in zip(cases, output_lines):
+        actual = list(map(int, output_line.split()))
+        expected = [brute_prefix(case[:end]) for end in range(1, len(case) + 1)]
+        assert actual == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -342,6 +444,9 @@ if __name__ == "__main__":
         verify_exponentiation,
         verify_counting_divisors,
         verify_div_game,
+        verify_product_one_modulo_n,
+        verify_power_products,
+        verify_diluc_and_kaeya,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

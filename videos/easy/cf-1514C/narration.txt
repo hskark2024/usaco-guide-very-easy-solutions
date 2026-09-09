@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Product 1 Modulo N from Codeforces and the USACO Guide Easy list. We receive one integer n. From the values one through n minus one, we want the longest increasing selection whose product has remainder one when divided by n.
+
+The first observation removes many impossible choices. Suppose we select a value that shares a prime factor with n. Then the entire product also contains that prime factor. A number with that shared factor cannot have remainder one modulo n. So every selected value must be coprime with n.
+
+Numbers coprime with n are sometimes called units modulo n. They have modular inverses. Our code scans every value from one through n minus one, checks its gcd with n, and stores exactly the units.
+
+Now try the boldest possible answer: take every unit. While collecting them, multiply them together modulo n. Call the final residue p.
+
+If p is already one, we are finished. No valid answer can contain any number outside the unit list, and we kept the whole unit list, so this must be maximum.
+
+What if p is not one? Here is the neat trick. The product of units is also a unit, so p is coprime with n. Since p is a residue from one through n minus one, the value p appears in our unit list. Remove that one value.
+
+Why does removal work? The old product was p. Removing p is the same as multiplying by the modular inverse of p. That changes the product to p times inverse p, which is one modulo n.
+
+We also get a short maximum proof. When the product of all units is not one, keeping every unit fails, so any valid answer must remove at least one value. Our construction removes exactly one. Therefore nobody can produce a longer answer.
+
+Let us trace n equal to five. The units are one, two, three, and four. Their product is twenty-four, which has residue four modulo five. Remove the value four. The remaining product is one times two times three, or six, and six has residue one modulo five. The answer is one, two, three.
+
+For n equal to eight, the units are one, three, five, and seven. Their product has residue one modulo eight, so we keep all four values. For the minimum n equal to two, the list contains only one, which already works.
+
+The C plus plus code follows the proof directly. It keeps a vector named usable and a running product. The gcd test rejects impossible values. Each multiplication uses a long long and immediately takes modulo n.
+
+After the scan, the code checks the product. If it is not one, it copies every usable value except the one equal to the product into a filtered vector. There is exactly one such value because the original numbers are distinct. Finally, it prints the size and the values in increasing order.
+
+The scan performs n gcd calculations. Euclid's gcd algorithm is logarithmic, so the time is order n log n, and the vector uses order n space.
+
+Remember the central idea: first prove that only units can work, then try every unit. Their total residue tells us the only value we may need to remove. The official problem and the fully commented C plus plus solution are linked in the description.

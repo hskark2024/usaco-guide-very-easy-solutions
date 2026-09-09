@@ -1,0 +1,25 @@
+Hey everyone. Today we are solving Diluc and Kaeya from Codeforces and the USACO Guide Easy list. We receive strings made only of D and K. For every prefix, we want the greatest number of contiguous pieces that all have the same D to K ratio.
+
+Start by turning each prefix into two counts. The first coordinate is how many D characters we have seen, and the second is how many K characters we have seen. We can picture the prefixes as points on a grid.
+
+Ratios must be reduced. Counts one to one and two to two describe the same balance, just at different sizes. We divide both counts by their greatest common divisor. That gives a unique primitive pair for every ratio.
+
+For example, prefix D K has counts one, one and reduced ratio one, one. Prefix D K D K has counts two, two, which also reduces to one, one. The same reduced key tells us that the longer prefix contains two copies of the same basic ratio, so it can split into D K and D K.
+
+The surprising rule is simple: the answer for a prefix is the number of times its reduced ratio has appeared among prefixes so far.
+
+Why? Suppose the current reduced ratio is a to b, and this is its third appearance. Those three prefix endpoints lie farther and farther along the same ray from the origin. The difference between consecutive endpoints contains counts proportional to a to b. Cutting at those endpoints creates three contiguous chunks with the same ratio.
+
+The reverse direction also proves maximum size. If a prefix is split into q equal-ratio pieces, then after one piece, two pieces, and so on, every cut endpoint has that same reduced ratio. Therefore the ratio must have appeared at least q times. Frequency gives both a construction and an upper bound.
+
+Trace D D K. After the first D, the counts are one, zero, which reduces to one, zero, and its frequency is one. After the second D, counts two, zero still reduce to one, zero, so the frequency becomes two. After K, counts two, one reduce to two, one, a new ratio with frequency one. The answers are one, two, one.
+
+All-one-letter strings also work. The gcd of d and zero is d, so every all-D prefix reduces to one, zero. Its frequency climbs one, two, three, and so on. That matches cutting the string into single D characters. All-K prefixes similarly reduce to zero, one.
+
+The C plus plus implementation resets two counters and a map for every test case. When it reads a D, it increments the D count; otherwise it increments the K count. It computes the gcd, divides both counts, and uses the resulting pair as a map key.
+
+Incrementing the map entry returns the answer immediately. The first time a ratio appears, the value is one. Each return to the same direction increases the maximum piece count by one. We print that number for every prefix.
+
+The total string length is at most five hundred thousand. We scan every character once. Gcd is fast, and the ordered map adds logarithmic overhead. Memory is linear in the number of different reduced ratios.
+
+Remember the geometric picture: every prefix is a grid point, gcd reduces it to a direction from the origin, and repeated visits to one direction mark consecutive equal-ratio chunks. The official problem and fully commented C plus plus solution are linked in the description.

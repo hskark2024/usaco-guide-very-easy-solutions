@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Power Products from Codeforces and the USACO Guide Easy list. We have an array and an exponent k. We need to count pairs of indices whose two values multiply to a perfect k-th power.
+
+The key fact comes from prime factorization. A number is a perfect k-th power exactly when every prime exponent is divisible by k. For a square, every exponent is even. For a cube, every exponent is a multiple of three. The same rule works for any k.
+
+Complete groups of k do not affect whether a partner is needed, so we reduce every prime exponent modulo k. The leftovers form a signature.
+
+For example, let k equal three. The number eighteen is two to the first times three squared, so its signature is the ordered pair list two comma one, then three comma two. To complete a cube, a partner needs two more copies of prime two and one more copy of prime three. Its complementary signature is two comma two, then three comma one.
+
+This is an exact condition. If every signature entry gets its complement, each combined exponent becomes k. If a prime is missing, extra, or has the wrong residue, at least one exponent is not divisible by k, so the product is not a perfect power.
+
+Values that are already perfect k-th powers have an empty signature. That includes one. Two empty signatures match, which is correct because the product of two perfect k-th powers is another perfect k-th power.
+
+We process the array from left to right. A map stores how many earlier values produced each signature. For the current value, build both its own signature and the signature it needs. Add the earlier frequency of the needed signature to the answer, then store the current signature.
+
+Querying before insertion matters. It prevents a value from pairing with itself. It also makes every valid pair appear once, when we reach its right endpoint, instead of twice in both orders.
+
+Consider k equal three with values two and four. Two has exponent residue one. Four has residue two. One plus two equals three, so they match and their product eight is a cube.
+
+In the official sample, one and eight both have empty signatures because one and eight are cubes. Three has residue one for prime three, while nine has residue two, so those signatures complement each other. Twenty-four supplies other combinations, and the final count is five.
+
+To factor up to one hundred thousand values efficiently, the code first builds a smallest-prime-factor table. For every prime, the sieve marks composites with their first prime divisor. Then factoring a number means repeatedly looking up that divisor, dividing it out, and counting its exponent.
+
+Our signature is a vector of prime and residue pairs. Prime factors are discovered in increasing order, so equal mathematical signatures become equal vector keys automatically. A standard map can count those vectors without risky numeric encoding or overflow.
+
+The answer uses long long because one hundred thousand values can create almost five billion pairs. The sieve takes near-linear preprocessing time. Each value has only a few prime factors, and map operations add logarithmic overhead.
+
+Remember the picture: factor each number into prime columns, erase complete groups of k, and ask for the exact leftover columns that fill every column back to a multiple of k. The official problem and fully commented C plus plus solution are linked in the description.

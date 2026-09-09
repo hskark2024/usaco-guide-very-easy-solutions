@@ -1,0 +1,7 @@
+Product 1 Modulo N	Choose the longest subsequence|Make its product equal one modulo n
+Only units can work	A selected value must be coprime with n|Otherwise the whole product shares a factor with n
+Take every unit	Scan one through n minus one|Multiply the coprime values modulo n
+One-removal trick	If the total residue is p, remove value p|The rest multiply to p times inverse p, which is one
+Why it is maximum	If all units work, nothing larger exists|Otherwise at least one removal is necessary and sufficient
+Examples	n equals five removes four|n equals eight keeps one, three, five, seven
+C++ and complexity	Use gcd, a vector, and 64-bit multiplication|O(n log n) time and O(n) space
