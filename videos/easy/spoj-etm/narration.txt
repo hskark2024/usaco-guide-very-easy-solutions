@@ -1,0 +1,23 @@
+Hey everyone. Today we are solving Euler Totient Function from SPOJ and the USACO Guide Easy list. The goal is to answer many queries. For each positive integer n, phi of n is the number of values from one through n that have greatest common divisor one with n.
+
+Let us start with twelve. The numbers coprime to twelve are one, five, seven, and eleven, so phi of twelve is four. Testing every possible value with gcd would work for one tiny number, but repeating that for many queries is much too slow.
+
+Prime factors reveal the pattern. Twelve has distinct prime factors two and three. Half of all candidates are divisible by two, so we keep a factor of one half. One third of the remaining pattern is removed by prime three, so we also keep a factor of two thirds. Twelve times one half times two thirds equals four.
+
+In general, start with n. For every distinct prime p dividing n, multiply by one minus one over p. We can perform that fraction with exact integer arithmetic as answer minus answer divided by p.
+
+Now turn the formula into a sieve so thousands of test cases can share the work. Make an array called phi, and initially set phi of x equal to x for every x up to the largest query.
+
+We scan candidate primes starting at two. If phi of p is still equal to p, no smaller prime has changed it. That means p is prime. We then visit every multiple of p and subtract one p-th of its current phi value.
+
+Trace twelve inside the sieve. It begins at twelve. When prime two arrives, twelve becomes twelve minus six, which is six. When prime three arrives, it becomes six minus two, which is four. No other prime divides twelve, so four is final.
+
+Notice that prime powers do not cause repeated updates for the same prime. For eight, prime two changes eight to four exactly once. That matches the fact that one, three, five, and seven are coprime to eight.
+
+The one unusual case is phi of one. The problem defines it as one. Our initialization already sets phi of one to one, and the prime loop begins at two, so the base case stays correct.
+
+In C plus plus, we first read and store all queries. Their maximum tells us exactly how large the table must be. We initialize the vector with its indices. Then the outer loop finds primes, and the inner loop updates their multiples using phi of multiple minus equals phi of multiple divided by prime.
+
+After preprocessing, each test case is just one array lookup. The sieve uses linear memory through the maximum query and roughly M log log M time. Every query after that costs constant time.
+
+Remember the central picture: each prime factor crosses out its share of non-coprime candidates. The totient sieve applies all those prime corrections to every number at once. The official problem and the thoroughly commented C plus plus solution are linked in the description.

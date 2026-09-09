@@ -1,0 +1,7 @@
+Permutation Rounds	A fixed shuffle repeats forever|When does the sorted array return?
+See the cycles	Every position has one incoming and outgoing arrow|A permutation splits into disjoint rings
+Each cycle is a clock	Length k returns every k rounds|All elements must return together
+Answer is the LCM	Cycle lengths 3 and 4 align at 12|Choose the first shared multiple
+Avoid the modulo trap	A reduced partial LCM loses prime factors|Store factor exponents first
+Merge prime factors	Factor each cycle length|Keep the maximum exponent of every prime
+C++ and complexity	Visit each position once|Rebuild the LCM modulo 1e9 plus 7

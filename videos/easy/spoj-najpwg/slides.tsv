@@ -1,0 +1,7 @@
+Playing with GCD	Count unordered pairs with gcd greater than 1|Equal endpoints are allowed
+Remove symmetry	Represent every pair with x less than or equal to y|Now each pair appears once
+Triangular columns	Fix the larger endpoint y|There are y choices for x
+Subtract coprimes	phi(y) choices have gcd 1|Wanted contribution is y minus phi(y)
+Trace n equals 5	Column contributions are 0, 1, 1, 2, 1|Prefix total is 5
+Precompute answers	Sieve every phi value|Prefix-sum each column contribution
+C++ and complexity	Use long long and exact case labels|O(M log log M), then O(1) per query

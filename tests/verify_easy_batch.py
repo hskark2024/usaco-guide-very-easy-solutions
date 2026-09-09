@@ -2,7 +2,7 @@ from bisect import insort
 from collections import Counter
 from fractions import Fraction
 from functools import lru_cache
-from math import atan2
+from math import atan2, gcd
 from itertools import combinations, permutations, product
 from pathlib import Path
 import random
@@ -427,6 +427,71 @@ def verify_diluc_and_kaeya() -> None:
         assert actual == expected
 
 
+def verify_euler_totient() -> None:
+    # GCD enumeration is deliberately independent of the sieve formula used by
+    # the solution.  It checks every candidate for each small n directly.
+    values = list(range(1, 501))
+    input_text = str(len(values)) + "\n" + "\n".join(map(str, values)) + "\n"
+    actual = list(map(int, run("spoj-etm", input_text).split()))
+    expected = [
+        sum(gcd(candidate, value) == 1 for candidate in range(1, value + 1))
+        for value in values
+    ]
+    assert actual == expected
+
+
+def verify_permutation_rounds() -> None:
+    def first_reset_round(permutation: list[int]) -> int:
+        # Move each labeled element according to the permutation until the full
+        # arrangement returns.  This simulates the statement rather than using
+        # cycle lengths or an LCM, which makes it a useful independent oracle.
+        positions = list(range(len(permutation)))
+        rounds = 0
+        while True:
+            positions = [permutation[position] for position in positions]
+            rounds += 1
+            if positions == list(range(len(permutation))):
+                return rounds
+
+    for size in range(1, 9):
+        cases = []
+        if size <= 7:
+            # Full enumeration is affordable through seven positions.
+            cases.extend(permutations(range(size)))
+        else:
+            # Eight factorial cases would dominate the suite, so use a fixed
+            # random sample plus identity and one full cycle.
+            cases.extend([tuple(range(size)), tuple(range(1, size)) + (0,)])
+            for _ in range(300):
+                values = list(range(size))
+                RNG.shuffle(values)
+                cases.append(tuple(values))
+
+        for permutation in cases:
+            input_text = (
+                f"{size}\n"
+                + " ".join(str(destination + 1) for destination in permutation)
+                + "\n"
+            )
+            actual = int(run("cses-3398", input_text))
+            assert actual == first_reset_round(list(permutation))
+
+
+def verify_playing_with_gcd() -> None:
+    limits = list(range(0, 181))
+    input_text = str(len(limits)) + "\n" + "\n".join(map(str, limits)) + "\n"
+    output_lines = run("spoj-najpwg", input_text).strip().splitlines()
+    assert len(output_lines) == len(limits)
+
+    for case_number, (limit, line) in enumerate(zip(limits, output_lines), 1):
+        expected = sum(
+            gcd(left, right) > 1
+            for right in range(1, limit + 1)
+            for left in range(1, right + 1)
+        )
+        assert line == f"Case {case_number}: {expected}"
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -447,6 +512,9 @@ if __name__ == "__main__":
         verify_product_one_modulo_n,
         verify_power_products,
         verify_diluc_and_kaeya,
+        verify_euler_totient,
+        verify_permutation_rounds,
+        verify_playing_with_gcd,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

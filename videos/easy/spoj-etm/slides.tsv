@@ -1,0 +1,7 @@
+Euler Totient Function	Count values coprime to n|Solve many SPOJ queries together
+What phi counts	phi(12) is 4|The survivors are 1, 5, 7, and 11
+Prime-factor formula	Start from n|For each distinct prime p, multiply by 1 minus 1 over p
+Totient sieve	Initialize phi[x] to x|Every prime updates all of its multiples
+Trace twelve	Prime 2 changes 12 to 6|Prime 3 changes 6 to 4
+Prime detection	An untouched phi[p] equals p|So p has no smaller prime factor
+C++ and complexity	Exact integer subtraction, then O(1) queries|O(M log log M) preprocessing

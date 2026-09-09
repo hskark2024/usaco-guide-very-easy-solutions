@@ -1,0 +1,25 @@
+Hey everyone. Today we are solving Playing with GCD from SPOJ and the USACO Guide Easy list. For every limit n, we need the number of unordered pairs from one through n whose greatest common divisor is greater than one.
+
+The word unordered matters. Pair two comma four is the same as pair four comma two, so we must count it once. Equal pairs such as four comma four are allowed, and their gcd is four, so they count.
+
+We can remove the symmetry cleanly by always writing the smaller value first. In other words, keep only pairs with x less than or equal to y. Picture these pairs as a triangular grid. Every column is labeled by its larger endpoint y, and it contains x from one through y.
+
+Now focus on one column. There are y total choices for x. Euler's totient phi of y tells us exactly how many numbers from one through y are coprime to y. Those are the pairs whose gcd equals one, which are the pairs we do not want.
+
+Therefore the number of wanted pairs in column y is simply y minus phi of y.
+
+Let us trace n equals five. For y equals one, one minus phi of one is zero. For y equals two, the contribution is one. The only wanted pair is two comma two. For y equals three, the contribution is also one. For y equals four, phi of four is two, so the contribution is two: pairs two comma four and four comma four. For y equals five, the contribution is one. Adding zero, one, one, two, and one gives five.
+
+This column method counts every valid unordered pair exactly once. Every pair has one unique larger endpoint after we order its two values. It cannot appear in another column, and we never count its reversed copy.
+
+The input has several test cases, so we precompute. First build Euler's totient values through the largest requested n. Start phi of x at x. Whenever an untouched index p identifies a prime, visit its multiples and subtract phi divided by p.
+
+Then build a prefix answer array. Answer of y equals answer of y minus one plus y minus phi of y. The prefix through n now contains the contribution of every possible larger endpoint from one through n.
+
+Each query becomes one table lookup. Be careful to store the answer in a long long because the number of possible pairs grows about as fast as n squared. The code also prints the exact case label format required by SPOJ.
+
+Consider a prime endpoint such as seven. Phi of seven is six, so seven minus six equals one. The only valid pair in that column is seven comma seven. Composite endpoints contribute more because smaller numbers can share their prime factors.
+
+The totient sieve takes roughly M log log M time, the prefix pass is linear, and each test case after that is constant time. Memory is linear through the largest query.
+
+Remember the triangular grid: choose one orientation for every unordered pair, group by the larger endpoint, and subtract the coprime choices counted by phi. That changes a two-dimensional pair problem into a simple one-dimensional prefix sum. The official problem and commented C plus plus solution are linked in the description.

@@ -40,6 +40,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-1514C` | CF | [Product 1 Modulo N](problems/cf-1514C/README.md) | [Divisibility, Modular Arithmetic, Greedy] | [C++](solutions/cf-1514C.cpp) | [Package](videos/easy/cf-1514C/README.md) |
 | `cf-1225D` | CF | [Power Products](problems/cf-1225D/README.md) | [Number Theory, Prime Factorization, Maps] | [C++](solutions/cf-1225D.cpp) | [Package](videos/easy/cf-1225D/README.md) |
 | `cf-1536C` | CF | [Diluc and Kaeya](problems/cf-1536C/README.md) | [Divisibility, GCD, Prefix Counting] | [C++](solutions/cf-1536C.cpp) | [Package](videos/easy/cf-1536C/README.md) |
+| `spoj-etm` | SPOJ | [ETF - Euler Totient Function](problems/spoj-etm/README.md) | [Euler Totient, Sieve, Prime Factors] | [C++](solutions/spoj-etm.cpp) | [Package](videos/easy/spoj-etm/README.md) |
+| `cses-3398` | CSES | [Permutation Rounds](problems/cses-3398/README.md) | [Functional Graph, Cycles, Prime Factorization, LCM] | [C++](solutions/cses-3398.cpp) | [Package](videos/easy/cses-3398/README.md) |
+| `spoj-najpwg` | SPOJ | [NAJPWG - Playing with GCD](problems/spoj-najpwg/README.md) | [Divisibility, Euler Totient, Prefix Sums] | [C++](solutions/spoj-najpwg.cpp) | [Package](videos/easy/spoj-najpwg/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

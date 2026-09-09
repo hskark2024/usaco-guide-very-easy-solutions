@@ -1,0 +1,27 @@
+Hey everyone. Today we are solving Permutation Rounds from CSES and the USACO Guide Easy list. We begin with a sorted array. During every round, each element moves according to the same permutation. We need the first positive round when everything is sorted again.
+
+The key is to stop imagining the whole array moving at once. Draw an arrow from every position i to its destination p of i. Because p is a permutation, every position has exactly one outgoing arrow and exactly one incoming arrow. That forces the graph to break into separate directed cycles.
+
+Consider a cycle with three positions. After one round, every element moves one step around the ring. After two rounds, each has moved two steps. After three rounds, every element returns to its start. This cycle resets on rounds three, six, nine, and so on.
+
+A cycle of length four resets on multiples of four. If our permutation contains both a length-three cycle and a length-four cycle, the first time both reset is twelve. That is exactly the least common multiple of three and four.
+
+So we can walk through the permutation, measure every cycle length, and find the LCM of those lengths. But there is a catch. The true LCM can become enormous, while the problem asks only for its value modulo one billion and seven.
+
+We cannot safely take a modulo after each ordinary LCM calculation. The next gcd needs the true factor structure, and modular reduction can destroy it. Instead, we store the LCM as prime exponents.
+
+Suppose the cycle lengths are four and six. Four is two squared. Six is two times three. The LCM needs the greatest exponent of each prime, so it is two squared times three, which equals twelve. We take the maximum exponent, not the sum.
+
+The program first builds a smallest-prime-factor table through n. Then it uses a visited array to find cycles. Starting from an unvisited position, follow permutation arrows, mark each position, and count steps until the walk reaches an already visited position. In a permutation, that new walk is exactly one complete cycle.
+
+Next, factor the cycle length. Repeatedly look up its smallest prime factor, count how many times it divides, and update the maximum exponent stored for that prime.
+
+After all cycles are processed, reconstruct the LCM modulo one billion and seven. For each prime, multiply it into the answer the stored number of times, taking the modulo after every multiplication. At this stage modulo is safe because all factor decisions are finished.
+
+The identity permutation is a useful edge case. Every position forms a cycle of length one. The LCM of all those ones is one, which matches the first positive round: after one round, the array is still sorted.
+
+For the official example, the cycle lengths are four, two, and two. Their least common multiple is four, so the answer is four.
+
+The cycle traversal touches every position once. The sieve and factorization are also efficient for n up to two hundred thousand, and the memory use is linear.
+
+Remember the clock picture: each cycle is a clock that resets at its own length, and the LCM is the first moment when all clocks show zero together. Prime exponents let us calculate that moment without ever storing its gigantic exact value. The official problem and commented C plus plus solution are linked below.

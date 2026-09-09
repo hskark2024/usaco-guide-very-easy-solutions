@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last live listing check: 2026-09-08
+- Last live listing check: 2026-09-09
 - Listing snapshot: USACO Guide source commit [`75c4a4e`](https://github.com/cpinitiative/usaco-guide/commit/75c4a4ec4c7569fe19898790733a90a52b406f68) (422 unique module-listed Easy IDs)
-- Completed Easy solutions: 21
-- Complete video packages: 21
+- Completed Easy solutions: 24
+- Complete video packages: 24
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -32,3 +32,6 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1514C` | Product 1 Modulo N | complete | complete | complete | generated |
 | `cf-1225D` | Power Products | complete | complete | complete | generated |
 | `cf-1536C` | Diluc and Kaeya | complete | complete | complete | generated |
+| `spoj-etm` | ETF - Euler Totient Function | complete | complete | complete | generated |
+| `cses-3398` | Permutation Rounds | complete | complete | complete | generated |
+| `spoj-najpwg` | NAJPWG - Playing with GCD | complete | complete | complete | generated |
