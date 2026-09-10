@@ -1,0 +1,25 @@
+Hey everyone. Today we are solving Mortal Kombat Tower, Codeforces fourteen eighteen C, from the USACO Guide Easy list. This problem teaches an important dynamic programming skill: sometimes your state needs one extra piece of information beyond your position.
+
+There is an ordered row of bosses. Zero means an easy boss, and one means a hard boss. You and a friend defeat them in sessions. The friend always goes first, turns alternate, and each session must defeat either one boss or two consecutive bosses.
+
+You can defeat every boss for free. Your friend can defeat an easy boss for free, but needs one skip point for each hard boss in their session. We want the fewest skip points the friend must spend.
+
+If we only stored the number of defeated bosses, we would lose critical information. Imagine two schedules that have both cleared the first five bosses. If your friend goes next in one schedule but you go next in the other, the cost of the remaining hard bosses can be completely different.
+
+So we add the next player to our state. Let dp of i comma friend be the minimum skips after exactly i bosses are defeated when the friend goes next. Let dp of i comma you mean the same thing when your session comes next.
+
+Before any boss is defeated, the friend goes first, so dp zero friend is zero. Every other state starts as unreachable.
+
+From each reachable state, try a session of one boss and a session of two bosses, as long as they fit. After the session, toggle the player. If it is your turn, the added cost is zero. If it is the friend's turn, add the difficulty markers of the bosses taken. Because each marker is zero or one, that sum is exactly the required skip points.
+
+Consider the row one, zero, one, one, zero, one, one, one. One good schedule uses session sizes two, two, one, two, one. The friend takes the first two bosses and pays one. You take the next two hard bosses for free. The friend takes the easy boss. You take two more hard bosses. Finally, the friend takes the last hard boss and pays one more. The total is two.
+
+The DP explores this schedule and every other legal grouping. It never creates an illegal one because every edge advances by one or two and switches turns. It never misses a legal one because any real schedule can be replayed by choosing its session size at each state.
+
+In the C plus plus code, we store an array of two costs for every defeated prefix length. We loop over the prefix, the player, and the two possible session sizes. An infinity check skips unreachable states. A reference to the destination makes the minimum update clear, and turn xor one switches between zero and one.
+
+After all bosses are defeated, either next-turn state may be reachable. That just tells us which player would have gone next if bosses remained. We take the smaller of both terminal costs.
+
+There are only two states per prefix and two outgoing session sizes, so the time is O of N for each test case. The table uses O of N memory. It could be compressed, but the full table makes the meaning and proof easier to follow.
+
+Remember the design lesson: when future choices depend on more than location, include that information in the state. Here, one turn bit transforms a confusing game into a small shortest-path-like DP. The official problem and the heavily commented solution are linked below.

@@ -1,0 +1,7 @@
+Increasing Frequency	Add one number to one segment|Maximize occurrences of target c
+Choose a source value x	Useful shift is k equals c minus x|Every x in the segment becomes c
+Net gain inside the segment	Mark x as plus 1|Mark old c as minus 1 and others zero
+Hidden maximum subarray	Best segment for x has maximum score|Baseline is the original count of c
+Avoid O(N times values)	Keep one ending gain for each x|Update x only when x appears
+Lazy target losses	Count c values since the previous x|Extend or restart with gain one
+C++ and complexity	Answer is baseline plus best gain|O(N) time and O(V) space

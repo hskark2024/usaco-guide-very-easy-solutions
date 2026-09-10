@@ -43,6 +43,9 @@ The official statements remain at their original judge links. These notes intent
 | `spoj-etm` | SPOJ | [ETF - Euler Totient Function](problems/spoj-etm/README.md) | [Euler Totient, Sieve, Prime Factors] | [C++](solutions/spoj-etm.cpp) | [Package](videos/easy/spoj-etm/README.md) |
 | `cses-3398` | CSES | [Permutation Rounds](problems/cses-3398/README.md) | [Functional Graph, Cycles, Prime Factorization, LCM] | [C++](solutions/cses-3398.cpp) | [Package](videos/easy/cses-3398/README.md) |
 | `spoj-najpwg` | SPOJ | [NAJPWG - Playing with GCD](problems/spoj-najpwg/README.md) | [Divisibility, Euler Totient, Prefix Sums] | [C++](solutions/spoj-najpwg.cpp) | [Package](videos/easy/spoj-najpwg/README.md) |
+| `ac-frog1` | AC | [Frog 1](problems/ac-frog1/README.md) | [Dynamic Programming] | [C++](solutions/ac-frog1.cpp) | [Package](videos/easy/ac-frog1/README.md) |
+| `cf-1418C` | CF | [Mortal Kombat Tower](problems/cf-1418C/README.md) | [Dynamic Programming] | [C++](solutions/cf-1418C.cpp) | [Package](videos/easy/cf-1418C/README.md) |
+| `cf-1082E` | CF | [Increasing Frequency](problems/cf-1082E/README.md) | [Dynamic Programming, Kadane] | [C++](solutions/cf-1082E.cpp) | [Package](videos/easy/cf-1082E/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

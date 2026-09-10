@@ -1,0 +1,25 @@
+Hey everyone. Today we are solving Increasing Frequency, Codeforces ten eighty-two E, from the USACO Guide Easy list. The solution hides Kadane's maximum-subarray idea inside a problem about changing array values.
+
+We receive an array and a target value c. We may choose one nonempty contiguous segment and add the same integer k to every entry in it. We want as many entries equal to c as possible afterward.
+
+First count how many c values already exist. Call that the baseline. We can always keep this many by choosing k equal to zero, so any real improvement must be added on top of the baseline.
+
+Suppose our operation converts an original value x into c. Then k has to equal c minus x. Inside the chosen segment, every x becomes a new target, which is a gain of one. But every value that was already c changes to c plus k, so for nonzero k it stops being a target. That is a loss of one. Every other value contributes zero.
+
+For a fixed source value x, replace each x with plus one, each c with minus one, and everything else with zero. The net number of new targets from any segment is exactly the sum of these weights. Therefore the best operation for x is the maximum-sum subarray.
+
+For example, let c be two and the array be six, two, six. If x is six, the weights are plus one, minus one, plus one. The full segment has score one. Adding that gain to the original one target gives two targets, matching the operation that shifts all three values by negative four.
+
+There is one performance problem. Array values can be large, so running a fresh Kadane scan for every possible x would be too slow. Instead, we maintain the relevant Kadane state for all values during one pass.
+
+For each non-target value x, ending gain of x stores the best segment score ending at its most recent occurrence. We also store how many targets had been seen at that occurrence. When x appears again, the difference in target counters tells us exactly how many minus-one positions lie in the gap.
+
+The new ending gain has two choices. Start a fresh segment at the current x, which scores one. Or extend the previous best segment: add one for this x and subtract the target values in the gap. We keep the larger choice, record the current target count, and update the global best gain.
+
+Why can we ignore unrelated values in the gap? Their weight is zero. Including or excluding them cannot change the score. Why do optimal segment boundaries land on x values? A leading or trailing region without x contains only zero and negative contributions, so trimming it never hurts.
+
+The C plus plus implementation uses two integer vectors indexed by the array value. When we see c, we only increment the global counter. When we see x, we calculate the lazy gap loss and update that value's state. This is much faster than touching every source value when a target appears.
+
+At the end, print the number of original targets plus the best gain. If the array already contains only c, best gain stays zero and the baseline is the full length, exactly as required.
+
+Each array position performs constant work, so the running time is O of N. The two tables use O of V space, where V is the largest allowed value. The central trick is to rewrite an operation as gains and losses. Once you see plus one for x and minus one for c, the hidden maximum-subarray DP becomes visible. The official problem and the thoroughly commented C plus plus solution are linked in the description.

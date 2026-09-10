@@ -492,6 +492,107 @@ def verify_playing_with_gcd() -> None:
         assert line == f"Case {case_number}: {expected}"
 
 
+def verify_frog_one() -> None:
+    def enumerate_routes(heights: list[int]) -> int:
+        # Enumerate both legal next jumps recursively.  Unlike the submitted
+        # bottom-up recurrence, this oracle explores complete routes directly.
+        @lru_cache(maxsize=None)
+        def brute(stone: int) -> int:
+            if stone == len(heights) - 1:
+                return 0
+            answers = []
+            for jump in (1, 2):
+                destination = stone + jump
+                if destination < len(heights):
+                    answers.append(
+                        abs(heights[stone] - heights[destination])
+                        + brute(destination)
+                    )
+            return min(answers)
+
+        return brute(0)
+
+    cases = [
+        [10, 10],
+        [10, 100, 10],
+        [10, 30, 40, 20],
+        [30, 10, 60, 10, 60, 50],
+    ]
+    for _ in range(240):
+        size = RNG.randint(2, 14)
+        cases.append([RNG.randint(1, 50) for _ in range(size)])
+
+    for heights in cases:
+        input_text = f"{len(heights)}\n{' '.join(map(str, heights))}\n"
+        actual = int(run("ac-frog1", input_text))
+        assert actual == enumerate_routes(heights)
+
+
+def verify_mortal_kombat_tower() -> None:
+    def enumerate_sessions(bosses: list[int]) -> int:
+        # Recursive enumeration independently tries every sequence of session
+        # sizes.  The Boolean says whether the friend owns the next session.
+        @lru_cache(maxsize=None)
+        def brute(defeated: int, friend_turn: bool) -> int:
+            if defeated == len(bosses):
+                return 0
+            best = len(bosses) + 1
+            for take in (1, 2):
+                if defeated + take > len(bosses):
+                    continue
+                cost = sum(bosses[defeated : defeated + take]) if friend_turn else 0
+                best = min(best, cost + brute(defeated + take, not friend_turn))
+            return best
+
+        return brute(0, True)
+
+    cases = [[0], [1], [1, 1, 1, 1, 1, 1], [1, 0, 1, 1, 0, 1, 1, 1]]
+    for _ in range(350):
+        size = RNG.randint(1, 15)
+        cases.append([RNG.randint(0, 1) for _ in range(size)])
+
+    input_text = str(len(cases)) + "\n" + "".join(
+        f"{len(case)}\n{' '.join(map(str, case))}\n" for case in cases
+    )
+    actual = list(map(int, run("cf-1418C", input_text).split()))
+    expected = [enumerate_sessions(case) for case in cases]
+    assert actual == expected
+
+
+def verify_increasing_frequency() -> None:
+    def enumerate_operations(values: list[int], target: int) -> int:
+        # Only shifts that map some present value to the target can improve the
+        # count; k = 0 preserves the baseline.  Exhaust every such shift and
+        # every nonempty segment for an independent small-case oracle.
+        shifts = {0, *(target - value for value in values)}
+        best = values.count(target)
+        for left in range(len(values)):
+            for right in range(left, len(values)):
+                for shift in shifts:
+                    candidate = sum(
+                        value + shift * (left <= index <= right) == target
+                        for index, value in enumerate(values)
+                    )
+                    best = max(best, candidate)
+        return best
+
+    cases = [
+        ([9, 9, 9, 9, 9, 9], 9),
+        ([6, 2, 6], 2),
+        ([1, 5, 5, 1], 5),
+        ([2, 7, 7, 2], 4),
+    ]
+    for _ in range(260):
+        size = RNG.randint(1, 10)
+        target = RNG.randint(1, 6)
+        cases.append(([RNG.randint(1, 6) for _ in range(size)], target))
+
+    for values, target in cases:
+        input_text = f"{len(values)} {target}\n{' '.join(map(str, values))}\n"
+        actual = int(run("cf-1082E", input_text))
+        assert actual == enumerate_operations(values, target)
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -515,6 +616,9 @@ if __name__ == "__main__":
         verify_euler_totient,
         verify_permutation_rounds,
         verify_playing_with_gcd,
+        verify_frog_one,
+        verify_mortal_kombat_tower,
+        verify_increasing_frequency,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

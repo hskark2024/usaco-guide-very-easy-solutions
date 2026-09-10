@@ -1,0 +1,23 @@
+Hey everyone. Today we are solving Frog 1 from AtCoder's Educational DP Contest and the USACO Guide Easy list. This is a perfect first dynamic programming problem because the story is simple, but the main idea appears in thousands of harder problems.
+
+We have a row of stones, each with a height. A frog begins on the first stone and wants to reach the last. From any stone, it may jump forward by one position or two positions. A jump costs the absolute difference between the two heights. Our goal is the smallest possible total cost.
+
+You might first try a greedy rule: always take the cheaper next jump. That rule can fail. A jump that looks cheap now may land on a stone that forces an expensive jump later. We need a way to remember the best full route to every position, not just the cheapest immediate move.
+
+Define dp of i as the minimum total cost needed to reach stone i. The frog starts on stone zero in our C plus plus indexing, so dp of zero is zero. That is our base case.
+
+Now ask one useful question: where could the frog have been immediately before landing on stone i? There are only two answers. It came from stone i minus one, or it came from stone i minus two.
+
+If the last jump came from i minus one, the total cost is the already optimal dp value there, plus the absolute difference between those two heights. If i is at least two, we can make the same calculation from i minus two. We store the smaller result.
+
+Let us trace heights ten, thirty, forty, and twenty. The first dp value is zero. Reaching height thirty costs twenty. For height forty, coming from thirty gives thirty total, while jumping directly from ten also gives thirty. So dp is thirty. For the last height, coming from forty gives fifty total, but coming from thirty gives thirty total. The answer is thirty.
+
+Why are we allowed to use dp values as if they are already correct? We fill the array from left to right. When we calculate stone i, both possible predecessors are earlier stones, so their minimum costs have already been finalized.
+
+The correctness proof follows the same picture. Every legal route to stone i has to use one of the two allowed final jumps. We calculate the cheapest route for each final-jump choice and take the minimum. There is no missing third case.
+
+In C plus plus, read the heights, create a long long vector called dp, fill it with a large value, and set dp zero to zero. Starting at stone one, relax the jump from the previous stone. Starting at stone two, also relax the jump from two stones back. Finally, print the last dp entry.
+
+The loop performs constant work for each stone, so the running time is O of N. The shown version stores O of N values because that makes the recurrence easy to learn and inspect. Since only two previous values are needed, the memory could later be reduced to constant space.
+
+The big lesson is not really about frogs. Dynamic programming works when a big optimum can be built from smaller optima. Define exactly what one state means, list every possible final move, and compute states in an order where their dependencies are ready. The official problem and the thoroughly commented solution are linked in the description.

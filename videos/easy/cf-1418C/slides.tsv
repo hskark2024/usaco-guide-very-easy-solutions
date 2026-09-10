@@ -1,0 +1,7 @@
+Mortal Kombat Tower	Defeat bosses in order|Minimize your friend's skip points
+Session rules	Friend goes first and turns alternate|Each session takes one or two bosses
+The missing state	Knowing the defeated prefix is not enough|We must also know whose turn comes next
+Two-layer DP	dp[i][friend] and dp[i][you]|Start at zero bosses with friend next
+Transitions	Take one or two, then toggle turns|Only friend pays for hard bosses
+Trace 1 0 1 1 0 1 1 1	Choose session sizes 2, 2, 1, 2, 1|Minimum skip points: 2
+C++ and complexity	Every legal schedule is a DP path|O(N) time and O(N) space

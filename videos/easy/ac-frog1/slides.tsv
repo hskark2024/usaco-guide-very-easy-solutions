@@ -1,0 +1,7 @@
+Frog 1	Reach the last stone with minimum cost|A friendly first dynamic programming problem
+The two legal jumps	Move forward by one or two stones|Pay the height difference
+Why greedy is risky	A cheap jump now may force a costly jump later|Remember the best full route to each stone
+Define dp[i]	Minimum total cost to reach stone i|Base case: dp[0] equals zero
+The recurrence	Try the final jump from i minus 1|Also try i minus 2 when it exists
+Trace 10, 30, 40, 20	DP becomes 0, 20, 30, 30|The optimal total is 30
+C++ and complexity	Fill the table from left to right|O(N) time and O(N) space
