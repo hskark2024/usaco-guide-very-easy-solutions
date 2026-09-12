@@ -1,0 +1,23 @@
+Hey everyone. Today we are solving Time is Mooney from USACO Gold and the USACO Guide Easy list. This problem mixes a directed graph with dynamic programming and one unusual cost: the longer Bessie travels, the faster her trip cost grows.
+
+Bessie starts in city one. Every directed road takes one day. When she arrives at a city, she earns that city's reward. A valid trip must eventually return to city one. If the trip lasts T days, its cost is C times T squared. Bessie may also stay home for profit zero.
+
+A normal best-path algorithm does not directly solve this. The value of a route depends on its exact length because the final cost uses the number of days. Also, positive cycles can collect rewards repeatedly, so there is no simple rule saying each city should be visited once.
+
+The key is to include time in the state. Define D P of t and city as the maximum gross reward Bessie can have after exactly t days while ending in that city. Gross means we have not subtracted the trip cost yet.
+
+The base case is day zero at city one with reward zero. Every other city is unreachable. To move from one day to the next, examine every directed road from u to v. If u was reachable yesterday, Bessie can take that road today and earn the reward of v. Use that candidate to update city v.
+
+After building a day, only one destination can finish a valid trip: city one. If city one is reachable, subtract C times day squared from its gross reward and compare that net profit with the answer.
+
+Let us trace the official sample. There are three cities in a cycle. City two pays ten and city three pays twenty. Going around once takes three days, earns thirty, and costs nine, giving twenty-one. Going around twice takes six days, earns sixty, and costs thirty-six, giving twenty-four. A third cycle costs too much, so the best answer is twenty-four.
+
+There is one big question. How many days must we simulate? Could Bessie loop forever? No, because each day can add at most one thousand moonies. A T-day route therefore earns at most one thousand times T. Since C is at least one, the cost is at least T squared. Once T is greater than one thousand, even this generous upper bound is negative. Staying home gives zero, so a longer trip cannot be optimal. Checking through day one thousand is enough.
+
+Why is the transition correct? Every route of t plus one days has some final road from u to v. Remove that final road and the remaining prefix is a t-day route ending at u. Our previous DP layer already stores the best reward for that exact situation. Conversely, appending a real road to a reachable state always creates a valid longer route. So the update considers every route and invents none.
+
+The C plus plus code stores the roads as pairs. It scans all roads for each day, ignores unreachable starting cities, and writes the best destination rewards into a fresh layer. After checking city one, it swaps the current and previous vectors.
+
+The time complexity is O of one thousand times M, and the DP memory is O of N. We also store the M roads. Long long integers keep the reward and quadratic cost arithmetic safe and easy to read.
+
+The general lesson is to add time to a graph state when the score depends on exact path length. Then find a mathematical bound that turns an apparently endless process into a finite dynamic program. The official statement and the heavily commented C plus plus solution are linked in the description.

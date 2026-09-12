@@ -1,0 +1,25 @@
+Hey everyone. Today we are solving the Gold version of Hoof, Paper, Scissors from the USACO Guide Easy list. The challenge is not figuring out which gesture wins one round. Bessie already knows every move Farmer John will play. The challenge is planning the entire match when Bessie may switch gestures only a limited number of times.
+
+We are given N rounds and a limit K. Bessie chooses a starting gesture for free. Between later rounds, she can keep that gesture or spend one switch to choose another. Our goal is the maximum number of wins.
+
+A greedy strategy can fail. Suppose we always choose the gesture that wins the current round. That could switch almost every time, quickly passing the limit. We need to compare plans that save switches now with plans that spend them for more wins.
+
+Dynamic programming works because the future only needs three facts about the past: how many rounds are finished, how many switches were used, and which gesture Bessie is currently playing. We do not care about the exact earlier gesture sequence once we know the best score for those facts.
+
+Define D P of s and g as the most wins after the processed rounds, using exactly s switches and ending with gesture g. There are only three values of g. Before the first round, Bessie can select any of those three gestures without spending a switch, so all three states at s equals zero begin with score zero.
+
+For each new round and each possible ending gesture, there are two kinds of transition. First, Bessie may stay on the same gesture. Then the switch count does not change. Second, she may switch from one of the other two gestures. Then the earlier state must use exactly one fewer switch.
+
+Take the best score from those possibilities. Then add one if the new gesture beats Farmer John's move in this round. That is the whole recurrence.
+
+In the code, I use a small naming trick. State zero means the gesture that beats Hoof, state one means the gesture that beats Paper, and state two means the gesture that beats Scissors. Now a state wins exactly when its index matches the encoded opponent move. This avoids a confusing circle of special cases while still representing all three real gestures.
+
+Let us trace the official sample. Farmer John plays Paper, Paper, Hoof, Paper, Scissors, and K is one. One strong plan is for Bessie to play Scissors through the first four rounds. That wins rounds one, two, and four. She then uses her one switch to play Hoof against the final Scissors. The total is four wins.
+
+Why is the dynamic program correct? Any legal plan ending with gesture g either used g in the previous round or changed from one of the other gestures. There is no third possibility. We keep the best earlier plan in every case and add the current result, so no legal strategy is missed.
+
+The full table would use N times K times three cells. But round i only depends on round i minus one. We keep a previous table and a current table, then swap them. That reduces memory to O of K.
+
+The running time is O of N K because the three gestures are a constant. With N up to one hundred thousand and K up to twenty, that easily fits.
+
+Remember the pattern: when an action may change only a few times, add the number of changes used and the current action to your DP state. The official problem and the heavily commented C plus plus solution are linked in the description.

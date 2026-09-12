@@ -1,0 +1,7 @@
+Hoof, Paper, Scissors	Plan N rounds with at most K gesture changes|Maximize Bessie's wins
+Why greedy fails	Winning this round may spend another switch|The whole match must be planned together
+DP state	Switches used plus current gesture|Keep the best wins for those facts
+Stay or switch	Stay keeps the same switch count|Changing gesture comes from s minus 1
+Official sample	Opponent: P, P, H, P, S|Play S, S, S, S, H for 4 wins
+Rolling memory	The next round needs only the previous round|Use two K by 3 tables
+Result	O(NK) time and O(K) space|Every legal plan is considered

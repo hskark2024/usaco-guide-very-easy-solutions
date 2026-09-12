@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last live listing check: 2026-09-10
-- Listing snapshot: USACO Guide source commit [`a45abeb`](https://github.com/cpinitiative/usaco-guide/commit/a45abebdce12c786ec83b4d3abca3edba108f759) (422 unique module-listed Easy IDs)
-- Completed Easy solutions: 27
-- Complete video packages: 27
+- Last live listing check: 2026-09-11
+- Listing snapshot: USACO Guide source commit [`962def5`](https://github.com/cpinitiative/usaco-guide/commit/962def5bd6f18f53b199a89d9de29fa5c5404cc4) (423 unique module-listed Easy IDs)
+- Completed Easy solutions: 29
+- Complete video packages: 29
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -38,3 +38,5 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `ac-frog1` | Frog 1 | complete | complete | complete | generated |
 | `cf-1418C` | Mortal Kombat Tower | complete | complete | complete | generated |
 | `cf-1082E` | Increasing Frequency | complete | complete | complete | generated |
+| `usaco-694` | Hoof, Paper, Scissors | complete | complete | complete | generated |
+| `usaco-993` | Time is Mooney | complete | complete | complete | generated |

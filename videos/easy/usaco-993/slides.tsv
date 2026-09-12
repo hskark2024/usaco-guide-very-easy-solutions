@@ -1,0 +1,8 @@
+Time is Mooney	Earn rewards on a directed graph|Return to city 1 after T days
+Why path alone is not enough	Trip cost is C times T squared|Repeated cycles may earn more rewards
+DP state	Best gross reward after exactly t days at city v|Start at city 1 on day zero
+Move one day	Follow every directed road u to v|Add the reward of destination v
+Official sample	One cycle nets 21|Two cycles net 24, the optimum
+Bound the days	Reward is at most 1000T|Beyond 1000, T squared wins
+Rolling memory	Keep previous and current city arrays|Check city 1 after every day
+Result	O(1000M) time and O(N plus M) space|Exact-day graph DP

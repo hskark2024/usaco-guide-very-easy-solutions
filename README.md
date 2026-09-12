@@ -46,6 +46,8 @@ The official statements remain at their original judge links. These notes intent
 | `ac-frog1` | AC | [Frog 1](problems/ac-frog1/README.md) | [Dynamic Programming] | [C++](solutions/ac-frog1.cpp) | [Package](videos/easy/ac-frog1/README.md) |
 | `cf-1418C` | CF | [Mortal Kombat Tower](problems/cf-1418C/README.md) | [Dynamic Programming] | [C++](solutions/cf-1418C.cpp) | [Package](videos/easy/cf-1418C/README.md) |
 | `cf-1082E` | CF | [Increasing Frequency](problems/cf-1082E/README.md) | [Dynamic Programming, Kadane] | [C++](solutions/cf-1082E.cpp) | [Package](videos/easy/cf-1082E/README.md) |
+| `usaco-694` | USACO Gold | [Hoof, Paper, Scissors](problems/usaco-694/README.md) | [Dynamic Programming] | [C++](solutions/usaco-694.cpp) | [Package](videos/easy/usaco-694/README.md) |
+| `usaco-993` | USACO Gold | [Time is Mooney](problems/usaco-993/README.md) | [Dynamic Programming, Directed Graphs] | [C++](solutions/usaco-993.cpp) | [Package](videos/easy/usaco-993/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

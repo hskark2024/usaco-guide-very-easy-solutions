@@ -593,6 +593,111 @@ def verify_increasing_frequency() -> None:
         assert actual == enumerate_operations(values, target)
 
 
+def verify_hoof_paper_scissors_gold() -> None:
+    def score_plan(opponent: list[int], bessie: tuple[int, ...]) -> int:
+        # With H=0, P=1, S=2, Bessie's gesture wins exactly when it is one
+        # cyclic step ahead of Farmer John's gesture.
+        return sum((mine - theirs) % 3 == 1 for mine, theirs in zip(bessie, opponent))
+
+    def brute_match(opponent: list[int], switch_limit: int) -> int:
+        # Enumerating every gesture string is intentionally independent of the
+        # submitted DP.  It directly filters plans by their adjacent changes.
+        best = 0
+        for bessie in product(range(3), repeat=len(opponent)):
+            switches = sum(
+                bessie[index] != bessie[index - 1]
+                for index in range(1, len(bessie))
+            )
+            if switches <= switch_limit:
+                best = max(best, score_plan(opponent, bessie))
+        return best
+
+    cases = [
+        ([1, 1, 0, 1, 2], 1),
+        ([0], 0),
+        ([0, 1, 2, 0], 0),
+        ([0, 1, 2, 0], 3),
+    ]
+    for _ in range(180):
+        size = RNG.randint(1, 8)
+        cases.append(
+            ([RNG.randrange(3) for _ in range(size)], RNG.randint(0, min(4, size - 1)))
+        )
+
+    gesture_text = "HPS"
+    for opponent, switch_limit in cases:
+        input_text = (
+            f"{len(opponent)} {switch_limit}\n"
+            + "".join(f"{gesture_text[gesture]}\n" for gesture in opponent)
+        )
+        actual = int(run("usaco-694", input_text))
+        assert actual == brute_match(opponent, switch_limit)
+
+
+def verify_time_is_mooney() -> None:
+    def exact_day_oracle(
+        city_count: int,
+        roads: list[tuple[int, int]],
+        rewards: list[int],
+        coefficient: int,
+    ) -> int:
+        # Random rewards are at most 6 and C is at least 1.  Thus every route
+        # longer than day 6 has upper bound 6*t-t^2 <= 0, so checking through
+        # day 7 covers every possible positive answer for this oracle domain.
+        unreachable = -10**9
+        dp = [[unreachable] * city_count for _ in range(8)]
+        dp[0][0] = 0
+        answer = 0
+        for day in range(1, 8):
+            for start, destination in roads:
+                if dp[day - 1][start] != unreachable:
+                    dp[day][destination] = max(
+                        dp[day][destination],
+                        dp[day - 1][start] + rewards[destination],
+                    )
+            if dp[day][0] != unreachable:
+                answer = max(answer, dp[day][0] - coefficient * day * day)
+        return answer
+
+    cases = [
+        (3, [(0, 1), (1, 2), (2, 0)], [0, 10, 20], 1, 24),
+        (2, [(0, 1)], [0, 6], 1, 0),
+        (2, [(0, 1), (1, 0)], [0, 1], 10, 0),
+    ]
+
+    for city_count, roads, rewards, coefficient, expected in cases:
+        input_text = (
+            f"{city_count} {len(roads)} {coefficient}\n"
+            + " ".join(map(str, rewards))
+            + "\n"
+            + "".join(f"{start + 1} {destination + 1}\n" for start, destination in roads)
+        )
+        assert int(run("usaco-993", input_text)) == expected
+
+    for _ in range(260):
+        city_count = RNG.randint(2, 6)
+        rewards = [0] + [RNG.randint(0, 6) for _ in range(city_count - 1)]
+        coefficient = RNG.randint(1, 5)
+        roads = [
+            (start, destination)
+            for start in range(city_count)
+            for destination in range(city_count)
+            if start != destination and RNG.random() < 0.34
+        ]
+        if not roads:
+            roads.append((0, 1))
+
+        input_text = (
+            f"{city_count} {len(roads)} {coefficient}\n"
+            + " ".join(map(str, rewards))
+            + "\n"
+            + "".join(f"{start + 1} {destination + 1}\n" for start, destination in roads)
+        )
+        actual = int(run("usaco-993", input_text))
+        expected = exact_day_oracle(city_count, roads, rewards, coefficient)
+        assert actual == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -619,6 +724,8 @@ if __name__ == "__main__":
         verify_frog_one,
         verify_mortal_kombat_tower,
         verify_increasing_frequency,
+        verify_hoof_paper_scissors_gold,
+        verify_time_is_mooney,
     ):
         verifier()
         print(f"passed {verifier.__name__}")
