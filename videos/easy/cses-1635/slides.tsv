@@ -1,0 +1,8 @@
+Coin Combinations I	Count reusable-coin sequences|Different orders are different answers
+Why brute force repeats work	Many search branches ask about the same remaining sum|Save each total once
+DP state	ways of s equals sequences totaling s|ways of zero is one empty sequence
+Choose the last coin	For final coin c, the prefix totals s minus c|Add ways of s minus c
+Official sample	Coins 2, 3, and 5; target 9|The dynamic program counts 8 sequences
+Loop order matters	Sum loop outside|Coin loop inside preserves order
+Correctness	Every sequence has one unique final coin|Every transition appends a valid coin
+Result	O of N times X time|O of X memory

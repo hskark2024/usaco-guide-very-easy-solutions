@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last live listing check: 2026-09-11
-- Listing snapshot: USACO Guide source commit [`962def5`](https://github.com/cpinitiative/usaco-guide/commit/962def5bd6f18f53b199a89d9de29fa5c5404cc4) (423 unique module-listed Easy IDs)
-- Completed Easy solutions: 29
-- Complete video packages: 29
+- Last live listing check: 2026-09-13
+- Listing snapshot: USACO Guide source commit [`2d51d53`](https://github.com/cpinitiative/usaco-guide/commit/2d51d535109e3e8e76bb577ce60991e75ed5f23a) (423 unique module-listed Easy IDs)
+- Completed Easy solutions: 31
+- Complete video packages: 31
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -40,3 +40,5 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1082E` | Increasing Frequency | complete | complete | complete | generated |
 | `usaco-694` | Hoof, Paper, Scissors | complete | complete | complete | generated |
 | `usaco-993` | Time is Mooney | complete | complete | complete | generated |
+| `cses-1635` | Coin Combinations I | complete | complete | complete | generated |
+| `cses-1636` | Coin Combinations II | complete | complete | complete | generated |

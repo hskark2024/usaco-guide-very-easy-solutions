@@ -48,6 +48,8 @@ The official statements remain at their original judge links. These notes intent
 | `cf-1082E` | CF | [Increasing Frequency](problems/cf-1082E/README.md) | [Dynamic Programming, Kadane] | [C++](solutions/cf-1082E.cpp) | [Package](videos/easy/cf-1082E/README.md) |
 | `usaco-694` | USACO Gold | [Hoof, Paper, Scissors](problems/usaco-694/README.md) | [Dynamic Programming] | [C++](solutions/usaco-694.cpp) | [Package](videos/easy/usaco-694/README.md) |
 | `usaco-993` | USACO Gold | [Time is Mooney](problems/usaco-993/README.md) | [Dynamic Programming, Directed Graphs] | [C++](solutions/usaco-993.cpp) | [Package](videos/easy/usaco-993/README.md) |
+| `cses-1635` | CSES | [Coin Combinations I](problems/cses-1635/README.md) | [Dynamic Programming, Knapsack, Counting] | [C++](solutions/cses-1635.cpp) | [Package](videos/easy/cses-1635/README.md) |
+| `cses-1636` | CSES | [Coin Combinations II](problems/cses-1636/README.md) | [Dynamic Programming, Knapsack, Counting] | [C++](solutions/cses-1636.cpp) | [Package](videos/easy/cses-1636/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

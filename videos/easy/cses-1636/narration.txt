@@ -1,0 +1,29 @@
+Hey everyone. Today we are solving Coin Combinations Two from CSES and the USACO Guide Easy list. It uses almost the same one-line update as Coin Combinations One, but the loops are reversed. That tiny change makes the program answer a different question.
+
+We receive up to one hundred distinct positive coin denominations and a target up to one million. Coins are reusable. This time, we count each combination of coins once. Rearranging a chosen group does not create a new combination.
+
+For example, with coins two and three and target five, the group containing one two and one three is a single answer. Writing two plus three or three plus two is only a different order of the same group.
+
+Our state is still a one-dimensional array. Ways of sum means the number of combinations totaling sum using only coin types we have processed so far. Ways of zero begins at one because the empty combination is our starting point.
+
+Now process one denomination at a time. Suppose the current coin is c. For each sum from c up through the target, add ways of sum minus c into ways of sum.
+
+Why do we scan upward? If we just formed a combination that uses one c, a later cell in the same pass may extend it with another c. That allows unlimited copies. A downward scan would use each coin at most once, which is a different kind of knapsack problem.
+
+Why is the coin loop outside? It gives every combination one canonical construction order. All copies of the first denomination are considered before the second denomination, and so on. We never go backward and add an earlier coin after a later coin. Therefore two plus three and three plus two cannot appear as separate paths.
+
+Trace the official sample with coins two, three, and five and target nine. After processing coin two, only even sums are reachable. After processing coin three, the table includes combinations of twos and threes, always represented with the two phase before the three phase. After coin five, new cells include combinations ending with one or more fives. The target nine has three combinations: two plus two plus five, three plus three plus three, and two plus two plus two plus three.
+
+Compare this with Coin Combinations One, which reports eight because it distinguishes rearrangements. Both programs have a line that adds ways of sum minus coin into ways of sum. The meaning comes from the loop nesting.
+
+Let us prove this version. Before processing any coin, the empty combination is the only state, so the base is correct. When we process coin c, each combination for sum falls into exactly one case. It either uses zero copies of c and was already stored, or it uses at least one copy. Remove one c from the second kind and it becomes a combination for sum minus c using only allowed coin types. Our upward transition restores it. Since the number of copies of c is fixed for each combination, nothing is counted twice.
+
+The C plus plus implementation does not need to sort the coins. Any fixed processing order works. For each coin, it scans from that coin to the target, updates the integer count, and reduces it modulo one billion seven.
+
+The running time is O of N times X, and memory is O of X. With the largest constraints the code can execute close to one hundred million small updates, so we enable fast input and keep the state compact.
+
+Here is a useful three-way memory trick. Sum outside and coin inside counts ordered sequences. Coin outside and sum moving upward counts reusable unordered combinations. Coin outside and sum moving downward counts combinations where each item is used at most once.
+
+Test coins one and two with target four. The combinations are four ones, two ones plus one two, and two twos. The answer is three. We do not separately count the three positions where the coin two could appear, because order is being ignored.
+
+The official problem and heavily commented C plus plus solution are linked below. If this loop-order idea feels subtle, place the two Coin Combinations solutions side by side. The diff is small, but it captures a major dynamic programming pattern.

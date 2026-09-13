@@ -698,6 +698,66 @@ def verify_time_is_mooney() -> None:
         assert actual == expected
 
 
+def verify_coin_combinations_one() -> None:
+    def enumerate_sequences(coins: tuple[int, ...], remaining: int) -> int:
+        # This oracle literally branches on the next coin in the sequence.
+        # It does not share the executable's bottom-up table or loop ordering.
+        if remaining == 0:
+            return 1
+        return sum(
+            enumerate_sequences(coins, remaining - coin)
+            for coin in coins
+            if coin <= remaining
+        )
+
+    cases = [
+        ((2, 3, 5), 9),
+        ((1, 2), 4),
+        ((4, 6), 5),
+        ((3,), 12),
+    ]
+    for _ in range(240):
+        coin_count = RNG.randint(1, 5)
+        coins = tuple(sorted(RNG.sample(range(1, 9), coin_count)))
+        target = RNG.randint(1, 14)
+        cases.append((coins, target))
+
+    for coins, target in cases:
+        input_text = f"{len(coins)} {target}\n{' '.join(map(str, coins))}\n"
+        actual = int(run("cses-1635", input_text))
+        expected = enumerate_sequences(coins, target)
+        assert actual == expected
+
+
+def verify_coin_combinations_two() -> None:
+    def enumerate_coin_counts(coins: tuple[int, ...], target: int) -> int:
+        # A Cartesian product over copy counts represents every multiset once,
+        # independently of the solution's incremental dynamic programming.
+        choices = [range(target // coin + 1) for coin in coins]
+        return sum(
+            sum(count * coin for count, coin in zip(counts, coins)) == target
+            for counts in product(*choices)
+        )
+
+    cases = [
+        ((2, 3, 5), 9),
+        ((1, 2), 4),
+        ((4, 6), 5),
+        ((3, 10), 9),
+    ]
+    for _ in range(240):
+        coin_count = RNG.randint(1, 5)
+        coins = tuple(sorted(RNG.sample(range(1, 9), coin_count)))
+        target = RNG.randint(1, 18)
+        cases.append((coins, target))
+
+    for coins, target in cases:
+        input_text = f"{len(coins)} {target}\n{' '.join(map(str, coins))}\n"
+        actual = int(run("cses-1636", input_text))
+        expected = enumerate_coin_counts(coins, target)
+        assert actual == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -726,6 +786,8 @@ if __name__ == "__main__":
         verify_increasing_frequency,
         verify_hoof_paper_scissors_gold,
         verify_time_is_mooney,
+        verify_coin_combinations_one,
+        verify_coin_combinations_two,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

@@ -1,0 +1,8 @@
+Coin Combinations II	Count reusable-coin multisets|Rearrangements are the same answer
+Order must disappear	2 plus 3 equals 3 plus 2|Build each group one canonical way
+DP state	ways of s uses only processed coin types|ways of zero is one
+Process one coin	Add ways of s minus c into ways of s|Scan sums upward for reuse
+Official sample	Coins 2, 3, and 5; target 9|Exactly 3 combinations
+Loop order matters	Coin loop outside|Never return to an earlier type
+Correctness	Use zero copies of c or at least one|Each count of c is unique
+Result	O of N times X time|O of X memory

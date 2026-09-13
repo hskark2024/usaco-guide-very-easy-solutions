@@ -1,0 +1,31 @@
+Hey everyone. Today we are solving Coin Combinations One from CSES and the USACO Guide Easy list. This is a great problem for learning that dynamic programming is not only about choosing a formula. The order of your loops can change what the formula means.
+
+We receive up to one hundred distinct positive coin values and a target as large as one million. Every coin can be used as many times as we want. We must count how many sequences add to the target, modulo one billion seven.
+
+The word sequence is important. If our coins are two and three and the target is five, two followed by three is one answer, and three followed by two is another. They use the same multiset of coins, but their order is different.
+
+A brute-force search would try every possible next coin. The search tree becomes huge because a target may have an enormous number of sequences. Dynamic programming works because many branches eventually ask the same smaller question: how many sequences make a certain sum?
+
+Define ways of sum as the number of ordered coin sequences whose total is exactly sum. There is one way to make zero: choose no coins. That empty sequence is our base case, so ways of zero equals one.
+
+Now imagine that we want ways of sum. Every valid sequence has a final coin. If that final coin has value c, everything before it must total sum minus c. We already know how many prefixes make that smaller total. Append c to each of them, and we get exactly the sequences ending in c.
+
+So for every sum from one through the target, we try every coin that fits and add ways of sum minus coin. The modulo keeps the count small enough for an integer.
+
+Let us use coins two, three, and five with target nine. Ways of zero begins at one. Sum two gets one sequence by appending two to the empty sequence. Sum three gets one by appending three. Sum four gets two plus two. At sum five, three different sequences appear: two then three, three then two, and the single coin five. Notice how the two sequences with coins two and three arrive through different final coins. That is exactly why they both survive.
+
+Continuing the table gives eight sequences for nine, matching the official sample.
+
+Here is the most important implementation detail: the sum loop is outside, and the coin loop is inside. By the time we compute a sum, every smaller sum is already complete. Trying each coin as the last step keeps every order distinct.
+
+If we reverse the loops and process one denomination all the way through the table, we create a canonical denomination order. That solves Coin Combinations Two, where rearrangements are supposed to be merged. Same looking update, different loop order, different counting question.
+
+Why is our recurrence correct? Take any sequence totaling sum. It has one unique last coin. Removing it lands in exactly one smaller state that our DP has already counted. In the other direction, every transition appends a real coin to a valid shorter sequence, so it cannot invent an invalid answer. Grouping sequences by their final coin covers all of them without overlap.
+
+The C plus plus code stores target plus one integer states. For each sum, it checks all coin values. Coins larger than the current sum are skipped. For a usable coin, it adds the previously computed count and subtracts the modulus if necessary.
+
+The running time is O of N times X, and memory is O of X. At the maximum limits that can mean close to one hundred million simple transitions, so fast input and compact arrays are useful.
+
+Test the distinction with coins one and two and target four. Coin Combinations One counts one-one-one-one, one-one-two, one-two-one, two-one-one, and two-two. That is five sequences. Coin Combinations Two counts only three multisets. When you see a counting DP with reusable choices, always ask whether order matters before choosing your loop order.
+
+The official problem and the heavily commented C plus plus solution are linked in the description. Try writing the second version next and change only the loop order. Seeing the answers diverge is one of the best ways to remember this idea.
