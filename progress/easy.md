@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last live listing check: 2026-09-13
-- Listing snapshot: USACO Guide source commit [`2d51d53`](https://github.com/cpinitiative/usaco-guide/commit/2d51d535109e3e8e76bb577ce60991e75ed5f23a) (423 unique module-listed Easy IDs)
-- Completed Easy solutions: 31
-- Complete video packages: 31
+- Last listing check: 2026-09-16 (the filtered webpage returned a Cloudflare verification page, so the current published source was checked directly)
+- Listing snapshot: USACO Guide source commit [`06831b4`](https://github.com/cpinitiative/usaco-guide/commit/06831b457a5a8e1c7b3cfcc2e62ffec024a627c5) (423 unique module-listed Easy IDs; Knapsack DP entries checked)
+- Completed Easy solutions: 34
+- Complete video packages: 34
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -42,3 +42,6 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-993` | Time is Mooney | complete | complete | complete | generated |
 | `cses-1635` | Coin Combinations I | complete | complete | complete | generated |
 | `cses-1636` | Coin Combinations II | complete | complete | complete | generated |
+| `ac-subsetSumQueries` | Subset Sum Queries | complete | complete | complete | generated |
+| `cses-1158` | Book Shop | complete | complete | complete | generated |
+| `cses-1745` | Money Sums | complete | complete | complete | generated |

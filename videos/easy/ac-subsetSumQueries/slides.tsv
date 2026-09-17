@@ -1,0 +1,8 @@
+Dynamic Subset Sum	A box changes after every query|Count subsets totaling K
+The DP state	ways of s counts current subsets|ways of zero starts at one
+Add x	Multiply by one plus z to the x|Scan sums downward
+Why downward?	The new ball is used at most once|Do not read a state it just created
+Remove x	old of s equals new of s plus new of s minus x|Solve for new of s
+Why upward?	Recover smaller sums first|Then subtract their contribution
+Duplicate values	Balls are distinguishable|Equal labels still create separate choices
+Result	O of Q times K time|O of K memory

@@ -1,0 +1,8 @@
+Book Shop	Choose books within a budget|Maximize total pages
+Why DP?	The biggest book can lose to a pair|Greedy choices miss combinations
+DP state	best of m uses processed books|Spend at most m
+Two choices	Skip this book|Buy it after best of m minus price
+Scan downward	Keep the source in the previous row|Each book contributes once
+Official sample	Buy prices 4 and 5|9 cost; 13 pages
+Correctness	Every selection skips or buys|The two cases cover all choices
+Result	O of N times X time|O of X memory

@@ -1,0 +1,29 @@
+Hey everyone. Today we are solving Book Shop from CSES and the USACO Guide Easy list. Each book has a price and a number of pages. We have a budget and want as many pages as possible, but we can buy each book only once.
+
+A greedy shortcut is tempting. Maybe we should buy the book with the most pages, or the best pages per dollar. But those choices can leave the wrong amount of money for the remaining books. We need a method that considers how choices combine.
+
+The official sample makes that clear. Our budget is ten. The books cost four, eight, five, and three, and contain five, twelve, eight, and one pages. The twelve-page book looks strongest by itself, but buying the four-cost and five-cost books gives thirteen pages for only nine money.
+
+This is zero-one knapsack. Zero-one means that for each item, we choose zero copies or one copy. Our capacity is the budget, our item weight is its price, and our item value is its pages.
+
+Let best of money mean the maximum pages we can get from books processed so far while spending at most that amount. Every entry starts at zero, because buying nothing is feasible no matter how much money we are allowed to spend.
+
+For each book, there are only two cases. We can skip it and keep the current entry. Or we can buy it, gain its pages, and combine it with a previous selection fitting in money minus its price. We take the larger of those two values.
+
+The implementation uses just one row of the DP table. That saves memory, but it makes loop direction essential. We scan money downward from the budget to the book's price.
+
+Why downward? When updating a large capacity, the smaller entry money minus price has not been updated for this book yet. It still represents earlier books. That prevents us from buying this same book more than once.
+
+For a counterexample, imagine one book costing two with seven pages and a budget of six. If we scan upward, capacity two becomes seven pages. Capacity four then reads that new state and becomes fourteen. Capacity six becomes twenty-one. The code has bought the same physical book three times. A downward scan correctly keeps the answer at seven.
+
+Trace the sample. The first book gives five pages to every capacity from four upward. The second book gives twelve pages at capacities eight and higher. Processing the third book at capacity ten compares the existing twelve with best of five plus eight. Best of five was five from book one, so the new value is thirteen. The last book cannot beat thirteen.
+
+Notice that we do not require spending the exact budget. Our state says at most money. The best sample purchase costs nine, leaving one unused. That is valid and is why every initial state can be zero rather than an impossible marker.
+
+To prove correctness, assume the table is correct for earlier books. Every selection with the new book either skips it or includes it. In the include case, remove this book and the remaining selection fits within the smaller capacity. The transition compares exactly those two exhaustive cases. The descending scan ensures the remaining selection contains only earlier books. Induction gives the optimum after all books.
+
+In C plus plus, we read prices and pages as separate arrays. We allocate budget plus one integer states, use a nested book loop and downward money loop, and update with max. Finally we print best of budget.
+
+Time is O of N times X and space is O of X. The maximum total pages is one million, so an integer is sufficient. Fast input and a compact array help at the largest limits.
+
+The official problem and heavily commented solution are linked below. The central habit is to ask whether an item is reusable. Here it is single-use, so the capacity loop moves downward.

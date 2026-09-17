@@ -1,0 +1,8 @@
+Money Sums	Find every total made by a coin subset|Each physical coin is used at most once
+Bound the states	No sum exceeds the total coin value|Track zero through S
+Base case	Sum zero is reachable|Choose the empty subset
+Process coin c	Shift every old reachable sum by c|Mark the destination true
+Scan downward	Read states from before this coin|Prevent accidental reuse
+Official sample	Coins 4, 2, 5, and 2|Nine positive sums
+Correctness	Exclude the coin or include it|Both cases are complete and disjoint
+Result	O of N times S time|O of S memory

@@ -758,6 +758,81 @@ def verify_coin_combinations_two() -> None:
         assert actual == expected
 
 
+def verify_subset_sum_queries() -> None:
+    # Enumerate physical-ball subsets after each valid query. Equal values
+    # retain separate positions, matching the judge's distinguishability.
+    modulus = 998_244_353
+    for _ in range(250):
+        target = RNG.randint(1, 15)
+        balls = []
+        queries = []
+        expected = []
+        for _ in range(RNG.randint(15, 45)):
+            if balls and (len(balls) >= 10 or RNG.random() < 0.45):
+                index = RNG.randrange(len(balls))
+                value = balls.pop(index)
+                queries.append(f"- {value}")
+            else:
+                value = RNG.randint(1, 20)
+                balls.append(value)
+                queries.append(f"+ {value}")
+            expected.append(sum(
+                sum(value for index, value in enumerate(balls) if mask >> index & 1)
+                == target
+                for mask in range(1 << len(balls))
+            ) % modulus)
+        input_text = f"{len(queries)} {target}\n" + "\n".join(queries) + "\n"
+        actual = list(map(int, run("ac-subsetSumQueries", input_text).split()))
+        assert actual == expected
+
+    # Large duplicate multiplicities force modular wraparound in both
+    # addition and subtraction. The oracle uses exact binomial coefficients.
+    from math import comb
+    target = 35
+    queries = ["+ 1"] * 80 + ["- 1"] * 80
+    counts = list(range(1, 81)) + list(range(79, -1, -1))
+    expected = [comb(count, target) % modulus if count >= target else 0 for count in counts]
+    actual = list(map(int, run(
+        "ac-subsetSumQueries", f"{len(queries)} {target}\n" + "\n".join(queries) + "\n"
+    ).split()))
+    assert actual == expected
+
+
+def verify_book_shop() -> None:
+    cases = [([4, 8, 5, 3], [5, 12, 8, 1], 10), ([6], [100], 5),
+             ([2], [7], 6), ([3, 3, 3], [4, 8, 5], 6)]
+    for _ in range(300):
+        n = RNG.randint(1, 12)
+        cases.append(([RNG.randint(1, 15) for _ in range(n)],
+                      [RNG.randint(1, 30) for _ in range(n)], RNG.randint(1, 35)))
+    for prices, pages, budget in cases:
+        # Enumerating sets of book indices does not use a knapsack recurrence.
+        expected = max(
+            sum(pages[i] for i in range(len(prices)) if mask >> i & 1)
+            for mask in range(1 << len(prices))
+            if sum(prices[i] for i in range(len(prices)) if mask >> i & 1) <= budget
+        )
+        input_text = (f"{len(prices)} {budget}\n" + " ".join(map(str, prices))
+                      + "\n" + " ".join(map(str, pages)) + "\n")
+        assert int(run("cses-1158", input_text)) == expected
+
+
+def verify_money_sums() -> None:
+    cases = [[4, 2, 5, 2], [7], [2, 2, 2], [1, 2, 4, 8], [5, 10]]
+    for _ in range(300):
+        cases.append([RNG.randint(1, 20) for _ in range(RNG.randint(1, 12))])
+    for coins in cases:
+        expected = sorted({
+            sum(value for i, value in enumerate(coins) if mask >> i & 1)
+            for mask in range(1, 1 << len(coins))
+        })
+        tokens = list(map(int, run(
+            "cses-1745", f"{len(coins)}\n" + " ".join(map(str, coins)) + "\n"
+        ).split()))
+        assert tokens[0] == len(expected)
+        assert tokens[1:] == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -788,6 +863,9 @@ if __name__ == "__main__":
         verify_time_is_mooney,
         verify_coin_combinations_one,
         verify_coin_combinations_two,
+        verify_subset_sum_queries,
+        verify_book_shop,
+        verify_money_sums,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

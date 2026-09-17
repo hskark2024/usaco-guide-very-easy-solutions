@@ -50,6 +50,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-993` | USACO Gold | [Time is Mooney](problems/usaco-993/README.md) | [Dynamic Programming, Directed Graphs] | [C++](solutions/usaco-993.cpp) | [Package](videos/easy/usaco-993/README.md) |
 | `cses-1635` | CSES | [Coin Combinations I](problems/cses-1635/README.md) | [Dynamic Programming, Knapsack, Counting] | [C++](solutions/cses-1635.cpp) | [Package](videos/easy/cses-1635/README.md) |
 | `cses-1636` | CSES | [Coin Combinations II](problems/cses-1636/README.md) | [Dynamic Programming, Knapsack, Counting] | [C++](solutions/cses-1636.cpp) | [Package](videos/easy/cses-1636/README.md) |
+| `ac-subsetSumQueries` | AC | [Subset Sum Queries](problems/ac-subsetSumQueries/README.md) | [Dynamic Programming, Knapsack, Generating Functions] | [C++](solutions/ac-subsetSumQueries.cpp) | [Package](videos/easy/ac-subsetSumQueries/README.md) |
+| `cses-1158` | CSES | [Book Shop](problems/cses-1158/README.md) | [Dynamic Programming, 0/1 Knapsack] | [C++](solutions/cses-1158.cpp) | [Package](videos/easy/cses-1158/README.md) |
+| `cses-1745` | CSES | [Money Sums](problems/cses-1745/README.md) | [Dynamic Programming, 0/1 Knapsack, Subset Sum] | [C++](solutions/cses-1745.cpp) | [Package](videos/easy/cses-1745/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 
