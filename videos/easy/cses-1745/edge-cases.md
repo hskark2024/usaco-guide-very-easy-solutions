@@ -1,9 +1,11 @@
-# Edge-Case Checklist
+# Edge-case checklist
 
-- The empty subset creates sum zero, but zero is not printed.
-- A single coin produces exactly one positive sum.
-- Equal-valued physical coins may both be selected.
-- Descending order prevents one coin from being reused.
-- Some sums may remain unreachable, creating gaps.
-- The maximum tracked sum is the total of all coins, at most `100000`.
-- Scanning output positions upward automatically sorts the sums.
+- One coin: print exactly its value.
+- Duplicate values: separate physical coins may combine.
+- Several subsets produce the same total: print that total once.
+- Reachable totals may contain large gaps.
+- The maximum total uses every coin.
+- Do not print zero; it represents the empty subset.
+- Scan sums downward so one coin is never reused in its own pass.
+- Size the table through the sum of all coin values.
+- Scan final indices upward to satisfy sorted output.

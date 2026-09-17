@@ -1,25 +1,25 @@
-Hey everyone. Today we are solving Subset Sum Queries from AtCoder and the USACO Guide Easy list. This problem takes the familiar subset-sum table and makes it dynamic: balls enter and leave a box, and after every change we count the subsets whose values add to a target K.
+Hey everyone. Today we are solving Subset Sum Queries from AtCoder and the current USACO Guide Easy list. This problem starts like ordinary subset sum, then adds a twist: balls enter and leave the box, and we must answer after every change.
 
-Every ball is distinguishable. If two balls both show the number two, choosing the red two and choosing the blue two are different subsets. Our answer is taken modulo nine hundred ninety-eight million, two hundred forty-four thousand, three hundred fifty-three.
+Each ball has a positive number. A plus query inserts one physical ball. A minus query removes one existing ball with that value. After the query, we count subsets whose values add to K. Equal-valued balls are still separate objects, so choosing the first five and choosing the second five are different subsets.
 
-Let ways of s be the number of subsets of the balls currently in the box whose sum is s. We only need sums from zero through K. At the beginning the box is empty, so ways of zero is one for the empty subset, and every positive sum has count zero.
+Our state is ways of s: the number of subsets of the balls currently present that sum to s. We only store sums from zero through K. The empty subset gives ways of zero equals one.
 
-Suppose we add a ball with value x. A subset totaling s either skips the new ball, which is already counted in ways of s, or takes it. If it takes the ball, removing that ball leaves an old subset totaling s minus x. So we add ways of s minus x into ways of s.
+First, consider adding a ball worth x. Every new subset totaling s has two possibilities. It skips the new ball, which contributes the old ways of s, or it uses the new ball, which contributes the old ways of s minus x. So we add ways of s minus x into ways of s.
 
-We must scan s downward from K to x. That direction ensures ways of s minus x still comes from before this new ball was added. If we scanned upward, a state made with the new ball could be used again later in the same query. We would pretend one physical ball was available several times.
+The scan direction matters. We move from K down to x. Then the source cell still describes subsets from before this ball was added. If we moved upward, a state created with this ball could be used again later in the same query, which would pretend one ball exists many times.
 
-Removal looks surprising, but it is the exact reverse. Call the array before removal old and the desired array after removal new. When the ball was added, old of s became new of s plus new of s minus x. Rearrange that equation: new of s equals old of s minus new of s minus x.
+Removing a ball looks harder, but the addition equation tells us exactly how to reverse it. Call the table with the ball old and the table after removing it new. Addition said old of s equals new of s plus new of s minus x. Rearranging gives new of s equals old of s minus new of s minus x.
 
-This time we scan upward. At sum s, the smaller entry new of s minus x has already been recovered. We subtract it from the current entry and add the modulus if the result is negative.
+Now we must scan upward from x to K. When we reach s, the smaller new state at s minus x has already been recovered. Subtract it and normalize modulo nine hundred ninety-eight million, two hundred forty-four thousand, three hundred fifty-three.
 
-Here is a tiny trace. Let K equal five. Add a two; no subset reaches five. Add a three; the old subset containing two combines with the new three, so the answer becomes one. Remove the two. During the upward recovery, the contribution from two plus three is subtracted, and the answer returns to zero.
+Let us trace target ten. Add five: no target subset yet. Add another five: there are now two distinguishable balls, and choosing both makes ten, so the answer is one. Add ten: the single ten gives another subset, raising the answer to two. Remove one five: the pair of fives disappears, but the ten remains, so the answer returns to one.
 
-Equal values work without special handling. If three separate balls each have value two and K is four, there are three pairs after the third addition. The DP produces that count because each addition represents a new distinguishable choice. Removing one copy reverses exactly one factor and leaves one pair among the two remaining balls.
+What if x is larger than K? Because every value is positive, that ball can never appear in a subset totaling K. We still accept the query, but the stored table does not change. This is why truncating the array at K is safe.
 
-A value larger than K can be skipped. All values are positive, so such a ball cannot belong to a subset totaling K. We still print the answer after that operation.
+For correctness, the addition step partitions every subset by whether it contains the new ball. Those two groups cannot overlap and cover every possibility. The removal step algebraically inverts that exact transformation, and its upward order guarantees each needed recovered value is ready. Therefore ways of K is correct after every query.
 
-For correctness, the addition cases, excluding or including the new ball, are disjoint and cover every subset. The descending loop uses the ball once. The removal equation algebraically reverses every coefficient, and the ascending loop supplies each already recovered smaller coefficient. Therefore ways of K is correct after every query.
+The C plus plus code stores the table in integers, performs one loop per relevant query, and prints ways of K immediately. The running time is O of Q times K and memory is O of K.
 
-Each query visits at most K states, so the running time is O of Q times K. The array uses O of K memory. With Q and K both at most five thousand, this fits the limits.
+An important edge case is duplicate values. We do not track ball identities in the array, but the counting transition still treats every insertion as a new choice. Two fives double the choice paths correctly. Removing one applies one inverse factor and leaves the other one represented.
 
-The official problem and heavily commented C plus plus solution are linked below. Remember the direction pair: add a zero-one item by scanning downward; remove it by solving the recurrence upward.
+The official problem and heavily commented C plus plus solution are linked below. Remember the direction pair: add a zero-one item by scanning downward; undo that item by scanning upward.

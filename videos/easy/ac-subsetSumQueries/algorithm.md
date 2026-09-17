@@ -1,5 +1,10 @@
-# Algorithm Derivation
+# Algorithm derivation
 
-Treat the current subset counts as coefficients of a polynomial `F(z)`. Adding a ball of value `x` changes it to `F(z)(1+z^x)`, truncated after degree `K`. In array form, this is the standard descending 0/1-knapsack update.
+1. Store `ways[s]`, the number of subsets of current physical balls totaling `s`, for `0 <= s <= K`.
+2. Initialize `ways[0] = 1` for the empty subset.
+3. For `+ x`, scan `s` from `K` down to `x` and add `ways[s-x]` into `ways[s]`.
+4. For `- x`, scan `s` from `x` up to `K` and subtract `ways[s-x]` from `ways[s]`.
+5. Normalize every update modulo `998244353`.
+6. Ignore table updates when `x > K`, then print `ways[K]` after every query.
 
-For removal, the current array is the product that still includes `(1+z^x)`. If `old[s] = new[s] + new[s-x]`, then `new[s] = old[s] - new[s-x]`. Since the right side needs the already recovered smaller coefficient, compute sums upward. Reduce every value modulo `998244353`.
+Addition multiplies the subset generating function by `1 + z^x`; removal divides out the same factor. Time is `O(QK)` and space is `O(K)`.

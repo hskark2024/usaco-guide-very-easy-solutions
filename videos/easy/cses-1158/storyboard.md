@@ -1,10 +1,10 @@
 # Storyboard
 
-1. **Book cards.** Display prices and page counts under a budget meter.
-2. **Greedy fails.** Compare the 12-page book with the better 5-plus-8-page pair.
-3. **DP state.** Reveal one slot for every available budget.
-4. **Skip or buy.** Split the transition into its two exhaustive choices.
-5. **Descending sweep.** Freeze the source slot while updating the destination.
-6. **Sample trace.** Show the 4-cost and 5-cost books producing 13 pages.
-7. **Correctness.** Partition selections by whether the current book is included.
-8. **C++ and bounds.** Highlight `max`, loop direction, and `O(NX)`/`O(X)`.
+1. **Shop shelf.** Show books labeled with price and pages beside budget `X`.
+2. **Failed greedy ideas.** Cross out cheapest-only and best-ratio-only choices.
+3. **Capacity row.** Reveal `best[0..X]` initialized to zero.
+4. **Two choices.** Split each book into skip and buy branches.
+5. **Descending sweep.** Animate the cursor moving from `X` toward the book price.
+6. **Official sample.** Compare the eight-dollar book with the four-plus-five pair.
+7. **Proof.** Partition selections by whether they contain the current book.
+8. **Code and complexity.** Highlight the `max` transition and `O(NX)` bound.

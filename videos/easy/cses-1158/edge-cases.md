@@ -1,9 +1,11 @@
-# Edge-Case Checklist
+# Edge-case checklist
 
-- A book costing more than the budget is skipped.
-- Each book is available once, even if prices are equal.
-- The optimum may leave part of the budget unused.
-- Buying nothing is legal and worth zero pages.
-- An upward capacity scan would incorrectly allow repeated purchases.
-- Up to one million total pages fit safely in a C++ `int`.
-- The largest limits require about one hundred million updates.
+- No book is affordable: answer `0`.
+- One book fits exactly at the budget boundary.
+- The optimum leaves some budget unused.
+- Several books have the same price or page count.
+- A less efficient-looking pair beats the best individual book.
+- Process book indices separately even when their values match.
+- Scan capacities downward to prevent repeated use.
+- Keep zero as a valid empty-purchase value at every capacity.
+- Maximum page totals fit in a 32-bit signed integer under the official constraints.

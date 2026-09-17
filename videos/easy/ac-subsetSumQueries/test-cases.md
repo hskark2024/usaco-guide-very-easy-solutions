@@ -1,17 +1,17 @@
-# Test-Case Walkthroughs
+# Test-case walkthroughs
 
-## Add then remove
+## Duplicate balls and a direct target
 
-For `K = 5`, add `2`, then `3`. The answers are `0`, then `1` because `{2,3}` reaches five. Removing `2` returns the answer to zero.
+For `K = 10`, add `5`, add another `5`, then add `10`. The answers are `0`, `1`, and `2`: the pair of distinguishable fives is one target subset, and the ten alone is another. Removing one five leaves only the ten, so the next answer is `1`.
 
-## Duplicate values
+## Value above the target
 
-For `K = 4`, add three separate balls valued `2`. After the second ball there is one subset; after the third there are three choices of which pair to take. Removing one returns the answer to one.
+With `K = 7`, adding or removing value `20` cannot change any subset totaling seven. The implementation still prints an answer for each query.
 
-## Value above target
+## Empty target count
 
-For `K = 4`, adding or removing a ball valued `9` leaves every tracked subset count unchanged.
+Even though `ways[0]` is always one for the empty subset, queries ask for the given positive `K`; an unreachable target correctly prints zero.
 
-## Official sample
+## Independent verifier
 
-The 15 queries exercise both directions, repeated fives, and several simultaneous representations. The reported sequence ends at five ways to total ten.
+Random valid add/remove sequences keep at most ten balls. After each operation, the oracle enumerates all `2^n` physical subsets and compares the target count. A second case inserts eighty ones and removes them again, checking modular wraparound with exact binomial coefficients.

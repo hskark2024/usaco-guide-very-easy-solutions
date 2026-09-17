@@ -1,17 +1,17 @@
-# Test-Case Walkthroughs
+# Test-case walkthroughs
 
-## Official sample
+## Small mixed collection
 
-Coins are `4, 2, 5, 2`. The reachable positive sums are `2, 4, 5, 6, 7, 8, 9, 11, 13`, so the count is nine. The two separate twos explain why sum four can be made without the four-valued coin.
+For coins `2, 3, 5`, the positive totals are `2, 3, 5, 7, 8, 10`. Sum five has two constructions, but it appears only once because the output is a set of totals.
 
-## One coin
+## Duplicate values
 
-Coin `7` gives only sum `7`. Sum zero is internally reachable but excluded from output.
+Coins `2, 2, 2` reach `2, 4, 6`. Each coin is one-use, while separate passes allow two or three physical copies to combine.
 
-## Catch wrong loop direction
+## Gapped totals
 
-With one coin valued `2`, an upward scan would incorrectly mark `4, 6, 8`, and so on. The correct descending scan marks only `2`.
+Coins `5, 10` reach only `5, 10, 15`. The boolean table preserves gaps.
 
-## Powers of two
+## Independent verifier
 
-Coins `1, 2, 4, 8` create every total from one through fifteen.
+For random lists of at most twelve coins, the oracle enumerates every nonempty subset mask, inserts its sum into a Python set, sorts the set, and compares both the reported count and all printed values.

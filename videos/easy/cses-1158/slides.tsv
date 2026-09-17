@@ -1,8 +1,8 @@
-Book Shop	Choose books within a budget|Maximize total pages
-Why DP?	The biggest book can lose to a pair|Greedy choices miss combinations
-DP state	best of m uses processed books|Spend at most m
-Two choices	Skip this book|Buy it after best of m minus price
-Scan downward	Keep the source in the previous row|Each book contributes once
-Official sample	Buy prices 4 and 5|9 cost; 13 pages
-Correctness	Every selection skips or buys|The two cases cover all choices
+Book Shop	Maximize pages within budget X|Each physical book at most once
+Why greedy fails	Books combine in surprising ways|We need best result for every capacity
+DP state	best[m] uses processed books|Spending at most m dollars
+Transition	Skip: keep best[m]|Buy: best[m-price] plus pages
+Scan downward	Source still excludes current book|Prevents buying one book twice
+Official sample	Costs 4, 8, 5, 3; budget 10|Books 4 and 5 give 13 pages
+Correctness	Every choice skips or buys the book|Take the better exhaustive case
 Result	O of N times X time|O of X memory

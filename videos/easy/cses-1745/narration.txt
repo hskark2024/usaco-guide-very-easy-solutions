@@ -1,29 +1,25 @@
-Hey everyone. Today we are solving Money Sums from CSES and the USACO Guide Easy list. We receive several physical coins and need to list every positive amount we can make by choosing a subset. Each coin may be used at most once.
+Hey everyone. Today we are solving Money Sums from CSES and the current USACO Guide Easy list. Instead of asking whether one target is possible, this problem asks us to print every positive total we can build.
 
-This is a decision version of zero-one knapsack. Instead of maximizing pages or counting arrangements, each state stores a yes-or-no answer: can some subset make this sum?
+We receive N physical coins. Each coin may be chosen zero or one time. Two coins can have the same value, but they are still two separate objects and can both be used.
 
-First, add all coin values to get S. No subset can total less than zero or more than S, so our array needs positions zero through S. Let reachable of sum be true when a subset of the processed coins makes that sum.
+Let maximum sum be the total value of all coins. No subset can produce anything larger. Create a boolean array reachable from zero through maximum sum. Reachable of s tells us whether some subset of processed coins totals s. Initially only zero is true because the empty subset makes zero.
 
-Before reading any coin into the DP, reachable of zero is true. The empty subset makes zero. Every positive sum is false.
+Now process one coin worth c. Any sum that was already reachable stays reachable by skipping this coin. Also, if s minus c was reachable using earlier coins, then s becomes reachable by adding the current coin.
 
-Now take one physical coin with value c. Every old subset totaling t can stay as it is, and it can also include the new coin to make t plus c. In array form, for every sum at least c, if reachable of sum minus c is true, mark reachable of sum true.
+We update in place, so we scan from maximum sum down to c. That downward order is the whole zero-one rule. The source at s minus c has not yet been changed by this coin. An upward scan would let a newly reached total create another total during the same pass, reusing one physical coin again and again.
 
-The loop scans from the total downward. This is the most important implementation detail. A smaller state cannot have been changed by the current coin yet when we read it. Therefore the new state uses this coin exactly once.
+Take coins two, three, and five. Start with zero. After coin two, totals zero and two are reachable. After coin three, zero, two, three, and five are reachable. After coin five, we keep those totals and also reach five, seven, eight, and ten. The positive output is two, three, five, seven, eight, and ten.
 
-If we scanned upward, one coin valued two would first make sum two. Later in the same pass, that new sum two would make sum four, then sum six, pretending that we owned unlimited copies. Downward order prevents that chain.
+Now look at duplicate coins two and two. The first coin reaches two. The second coin can read that earlier two and reach four. This is correct because there really are two physical coins. One pass cannot use a single two twice, but two separate passes may use both.
 
-Trace the official sample with coins four, two, five, and two. Start with zero. After the four, we can make four. After the first two, we can make two, four, and six. The five adds five, seven, nine, and eleven. The final two is a separate physical coin, so it can combine with subsets that used the first two.
+When every coin has been processed, scan the boolean array from one upward. Collect every true index. This automatically sorts the answers. Print the count first and the values on the next line.
 
-At the end, the positive reachable sums are two, four, five, six, seven, eight, nine, eleven, and thirteen. There are nine of them. We scan the array from one upward, so they automatically appear in increasing order.
+For correctness, maintain this invariant: after processing the first i coins, reachable of s is true exactly when a subset of those i coins has sum s. The base case with zero coins is correct. For the next coin, any valid subset either excludes it and was already represented, or includes it and becomes an earlier subset for s minus c after we remove that coin. The downward scan ensures the earlier subset cannot already contain the current coin. Therefore the invariant holds, and the final true cells are exactly all possible totals.
 
-Duplicate values deserve attention. The two coins labeled two are separate items. We may choose neither, either one, or both. Our algorithm processes them in separate iterations, so using both is allowed while using either physical coin twice is not.
+The C plus plus code first sums the coin values to size the array tightly. It uses a compact char vector instead of a vector of booleans, then performs one descending loop for each coin.
 
-For correctness, use induction on processed coins. With no coins, only zero is possible. For the next coin, every subset either excludes it, leaving an already reachable sum, or includes it. Removing the coin from the second case leaves an earlier subset totaling sum minus c. Our transition marks exactly those possibilities. Descending order ensures the source uses only earlier coins. So the invariant remains true.
+The running time is O of N times S, where S is the total coin value. The memory is O of S. Under the official limits, S is at most one hundred thousand, so this is comfortably fast.
 
-After all coins, every true positive position is a possible money sum, and every possible sum is true. We collect those positions into a vector and print its size and contents.
+Check a one-coin case with value seven. The output count is one and the list contains seven. Check coins five and ten. Reachable totals are five, ten, and fifteen, with gaps everywhere else. The algorithm never assumes totals form a continuous interval.
 
-The running time is O of N times S, where S is the sum of all values. Memory is O of S. Here N is at most one hundred and S is at most one hundred thousand, so the method easily fits.
-
-The C plus plus code uses a vector of char values for compact boolean storage. It accumulates the total while reading, performs one downward loop per coin, and then prints the sorted results.
-
-The official problem and heavily commented solution are linked below. Keep the rule in mind: when each physical item is single-use, scan the capacity or sum downward.
+The official problem and heavily commented C plus plus solution are linked below. Remember: one physical coin per pass means sums move downward.

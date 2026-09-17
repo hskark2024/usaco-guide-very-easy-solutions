@@ -1,8 +1,11 @@
-# C++ Coding Walkthrough
+# C++ coding walkthrough
 
-1. Read `Q` and `K`, then allocate `ways` with exactly `K+1` entries.
-2. Set `ways[0] = 1` for the empty subset.
-3. On `+ x`, scan from `K` down to `x`, add `ways[s-x]`, and reduce modulo `998244353`.
-4. On `- x`, scan from `x` up to `K`, subtract the already recovered `ways[s-x]`, and normalize negative values.
-5. Skip both loops when `x > K`; positive values above the target cannot help reach it.
-6. Print `ways[K]` after the query. The code comments explain the generating-function identity and both scan directions.
+1. Read `Q` and `K`, allocate `ways[0..K]`, and set `ways[0] = 1`.
+2. Read each operation character and value.
+3. On `+ x` with `x <= K`, loop downward from `K` to `x`.
+4. Add `ways[s-x]` and subtract the modulus when needed.
+5. On `- x` with `x <= K`, loop upward from `x` to `K`.
+6. Subtract the already recovered `ways[s-x]` and add the modulus when negative.
+7. Print `ways[K]` after every operation.
+
+The comments explain the generating-function identity and why the inverse update uses the opposite direction.

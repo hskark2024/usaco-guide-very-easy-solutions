@@ -1,8 +1,8 @@
-Dynamic Subset Sum	A box changes after every query|Count subsets totaling K
-The DP state	ways of s counts current subsets|ways of zero starts at one
-Add x	Multiply by one plus z to the x|Scan sums downward
-Why downward?	The new ball is used at most once|Do not read a state it just created
-Remove x	old of s equals new of s plus new of s minus x|Solve for new of s
-Why upward?	Recover smaller sums first|Then subtract their contribution
-Duplicate values	Balls are distinguishable|Equal labels still create separate choices
+Subset Sum Queries	Maintain subset counts while balls enter and leave|Answer after every query
+DP state	ways[s] counts current subsets totaling s|ways[0] starts at one
+Add x	ways[s] += ways[s-x]|Scan downward so x is used once
+Remove x	ways[s] -= ways[s-x]|Scan upward through recovered states
+Target 10	Two physical 5s make one pair|A separate 10 makes another subset
+Values above K	Positive values cannot help reach K|The truncated table stays unchanged
+Correctness	Partition on using the new ball|Removal inverts the same equation
 Result	O of Q times K time|O of K memory

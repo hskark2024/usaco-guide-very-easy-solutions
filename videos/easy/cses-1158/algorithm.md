@@ -1,5 +1,10 @@
-# Algorithm Derivation
+# Algorithm derivation
 
-Define `best[m]` as the greatest page count obtainable with the already processed books while spending at most `m`. All capacities start at zero because buying nothing is feasible.
+1. Let `best[m]` be the maximum pages obtainable from processed books while spending at most `m`.
+2. Initialize every capacity to zero because the empty purchase is legal.
+3. Process each book `(price[i], pages[i])` once.
+4. Scan `m` downward from `X` to `price[i]`.
+5. Set `best[m] = max(best[m], best[m-price[i]] + pages[i])`.
+6. Return `best[X]` after all books.
 
-For price `h` and pages `p`, a selection either skips this book or buys it after a selection fitting in `m-h`: `best[m] = max(best[m], best[m-h] + p)`. Scan `m` downward so the source entry refers to earlier books. This rolls a conceptual `N`-by-`X` DP table into one row.
+The downward capacity order preserves the previous-book row, so each item is used at most once. Time is `O(NX)` and space is `O(X)`.

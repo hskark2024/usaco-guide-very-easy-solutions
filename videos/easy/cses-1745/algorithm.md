@@ -1,5 +1,10 @@
-# Algorithm Derivation
+# Algorithm derivation
 
-All possible sums lie between zero and the total value `S`, so use a boolean array `reachable[0..S]`. Begin with only zero true.
+1. Compute `S`, the sum of all coin values; every obtainable total lies in `0..S`.
+2. Let `reachable[s]` record whether processed coins can form `s`.
+3. Set `reachable[0] = true` for the empty subset.
+4. For each physical coin `c`, scan `s` downward from `S` to `c`.
+5. If `reachable[s-c]` is true, mark `reachable[s]` true.
+6. Collect every true index from `1` through `S` and print the count and sorted list.
 
-For each physical coin `c`, every previously reachable sum `t` makes `t+c` reachable. Implement this as `reachable[s] |= reachable[s-c]` while scanning `s` from `S` down to `c`. Descending order stops the same coin from making a chain of new states. Finally scan positive indices upward to collect a sorted answer.
+The downward scan ensures one pass uses its physical coin at most once. Time is `O(NS)` and space is `O(S)`.

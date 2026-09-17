@@ -1,10 +1,10 @@
 # Storyboard
 
-1. **The changing box.** Add and remove labeled balls around a target `K`.
-2. **Subset-count state.** Show columns `0` through `K`, with `ways[0] = 1`.
-3. **Add a ball.** Animate rightward arrows and a right-to-left sweep.
-4. **Why downward.** Show an upward sweep incorrectly choosing the new ball twice.
-5. **Reverse the update.** Rearrange `old[s] = new[s] + new[s-x]`.
-6. **Why removal is upward.** Recover smaller sums before larger ones.
-7. **Duplicate balls.** Give same-valued balls distinct colors and count them separately.
-8. **Code, proof, complexity.** Highlight the two loops and `O(QK)` bound.
+1. **Problem setup.** Drop numbered balls into a box and display target `K`.
+2. **Subset-count row.** Show cells `0..K` with cell zero lit as one.
+3. **Addition arrows.** Animate arrows from `s-x` to `s` moving right-to-left.
+4. **Why direction matters.** Contrast one physical ball with accidental repeated use.
+5. **Removal equation.** Rearrange `old[s] = new[s] + new[s-x]` on screen.
+6. **Upward recovery.** Fill the `new` row from small sums to large sums.
+7. **Duplicate walkthrough.** Use two fives and one ten with target ten.
+8. **Code and complexity.** Highlight the two loop directions and `O(QK)` time.

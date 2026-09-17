@@ -1,8 +1,11 @@
-# C++ Coding Walkthrough
+# C++ coding walkthrough
 
-1. Read the number of books and budget.
-2. Read the price array and page array separately, matching the input format.
-3. Allocate `best` with `budget+1` zero entries; each state means an at-most capacity.
-4. For each book, scan money from `budget` down to its price.
-5. Compare skipping with `best[money-price] + pages` using `max`.
-6. Print `best[budget]`. The comments emphasize that downward order keeps every book single-use.
+1. Read `N`, budget `X`, then the price and page arrays.
+2. Allocate `best[0..X]` and initialize it to zero.
+3. Loop over each book index so equal-looking books remain distinct items.
+4. For the current book, loop `money` downward from `X` to its price.
+5. Compare skipping with `best[money-price] + pages`.
+6. Store the larger value in place.
+7. Print `best[X]` after every book has been processed.
+
+The comments connect the descending scan with the zero-one restriction and explain why impossible-state sentinels are unnecessary.
