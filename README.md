@@ -53,6 +53,8 @@ The official statements remain at their original judge links. These notes intent
 | `ac-subsetSumQueries` | AC | [Subset Sum Queries](problems/ac-subsetSumQueries/README.md) | [Dynamic Programming, Knapsack, Generating Functions] | [C++](solutions/ac-subsetSumQueries.cpp) | [Package](videos/easy/ac-subsetSumQueries/README.md) |
 | `cses-1158` | CSES | [Book Shop](problems/cses-1158/README.md) | [Dynamic Programming, 0/1 Knapsack] | [C++](solutions/cses-1158.cpp) | [Package](videos/easy/cses-1158/README.md) |
 | `cses-1745` | CSES | [Money Sums](problems/cses-1745/README.md) | [Dynamic Programming, 0/1 Knapsack, Subset Sum] | [C++](solutions/cses-1745.cpp) | [Package](videos/easy/cses-1745/README.md) |
+| `cses-1093` | CSES | [Two Sets II](problems/cses-1093/README.md) | [DP, Knapsack] | [C++](solutions/cses-1093.cpp) | [Package](videos/easy/cses-1093/README.md) |
+| `cf-687C` | CF | [The Values You Can Make](problems/cf-687C/README.md) | [DP, Knapsack] | [C++](solutions/cf-687C.cpp) | [Package](videos/easy/cf-687C/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

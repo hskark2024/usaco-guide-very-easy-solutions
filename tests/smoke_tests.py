@@ -6,6 +6,8 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "cses-1093": ("7\n", "4\n"),
+    "cf-687C": ("6 18\n5 6 1 10 12 2\n", "16\n0 1 2 3 5 6 7 8 10 11 12 13 15 16 17 18\n"),
     "ys-montmort": ("10 100\n", "0 1 2 9 44 65 54 33 96 61\n"),
     "ys-UnionFind": ("5 9\n1 0 1\n0 0 1\n1 0 1\n0 1 2\n1 0 2\n0 0 2\n1 3 4\n0 3 4\n1 3 4\n", "0\n1\n1\n0\n1\n"),
     "ys-AssociativeArray": ("9\n1 8\n0 8 12\n1 8\n0 8 99\n1 8\n0 1000000000000000000 7\n1 1000000000000000000\n0 3 0\n1 3\n", "0\n12\n99\n7\n0\n"),
@@ -74,7 +76,9 @@ tests = {
 }
 
 failed = []
-for stem, (inp, expected) in tests.items():
+cases = [(stem, inp, expected) for stem, (inp, expected) in tests.items()]
+cases.append(("cf-687C", "3 50\n25 25 50\n", "3\n0 25 50\n"))
+for stem, inp, expected in cases:
     exe = build / stem
     if not exe.exists():
         failed.append((stem, "missing executable; run compile_all.py first"))

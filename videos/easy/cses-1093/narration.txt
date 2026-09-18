@@ -1,0 +1,15 @@
+Welcome! Today we are solving Two Sets Two from CSES, an Easy problem in the USACO Guide. Imagine the number cards one through N. We want to split all the cards into two groups with equal sums. The groups have no names, so exchanging the left and right groups must not create a new answer. That last detail is the main counting trap.
+
+First, add every card. The total is N times N plus one, divided by two. If that total is odd, an equal split is impossible because both groups have integer sums. We print zero immediately. For an even total, each group must reach exactly half of it. For N equal to three, the total is six and the target is three.
+
+Now let us prevent double counting before writing the dynamic program. Pin the largest card, N, to the right group. We will count only the left group, which uses cards one through N minus one. Every equal partition has exactly one side that does not contain N. So every partition contributes exactly one choice to our count. The other side is simply its complement.
+
+Our state ways of S means the number of subsets of the cards already processed that add to exactly S. At the beginning, ways of zero is one, because the empty subset is a real choice. Every positive sum starts at zero ways. When the next card has value V, a subset either skips that card or includes it. Including it leaves a previous subset totaling S minus V.
+
+Therefore we add ways of S minus V into ways of S. We scan sums from the target downward to V. This direction matters. The source counter must still describe cards from before V arrived. Scanning upward could use V in a newly updated source, effectively putting the same card into the subset more than once. Reduce each addition modulo one billion and seven.
+
+Let us trace N equal to three. Pin card three to the right. Initially only sum zero has one way. After card one, sums zero and one are possible. After card two, the target three receives the one way from sum one. That represents the left group containing one and two. Its complement is the right group containing three. The answer is one.
+
+The official example uses N equal to seven and gives four partitions. If we counted subsets using all seven cards, each partition would appear twice, once for each side. Ordinary division by two after taking a remainder is unsafe. Our representative trick avoids that entire issue. Odd totals, such as N equal to one or two, correctly return zero.
+
+In C plus plus, read N, compute the total, check parity, and allocate target plus one counters. Set the zero counter to one. Loop card values strictly below N, then loop sums downward. Print the target counter. The running time is proportional to N times the target, or order N cubed, and memory is order N squared. At the maximum N of five hundred, the target is only sixty two thousand six hundred twenty five. We checked small cases by enumerating subsets and larger cases with a separate counting method. Remember the two ideas: choose one representative, and scan downward to use each card once.

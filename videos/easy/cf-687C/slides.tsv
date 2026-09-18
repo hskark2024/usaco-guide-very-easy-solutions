@@ -1,0 +1,8 @@
+The Values You Can Make	Choose coins paying exactly K|Find totals inside some valid payment|Codeforces 687C — USACO Guide Easy
+Two totals, one state	payment = total coins handed over|inside = total coins marked within payment|Start at (0,0)
+A coin has three roles	Unused: keep the old state|Payment only: add v to payment|Payment and inside: add v to both
+A bitset row	possible[p] holds all inside sums for p|Unmarked coin copies source bits|Marked coin shifts source bits left by v
+Update rows downward	Read possible[p-v] before this coin|Merge source OR shifted source|Each physical coin is used at most once
+Trace coins 2 and 3	For payment K=5, select both coins|Inside subsets: {}, {2}, {3}, {2,3}|Answer: 0, 2, 3, 5
+Official samples and edges	25,25,50 with K=50: 0,25,50|0 and K are always valid if payment exists|Skip coins above K; preserve duplicates
+C++ and verification	K+1 rows of bitset<501>|Output set bits in row K in ascending order|Ternary brute force and maximum-size checks

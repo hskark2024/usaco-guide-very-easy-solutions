@@ -1,0 +1,8 @@
+Two Sets II	Split 1 through N into equal sums|Count each unordered split once|CSES 1093 — Easy in USACO Guide
+Can a split exist?	Total = N(N+1)/2|An odd total cannot split equally|Otherwise target = total/2
+Choose one representative	Pin N to the right group|Build the left group from 1 through N-1|Every partition has exactly one side without N
+Exact-sum counting	ways[s] counts subsets totaling s|Start ways[0] = 1|Skip v or include v: ways[s] += ways[s-v]
+Why scan downward?	Read states before this number|Each number appears at most once|Reduce every addition modulo 1,000,000,007
+Trace N = 3	Total 6; target 3; pin 3 right|Use 1 and 2: one subset totals 3|Left {1,2}; right {3}
+Samples and pitfalls	N=7 gives 4; N=1 gives 0|Do not count both sides separately|Do not divide a modular residue with ordinary /2
+C++ and verification	Check parity; allocate target+1 counters|Loop values below N and sums downward|O(N³) time, O(N²) space; brute-force verified

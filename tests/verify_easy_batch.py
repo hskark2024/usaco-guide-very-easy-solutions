@@ -833,6 +833,66 @@ def verify_money_sums() -> None:
         assert tokens[1:] == expected
 
 
+
+def verify_two_sets_ii() -> None:
+    modulus = 1_000_000_007
+    for n in range(1, 21):
+        total = n * (n + 1) // 2
+        # Enumerate subsets of ALL numbers, then pair each subset with its
+        # complement. This oracle does not use the solution's pinned-N DP.
+        sums = [0]
+        for value in range(1, n + 1):
+            sums += [subtotal + value for subtotal in sums]
+        expected = sums.count(total // 2) // 2 if total % 2 == 0 else 0
+        assert int(run("cses-1093", f"{n}\n")) == expected
+
+    for n in (31, 64, 100, 500):
+        total = n * (n + 1) // 2
+        target = total // 2
+        # Separate immutable rows include N, counting both orientations;
+        # use a modular inverse to remove the symmetry at the end.
+        counts = [1] + [0] * target
+        for value in range(1, n + 1):
+            previous = counts
+            counts = [
+                (previous[s] + (previous[s-value] if s >= value else 0)) % modulus
+                for s in range(target + 1)
+            ]
+        expected = counts[target] * pow(2, modulus - 2, modulus) % modulus
+        assert int(run("cses-1093", f"{n}\n")) == expected
+
+
+def verify_values_you_can_make() -> None:
+    cases = [([2, 3], 5), ([25, 25, 50], 50), ([1, 500], 1),
+             ([5], 5), ([1, 1, 1], 2), ([5, 6, 1, 10, 12, 2], 18)]
+    for _ in range(160):
+        coins = [RNG.randint(1, 12) for _ in range(RNG.randint(1, 9))]
+        # Select one nonempty subset to ensure a legal payable target.
+        mask = RNG.randint(1, (1 << len(coins)) - 1)
+        target = sum(v for i, v in enumerate(coins) if mask >> i & 1)
+        cases.append((coins, target))
+
+    for coins, target in cases:
+        expected = set()
+        # Explicit ternary roles: unused, payment-only, payment-and-marked.
+        # Enumerating complete assignments is independent of bitset DP.
+        for roles in product(range(3), repeat=len(coins)):
+            payment = sum(v for v, role in zip(coins, roles) if role != 0)
+            if payment == target:
+                expected.add(sum(v for v, role in zip(coins, roles) if role == 2))
+        tokens = list(map(int, run(
+            "cf-687C", f"{len(coins)} {target}\n" + " ".join(map(str, coins)) + "\n"
+        ).split()))
+        assert tokens == [len(expected)] + sorted(expected)
+
+    for coins, expected in (([1] * 500, list(range(501))),
+                            ([500] * 500, [0, 500])):
+        tokens = list(map(int, run(
+            "cf-687C", "500 500\n" + " ".join(map(str, coins)) + "\n"
+        ).split()))
+        assert tokens == [len(expected)] + expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -866,6 +926,8 @@ if __name__ == "__main__":
         verify_subset_sum_queries,
         verify_book_shop,
         verify_money_sums,
+        verify_two_sets_ii,
+        verify_values_you_can_make,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

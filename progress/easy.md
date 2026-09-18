@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-09-16 (the filtered webpage returned a Cloudflare verification page, so the current published source was checked directly)
-- Listing snapshot: USACO Guide source commit [`06831b4`](https://github.com/cpinitiative/usaco-guide/commit/06831b457a5a8e1c7b3cfcc2e62ffec024a627c5) (423 unique module-listed Easy IDs; Knapsack DP entries checked)
-- Completed Easy solutions: 34
-- Complete video packages: 34
+- Last listing check: 2026-09-17 (the filtered webpage was unavailable to the web fetch, so the current published Guide source was checked directly)
+- Listing snapshot: USACO Guide source commit [`8671909`](https://github.com/cpinitiative/usaco-guide/commit/86719090e74da7a51af284038c0a7ebf6636ce8e) (423 unique module-listed Easy IDs; Knapsack DP entries checked)
+- Completed Easy solutions: 36
+- Complete video packages: 36
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -45,3 +45,14 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `ac-subsetSumQueries` | Subset Sum Queries | complete | complete | complete | generated |
 | `cses-1158` | Book Shop | complete | complete | complete | generated |
 | `cses-1745` | Money Sums | complete | complete | complete | generated |
+| `cses-1093` | Two Sets II | complete | complete | complete | generated |
+| `cf-687C` | The Values You Can Make | complete | complete | complete | generated |
+
+## Batch verification — 2026-09-17
+
+- New entries: `cses-1093` Two Sets II and `cf-687C` The Values You Can Make.
+- All 67 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 68 smoke cases and all 33 independent Easy verifier groups passed.
+- Complete Daniel narration packages and 1280×720 MP4s were generated; video/audio tracks and all slide layouts were checked. Durations: 192 seconds and 201 seconds.
+- GitHub upload is pending usable write authentication. YouTube uploads are pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Next unsolved Easy Knapsack DP entries: `cf-1458B` Glass Half Spilled and `usaco-574` Fruit Feast.
