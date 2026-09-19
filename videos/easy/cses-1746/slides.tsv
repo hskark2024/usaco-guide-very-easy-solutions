@@ -1,0 +1,8 @@
+Array Description	Values lie from 1 through m	Neighbors differ by at most 1	Zero means unknown
+Choose the DP state	dp[v] counts valid prefixes ending at v	Only the last value affects the next step	Forget the older prefix
+Three possible predecessors	Previous value is v-1, v, or v+1	Add those three counts	Zero sentinels handle boundaries
+Respect fixed positions	Unknown: try every value	Fixed: keep only the stated value	All rejected states stay zero
+Walk through 2 0 2	Start at value 2	Middle may be 1, 2, or 3	All three return to 2
+Roll two rows	Clear the reusable current row	Fill it from the previous row	Swap after each position
+Complexity	n positions times m values	O(nm) time	O(m) memory
+Correctness and tests	Every valid predecessor is counted once	Induct on prefix length	Exhaustive small completions verify it

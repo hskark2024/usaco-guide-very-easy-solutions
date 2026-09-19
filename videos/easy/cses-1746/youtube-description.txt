@@ -1,0 +1,7 @@
+Learn how to count fixed and unknown arrays with a DP by ending value, rolling memory, and heavily commented C++17.
+
+Official problem: https://cses.fi/problemset/task/1746
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-1746.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #cses #dynamicprogramming #cplusplus

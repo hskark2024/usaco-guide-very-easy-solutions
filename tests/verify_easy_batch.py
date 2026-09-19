@@ -972,6 +972,137 @@ def verify_fruit_feast() -> None:
         assert (path / 'feast.out').read_text() == '8\n'
 
 
+def verify_grid_paths() -> None:
+    def enumerate_routes(grid):
+        n = len(grid)
+        if grid[0][0] == '*' or grid[-1][-1] == '*':
+            return 0
+        # Choose which of the 2n-2 steps are downward. This enumerates routes
+        # directly instead of repeating the submitted cell recurrence.
+        total = 0
+        for down_steps in combinations(range(2 * n - 2), n - 1):
+            down_steps = set(down_steps)
+            row = column = 0
+            legal = True
+            for step in range(2 * n - 2):
+                if step in down_steps:
+                    row += 1
+                else:
+                    column += 1
+                if grid[row][column] == '*':
+                    legal = False
+                    break
+            total += legal
+        return total
+
+    cases = [['.'], ['*'], ['..', '..'], ['.*', '..'],
+             ['...', '***', '...'], ['....', '.*..', '...*', '*...']]
+    for _ in range(220):
+        n = RNG.randint(1, 7)
+        cases.append([
+            ''.join('*' if RNG.random() < 0.30 else '.' for _ in range(n))
+            for _ in range(n)
+        ])
+    for grid in cases:
+        expected = enumerate_routes(grid) % 1_000_000_007
+        actual = int(run('cses-1638', str(len(grid)) + '\n' + '\n'.join(grid) + '\n'))
+        assert actual == expected
+
+    # Exercise all one million cells without requiring a large integer oracle:
+    # a fully trapped second row makes the destination unreachable.
+    n = 1000
+    grid = ['.' * n, '*' * n] + ['.' * n] * (n - 2)
+    assert int(run('cses-1638', f'{n}\n' + '\n'.join(grid) + '\n')) == 0
+
+
+def verify_array_description() -> None:
+    modulus = 1_000_000_007
+
+    def enumerate_arrays(description, maximum):
+        return sum(
+            all(given == 0 or given == value
+                for given, value in zip(description, candidate))
+            and all(abs(left - right) <= 1
+                    for left, right in zip(candidate, candidate[1:]))
+            for candidate in product(range(1, maximum + 1), repeat=len(description))
+        ) % modulus
+
+    cases = [([0], 1), ([0], 5), ([2, 0, 2], 5), ([1, 3], 3),
+             ([0, 0, 0], 2), ([1, 1, 1, 1], 1)]
+    for _ in range(260):
+        n = RNG.randint(1, 7)
+        maximum = RNG.randint(1, 5)
+        description = [
+            0 if RNG.random() < 0.55 else RNG.randint(1, maximum)
+            for _ in range(n)
+        ]
+        cases.append((description, maximum))
+    for description, maximum in cases:
+        expected = enumerate_arrays(description, maximum)
+        actual = int(run(
+            'cses-1746',
+            f'{len(description)} {maximum}\n' + ' '.join(map(str, description)) + '\n',
+        ))
+        assert actual == expected
+
+    # Maximum n and m with a unique fixed array checks bounds and runtime.
+    n, maximum = 100_000, 100
+    fixed = ' '.join(['50'] * n)
+    assert int(run('cses-1746', f'{n} {maximum}\n{fixed}\n')) == 1
+
+
+def verify_edit_distance() -> None:
+    alphabet = 'ABC'
+
+    def graph_distance(source, target):
+        # Breadth-first search treats whole strings as graph vertices. It uses
+        # the allowed edits themselves, not the prefix-table recurrence.
+        max_length = max(len(source), len(target)) + 1
+        pending = deque([(source, 0)])
+        seen = {source}
+        while pending:
+            text, distance = pending.popleft()
+            if text == target:
+                return distance
+            neighbors = set()
+            for index in range(len(text)):
+                neighbors.add(text[:index] + text[index + 1:])
+                for letter in alphabet:
+                    neighbors.add(text[:index] + letter + text[index + 1:])
+            if len(text) < max_length:
+                for index in range(len(text) + 1):
+                    for letter in alphabet:
+                        neighbors.add(text[:index] + letter + text[index:])
+            for neighbor in neighbors:
+                if len(neighbor) <= max_length and neighbor not in seen:
+                    seen.add(neighbor)
+                    pending.append((neighbor, distance + 1))
+        raise AssertionError('target should always be reachable')
+
+    known_cases = [('A', 'A', 0), ('A', 'B', 1), ('AB', 'A', 1),
+                   ('A', 'AB', 1), ('LOVE', 'MOVIE', 2),
+                   ('AAAA', 'BBBB', 4), ('ABCA', 'CABA', 2)]
+    for first, second, expected in known_cases:
+        assert int(run('cses-1639', f'{first}\n{second}\n')) == expected
+        assert int(run('cses-1639', f'{second}\n{first}\n')) == expected
+
+    cases = []
+    for _ in range(90):
+        first = ''.join(RNG.choice(alphabet) for _ in range(RNG.randint(1, 4)))
+        second = ''.join(RNG.choice(alphabet) for _ in range(RNG.randint(1, 4)))
+        cases.append((first, second))
+    for first, second in cases:
+        expected = graph_distance(first, second)
+        assert int(run('cses-1639', f'{first}\n{second}\n')) == expected
+        assert int(run('cses-1639', f'{second}\n{first}\n')) == expected
+
+    # Both dimensions at the maximum; the answer is obvious but forces all
+    # 25 million DP cells to be processed.
+    first = 'A' * 5000
+    second = 'A' * 4999 + 'B'
+    assert int(run('cses-1639', f'{first}\n{second}\n')) == 1
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -1009,6 +1140,9 @@ if __name__ == "__main__":
         verify_values_you_can_make,
         verify_glass_half_spilled,
         verify_fruit_feast,
+        verify_grid_paths,
+        verify_array_description,
+        verify_edit_distance,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

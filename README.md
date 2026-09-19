@@ -57,6 +57,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-687C` | CF | [The Values You Can Make](problems/cf-687C/README.md) | [DP, Knapsack] | [C++](solutions/cf-687C.cpp) | [Package](videos/easy/cf-687C/README.md) |
 | `cf-1458B` | CF | [Glass Half Spilled](problems/cf-1458B/README.md) | [DP, 0/1 Knapsack] | [C++](solutions/cf-1458B.cpp) | [Package](videos/easy/cf-1458B/README.md) |
 | `usaco-574` | USACO Gold | [Fruit Feast](problems/usaco-574/README.md) | [DP, Knapsack, Reachability] | [C++](solutions/usaco-574.cpp) | [Package](videos/easy/usaco-574/README.md) |
+| `cses-1638` | CSES | [Grid Paths I](problems/cses-1638/README.md) | [DP, Grids] | [C++](solutions/cses-1638.cpp) | [Package](videos/easy/cses-1638/README.md) |
+| `cses-1746` | CSES | [Array Description](problems/cses-1746/README.md) | [DP, Sequences] | [C++](solutions/cses-1746.cpp) | [Package](videos/easy/cses-1746/README.md) |
+| `cses-1639` | CSES | [Edit Distance](problems/cses-1639/README.md) | [DP, Strings] | [C++](solutions/cses-1639.cpp) | [Package](videos/easy/cses-1639/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

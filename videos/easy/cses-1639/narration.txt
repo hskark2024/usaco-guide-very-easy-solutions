@@ -1,0 +1,15 @@
+1. Edit Distance asks for the fewest single-character operations that turn one string into another. We may insert a letter, delete a letter, or replace a letter. The sample changes LOVE into MOVIE in two operations.
+
+2. Work with prefixes. Let dp i j be the cheapest way to turn the first i letters of the first string into the first j letters of the second. Prefixes reveal what the last operation must have done.
+
+3. If the final letters match, we can keep that letter for free and use the answer for both shorter prefixes. This is a diagonal move in the table with no added cost.
+
+4. If the letters differ, the final edit is one of three kinds. Delete uses the cell above. Insert uses the cell to the left. Replace uses the diagonal cell. Take the smallest of those three and add one.
+
+5. The empty-prefix borders are simple. Turning i letters into empty takes i deletions. Turning empty into j letters takes j insertions. These values give the first column and first row.
+
+6. For LOVE and MOVIE, matching O, V, and E can travel diagonally for free where they line up. Replacing L with M costs one, and inserting I costs one more, giving a final distance of two.
+
+7. Each row depends only on the previous row and the current row's left neighbor, so store two rows. Put the shorter string across the columns to use O of the shorter length memory. Time remains O of n times m.
+
+8. The proof examines the last edit of any optimal transformation, so it cannot miss a cheaper case. Tests also use breadth-first search over whole short strings, test symmetry and repeated letters, use the official sample, and run both lengths at five thousand.

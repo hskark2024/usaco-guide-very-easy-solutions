@@ -1,0 +1,7 @@
+Derive edit distance from the final operation, compress the DP to two rows, and code it in heavily commented C++17.
+
+Official problem: https://cses.fi/problemset/task/1639
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-1639.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #cses #dynamicprogramming #strings #cplusplus

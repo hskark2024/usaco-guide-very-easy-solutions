@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-09-18 (the filtered webpage was unavailable to the web fetch, so the current published Guide source was checked directly)
-- Listing snapshot: USACO Guide source commit [`8671909`](https://github.com/cpinitiative/usaco-guide/commit/86719090e74da7a51af284038c0a7ebf6636ce8e) (423 unique module-listed Easy IDs; Knapsack DP entries checked)
-- Completed Easy solutions: 38
-- Complete video packages: 38
+- Last listing check: 2026-09-19 (the current published Guide source and its Paths on Grids problem data were checked directly)
+- Listing snapshot: USACO Guide source commit [`ecd27b6`](https://github.com/cpinitiative/usaco-guide/commit/ecd27b6eff69112891eabf0c968d3ad0b2a7f745) (423 unique module-listed Easy IDs; Paths on Grids entries checked)
+- Completed Easy solutions: 41
+- Complete video packages: 41
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -49,12 +49,15 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-687C` | The Values You Can Make | complete | complete | complete | generated |
 | `cf-1458B` | Glass Half Spilled | complete | complete | complete | generated |
 | `usaco-574` | Fruit Feast | complete | complete | complete | generated |
+| `cses-1638` | Grid Paths I | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1746` | Array Description | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1639` | Edit Distance | complete | complete | complete | generated locally; excluded from Git |
 
-## Batch verification — 2026-09-18
+## Batch verification — 2026-09-19
 
-- New entries: `cf-1458B` Glass Half Spilled and `usaco-574` Fruit Feast.
-- All 69 C++ solutions compiled with C++17, optimization, and warnings enabled.
-- All 70 smoke cases and all 35 independent Easy verifier groups passed.
-- Complete Daniel narration packages and 1280×720 MP4s were generated; video/audio tracks and slide layouts were checked. Durations: 141.0 and 143.5 seconds.
-- GitHub upload completed to `origin/main` using GitHub CLI. YouTube uploads are pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
-- This completes the Easy entries in Knapsack DP; Easy remains in progress across later modules.
+- New entries: `cses-1638` Grid Paths I, `cses-1746` Array Description, and `cses-1639` Edit Distance.
+- All 72 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 73 smoke cases and all 38 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 MP4s were generated; media files are intentionally excluded from GitHub.
+- YouTube uploads are pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Paths on Grids still has four unsolved entries; Easy remains in progress.

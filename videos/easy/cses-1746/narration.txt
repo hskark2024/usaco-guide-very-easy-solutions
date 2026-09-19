@@ -1,0 +1,15 @@
+1. Array Description asks us to fill an array with numbers from one through m. Neighboring numbers may differ by at most one. A zero means we may choose that position, while a positive number is fixed. We count every matching array modulo one billion and seven.
+
+2. When building from left to right, the full prefix is more history than we need. To decide what may come next, only the prefix's last value matters. Define dp at value v as the number of valid prefixes ending at v.
+
+3. If the next value is v, the preceding value may be v minus one, v, or v plus one. Add those three counts. Two zero sentinel slots outside the legal range make the same formula work for the boundary values one and m.
+
+4. The description controls which ending values are allowed. At an unknown position, compute every v from one to m. At a fixed position, compute only its stated value and leave every other count zero.
+
+5. For the sample two, zero, two, the first position has one prefix ending at two. The middle may be one, two, or three. Each of those can move back to two, so the final fixed two receives three ways.
+
+6. Only the previous column of counts is needed to build the current one. Clear the current row before reusing it, fill legal values, then swap the rows. The sentinels remain zero and prevent out-of-range checks.
+
+7. There are n positions and m possible ending values, giving O of n times m time. Two rows of m plus two integers give O of m memory. With n up to one hundred thousand and m up to one hundred, this fits easily.
+
+8. The proof classifies arrays by their final value and previous value. Independent tests enumerate every complete small array, including impossible fixed neighbors and m equal to one, then a maximum-size fixed array checks the runtime and boundaries.

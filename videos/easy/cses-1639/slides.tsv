@@ -1,0 +1,8 @@
+Edit Distance	Insert one character	Delete one character	Replace one character
+Use prefix states	dp[i][j] compares two prefixes	The last operation links smaller prefixes	Answer is dp[n][m]
+Matching final letters	Keep the equal letter for free	Move diagonally	No extra operation
+Different final letters	Delete comes from above	Insert comes from left	Replace comes from diagonal
+Empty-prefix bases	i letters to empty costs i	empty to j letters costs j	Fill row zero and column zero
+LOVE to MOVIE	Replace L with M	Insert I before E	Minimum distance is 2
+Roll two rows	Keep previous and current rows	Use shorter string for columns	O(nm) time, O(min(n,m)) memory
+Correctness and checks	Every optimum has one final case	Take the cheapest predecessor	Whole-string BFS verifies small cases

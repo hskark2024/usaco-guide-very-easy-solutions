@@ -1,0 +1,15 @@
+1. Grid Paths gives us a square board. We begin in the upper-left, want to reach the lower-right, may move only right or down, and cannot step on a trap. We need the route count modulo one billion and seven.
+
+2. Focus on one open square. Every route that reaches it makes its final move from exactly one of two places: the square above or the square to the left. Those groups cannot overlap, so the square's answer is their sum.
+
+3. A trap is different. No legal route may enter it, so its count must be zero. The starting square gets one route: the empty route that is already there. If the start is trapped, the trap rule correctly keeps it at zero.
+
+4. We could store the whole grid of answers, but one row is enough. Before updating dp at a column, it still means the cell above. The entry to its left has already been updated for this row. Adding them produces the current cell.
+
+5. In the sample, counts spread right and down from the start. The trap in row two clears its entry. Later cells can route around it, but the trap near the right edge blocks some choices. The destination receives three routes.
+
+6. Clearing a trap entry is a subtle but important line of code. If we left the old value there, the next row could reuse a route from above and act as though the route crossed the blocked square.
+
+7. We visit all n squared cells once and keep n counts, so time is O of n squared and memory is O of n. Modulo arithmetic keeps every count inside an integer.
+
+8. The correctness proof follows the final move into each cell. Tests enumerate actual move sequences on small random boards, cover trapped endpoints and no-path grids, use the official sample, and process a one-thousand by one-thousand boundary grid.

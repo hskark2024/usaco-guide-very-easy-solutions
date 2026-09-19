@@ -1,0 +1,8 @@
+Grid Paths I	Move only right or down	Never enter a trap	Count routes modulo 1,000,000,007
+The final-move idea	Every route arrives from above or left	The two groups are disjoint	Add their counts
+Base cases	Start has one empty route	A trap always has zero routes	Open cells use the recurrence
+Roll one DP row	dp[column] before update means above	dp[column-1] means current left	Only O(n) memory
+Sample walkthrough	Counts flow around the first trap	A later trap removes more routes	Destination receives 3
+The trap-reset pitfall	Set dp[column] to zero on a trap	Old above counts must not leak	Blocked paths stay blocked
+Complexity	Visit n squared cells once	O(n²) time and O(n) memory	Reduce every sum modulo M
+Why it is correct	Classify each route by its final move	Induct through row-major order	Enumerated route tests verify it

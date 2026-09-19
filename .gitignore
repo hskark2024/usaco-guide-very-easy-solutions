@@ -1,3 +1,9 @@
 tests/build/
 *.out
 *.dSYM/
+videos/easy/cses-1638/video.mp4
+videos/easy/cses-1638/narration.aiff
+videos/easy/cses-1746/video.mp4
+videos/easy/cses-1746/narration.aiff
+videos/easy/cses-1639/video.mp4
+videos/easy/cses-1639/narration.aiff
