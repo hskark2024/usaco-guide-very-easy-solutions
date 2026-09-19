@@ -56,5 +56,5 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 - All 69 C++ solutions compiled with C++17, optimization, and warnings enabled.
 - All 70 smoke cases and all 35 independent Easy verifier groups passed.
 - Complete Daniel narration packages and 1280×720 MP4s were generated; video/audio tracks and slide layouts were checked. Durations: 141.0 and 143.5 seconds.
-- GitHub upload is pending usable write authentication. YouTube uploads are pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- GitHub upload completed to `origin/main` using GitHub CLI. YouTube uploads are pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
 - This completes the Easy entries in Knapsack DP; Easy remains in progress across later modules.
