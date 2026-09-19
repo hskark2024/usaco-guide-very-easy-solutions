@@ -58,6 +58,7 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 - New entries: `cses-1638` Grid Paths I, `cses-1746` Array Description, and `cses-1639` Edit Distance.
 - All 72 C++ solutions compiled with C++17, optimization, and warnings enabled.
 - All 73 smoke cases and all 38 independent Easy verifier groups passed.
-- Complete Daniel narration packages and local 1280×720 MP4s were generated; media files are intentionally excluded from GitHub.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; stream/frame QA passed. Durations: 108.9, 116.9, and 107.4 seconds. Media files are intentionally excluded from GitHub.
+- Source, notes, tests, and text video assets were uploaded to `origin/main`; MP4 and AIFF files remain local only.
 - YouTube uploads are pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
 - Easy Paths on Grids still has four unsolved entries; Easy remains in progress.
