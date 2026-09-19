@@ -1,0 +1,8 @@
+Fruit Feast	Eat fruit A or fruit B|Drink water at most once|USACO Gold — USACO Guide Easy
+Why one array is not enough	A fullness value can occur in two phases|Before water: halving is available|After water: halving is forbidden
+First reachability layer	Start at fullness zero|Move right by A or B|Stop every move above T
+Use the one water move	From each reachable x|Mark floor(x / 2) after water|Odd fullness rounds down
+Second reachability layer	Again move right by A or B|Never halve from this layer|Scan upward for unlimited fruit
+Walk through T=8	Reach 5 or 6 before water|Drink at 5 to reach 2|Then eat 6 and finish exactly at 8
+Edges and implementation	Water is optional|Byte arrays use about 2(T+1) bytes|USACO files plus stdin fallback
+Correctness and checks	Both layers equal all legal histories|O(T) time and O(T) space|BFS oracle and maximum T tests

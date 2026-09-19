@@ -1,0 +1,15 @@
+1. In Glass Half Spilled, we must answer one question for every k: if we keep exactly k glasses, how much water can end inside them? Any transfer loses half of what we pour. We will turn that story into a clean zero-one knapsack.
+
+2. Fix one possible chosen set. Call its combined capacity C, its starting water B, and all water on the table S. These three numbers contain everything we need. The identities of the glasses no longer matter after we know C and B.
+
+3. Water already in the selected glasses stays there without loss. There are S minus B units outside. At most half of that outside water can arrive, and the chosen glasses cannot hold more than C. So the exact result is the smaller of C and B plus half of S minus B. That simplifies to the smaller of C and the quantity S plus B divided by two.
+
+4. Now compare selections with the same number of glasses and the same capacity. The one with more starting water B can never be worse. Our DP cell for count k and capacity C stores only the greatest B among all such selections.
+
+5. Each glass has the standard two choices. Skip it and the cell stays unchanged. Take it and add both its capacity and its water. We move the count and capacity loops downward. That guarantees the source state comes from earlier glasses, so one physical glass cannot be selected twice.
+
+6. In the sample there are twelve units of water total. For one glass, choosing the capacity-ten glass with two units inside gives the smaller of ten and seven, so the answer is seven. For two glasses, the first two begin with ten units and hold twelve, giving eleven.
+
+7. A cell value of zero can be real, so we use negative one as unreachable. The optimum can be a half unit. We compare twice every quantity with integers and divide only while printing ten decimal places. Choosing more glasses cannot lower the optimum because an extra glass may simply keep its own water.
+
+8. The C plus plus code stores a two-dimensional table and scans every capacity for every requested k. Independent tests enumerate every small subset and compare the exact fractions. They also cover no water, full glasses, equal glasses, half-unit results, and the largest table dimensions.

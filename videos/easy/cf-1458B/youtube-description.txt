@@ -1,0 +1,9 @@
+Learn how to solve Glass Half Spilled with a carefully derived dynamic programming state, a sample walkthrough, edge cases, and a heavily commented C++17 implementation.
+
+Official problem: https://codeforces.com/contest/1458/problem/B
+
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1458B.cpp
+
+Playlist: USACO Guide Easy C++ Solutions
+
+#dynamicprogramming #knapsack #codeforces #cplusplus

@@ -1,0 +1,9 @@
+Learn how to solve Fruit Feast with a carefully derived dynamic programming state, a sample walkthrough, edge cases, and a heavily commented C++17 implementation.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=574
+
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-574.cpp
+
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #dynamicprogramming #knapsack #cplusplus

@@ -1,0 +1,8 @@
+Glass Half Spilled	Choose exactly k glasses|Transfers lose half the poured water|Codeforces 1458B — USACO Guide Easy
+Compress a chosen set	C = its total capacity|B = water already inside it|S = total water everywhere
+Derive the formula	Keep B for free|Half of outside water S-B can arrive|Answer = min(C, (S+B)/2)
+What DP must remember	Exactly k chosen glasses|Combined capacity C|Largest possible starting water B
+0/1 knapsack update	Skip keeps the old state|Take adds capacity and water|Loop count and capacity downward
+Walk through the sample	S = 12 total water|k=1: capacity 10, inside 2 gives 7|k=2: first two glasses give 11
+Edges and precision	Empty water is a valid state|Answers may end in one half|Double values until final printing
+C++ and checks	O(N squared times sum of capacities)|Subset enumeration verifies small inputs|Maximum N and capacity are tested

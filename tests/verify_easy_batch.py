@@ -1,5 +1,6 @@
 from bisect import insort
 from collections import Counter
+from collections import deque
 from fractions import Fraction
 from functools import lru_cache
 from math import atan2, gcd
@@ -8,6 +9,7 @@ from pathlib import Path
 import random
 import subprocess
 import sys
+import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -893,6 +895,83 @@ def verify_values_you_can_make() -> None:
         assert tokens == [len(expected)] + expected
 
 
+def verify_glass_half_spilled() -> None:
+    cases = [[(6, 5), (6, 5), (10, 2)], [(1, 0)], [(1, 1)],
+             [(10, 0), (1, 1)], [(1, 1), (1, 1)],
+             [(100, 0)] * 4, [(3, 3)] * 5]
+    # All legal one- and two-glass cases up to capacity three.
+    glasses = [(a, b) for a in range(1, 4) for b in range(a + 1)]
+    cases.extend([list(pair) for pair in product(glasses, repeat=2)])
+    for _ in range(180):
+        capacities = [RNG.randint(1, 12) for _ in range(RNG.randint(1, 10))]
+        cases.append([(a, RNG.randint(0, a)) for a in capacities])
+    for items in cases:
+        n = len(items)
+        total = sum(b for a, b in items)
+        expected = [Fraction(0) for _ in range(n)]
+        # Explicitly enumerate selections; no count/capacity DP compression.
+        for mask in range(1, 1 << n):
+            chosen = [items[i] for i in range(n) if mask >> i & 1]
+            capacity = sum(a for a, b in chosen)
+            water = sum(b for a, b in chosen)
+            retained = min(Fraction(capacity), Fraction(total + water, 2))
+            expected[len(chosen) - 1] = max(expected[len(chosen) - 1], retained)
+        actual = list(map(float, run('cf-1458B', str(n) + '\n' + ''.join(
+            f'{a} {b}\n' for a, b in items)).split()))
+        assert len(actual) == n
+        assert all(abs(a - float(e)) < 1e-9 for a, e in zip(actual, expected))
+        assert all(a <= b for a, b in zip(actual, actual[1:]))
+        assert actual[-1] == total
+    # Max N and max total capacity: exact closed-form uniform answers.
+    for b in (0, 37, 100):
+        actual = list(map(float, run('cf-1458B', '100\n' + f'100 {b}\n' * 100).split()))
+        assert actual == [min(100 * k, (100 * b + k * b) / 2) for k in range(1, 101)]
+
+
+def verify_fruit_feast() -> None:
+    def bfs(limit, a, b):
+        # Queue traversal explores the original legal moves, in arbitrary
+        # order, including the downward water edge; independent of two passes.
+        seen = {(0, False)}
+        pending = deque(seen)
+        while pending:
+            fullness, drank = pending.popleft()
+            moves = [(fullness + a, drank), (fullness + b, drank)]
+            if not drank: moves.append((fullness // 2, True))
+            for state in moves:
+                if state[0] <= limit and state not in seen:
+                    seen.add(state)
+                    pending.append(state)
+        return max(f for f, drank in seen)
+    cases = [(t, a, b) for t in range(1, 13)
+             for a in range(1, t + 1) for b in range(1, t + 1)]
+    cases += [(8, 5, 6), (15, 10, 10), (10, 7, 7), (1, 1, 1)]
+    for _ in range(160):
+        t = RNG.randint(1, 180)
+        cases.append((t, RNG.randint(1, t), RNG.randint(1, t)))
+    for t, a, b in cases:
+        assert int(run('usaco-574', f'{t} {a} {b}\n')) == bfs(t, a, b)
+    # Large fruit sizes keep a direct enumeration oracle small at maximum T.
+    for t, a, b in [(5000000, 1111111, 2222223), (5000000, 1, 5000000)]:
+        if a == 1:
+            expected = t
+        else:
+            plain = {i*a + j*b for i in range(t//a + 1)
+                     for j in range(t//b + 1) if i*a + j*b <= t}
+            expected = max(plain)
+            for seed in plain:
+                for extra in plain:
+                    if seed//2 + extra <= t:
+                        expected = max(expected, seed//2 + extra)
+        assert int(run('usaco-574', f'{t} {a} {b}\n')) == expected
+    # Also exercise the required feast.in/feast.out interface in isolation.
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder)
+        (path / 'feast.in').write_text('8 5 6\n')
+        subprocess.run([str(BUILD / 'usaco-574')], cwd=folder, check=True)
+        assert (path / 'feast.out').read_text() == '8\n'
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -928,6 +1007,8 @@ if __name__ == "__main__":
         verify_money_sums,
         verify_two_sets_ii,
         verify_values_you_can_make,
+        verify_glass_half_spilled,
+        verify_fruit_feast,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

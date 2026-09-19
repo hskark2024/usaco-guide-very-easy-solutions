@@ -55,6 +55,8 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1745` | CSES | [Money Sums](problems/cses-1745/README.md) | [Dynamic Programming, 0/1 Knapsack, Subset Sum] | [C++](solutions/cses-1745.cpp) | [Package](videos/easy/cses-1745/README.md) |
 | `cses-1093` | CSES | [Two Sets II](problems/cses-1093/README.md) | [DP, Knapsack] | [C++](solutions/cses-1093.cpp) | [Package](videos/easy/cses-1093/README.md) |
 | `cf-687C` | CF | [The Values You Can Make](problems/cf-687C/README.md) | [DP, Knapsack] | [C++](solutions/cf-687C.cpp) | [Package](videos/easy/cf-687C/README.md) |
+| `cf-1458B` | CF | [Glass Half Spilled](problems/cf-1458B/README.md) | [DP, 0/1 Knapsack] | [C++](solutions/cf-1458B.cpp) | [Package](videos/easy/cf-1458B/README.md) |
+| `usaco-574` | USACO Gold | [Fruit Feast](problems/usaco-574/README.md) | [DP, Knapsack, Reachability] | [C++](solutions/usaco-574.cpp) | [Package](videos/easy/usaco-574/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

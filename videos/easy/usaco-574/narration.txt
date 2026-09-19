@@ -1,0 +1,15 @@
+1. Fruit Feast gives Bessie unlimited fruit of two sizes. She must never pass fullness T, and once at most she may drink water, cutting her fullness in half and rounding down. The key is to remember whether that special move remains available.
+
+2. The same fullness number can mean two different situations. Before drinking, Bessie may still halve it. After drinking, she may not. One reachability array would merge those situations and could accidentally permit water twice, so we use two layers.
+
+3. The before-water layer begins with fullness zero. From every marked value, add fruit size A or fruit size B when the result stays at most T. We scan from small values upward. Because fruit only increases fullness, newly marked values appear later and can eat more fruit in this same pass.
+
+4. Every value x marked in the first layer offers the one legal water transition. We mark floor of x divided by two in the after-water layer. Seeding from every reachable x covers drinking early, late, or at zero. Odd values automatically round down with integer division.
+
+5. Now close the after-water layer under the same two fruit additions. There is no halving transition from this layer, which enforces the at-most-once rule. Another upward scan handles unlimited copies of each fruit without a nested loop over the number eaten.
+
+6. For T equals eight with fruit sizes five and six, the first layer reaches five and six. Drink at fullness five and it becomes two. Then eat the size-six fruit and finish at exactly eight. This shows why lowering fullness once can create room for a better combination.
+
+7. Drinking is optional, so the final answer scans both layers. Byte arrays are enough because each state is only reachable or unreachable; at T equals five million they use about ten megabytes total. The solution also supports the original feast dot in and feast dot out files, with standard input as a local-test fallback.
+
+8. An induction on legal moves shows the first layer contains exactly histories before water. The diagonal seeds represent every possible drink, and the second closure represents exactly the fruit eaten afterward. Tests compare against a graph search on states fullness and drank, cover rounding and equal fruits, exercise file input, and run the maximum limit.
