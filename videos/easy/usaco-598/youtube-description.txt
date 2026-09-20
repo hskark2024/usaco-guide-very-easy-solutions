@@ -1,0 +1,7 @@
+Turn two fixed walking routes into a weighted grid and use dynamic programming to schedule waits and simultaneous moves with minimum radio energy.
+
+Official problem: https://www.usaco.org/index.php?page=viewproblem2&cpid=598
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-598.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #usaco #dynamicprogramming #cplusplus

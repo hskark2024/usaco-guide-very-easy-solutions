@@ -1,0 +1,8 @@
+Longest Common Subsequence	Keep relative order	Skipping letters is allowed	ABCDE and ACE give 3
+Define prefix states	Rows are prefixes of string one	Columns are prefixes of string two	Each cell stores one best length
+Matching letters	Use both matching final letters	Read the diagonal shorter prefixes	Add one
+Different letters	They cannot both be the final match	Drop one side or the other	Take max of above and left
+Sample grid	A match starts at A	C extends the answer to 2	E extends it to 3
+Roll the rows	Only previous and current are needed	Put shorter string on columns	O(min(n,m)) memory
+Complexity and edges	O(nm) time	Empty prefixes stay zero	Repeated letters remain safe
+Why it is correct	Split on match versus mismatch	Every optimal ending is covered	Enumeration checks small strings

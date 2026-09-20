@@ -1,0 +1,8 @@
+Cow Checklist	Two breeds with fixed internal orders	Start at H1 and finish at HH	Minimize squared travel distance
+Choose the DP state	Count visited Holsteins i	Count visited Guernseys j	Remember the current breed
+Two endpoint layers	H layer stands at Hi	G layer stands at Gj	Location controls the next edge cost
+Four transitions	Visit next H from either layer	Visit next G from either layer	Breed orders stay valid
+Base and edge costs	Start at H1 with energy zero	Other states begin at infinity	Add dx squared plus dy squared
+Official sample	Interleave H1 G1 G2 H2 H3	Edge costs are 9 1 9 1	Minimum total is 20
+Finish and complexity	Accept only the final H layer	O(HG) states	Constant work per transition
+Why it is correct	Every next visit is H or G	Every legal interleaving is represented	Brute enumeration checks small herds

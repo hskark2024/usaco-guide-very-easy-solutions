@@ -1,0 +1,15 @@
+1. Cow Checklist gives us Holsteins and Guernseys in two required orders. Farmer John may weave the lists together, but he starts at the first Holstein, finishes at the last Holstein, and pays squared distance for every move.
+
+2. After part of the tour, three facts determine every future choice: the number of Holsteins already visited, the number of Guernseys already visited, and which breed supplied the current cow. That becomes our dynamic programming state.
+
+3. We store two values at each grid coordinate. End at H means we stand at the newest Holstein. End at G means we stand at the newest Guernsey. Keeping this last-breed layer is essential because the next travel distance depends on our exact location.
+
+4. From either layer, we may visit the next Holstein or the next Guernsey. The breed's number always increases by one, so every transition automatically keeps both checklist orders valid.
+
+5. Begin at state one Holstein, zero Guernseys, end at H, with energy zero. Every other state begins as infinity. Relax transitions by adding delta x squared plus delta y squared.
+
+6. In the sample, following all three Holsteins first would force an expensive trip to the Guernseys and back. The better interleaving is H one, G one, G two, H two, H three, for total energy twenty.
+
+7. The answer must come from the H-ending layer after every cow is visited. A cheaper G-ending path is illegal because Farmer John is required to finish at the last Holstein. The table has H times G states and constant work per layer.
+
+8. Correctness follows because the final visit of any partial tour is either the next Holstein or next Guernsey, and we try both from both endpoint types. Tests enumerate every valid small interleaving, check the official sample, repeated points, and maximum herd sizes.

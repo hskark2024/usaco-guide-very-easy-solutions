@@ -1,0 +1,7 @@
+Learn the classic longest common subsequence recurrence, see the DP grid fill, and reduce the table to two rows in heavily commented C++17.
+
+Official problem: https://leetcode.com/problems/longest-common-subsequence/
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/lc-LongestCommonSubsequence.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #leetcode #dynamicprogramming #cplusplus

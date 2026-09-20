@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-09-19 (the current published Guide source and its Paths on Grids problem data were checked directly)
+- Last listing check: 2026-09-20 (the current published Guide source and its Paths on Grids problem data were checked directly)
 - Listing snapshot: USACO Guide source commit [`ecd27b6`](https://github.com/cpinitiative/usaco-guide/commit/ecd27b6eff69112891eabf0c968d3ad0b2a7f745) (423 unique module-listed Easy IDs; Paths on Grids entries checked)
-- Completed Easy solutions: 41
-- Complete video packages: 41
+- Completed Easy solutions: 44
+- Complete video packages: 44
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -52,6 +52,18 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cses-1638` | Grid Paths I | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1746` | Array Description | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1639` | Edit Distance | complete | complete | complete | generated locally; excluded from Git |
+| `lc-LongestCommonSubsequence` | Longest Common Subsequence | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-670` | Cow Checklist | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-598` | Radio Contact | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-09-20
+
+- New entries: `lc-LongestCommonSubsequence` Longest Common Subsequence, `usaco-670` Cow Checklist, and `usaco-598` Radio Contact.
+- All 75 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 76 smoke cases and all 41 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; stream/frame QA passed. Durations: 109.5, 116.8, and 104.1 seconds. Media files are intentionally excluded from GitHub.
+- YouTube uploads are pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Paths on Grids has one unsolved entry (`usaco-718`); Easy remains in progress.
 
 ## Batch verification — 2026-09-19
 

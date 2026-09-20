@@ -1,0 +1,15 @@
+1. In Radio Contact, Farmer John and Bessie each follow a fixed route, but they choose the timing. During one time step, Farmer can move, Bessie can move, or both can move. After the step, radio energy equals their squared distance.
+
+2. First, simulate each route once and save every position, including the start. Position F of i tells us where Farmer is after i moves. Position B of j does the same for Bessie.
+
+3. Now draw a progress grid. State i comma j means Farmer completed i moves and Bessie completed j. Reaching the bottom-right means both fixed routes are finished.
+
+4. Every state has at most three incoming edges. From i minus one comma j, only Farmer moved. From i comma j minus one, only Bessie moved. From the diagonal, both moved together.
+
+5. All three arrivals end at the same pair of positions, so they add the same current squared distance. We take the cheapest predecessor and then add delta x squared plus delta y squared.
+
+6. The starting state costs zero because the problem excludes the initial instant. Every other state is the end of one time step and pays exactly once. This detail prevents an extra charge before anyone moves.
+
+7. For the sample routes, moving at the same speed is not always best. Strategic waiting keeps the two searchers closer, and the DP chooses a path through the progress grid whose total energy is twenty-eight.
+
+8. There are N times M grid cells and three constant-time choices per cell. Rolling two rows gives O of N M time and O of M memory. Exhaustive schedule tests cover all move combinations on short paths, plus maximum lengths and file input.

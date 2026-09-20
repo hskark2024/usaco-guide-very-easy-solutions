@@ -1103,6 +1103,198 @@ def verify_edit_distance() -> None:
     assert int(run('cses-1639', f'{first}\n{second}\n')) == 1
 
 
+def verify_longest_common_subsequence() -> None:
+    def is_subsequence(candidate, text):
+        position = 0
+        for character in text:
+            if position < len(candidate) and candidate[position] == character:
+                position += 1
+        return position == len(candidate)
+
+    def enumerate_subsequences(first, second):
+        # Enumerate selections from the shorter input directly.  This oracle
+        # does not reuse the solution's prefix-grid recurrence.
+        if len(first) > len(second):
+            first, second = second, first
+        best = 0
+        for mask in range(1 << len(first)):
+            candidate = ''.join(
+                character for index, character in enumerate(first)
+                if mask & (1 << index)
+            )
+            if len(candidate) > best and is_subsequence(candidate, second):
+                best = len(candidate)
+        return best
+
+    known_cases = [
+        ('abcde', 'ace', 3),
+        ('abc', 'abc', 3),
+        ('abc', 'def', 0),
+        ('aaaa', 'aa', 2),
+        ('a', 'z', 0),
+    ]
+    for first, second, expected in known_cases:
+        assert int(run('lc-LongestCommonSubsequence', f'{first}\n{second}\n')) == expected
+        assert int(run('lc-LongestCommonSubsequence', f'{second}\n{first}\n')) == expected
+
+    alphabet = 'abcd'
+    for _ in range(260):
+        first = ''.join(RNG.choice(alphabet) for _ in range(RNG.randint(1, 10)))
+        second = ''.join(RNG.choice(alphabet) for _ in range(RNG.randint(1, 10)))
+        expected = enumerate_subsequences(first, second)
+        assert int(run('lc-LongestCommonSubsequence', f'{first}\n{second}\n')) == expected
+
+    # Both official dimensions at their maximum exercise one million cells.
+    first = 'a' * 500 + 'b' * 500
+    second = 'a' * 500 + 'c' * 500
+    assert int(run('lc-LongestCommonSubsequence', f'{first}\n{second}\n')) == 500
+
+
+def verify_cow_checklist() -> None:
+    def distance(first, second):
+        return (first[0] - second[0]) ** 2 + (first[1] - second[1]) ** 2
+
+    def enumerate_interleavings(holsteins, guernseys):
+        if len(holsteins) == 1:
+            route = holsteins + guernseys + holsteins
+            return sum(distance(left, right) for left, right in zip(route, route[1:]))
+
+        # Choose the G positions among all middle visits.  H1 and HH are fixed
+        # at the ends, while both breed orders are then forced automatically.
+        middle_length = len(holsteins) + len(guernseys) - 2
+        best = None
+        for g_positions in combinations(range(middle_length), len(guernseys)):
+            g_positions = set(g_positions)
+            route = [holsteins[0]]
+            next_h = 1
+            next_g = 0
+            for position in range(middle_length):
+                if position in g_positions:
+                    route.append(guernseys[next_g])
+                    next_g += 1
+                else:
+                    route.append(holsteins[next_h])
+                    next_h += 1
+            route.append(holsteins[-1])
+            energy = sum(distance(left, right) for left, right in zip(route, route[1:]))
+            best = energy if best is None else min(best, energy)
+        return best
+
+    cases = [
+        ([(0, 0)], [(3, 4)]),
+        ([(0, 0), (2, 0)], [(1, 0)]),
+        ([(0, 0), (0, 0)], [(0, 0), (0, 0)]),
+        ([(0, 0), (1, 0), (2, 0)], [(0, 3), (1, 3)]),
+    ]
+    for _ in range(220):
+        h = RNG.randint(1, 6)
+        g = RNG.randint(1, 5)
+        holsteins = [(RNG.randint(0, 8), RNG.randint(0, 8)) for _ in range(h)]
+        guernseys = [(RNG.randint(0, 8), RNG.randint(0, 8)) for _ in range(g)]
+        cases.append((holsteins, guernseys))
+
+    for holsteins, guernseys in cases:
+        expected = enumerate_interleavings(holsteins, guernseys)
+        input_text = (
+            f'{len(holsteins)} {len(guernseys)}\n'
+            + ''.join(f'{x} {y}\n' for x, y in holsteins)
+            + ''.join(f'{x} {y}\n' for x, y in guernseys)
+        )
+        assert int(run('usaco-670', input_text)) == expected
+
+    # Maximum dimensions with coincident coordinates exercise the full table.
+    points = '0 0\n' * 2000
+    assert int(run('usaco-670', f'1000 1000\n{points}')) == 0
+
+    # Exercise the original file interface in a clean temporary directory.
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder)
+        (path / 'checklist.in').write_text(
+            '3 2\n0 0\n1 0\n2 0\n0 3\n1 3\n'
+        )
+        subprocess.run([str(BUILD / 'usaco-670')], cwd=folder, check=True)
+        assert (path / 'checklist.out').read_text() == '20\n'
+
+
+def verify_radio_contact() -> None:
+    deltas = {'N': (0, 1), 'S': (0, -1), 'E': (1, 0), 'W': (-1, 0)}
+
+    def positions(start, path):
+        result = [start]
+        x, y = start
+        for move in path:
+            dx, dy = deltas[move]
+            x += dx
+            y += dy
+            result.append((x, y))
+        return result
+
+    def enumerate_schedules(farmer_start, bessie_start, farmer_path, bessie_path):
+        farmer = positions(farmer_start, farmer_path)
+        bessie = positions(bessie_start, bessie_path)
+        best = None
+
+        # This recursively lists actual timing schedules.  It is exponential
+        # and therefore independent from the polynomial rolling DP program.
+        def search(i, j, energy):
+            nonlocal best
+            if best is not None and energy >= best:
+                return
+            if i == len(farmer_path) and j == len(bessie_path):
+                best = energy if best is None else min(best, energy)
+                return
+            for move_farmer, move_bessie in ((1, 0), (0, 1), (1, 1)):
+                ni, nj = i + move_farmer, j + move_bessie
+                if ni > len(farmer_path) or nj > len(bessie_path):
+                    continue
+                dx = farmer[ni][0] - bessie[nj][0]
+                dy = farmer[ni][1] - bessie[nj][1]
+                search(ni, nj, energy + dx * dx + dy * dy)
+
+        search(0, 0, 0)
+        return best
+
+    cases = [
+        ((0, 0), (0, 0), 'N', 'N'),
+        ((0, 0), (2, 0), 'E', 'W'),
+        ((3, 0), (5, 0), 'NN', 'NWWWWWN'),
+        ((4, 4), (0, 0), 'SW', 'NE'),
+    ]
+    moves = 'NSEW'
+    for _ in range(180):
+        farmer_path = ''.join(RNG.choice(moves) for _ in range(RNG.randint(1, 5)))
+        bessie_path = ''.join(RNG.choice(moves) for _ in range(RNG.randint(1, 5)))
+        cases.append((
+            (RNG.randint(-5, 5), RNG.randint(-5, 5)),
+            (RNG.randint(-5, 5), RNG.randint(-5, 5)),
+            farmer_path,
+            bessie_path,
+        ))
+
+    for farmer_start, bessie_start, farmer_path, bessie_path in cases:
+        expected = enumerate_schedules(
+            farmer_start, bessie_start, farmer_path, bessie_path
+        )
+        input_text = (
+            f'{len(farmer_path)} {len(bessie_path)}\n'
+            f'{farmer_start[0]} {farmer_start[1]}\n'
+            f'{bessie_start[0]} {bessie_start[1]}\n'
+            f'{farmer_path}\n{bessie_path}\n'
+        )
+        assert int(run('usaco-598', input_text)) == expected
+
+    # Maximum lengths: they start together and follow the same route, so all
+    # diagonal steps cost zero while still filling the full million-cell grid.
+    path = 'E' * 1000
+    assert int(run('usaco-598', f'1000 1000\n0 0\n0 0\n{path}\n{path}\n')) == 0
+
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder)
+        (path / 'radio.in').write_text('2 7\n3 0\n5 0\nNN\nNWWWWWN\n')
+        subprocess.run([str(BUILD / 'usaco-598')], cwd=folder, check=True)
+        assert (path / 'radio.out').read_text() == '28\n'
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -1143,6 +1335,9 @@ if __name__ == "__main__":
         verify_grid_paths,
         verify_array_description,
         verify_edit_distance,
+        verify_longest_common_subsequence,
+        verify_cow_checklist,
+        verify_radio_contact,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

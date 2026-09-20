@@ -1,0 +1,7 @@
+Learn how a two-layer grid DP finds the cheapest interleaving of Holstein and Guernsey visits while preserving both required orders.
+
+Official problem: https://www.usaco.org/index.php?page=viewproblem2&cpid=670
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-670.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #usaco #dynamicprogramming #cplusplus

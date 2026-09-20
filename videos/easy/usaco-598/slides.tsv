@@ -1,0 +1,8 @@
+Radio Contact	Two fixed routes	Flexible timing	Minimize squared-distance energy
+Precompute positions	Save each starting point	Apply every route move once	F[i] and B[j] answer locations
+The progress grid	State i j means completed steps	Start at 0 0	Finish at N M
+Three possible moves	Only Farmer advances	Only Bessie advances	Both advance together
+The DP transition	Take the cheapest predecessor	Add current dx² plus dy²	Store the best total
+Do not charge the start	dp[0][0] is zero	Charge after each real time step	Every step counted exactly once
+Official sample	Waiting can keep them closer	DP chooses the best schedule	Minimum energy is 28
+Complexity and proof	O(NM) time and O(M) DP memory	Classify the final move	Exhaustive schedules verify it

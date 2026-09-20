@@ -1,0 +1,15 @@
+1. Longest Common Subsequence asks for the longest character sequence that appears in two strings in the same order. We may skip letters, but we may never rearrange them. For A B C D E and A C E, the answer is three.
+
+2. Prefixes make the choices manageable. Imagine a grid where row i uses the first i letters of the first string, and column j uses the first j letters of the second. Each cell stores the best answer for exactly those prefixes.
+
+3. When the two newest letters match, we can place that shared letter after an answer for the two shorter prefixes. So the current value is the diagonal upper-left value plus one.
+
+4. When the newest letters differ, they cannot both be the final letter of one common subsequence. We try ignoring the first string's newest letter or ignoring the second string's newest letter, then keep the larger answer from above or left.
+
+5. For A B C D E and A C E, matching A creates one. The C match extends that to two, and the E match extends it to three. Other cells carry the best value across mismatches.
+
+6. The full grid explains the idea, but the next row only reads the previous row and its own left neighbor. We keep two rows and place the shorter string across the columns, using O of the shorter length memory.
+
+7. The nested loops visit n times m cells, so time is O of n m. Empty prefixes stay zero. Repeated letters are safe because each cell represents fixed prefixes, not a greedy choice of positions.
+
+8. Correctness follows from the final pair of letters: a match extends the diagonal, while a mismatch must drop at least one side. Tests enumerate actual subsequences for small random strings and also check identical, disjoint, repeated, and maximum-length inputs.

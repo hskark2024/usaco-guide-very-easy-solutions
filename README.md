@@ -60,6 +60,9 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1638` | CSES | [Grid Paths I](problems/cses-1638/README.md) | [DP, Grids] | [C++](solutions/cses-1638.cpp) | [Package](videos/easy/cses-1638/README.md) |
 | `cses-1746` | CSES | [Array Description](problems/cses-1746/README.md) | [DP, Sequences] | [C++](solutions/cses-1746.cpp) | [Package](videos/easy/cses-1746/README.md) |
 | `cses-1639` | CSES | [Edit Distance](problems/cses-1639/README.md) | [DP, Strings] | [C++](solutions/cses-1639.cpp) | [Package](videos/easy/cses-1639/README.md) |
+| `lc-LongestCommonSubsequence` | LeetCode | [Longest Common Subsequence](problems/lc-LongestCommonSubsequence/README.md) | [DP, Strings] | [C++](solutions/lc-LongestCommonSubsequence.cpp) | [Package](videos/easy/lc-LongestCommonSubsequence/README.md) |
+| `usaco-670` | USACO Gold | [Cow Checklist](problems/usaco-670/README.md) | [DP, Grid Paths, Interleaving] | [C++](solutions/usaco-670.cpp) | [Package](videos/easy/usaco-670/README.md) |
+| `usaco-598` | USACO Gold | [Radio Contact](problems/usaco-598/README.md) | [DP, Grid Paths] | [C++](solutions/usaco-598.cpp) | [Package](videos/easy/usaco-598/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 
