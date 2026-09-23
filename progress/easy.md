@@ -66,6 +66,7 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 - All 78 C++ solutions compiled with C++17, optimization, and warnings enabled.
 - All 79 smoke cases and all 44 independent Easy verifier groups passed.
 - Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and frame QA passed. Durations: 99.3 seconds (`usaco-718`), 97.0 seconds (`cses-1145`), and 95.4 seconds (`cses-1073`). Media files are intentionally excluded from GitHub.
+- Source, notes, tests, and text video assets were uploaded to `origin/main`; MP4 and AIFF files remain local only.
 - YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
 - Easy Paths on Grids is complete. Easy LIS has one remaining listed entry (`cf-977F`), so Easy remains in progress.
 
