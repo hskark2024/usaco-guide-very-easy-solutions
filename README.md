@@ -63,6 +63,9 @@ The official statements remain at their original judge links. These notes intent
 | `lc-LongestCommonSubsequence` | LeetCode | [Longest Common Subsequence](problems/lc-LongestCommonSubsequence/README.md) | [DP, Strings] | [C++](solutions/lc-LongestCommonSubsequence.cpp) | [Package](videos/easy/lc-LongestCommonSubsequence/README.md) |
 | `usaco-670` | USACO Gold | [Cow Checklist](problems/usaco-670/README.md) | [DP, Grid Paths, Interleaving] | [C++](solutions/usaco-670.cpp) | [Package](videos/easy/usaco-670/README.md) |
 | `usaco-598` | USACO Gold | [Radio Contact](problems/usaco-598/README.md) | [DP, Grid Paths] | [C++](solutions/usaco-598.cpp) | [Package](videos/easy/usaco-598/README.md) |
+| `usaco-718` | USACO Gold | [Why Did the Cow Cross the Road II](problems/usaco-718/README.md) | [DP, Grid Paths, LCS] | [C++](solutions/usaco-718.cpp) | [Package](videos/easy/usaco-718/README.md) |
+| `cses-1145` | CSES | [Increasing Subsequence](problems/cses-1145/README.md) | [LIS, Binary Search] | [C++](solutions/cses-1145.cpp) | [Package](videos/easy/cses-1145/README.md) |
+| `cses-1073` | CSES | [Towers](problems/cses-1073/README.md) | [Greedy, Binary Search] | [C++](solutions/cses-1073.cpp) | [Package](videos/easy/cses-1073/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

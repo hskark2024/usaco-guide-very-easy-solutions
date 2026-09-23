@@ -1,0 +1,15 @@
+1. In CSES Towers, cubes arrive one at a time. A cube may sit on a tower only when the cube below it is strictly larger. Our job is to finish with as few towers as possible.
+
+2. We do not need to remember every cube in every tower. Only the exposed top matters, because that is the only cube the next arrival can touch.
+
+3. Keep those exposed tops in sorted order. When cube x arrives, search for the first top strictly greater than x. That is the smallest tower that can legally accept the cube.
+
+4. Replace that top with x. This greedy choice is safe: using a larger legal top would waste a more flexible tower, while the smallest legal top already does the job.
+
+5. If no exposed top is greater than x, no existing tower can accept it. Starting a new tower is not just convenient; every possible solution is forced to do it.
+
+6. For the sample cubes three, eight, two, one, five, the sorted top list changes step by step. The first two cubes start towers, then smaller cubes replace legal tops, and the answer stays two.
+
+7. Equal sizes reveal an important detail. The rule is strict, so an equal top is not legal. In C plus plus, that means upper bound, which skips equal values, instead of lower bound.
+
+8. Each binary search takes logarithmic time, and there are N cubes, for O of N log N time and O of N space. Exhaustive tests try every legal placement on short inputs to confirm the greedy result.

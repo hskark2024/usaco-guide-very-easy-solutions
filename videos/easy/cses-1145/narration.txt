@@ -1,0 +1,15 @@
+1. In CSES Increasing Subsequence, we keep some numbers in their original order. Every kept number must be strictly larger than the previous one, and we want the greatest possible length.
+
+2. A simple N squared dynamic program checks every earlier number. We can do better by remembering one powerful summary: the smallest ending value found for every achievable subsequence length.
+
+3. Call this sorted list tails. A smaller ending value is always at least as helpful, because more future numbers can extend it. We do not need to keep worse endings for the same length.
+
+4. When value x arrives, binary-search for the first tail greater than or equal to x. Replace it with x. The represented length stays the same, but its ending becomes no larger.
+
+5. If x is larger than every stored tail, it extends the longest known increasing subsequence. Append x, and the number of achievable lengths grows by one.
+
+6. For the sample seven, three, five, three, six, two, nine, eight, the tails list keeps improving. Its final size is four, matching subsequences such as three, five, six, eight.
+
+7. Duplicates must not extend a strict subsequence. Lower bound finds the first tail at least x, so an equal value replaces a tail instead of adding a new length.
+
+8. We perform N binary searches, giving O of N log N time and O of N space. A brute-force verifier enumerates every subsequence on short arrays and checks the answer directly.

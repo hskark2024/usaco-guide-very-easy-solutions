@@ -1,0 +1,8 @@
+Increasing Subsequence	Keep values in original order	Every next value must be larger	Maximize the kept length
+Compress the DP	Track one best ending per length	Smaller ending is more flexible	Discard worse endings
+The tails list	tails[k] is the smallest end for length k+1	Values stay sorted	Size is the current best length
+Process value x	Find first tail at least x	Replace it with x	Use lower_bound
+Grow the answer	If every tail is smaller	Append x	A longer subsequence now exists
+Sample walkthrough	7 3 5 3 6 2 9 8	Tails improve after each value	Final length is 4
+Duplicates stay strict	Equal values cannot extend	lower_bound finds equals	Replace instead of append
+Complexity and proof	O(N log N) time and O(N) space	Best tail invariant	All short subsequences verified

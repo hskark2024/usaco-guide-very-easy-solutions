@@ -1,0 +1,15 @@
+1. In Why Did the Cow Cross the Road Two, two rows of fields sit across a road. We want as many crosswalks as possible. A pair is friendly when its breed numbers differ by at most four, and crosswalks cannot cross.
+
+2. Number the positions on both sides from top to bottom. If one crosswalk uses positions i and j, every crosswalk below it must use a larger position on both sides. That shared ordering is the key.
+
+3. Draw a grid of prefixes. State i comma j means we only consider the first i fields on the left and first j fields on the right. The answer lives in the bottom-right corner.
+
+4. We have two skip choices. Ignore the newest left field and copy the value from above, or ignore the newest right field and copy the value from the left.
+
+5. If the two newest breed IDs differ by at most four, we may connect them. The diagonal predecessor used neither endpoint, so adding this crosswalk keeps endpoints unique and cannot create an intersection.
+
+6. Take the maximum of the two skip choices and the friendly diagonal choice. This is longest common subsequence with a flexible match rule instead of exact equality.
+
+7. In the sample, the two orderings run in opposite directions. Exact matching would allow only one pair, but the friendly distance rule lets the dynamic program safely choose five noncrossing crosswalks.
+
+8. The grid has N squared states and constant work in each state. Rolling two rows uses O of N memory. Exhaustive tests list every legal increasing matching for small permutations and also check the USACO file interface.

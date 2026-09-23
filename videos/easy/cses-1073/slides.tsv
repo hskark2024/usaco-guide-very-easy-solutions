@@ -1,0 +1,8 @@
+CSES Towers	Cubes arrive in fixed order	A lower cube must be strictly larger	Minimize the number of towers
+Remember only tower tops	Buried cubes never matter again	Each exposed top is one future option	Keep the tops sorted
+Find a legal tower	For cube x search for top greater than x	Choose the smallest legal top	Use upper_bound
+Why smallest is safest	It accepts x right now	Larger tops remain available	Future choices only improve
+When a new tower is forced	No top is greater than x	No existing placement is legal	Append x
+Sample walkthrough	Cubes 3 8 2 1 5	Replace the first greater top	Final answer is 2
+Strict means upper bound	Equal top cannot accept x	upper_bound skips equal values	lower_bound would be wrong
+Complexity and proof	O(N log N) time and O(N) space	Exchange the chosen legal top	Exhaustive placements verify it

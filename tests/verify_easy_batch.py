@@ -1295,6 +1295,148 @@ def verify_radio_contact() -> None:
         assert (path / 'radio.out').read_text() == '28\n'
 
 
+def verify_no_cross() -> None:
+    def enumerate_upper_subsequences(upper, lower):
+        # This oracle explicitly lists every subsequence chosen on the upper
+        # side.  For one fixed choice, greedily taking the earliest compatible
+        # lower endpoint decides whether a noncrossing matching exists.  It is
+        # intentionally different from the solution's prefix-grid recurrence.
+        best = 0
+        for mask in range(1 << len(upper)):
+            chosen = [
+                upper[index]
+                for index in range(len(upper))
+                if mask & (1 << index)
+            ]
+            lower_index = 0
+            for breed in chosen:
+                while (
+                    lower_index < len(lower)
+                    and abs(breed - lower[lower_index]) > 4
+                ):
+                    lower_index += 1
+                if lower_index == len(lower):
+                    break
+                lower_index += 1
+            else:
+                best = max(best, len(chosen))
+        return best
+
+    cases = [
+        ([1], [1]),
+        ([1], [6]),
+        ([1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1]),
+        ([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]),
+    ]
+    for size in range(1, 9):
+        base = list(range(1, size + 1))
+        for _ in range(35):
+            upper = RNG.sample(base, size)
+            lower = RNG.sample(base, size)
+            cases.append((upper, lower))
+
+    for upper, lower in cases:
+        expected = enumerate_upper_subsequences(upper, lower)
+        input_text = (
+            f'{len(upper)}\n'
+            + ''.join(f'{value}\n' for value in upper)
+            + ''.join(f'{value}\n' for value in lower)
+        )
+        assert int(run('usaco-718', input_text)) == expected
+
+    # The maximum-size identical ordering must match every endpoint while
+    # forcing the implementation to fill the complete million-state grid.
+    ordering = ''.join(f'{value}\n' for value in range(1, 1001))
+    assert int(run('usaco-718', f'1000\n{ordering}{ordering}')) == 1000
+
+    # Exercise the historical USACO file interface in an isolated directory.
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder)
+        (path / 'nocross.in').write_text(
+            '6\n1\n2\n3\n4\n5\n6\n6\n5\n4\n3\n2\n1\n'
+        )
+        subprocess.run([str(BUILD / 'usaco-718')], cwd=folder, check=True)
+        assert (path / 'nocross.out').read_text() == '5\n'
+
+
+def verify_increasing_subsequence() -> None:
+    def enumerate_subsequences(values):
+        # Enumerating every mask is practical only for tiny arrays, but it is
+        # a direct definition-based oracle for the strictly increasing rule.
+        best = 0
+        for mask in range(1 << len(values)):
+            chosen = [
+                value for index, value in enumerate(values)
+                if mask & (1 << index)
+            ]
+            if all(left < right for left, right in zip(chosen, chosen[1:])):
+                best = max(best, len(chosen))
+        return best
+
+    cases = [
+        [7, 3, 5, 3, 6, 2, 9, 8],
+        [1],
+        [4, 4, 4, 4],
+        [5, 4, 3, 2, 1],
+        [1, 2, 3, 4, 5],
+    ]
+    for _ in range(260):
+        cases.append([RNG.randint(-8, 8) for _ in range(RNG.randint(1, 12))])
+
+    for values in cases:
+        expected = enumerate_subsequences(values)
+        input_text = f'{len(values)}\n' + ' '.join(map(str, values)) + '\n'
+        assert int(run('cses-1145', input_text)) == expected
+
+    increasing = list(range(200000))
+    input_text = '200000\n' + ' '.join(map(str, increasing)) + '\n'
+    assert int(run('cses-1145', input_text)) == 200000
+
+
+def verify_towers() -> None:
+    @lru_cache(maxsize=None)
+    def minimum_tower_count(remaining, tops):
+        # Towers are interchangeable, so sorting their exposed tops collapses
+        # symmetric states while still trying every legal placement.
+        if not remaining:
+            return len(tops)
+        cube = remaining[0]
+        answers = []
+        tried_top_values = set()
+        for index, top in enumerate(tops):
+            if top > cube and top not in tried_top_values:
+                tried_top_values.add(top)
+                changed = list(tops)
+                changed[index] = cube
+                answers.append(
+                    minimum_tower_count(remaining[1:], tuple(sorted(changed)))
+                )
+        answers.append(
+            minimum_tower_count(remaining[1:], tuple(sorted(tops + (cube,))))
+        )
+        return min(answers)
+
+    cases = [
+        [3, 8, 2, 1, 5],
+        [1],
+        [4, 4, 4, 4],
+        [1, 2, 3, 4, 5],
+        [5, 4, 3, 2, 1],
+    ]
+    for _ in range(220):
+        cases.append([RNG.randint(1, 8) for _ in range(RNG.randint(1, 9))])
+
+    for cubes in cases:
+        minimum_tower_count.cache_clear()
+        expected = minimum_tower_count(tuple(cubes), tuple())
+        input_text = f'{len(cubes)}\n' + ' '.join(map(str, cubes)) + '\n'
+        assert int(run('cses-1073', input_text)) == expected
+
+    # Equal cubes cannot share a tower, so this also stresses maximum input.
+    input_text = '200000\n' + ' '.join(['7'] * 200000) + '\n'
+    assert int(run('cses-1073', input_text)) == 200000
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -1338,6 +1480,9 @@ if __name__ == "__main__":
         verify_longest_common_subsequence,
         verify_cow_checklist,
         verify_radio_contact,
+        verify_no_cross,
+        verify_increasing_subsequence,
+        verify_towers,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

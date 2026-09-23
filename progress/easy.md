@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-09-20 (the current published Guide source and its Paths on Grids problem data were checked directly)
-- Listing snapshot: USACO Guide source commit [`ecd27b6`](https://github.com/cpinitiative/usaco-guide/commit/ecd27b6eff69112891eabf0c968d3ad0b2a7f745) (423 unique module-listed Easy IDs; Paths on Grids entries checked)
-- Completed Easy solutions: 44
-- Complete video packages: 44
+- Last listing check: 2026-09-22 (the live Guide source and the Paths on Grids and LIS problem data were checked directly)
+- Listing snapshot: USACO Guide source commit [`ecd27b6`](https://github.com/cpinitiative/usaco-guide/commit/ecd27b6eff69112891eabf0c968d3ad0b2a7f745) (423 unique module-listed Easy IDs; selected module entries checked)
+- Completed Easy solutions: 47
+- Complete video packages: 47
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -55,6 +55,19 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `lc-LongestCommonSubsequence` | Longest Common Subsequence | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-670` | Cow Checklist | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-598` | Radio Contact | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-718` | Why Did the Cow Cross the Road II | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1145` | Increasing Subsequence | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1073` | Towers | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-09-22
+
+- New entries: `usaco-718` Why Did the Cow Cross the Road II, `cses-1145` Increasing Subsequence, and `cses-1073` Towers.
+- The live USACO Guide source remains at commit `ecd27b6`; all three selected entries are currently labeled Easy.
+- All 78 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 79 smoke cases and all 44 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and frame QA passed. Durations: 99.3 seconds (`usaco-718`), 97.0 seconds (`cses-1145`), and 95.4 seconds (`cses-1073`). Media files are intentionally excluded from GitHub.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Paths on Grids is complete. Easy LIS has one remaining listed entry (`cf-977F`), so Easy remains in progress.
 
 ## Batch verification — 2026-09-20
 

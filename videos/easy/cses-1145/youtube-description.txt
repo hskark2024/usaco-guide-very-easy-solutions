@@ -1,0 +1,7 @@
+Build the longest strictly increasing subsequence length with a sorted tails array and one binary search per value.
+
+Official problem: https://cses.fi/problemset/task/1145
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-1145.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #cses #dynamicprogramming #binarysearch #cplusplus

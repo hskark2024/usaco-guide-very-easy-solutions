@@ -1,0 +1,8 @@
+No-Cross Crosswalks	Friendly when IDs differ by at most four	Each endpoint used once	Lines may not intersect
+Order prevents crossing	A chosen pair has indices i and j	Later pairs need both larger indices	Think in two ordered prefixes
+The prefix grid	State i j uses first i and first j fields	Start with empty prefixes	Answer at N N
+Two skip transitions	Skip the newest left field	Or skip the newest right field	Preserve the best earlier matching
+One diagonal transition	Only when the pair is friendly	Add one to i-1 j-1	New line cannot cross earlier lines
+Tolerant LCS	Maximum of up left and diagonal	Match means distance at most four	Roll two rows
+Official sample	Opposite orderings	Friendly matches add flexibility	Maximum is five
+Complexity and proof	O(N²) time and O(N) space	Classify the newest endpoints	Exhaustive small matchings verify it
