@@ -1,0 +1,7 @@
+Turn edge deletion into minimum clique partition, precompute clique masks, and solve the graph with subset DP.
+
+Official problem: https://atcoder.jp/contests/abc187/tasks/abc187_f
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ac-CloseGroup.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #atcoder #bitmaskdp #clique #cplusplus

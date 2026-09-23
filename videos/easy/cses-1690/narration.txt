@@ -1,0 +1,15 @@
+1. In CSES Hamiltonian Flights, we start at city one, finish at city N, and visit every city exactly once. We count all directed routes, so a simple visited array is not enough.
+
+2. N is at most twenty. That is a clue to represent the visited set with a bitmask. Bit i is one exactly when city i has already been visited.
+
+3. Our state is D P of mask and last. It counts routes that start at city one, visit exactly the mask, and currently finish at last.
+
+4. To compute a state, remove last from the mask. Then try every previous city in the smaller mask that has a directed flight into last. Add its route count.
+
+5. Every route has exactly one final flight, so these transitions neither miss nor double-count a route. We take every addition modulo one billion and seven.
+
+6. In the four-city sample, the middle cities can be visited as two then three, or three then two. Both orders have all needed flights, so the answer is two.
+
+7. Two prunings matter. Every mask must include city one, and city N cannot appear before the full mask because it must be the final city.
+
+8. There are N times two-to-the-N states, and each may inspect up to N predecessors. That gives O of N squared times two-to-the-N time and O of N times two-to-the-N space.

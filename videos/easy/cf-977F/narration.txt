@@ -1,0 +1,15 @@
+1. In Codeforces Consecutive Subsequence, we keep array positions in their original order. Each chosen value must be exactly one larger than the previous value. We need the greatest possible length and the chosen indices.
+
+2. Ordinary longest increasing subsequence allows many possible previous values. Here the rule is stricter and simpler. If the current value is x, its only possible predecessor value is x minus one.
+
+3. Keep a hash-map entry for every ending value. It stores the length of the best chain ending there and the array index of that chain's final element.
+
+4. When x arrives, look up x minus one. If that entry exists, append x and add one to its length. Otherwise, x begins a new chain of length one.
+
+5. Also save a parent pointer from the current index to the predecessor index. After processing the array, start at the best final index, follow parents backward, and reverse the result.
+
+6. For three, three, four, seven, five, six, eight, a chain grows from a three to four, five, and six. The unused seven and eight do not break anything because a subsequence may skip positions.
+
+7. Duplicate values are safe. We keep only the best chain ending at each value. The stored final index is earlier than any future element, so it remains ready to extend.
+
+8. Hash-map operations take expected constant time, so the whole algorithm takes expected O of N time and O of N space. Exhaustive tests check every subsequence on small arrays and validate every reported index.

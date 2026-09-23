@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-09-22 (the live Guide source and the Paths on Grids and LIS problem data were checked directly)
+- Last listing check: 2026-09-23 (the live Guide source and the LIS and Bitmask DP problem data were checked directly)
 - Listing snapshot: USACO Guide source commit [`ecd27b6`](https://github.com/cpinitiative/usaco-guide/commit/ecd27b6eff69112891eabf0c968d3ad0b2a7f745) (423 unique module-listed Easy IDs; selected module entries checked)
-- Completed Easy solutions: 47
-- Complete video packages: 47
+- Completed Easy solutions: 50
+- Complete video packages: 50
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -58,6 +58,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-718` | Why Did the Cow Cross the Road II | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1145` | Increasing Subsequence | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1073` | Towers | complete | complete | complete | generated locally; excluded from Git |
+| `cf-977F` | Consecutive Subsequence | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1690` | Hamiltonian Flights | complete | complete | complete | generated locally; excluded from Git |
+| `ac-CloseGroup` | Close Group | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-09-23
+
+- New entries: `cf-977F` Consecutive Subsequence, `cses-1690` Hamiltonian Flights, and `ac-CloseGroup` Close Group.
+- The live USACO Guide source remains at commit `ecd27b6`; all three selected entries are currently labeled Easy.
+- All 81 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 82 smoke cases and all 47 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and frame QA passed. Durations: 101.0 seconds (`cf-977F`), 83.7 seconds (`cses-1690`), and 85.1 seconds (`ac-CloseGroup`). Media files are intentionally excluded from GitHub.
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy LIS is complete. Easy Bitmask DP has five remaining listed entries, so Easy remains in progress.
 
 ## Batch verification — 2026-09-22
 

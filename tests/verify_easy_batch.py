@@ -1437,6 +1437,161 @@ def verify_towers() -> None:
     assert int(run('cses-1073', input_text)) == 200000
 
 
+def verify_consecutive_subsequence() -> None:
+    def brute_best_length(values):
+        best = 0
+        for mask in range(1, 1 << len(values)):
+            chosen = [
+                values[index]
+                for index in range(len(values))
+                if mask & (1 << index)
+            ]
+            if all(right == left + 1 for left, right in zip(chosen, chosen[1:])):
+                best = max(best, len(chosen))
+        return best
+
+    cases = [
+        [3, 3, 4, 7, 5, 6, 8],
+        [1],
+        [5, 5, 5, 5],
+        [10, 9, 8, 7],
+        [1, 2, 3, 4, 5],
+        [5, 5, 6, 6, 7],
+    ]
+    for _ in range(260):
+        cases.append([
+            RNG.randint(1, 12) for _ in range(RNG.randint(1, 12))
+        ])
+
+    for values in cases:
+        tokens = list(map(int, run(
+            'cf-977F',
+            f'{len(values)}\n' + ' '.join(map(str, values)) + '\n',
+        ).split()))
+        reported_length = tokens[0]
+        reported_indices = [index - 1 for index in tokens[1:]]
+
+        assert reported_length == brute_best_length(values)
+        assert len(reported_indices) == reported_length
+        assert all(
+            left < right
+            for left, right in zip(reported_indices, reported_indices[1:])
+        )
+        assert all(0 <= index < len(values) for index in reported_indices)
+        chosen = [values[index] for index in reported_indices]
+        assert all(
+            right == left + 1 for left, right in zip(chosen, chosen[1:])
+        )
+
+    # The full-size consecutive array checks linear scaling and a parent chain
+    # that includes every input position.
+    values = list(range(1, 200001))
+    tokens = list(map(int, run(
+        'cf-977F',
+        '200000\n' + ' '.join(map(str, values)) + '\n',
+    ).split()))
+    assert tokens[0] == 200000
+    assert tokens[1:] == values
+
+
+def verify_hamiltonian_flights() -> None:
+    def brute_route_count(city_count, multiplicity):
+        answer = 0
+        middle = range(1, city_count - 1)
+        for ordering in permutations(middle):
+            route = (0,) + ordering + (city_count - 1,)
+            choices = 1
+            for start, finish in zip(route, route[1:]):
+                choices *= multiplicity[start][finish]
+            answer += choices
+        return answer % 1_000_000_007
+
+    cases = []
+    for city_count in range(2, 9):
+        for _ in range(35):
+            multiplicity = [
+                [0] * city_count for _ in range(city_count)
+            ]
+            for start in range(city_count):
+                for finish in range(city_count):
+                    if start != finish and RNG.random() < 0.3:
+                        multiplicity[start][finish] = RNG.randint(1, 2)
+            cases.append((city_count, multiplicity))
+
+    for city_count, multiplicity in cases:
+        edges = []
+        for start in range(city_count):
+            for finish in range(city_count):
+                edges.extend(
+                    [(start + 1, finish + 1)] * multiplicity[start][finish]
+                )
+        input_text = (
+            f'{city_count} {len(edges)}\n'
+            + ''.join(f'{start} {finish}\n' for start, finish in edges)
+        )
+        actual = int(run('cses-1690', input_text))
+        assert actual == brute_route_count(city_count, multiplicity)
+
+    # At maximum N, a single forward chain has exactly one Hamiltonian route.
+    chain_edges = ''.join(f'{city} {city + 1}\n' for city in range(1, 20))
+    assert int(run('cses-1690', f'20 19\n{chain_edges}')) == 1
+
+
+def verify_close_group_partition() -> None:
+    def brute_partition_count(vertex_count, neighbor_masks):
+        best = vertex_count
+        groups = []
+
+        def search(vertex):
+            nonlocal best
+            if len(groups) >= best:
+                return
+            if vertex == vertex_count:
+                best = len(groups)
+                return
+
+            vertex_bit = 1 << vertex
+            for group_index, group in enumerate(groups):
+                if neighbor_masks[vertex] & group == group:
+                    groups[group_index] |= vertex_bit
+                    search(vertex + 1)
+                    groups[group_index] ^= vertex_bit
+
+            groups.append(vertex_bit)
+            search(vertex + 1)
+            groups.pop()
+
+        search(0)
+        return best
+
+    cases = []
+    for vertex_count in range(1, 10):
+        for _ in range(30):
+            neighbor_masks = [0] * vertex_count
+            for first in range(vertex_count):
+                for second in range(first + 1, vertex_count):
+                    if RNG.random() < 0.45:
+                        neighbor_masks[first] |= 1 << second
+                        neighbor_masks[second] |= 1 << first
+            cases.append((vertex_count, neighbor_masks))
+
+    for vertex_count, neighbor_masks in cases:
+        edges = []
+        for first in range(vertex_count):
+            for second in range(first + 1, vertex_count):
+                if neighbor_masks[first] & (1 << second):
+                    edges.append((first + 1, second + 1))
+        input_text = (
+            f'{vertex_count} {len(edges)}\n'
+            + ''.join(f'{first} {second}\n' for first, second in edges)
+        )
+        actual = int(run('ac-CloseGroup', input_text))
+        assert actual == brute_partition_count(vertex_count, neighbor_masks)
+
+    # The largest empty graph forces every vertex to remain a singleton.
+    assert int(run('ac-CloseGroup', '18 0\n')) == 18
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -1483,6 +1638,9 @@ if __name__ == "__main__":
         verify_no_cross,
         verify_increasing_subsequence,
         verify_towers,
+        verify_consecutive_subsequence,
+        verify_hamiltonian_flights,
+        verify_close_group_partition,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

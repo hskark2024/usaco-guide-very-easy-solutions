@@ -1,0 +1,15 @@
+1. In AtCoder Close Group, we may delete edges until every connected component is fully connected inside. We want as few components as possible.
+
+2. A fully connected set is called a clique. Deleting edges cannot create a missing connection, so every final component must already be a clique in the original graph.
+
+3. The problem is now: partition all vertices into the fewest cliques. Since N is at most eighteen, we can represent every vertex subset with a bitmask.
+
+4. First precompute whether every mask is a clique. Remove one vertex from the mask. The mask is a clique if the remainder is a clique and the removed vertex connects to everyone in it.
+
+5. Let D P of mask be the fewest cliques needed to cover exactly that mask. If the entire mask is a clique, its answer is one.
+
+6. Otherwise, choose the lowest vertex as an anchor. Try every clique submask containing that anchor, pay one group, and add the best answer for the vertices left over.
+
+7. The anchor does not remove any real partition. Every partition has exactly one group containing that vertex. It only avoids trying the same groups in different orders.
+
+8. Clique checks use O of two-to-the-N space. The partition loop is O of three-to-the-N in the worst case, which is practical for eighteen vertices. Backtracking tests verify small random graphs.

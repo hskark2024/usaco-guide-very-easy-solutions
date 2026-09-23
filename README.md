@@ -66,6 +66,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-718` | USACO Gold | [Why Did the Cow Cross the Road II](problems/usaco-718/README.md) | [DP, Grid Paths, LCS] | [C++](solutions/usaco-718.cpp) | [Package](videos/easy/usaco-718/README.md) |
 | `cses-1145` | CSES | [Increasing Subsequence](problems/cses-1145/README.md) | [LIS, Binary Search] | [C++](solutions/cses-1145.cpp) | [Package](videos/easy/cses-1145/README.md) |
 | `cses-1073` | CSES | [Towers](problems/cses-1073/README.md) | [Greedy, Binary Search] | [C++](solutions/cses-1073.cpp) | [Package](videos/easy/cses-1073/README.md) |
+| `cf-977F` | CF | [Consecutive Subsequence](problems/cf-977F/README.md) | [DP, Hash Map, Reconstruction] | [C++](solutions/cf-977F.cpp) | [Package](videos/easy/cf-977F/README.md) |
+| `cses-1690` | CSES | [Hamiltonian Flights](problems/cses-1690/README.md) | [Bitmask DP, Hamiltonian Paths] | [C++](solutions/cses-1690.cpp) | [Package](videos/easy/cses-1690/README.md) |
+| `ac-CloseGroup` | AC | [Close Group](problems/ac-CloseGroup/README.md) | [Bitmask DP, Clique Partition] | [C++](solutions/ac-CloseGroup.cpp) | [Package](videos/easy/ac-CloseGroup/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

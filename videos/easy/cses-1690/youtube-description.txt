@@ -1,0 +1,7 @@
+Count every route that visits each city once using subset states, endpoint transitions, and destination pruning.
+
+Official problem: https://cses.fi/problemset/task/1690
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-1690.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #cses #bitmaskdp #graphs #cplusplus

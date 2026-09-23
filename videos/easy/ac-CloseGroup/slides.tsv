@@ -1,0 +1,8 @@
+Close Group	Delete edges between final components	Each component must be fully connected	Minimize the number of components
+Components are cliques	Every pair inside needs an original edge	Deleting cannot create missing edges	Partition into original cliques
+Use subset masks	N is at most 18	One bit represents each vertex	Enumerate candidate groups
+Precompute clique masks	Remove one chosen vertex	The remainder must be a clique	Chosen vertex connects to all remaining
+Partition DP	dp mask is the fewest clique groups	A clique mask needs one group	Build answers from smaller masks
+Anchor one vertex	Pick the lowest set bit	Try clique groups containing it	Solve the uncovered remainder
+Why anchoring is safe	Every partition has one anchor group	No possible partition disappears	Symmetric group orders are skipped
+Complexity and tests	Worst-case O(3 to N) time	O(2 to N) space	Backtracking checks random small graphs

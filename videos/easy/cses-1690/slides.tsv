@@ -1,0 +1,8 @@
+Hamiltonian Flights	Start at city 1 and finish at city N	Visit every city exactly once	Count directed routes
+Why a bitmask?	N is at most 20	One bit records each visited city	A mask represents the whole visited set
+Define the state	dp mask last counts routes	Visit exactly the mask	Finish at city last
+Remove the final city	previous mask equals mask without last	Try flights previous to last	Add matching smaller states
+Why counting is exact	Every route has one unique final flight	Every valid transition appends one city	Take sums modulo 1,000,000,007
+Sample with four cities	Middle order 2 then 3 works	Middle order 3 then 2 works	Answer is 2
+Prune impossible states	Every mask includes city 1	City N appears only in the full mask	Less work and clearer endpoints
+Complexity	O(N squared times 2 to N) time	O(N times 2 to N) space	Permutation tests verify small graphs

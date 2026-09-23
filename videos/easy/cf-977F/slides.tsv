@@ -1,0 +1,8 @@
+Consecutive Subsequence	Keep original array order	Values must rise by exactly one	Output length and indices
+Only one predecessor	Current value is x	Previous value must be x minus 1	No binary search is needed
+DP by ending value	Map value to best chain length	Also store its final index	Future values need only this record
+Process each x	Look up the record for x minus 1	Extend it when found	Otherwise start at length 1
+Recover the indices	Save a parent pointer for every extension	Follow parents from the best end	Reverse the collected path
+Example chain	Array: 3 3 4 7 5 6 8	Choose 3, 4, 5, 6	Skipped values do not matter
+Duplicates are safe	Keep the best chain for each ending value	Its last index is still before future input	One record is enough
+Complexity and tests	Expected O(N) time	O(N) space	Brute force checks all short subsequences

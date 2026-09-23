@@ -1,0 +1,7 @@
+Build the longest plus-one subsequence in expected linear time, then recover its original indices with parent pointers.
+
+Official problem: https://codeforces.com/contest/977/problem/F
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-977F.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #dynamicprogramming #hashmap #cplusplus
