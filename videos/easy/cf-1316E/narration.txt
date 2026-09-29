@@ -1,0 +1,15 @@
+1. In Codeforces Team Building, we need one player for each position and exactly K other people in the audience. Every person has one audience value and a different skill value for each position.
+
+2. A strong audience candidate might be an even stronger player, so choosing the top K audience values first can be wrong. But there are at most seven positions, which is perfect for a bitmask.
+
+3. Sort everyone from highest to lowest audience value. Now, after the player choices are fixed, the best audience is simply the first K people in this order who were not used as players.
+
+4. Let D P of mask store the best score after a prefix of candidates. A one-bit means that playing position is already filled.
+
+5. For the current person, one option fills any empty position and adds that position skill. The mask prevents the same person from taking two jobs.
+
+6. The other option does not use this person as a player. The number of earlier nonplayers is processed minus popcount-mask. If that number is below K, add this person's audience value. Otherwise add zero.
+
+7. Sorting makes that automatic audience choice optimal. We accept exactly the first K available nonplayers, which are the K strongest audience choices left after the selected players are removed.
+
+8. With rolling arrays, memory is O of two-to-the-P. Time is O of N times P times two-to-the-P, plus sorting, which works for one hundred thousand candidates because P is at most seven.

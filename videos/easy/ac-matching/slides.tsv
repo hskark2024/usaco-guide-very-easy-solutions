@@ -1,0 +1,8 @@
+Matching problem	Pair everyone one-to-one	Only compatible edges are allowed	Count complete pairings
+Why brute force fails	A permutation tree has N factorial leaves	N can be 21	Merge equal used-person sets
+Mask the used women	One bit per woman	Set bits mean already paired	Popcount chooses the next man
+Define the DP	dp mask counts partial matchings	dp zero equals one	The full mask is the answer
+Make a transition	Find compatible unused women	Turn on one chosen bit	Add ways modulo one billion and seven
+Why it is exact	Each man is handled in fixed order	Each partner turns on one bit	Every matching has one path
+Walk through tests	Sample answer is three	Identity gives one	A blocked row gives zero
+Complexity	O of N times two to N time	O of two to N memory	Random cases checked by permutations

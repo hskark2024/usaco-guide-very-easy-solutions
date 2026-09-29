@@ -1,0 +1,15 @@
+1. In AtCoder Matching, two groups have the same size. We must pair everyone one-to-one, but the matrix allows only certain pairs. Our job is to count all complete valid pairings.
+
+2. Trying every full permutation takes N factorial time. At N equals twenty-one, that is far too large. The key is that we do not care about the order used to build the same partial pairing.
+
+3. Use one bit for every woman. A one means already paired. If the mask has three one-bits, exactly the first three men have partners, so the next man is number three in zero-based indexing.
+
+4. Let D P of mask count ways to pair those first popcount-mask men with exactly the selected women. D P of zero is one because there is one empty matching.
+
+5. For the next man, inspect every compatible woman whose bit is still zero. Set her bit and add the current number of ways into that larger mask.
+
+6. Every complete matching follows exactly one path. At step i, its partner for man i chooses one new bit. No matching is missed, and no matching can follow two different paths.
+
+7. The first sample has three valid complete pairings, so the full mask stores three. An identity matrix has exactly one path, while a row with no allowed partner makes the answer zero.
+
+8. There are two-to-the-N masks and at most N choices per mask. That gives O of N times two-to-the-N time and O of two-to-the-N memory, with every addition reduced modulo one billion and seven.

@@ -1,0 +1,7 @@
+Build a compact subset DP that counts every compatible one-to-one matching without double-counting.
+
+Official problem: https://atcoder.jp/contests/dp/tasks/dp_o?lang=en
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ac-matching.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #atcoder #bitmaskdp #matching #cplusplus

@@ -1,0 +1,7 @@
+Sort by audience strength, mask the few playing positions, and let DP resolve every player-versus-audience tradeoff.
+
+Official problem: https://codeforces.com/contest/1316/problem/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1316E.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #bitmaskdp #sorting #cplusplus

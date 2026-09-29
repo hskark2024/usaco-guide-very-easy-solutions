@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-09-23 (the live Guide source and the LIS and Bitmask DP problem data were checked directly)
-- Listing snapshot: USACO Guide source commit [`ecd27b6`](https://github.com/cpinitiative/usaco-guide/commit/ecd27b6eff69112891eabf0c968d3ad0b2a7f745) (423 unique module-listed Easy IDs; selected module entries checked)
-- Completed Easy solutions: 50
-- Complete video packages: 50
+- Last listing check: 2026-09-28 (the live Guide source and all module problem data were checked directly)
+- Listing snapshot: USACO Guide source commit [`a023ae1`](https://github.com/cpinitiative/usaco-guide/commit/a023ae1bbe10171de93301d4d5891bc89ad2bc14) (423 unique module-listed Easy IDs; selected module entries checked)
+- Completed Easy solutions: 53
+- Complete video packages: 53
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -61,6 +61,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-977F` | Consecutive Subsequence | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1690` | Hamiltonian Flights | complete | complete | complete | generated locally; excluded from Git |
 | `ac-CloseGroup` | Close Group | complete | complete | complete | generated locally; excluded from Git |
+| `ac-matching` | Matching | complete | complete | complete | generated locally; excluded from Git |
+| `ac-grouping` | Grouping | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1316E` | Team Building | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-09-28
+
+- New entries: `ac-matching` Matching, `ac-grouping` Grouping, and `cf-1316E` Team Building.
+- The live USACO Guide source is at commit `a023ae1`; all three selected entries remain labeled Easy. A full module-data scan found 423 unique Easy IDs.
+- All 84 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 85 smoke cases and all 50 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and frame QA passed. Durations: 92.9 seconds (`ac-matching`), 86.8 seconds (`ac-grouping`), and 91.9 seconds (`cf-1316E`). Media files are intentionally excluded from GitHub.
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Bitmask DP has two remaining listed entries: `usaco-494` Guard Mark and `usaco-515` Moovie Mooving. Easy remains in progress.
 
 ## Batch verification — 2026-09-23
 

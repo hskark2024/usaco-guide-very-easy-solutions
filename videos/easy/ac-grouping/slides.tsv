@@ -1,0 +1,8 @@
+Grouping problem	Partition up to sixteen rabbits	Pairs inside a group add scores	Scores may be positive or negative
+Why greedy fails	One decision affects many pair edges	A locally positive edge may cause losses	We need global optimization
+Mask every group	One bit per rabbit	group score sums internal pairs	Precompute all possible groups
+Build group scores	Remove one rabbit	Reuse the smaller mask	Add edges to remaining rabbits
+Partition DP	best mask is the optimal partition	Anchor the lowest set bit	Try groups containing the anchor
+Combine choices	Take one precomputed group	Solve the uncovered remainder	Keep the maximum total
+Why anchoring works	Every partition has one anchor group	No partition disappears	Reordered duplicates are skipped
+Complexity and safety	O of three to N time	O of two to N memory	Use sixty-four-bit scores

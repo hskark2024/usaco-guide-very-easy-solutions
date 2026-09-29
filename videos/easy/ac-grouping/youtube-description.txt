@@ -1,0 +1,7 @@
+Precompute every group's score, then maximize an unlabeled set partition with anchored submask DP.
+
+Official problem: https://atcoder.jp/contests/dp/tasks/dp_u?lang=en
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ac-grouping.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #atcoder #subsetdp #submasks #cplusplus

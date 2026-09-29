@@ -1,0 +1,15 @@
+1. AtCoder Grouping asks us to split up to sixteen rabbits into groups. Every pair inside the same group adds its compatibility score, which can be positive or negative. We want the maximum total.
+
+2. Positive edges suggest keeping rabbits together, while negative edges suggest separating them. A greedy choice can fail because one grouping decision changes many pair contributions at once.
+
+3. Represent any possible group with a bitmask. First compute group-score of mask, the sum of every pair whose two endpoints are inside that mask.
+
+4. We can build scores quickly. Remove one rabbit, reuse the smaller mask's score, then add the removed rabbit's compatibility with every rabbit that remains.
+
+5. Let best of mask be the maximum score from partitioning exactly those rabbits. Choose the lowest set bit as an anchor, then try every group submask that contains it.
+
+6. For each choice, add that group's precomputed score to best of the uncovered remainder. Take the maximum over all choices.
+
+7. Anchoring is safe because every partition has exactly one group containing that rabbit. It also avoids trying the same collection of groups in many different orders.
+
+8. The algorithm uses O of three-to-the-N time and O of two-to-the-N memory. We use sixty-four-bit integers because scores can be large, and brute-force group assignments verify random small cases.

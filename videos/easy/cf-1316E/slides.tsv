@@ -1,0 +1,8 @@
+Team Building	Fill every playing position	Choose exactly K audience members	Nobody can be used twice
+The key conflict	Audience and player values differ	The best fan may be a better player	P is at most seven
+Sort by audience value	Highest audience strength first	Fix any player choices	Take the first K remaining cards
+Mask the positions	One bit per playing job	dp mask stores the best prefix score	Only 128 masks at P equals seven
+Player transition	Choose an empty position	Add its skill value	Set exactly one new bit
+Nonplayer transition	Count processed minus assigned players	Below K means add audience value	After K add zero
+Why sorting works	Remove the chosen player cards	The first K remaining values are largest	DP tries every player assignment
+Complexity	O of N P two to P time	O of two to P DP memory	Scales to one hundred thousand people

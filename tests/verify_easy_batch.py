@@ -1592,6 +1592,180 @@ def verify_close_group_partition() -> None:
     assert int(run('ac-CloseGroup', '18 0\n')) == 18
 
 
+def verify_matching() -> None:
+    def brute_count(compatibility):
+        size = len(compatibility)
+        return sum(
+            all(compatibility[man][woman] for man, woman in enumerate(order))
+            for order in permutations(range(size))
+        ) % 1_000_000_007
+
+    cases = [
+        [[1]],
+        [[0]],
+        [[1, 0], [0, 1]],
+        [[1, 1], [1, 1]],
+        [[0, 1, 1], [1, 0, 1], [1, 1, 1]],
+    ]
+    for size in range(1, 9):
+        for _ in range(28):
+            cases.append([
+                [int(RNG.random() < 0.58) for _ in range(size)]
+                for _ in range(size)
+            ])
+
+    for compatibility in cases:
+        size = len(compatibility)
+        input_text = (
+            f'{size}\n'
+            + ''.join(' '.join(map(str, row)) + '\n' for row in compatibility)
+        )
+        assert int(run('ac-matching', input_text)) == brute_count(compatibility)
+
+    # Maximum N with only one legal perfect matching exercises allocation and
+    # traversal of all 2^21 masks without making the oracle expensive.
+    identity_rows = []
+    for row in range(21):
+        identity_rows.append(' '.join(
+            '1' if row == column else '0' for column in range(21)
+        ))
+    assert int(run('ac-matching', '21\n' + '\n'.join(identity_rows) + '\n')) == 1
+
+
+def verify_grouping() -> None:
+    def brute_best(affinity):
+        size = len(affinity)
+        groups = []
+        best = 0
+
+        # Groups are created in canonical order: the first rabbit of a new
+        # group is always the next unassigned rabbit.  This lists each set
+        # partition once and is independent of subset-DP transitions.
+        def search(rabbit, score):
+            nonlocal best
+            if rabbit == size:
+                best = max(best, score)
+                return
+
+            for group in groups:
+                gain = sum(affinity[rabbit][member] for member in group)
+                group.append(rabbit)
+                search(rabbit + 1, score + gain)
+                group.pop()
+
+            groups.append([rabbit])
+            search(rabbit + 1, score)
+            groups.pop()
+
+        search(0, 0)
+        return best
+
+    cases = [
+        [[0]],
+        [[0, -10], [-10, 0]],
+        [[0, 10, 20], [10, 0, -100], [20, -100, 0]],
+    ]
+    for size in range(2, 9):
+        for _ in range(26):
+            affinity = [[0] * size for _ in range(size)]
+            for first in range(size):
+                for second in range(first + 1, size):
+                    value = RNG.randint(-12, 12)
+                    affinity[first][second] = value
+                    affinity[second][first] = value
+            cases.append(affinity)
+
+    for affinity in cases:
+        size = len(affinity)
+        input_text = (
+            f'{size}\n'
+            + ''.join(' '.join(map(str, row)) + '\n' for row in affinity)
+        )
+        assert int(run('ac-grouping', input_text)) == brute_best(affinity)
+
+    # All positive edges make the full N=16 set optimal.  Billion-sized edge
+    # weights also ensure the implementation truly uses 64-bit totals.
+    rows = []
+    for first in range(16):
+        rows.append(' '.join(
+            '0' if first == second else '1000000000'
+            for second in range(16)
+        ))
+    expected = 1_000_000_000 * 16 * 15 // 2
+    assert int(run('ac-grouping', '16\n' + '\n'.join(rows) + '\n')) == expected
+
+
+def verify_team_building() -> None:
+    def brute_best(candidates, position_count, audience_count):
+        best = 0
+        people = range(len(candidates))
+        for players in permutations(people, position_count):
+            player_set = set(players)
+            player_score = sum(
+                candidates[person][1][position]
+                for position, person in enumerate(players)
+            )
+            audience_values = sorted(
+                (
+                    candidates[person][0]
+                    for person in people
+                    if person not in player_set
+                ),
+                reverse=True,
+            )
+            best = max(
+                best,
+                player_score + sum(audience_values[:audience_count]),
+            )
+        return best
+
+    cases = [
+        ([(1, [18]), (16, [19]), (10, [13]), (3, [15])], 1, 2),
+        ([(100, [1000]), (99, [1]), (98, [1])], 1, 1),
+    ]
+    for _ in range(210):
+        size = RNG.randint(2, 8)
+        position_count = RNG.randint(1, min(3, size - 1))
+        audience_count = RNG.randint(1, size - position_count)
+        candidates = [
+            (
+                RNG.randint(1, 30),
+                [RNG.randint(1, 45) for _ in range(position_count)],
+            )
+            for _ in range(size)
+        ]
+        cases.append((candidates, position_count, audience_count))
+
+    for candidates, position_count, audience_count in cases:
+        input_text = (
+            f'{len(candidates)} {position_count} {audience_count}\n'
+            + ' '.join(str(candidate[0]) for candidate in candidates)
+            + '\n'
+            + ''.join(
+                ' '.join(map(str, candidate[1])) + '\n'
+                for candidate in candidates
+            )
+        )
+        assert int(run('cf-1316E', input_text)) == brute_best(
+            candidates,
+            position_count,
+            audience_count,
+        )
+
+    # Everyone scores one in every role, so selecting all 100,000 people gives
+    # a simple exact answer while stressing the largest N and P dimensions.
+    size = 100_000
+    position_count = 7
+    audience_count = size - position_count
+    input_text = (
+        f'{size} {position_count} {audience_count}\n'
+        + ' '.join(['1'] * size)
+        + '\n'
+        + ('1 1 1 1 1 1 1\n' * size)
+    )
+    assert int(run('cf-1316E', input_text)) == size
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -1641,6 +1815,9 @@ if __name__ == "__main__":
         verify_consecutive_subsequence,
         verify_hamiltonian_flights,
         verify_close_group_partition,
+        verify_matching,
+        verify_grouping,
+        verify_team_building,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

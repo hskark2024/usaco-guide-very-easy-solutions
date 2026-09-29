@@ -69,6 +69,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-977F` | CF | [Consecutive Subsequence](problems/cf-977F/README.md) | [DP, Hash Map, Reconstruction] | [C++](solutions/cf-977F.cpp) | [Package](videos/easy/cf-977F/README.md) |
 | `cses-1690` | CSES | [Hamiltonian Flights](problems/cses-1690/README.md) | [Bitmask DP, Hamiltonian Paths] | [C++](solutions/cses-1690.cpp) | [Package](videos/easy/cses-1690/README.md) |
 | `ac-CloseGroup` | AC | [Close Group](problems/ac-CloseGroup/README.md) | [Bitmask DP, Clique Partition] | [C++](solutions/ac-CloseGroup.cpp) | [Package](videos/easy/ac-CloseGroup/README.md) |
+| `ac-matching` | AC | [Matching](problems/ac-matching/README.md) | [Bitmask DP, Perfect Matching, Counting] | [C++](solutions/ac-matching.cpp) | [Package](videos/easy/ac-matching/README.md) |
+| `ac-grouping` | AC | [Grouping](problems/ac-grouping/README.md) | [Bitmask DP, Set Partition] | [C++](solutions/ac-grouping.cpp) | [Package](videos/easy/ac-grouping/README.md) |
+| `cf-1316E` | CF | [Team Building](problems/cf-1316E/README.md) | [Bitmask DP, Sorting, Greedy] | [C++](solutions/cf-1316E.cpp) | [Package](videos/easy/cf-1316E/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 
