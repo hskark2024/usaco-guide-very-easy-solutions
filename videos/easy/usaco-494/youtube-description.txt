@@ -1,0 +1,7 @@
+Learn how one value per cow subset captures the safest possible stack ordering.
+
+Official problem: https://www.usaco.org/index.php?page=viewproblem2&cpid=494
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-494.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #bitmaskdp #dynamicprogramming #cplusplus

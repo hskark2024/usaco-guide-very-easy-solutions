@@ -1766,6 +1766,143 @@ def verify_team_building() -> None:
     assert int(run('cf-1316E', input_text)) == size
 
 
+def verify_guard_mark() -> None:
+    def brute_best_safety(cows, required_height):
+        best = -1
+        cow_indices = range(len(cows))
+
+        # Enumerate a bottom-to-top sequence directly.  Every possible subset
+        # and every ordering of that subset appears exactly once.
+        for stack_size in range(1, len(cows) + 1):
+            for order in permutations(cow_indices, stack_size):
+                if sum(cows[index][0] for index in order) < required_height:
+                    continue
+
+                weight_above = 0
+                stack_safety = 10**30
+                stable = True
+                for index in reversed(order):
+                    _, weight, strength = cows[index]
+                    margin = strength - weight_above
+                    if margin < 0:
+                        stable = False
+                        break
+                    stack_safety = min(stack_safety, margin)
+                    weight_above += weight
+
+                if stable:
+                    best = max(best, stack_safety)
+        return best
+
+    cases = [
+        ([(10, 5, 0)], 10),
+        ([(4, 8, 2)], 5),
+        ([(9, 4, 1), (3, 3, 5), (5, 5, 10), (4, 4, 5)], 10),
+        ([(1_000_000_000, 1_000_000_000, 1_000_000_000)], 1_000_000_000),
+    ]
+    for size in range(1, 8):
+        for _ in range(18):
+            cows = [
+                (
+                    RNG.randint(1, 10),
+                    RNG.randint(1, 10),
+                    RNG.randint(0, 30),
+                )
+                for _ in range(size)
+            ]
+            required_height = RNG.randint(1, sum(cow[0] for cow in cows) + 5)
+            cases.append((cows, required_height))
+
+    for cows, required_height in cases:
+        input_text = (
+            f'{len(cows)} {required_height}\n'
+            + ''.join(f'{height} {weight} {strength}\n'
+                      for height, weight, strength in cows)
+        )
+        expected = brute_best_safety(cows, required_height)
+        actual = run('usaco-494', input_text).strip()
+        if expected < 0:
+            assert actual == 'Mark is too tall'
+        else:
+            assert int(actual) == expected
+
+    # All twenty cows are required.  Equal unit weights and strength twenty
+    # make every ordering stable with a final safety factor of one.
+    full_input = '20 20\n' + ('1 1 20\n' * 20)
+    assert int(run('usaco-494', full_input)) == 1
+
+
+def verify_moovie_mooving() -> None:
+    def brute_minimum_movies(durations, schedules, target):
+        movie_count = len(durations)
+        best = movie_count + 1
+        seen = set()
+
+        # This oracle explores actual viewing orders and every compatible
+        # showing.  It does not use the solution's latest-showtime shortcut.
+        def search(current_time, used_mask):
+            nonlocal best
+            state = (current_time, used_mask)
+            if state in seen:
+                return
+            seen.add(state)
+
+            used_count = bin(used_mask).count('1')
+            if current_time >= target:
+                best = min(best, used_count)
+                return
+            if used_count >= best:
+                return
+
+            for movie in range(movie_count):
+                movie_bit = 1 << movie
+                if used_mask & movie_bit:
+                    continue
+                for start_time in schedules[movie]:
+                    finish_time = start_time + durations[movie]
+                    if start_time <= current_time < finish_time:
+                        search(finish_time, used_mask | movie_bit)
+
+        search(0, 0)
+        return -1 if best == movie_count + 1 else best
+
+    cases = [
+        ([10], [[0]], 10),
+        ([10], [[1]], 10),
+        ([10, 10], [[0], [10]], 20),
+        ([8, 8], [[0], [7]], 15),
+        ([5, 5], [[0], [6]], 10),
+        ([50, 40, 30, 20], [[15, 30, 55], [0, 65], [20, 90], [0]], 100),
+    ]
+    for size in range(1, 8):
+        for _ in range(24):
+            durations = [RNG.randint(2, 10) for _ in range(size)]
+            schedules = []
+            for _movie in range(size):
+                possible_starts = list(range(0, 23))
+                RNG.shuffle(possible_starts)
+                showing_count = RNG.randint(1, 5)
+                schedules.append(sorted(possible_starts[:showing_count]))
+            target = RNG.randint(1, 25)
+            cases.append((durations, schedules, target))
+
+    for durations, schedules, target in cases:
+        input_text = f'{len(durations)} {target}\n'
+        for duration, starts in zip(durations, schedules):
+            input_text += (
+                f'{duration} {len(starts)} '
+                + ' '.join(map(str, starts))
+                + '\n'
+            )
+        actual = int(run('usaco-515', input_text))
+        assert actual == brute_minimum_movies(durations, schedules, target)
+
+    # A twenty-movie chain checks the maximum subset allocation and an answer
+    # that requires every available movie.
+    chain = ''.join(f'1 1 {start}\n' for start in range(20))
+    assert int(run('usaco-515', f'20 20\n{chain}')) == 20
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -1818,6 +1955,8 @@ if __name__ == "__main__":
         verify_matching,
         verify_grouping,
         verify_team_building,
+        verify_guard_mark,
+        verify_moovie_mooving,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

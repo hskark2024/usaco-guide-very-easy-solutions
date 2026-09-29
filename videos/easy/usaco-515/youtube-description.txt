@@ -1,0 +1,7 @@
+Use subset DP and binary search to cover a timeline with the fewest distinct movies.
+
+Official problem: https://www.usaco.org/index.php?page=viewproblem2&cpid=515
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-515.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #bitmaskdp #scheduling #cplusplus

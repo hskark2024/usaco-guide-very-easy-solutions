@@ -1,0 +1,9 @@
+Moovie Mooving	Watch continuously from time zero	Reach the target time	Use each movie at most once
+Useful showings	A showing starts before now	It must end after now	Then switching creates no gap
+Mask used movies	One bit per movie	Set means already watched	N is at most twenty
+Define the DP	dp mask is farthest covered time	dp zero equals zero	Other states start unreachable
+Find a showing	Try an unused movie	Latest start at or before t	Use binary search
+Extend coverage	Showing must end after t	Set the movie bit	Keep the farther endpoint
+Why one endpoint works	Same subset can have many paths	Later coverage dominates	Merge them into one state
+Sample and answer	Three movies reach one hundred	Minimize set bits	Print negative one if impossible
+Complexity	Two to N subset states	N movie choices	Binary search each schedule

@@ -72,6 +72,8 @@ The official statements remain at their original judge links. These notes intent
 | `ac-matching` | AC | [Matching](problems/ac-matching/README.md) | [Bitmask DP, Perfect Matching, Counting] | [C++](solutions/ac-matching.cpp) | [Package](videos/easy/ac-matching/README.md) |
 | `ac-grouping` | AC | [Grouping](problems/ac-grouping/README.md) | [Bitmask DP, Set Partition] | [C++](solutions/ac-grouping.cpp) | [Package](videos/easy/ac-grouping/README.md) |
 | `cf-1316E` | CF | [Team Building](problems/cf-1316E/README.md) | [Bitmask DP, Sorting, Greedy] | [C++](solutions/cf-1316E.cpp) | [Package](videos/easy/cf-1316E/README.md) |
+| `usaco-494` | USACO Gold | [Guard Mark](problems/usaco-494/README.md) | [Bitmask DP, Subsets, Optimization] | [C++](solutions/usaco-494.cpp) | [Package](videos/easy/usaco-494/README.md) |
+| `usaco-515` | USACO Gold | [Moovie Mooving](problems/usaco-515/README.md) | [Bitmask DP, Binary Search, Scheduling] | [C++](solutions/usaco-515.cpp) | [Package](videos/easy/usaco-515/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

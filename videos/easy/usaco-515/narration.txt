@@ -1,0 +1,17 @@
+1. In Moovie Mooving, Bessie wants to watch movies without any break from time zero until a target time. She may enter a movie late or leave early, but she may use each movie only once.
+
+2. Each movie has one duration and several starting times. A showing is useful at the current time if it has already started but has not ended. Then Bessie can switch into it immediately.
+
+3. With at most twenty movies, use a bitmask. A one-bit means that movie has already appeared in the viewing plan. We do not need to remember which exact showings came earlier.
+
+4. Let D P of mask be the farthest time we can cover continuously from zero using exactly those movies. D P of zero is zero. Every other state starts unreachable.
+
+5. From current time t, try an unused movie. Find the latest showing that starts at or before t. Since all showings of one movie have the same duration, this choice also ends latest.
+
+6. If that showing ends after t, there is no gap and it extends our coverage. Turn on the movie's bit and maximize the new state's ending time.
+
+7. Keeping only the farthest ending time is safe. Reaching the same subset later can do everything the earlier endpoint could do whenever the next showing actually extends the schedule.
+
+8. The sample reaches time one hundred with three movies. Count the bits in every state that reaches the target and take the minimum. If none reaches it, print negative one.
+
+9. There are two-to-the-N states and at most N transitions per state. Binary search finds a showing, giving O of N times two-to-the-N times log C time and O of two-to-the-N D P memory.

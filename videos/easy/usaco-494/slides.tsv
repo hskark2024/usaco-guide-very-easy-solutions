@@ -1,0 +1,8 @@
+Guard Mark	Build a cow tower	Reach the frisbee	Respect every strength limit
+Safety factor	Strength minus weight above	Measure every cow	Maximize the smallest margin
+Why subsets	Simple sorting can fail	N is at most twenty	One bit per selected cow
+Define the DP	dp mask is best safety	Empty stack has infinity	Unreachable states are negative
+Choose the top cow	Remove one selected bit	The previous state is below	Try every possible top
+Update safety	Lower margin loses top weight	New cow has own strength	Take the smaller limit
+Finish the answer	Keep best stable ordering	Subset height ignores order	Check every tall-enough mask
+Results and cost	Sample answer is two	Failure has exact text	N times two to N time

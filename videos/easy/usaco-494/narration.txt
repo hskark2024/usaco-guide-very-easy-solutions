@@ -1,0 +1,15 @@
+1. In Guard Mark, cows form a tower to catch a frisbee. Every cow has a height, a weight, and a strength. We need enough total height, but no cow may carry more weight than her strength allows.
+
+2. The score is the safety factor. For each cow, subtract the weight above her from her strength. The smallest leftover value in the whole tower is its safety factor, and we want that value as large as possible.
+
+3. Sorting by weight or strength does not always work. With at most twenty cows, the clue is to use a bitmask. One bit tells whether each cow belongs to the current stack.
+
+4. Let D P of mask be the best safety factor over every stable ordering of exactly those cows. The empty stack gets infinity because it has no cow that can become the bottleneck.
+
+5. To build a nonempty state, choose one selected cow to be on top. Remove her bit. The smaller state represents the cows below her in their best possible order.
+
+6. Adding the top cow places her weight on every cow below, so the lower safety drops by her weight. The new cow also has her own strength. The candidate is the smaller of those two limits.
+
+7. Try every possible top cow and keep the largest nonnegative candidate. The subset's height does not depend on order, so after the D P we inspect every tall-enough subset and choose its best safety.
+
+8. In the sample, the best qualifying stack has safety factor two. If every tall-enough subset is unstable, print Mark is too tall. The algorithm uses N times two-to-the-N time and two-to-the-N memory.
