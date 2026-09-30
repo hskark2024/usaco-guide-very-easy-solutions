@@ -1,0 +1,17 @@
+1. Space Jazz starts with a pair of identical notes. Every later step inserts another identical pair between two neighboring notes. We hear an incomplete performance and must restore as few missing notes as possible.
+
+2. Imagine repeatedly removing adjacent equal notes. A complete Space Jazz piece can disappear completely this way. Another view draws a curved line between the notes of each pair. Those lines can nest, but they never cross.
+
+3. Let D P of left, right be the fewest notes we must add to fix that substring. We solve short intervals first, then use them inside longer intervals.
+
+4. Focus on the leftmost note. We can always insert one matching copy beside it. That pair is finished, so the cost is one plus the answer for the rest of the substring.
+
+5. We may avoid that insertion if a later observed note is equal. Pair the left note with that partner. The notes inside the arc and the notes after it become two independent smaller problems.
+
+6. For every equal partner k, try D P of left plus one through k minus one, plus D P of k plus one through right. Take the minimum over those choices and the one-insertion fallback.
+
+7. For the sample a a g o g, the two a notes pair immediately. The first and last g surround the o. Only the o needs a new copy, so the answer is one.
+
+8. Why is the recurrence complete? In any valid finished piece, the first observed note pairs with either an inserted note or one later equal observed note. Those are exactly our choices, and a chosen arc separates independent regions.
+
+9. There are about N squared intervals. Each one tries up to N partners, so the time is O of N cubed and memory is O of N squared. N is at most five hundred.

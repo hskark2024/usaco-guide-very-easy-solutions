@@ -1,0 +1,7 @@
+Learn the classic interval-painting range DP through USACO Modern Art 3. We show how matching colors can share one brush stroke, prove the recurrence, trace the sample, and build a commented C++17 solution.
+
+Official problem: https://www.usaco.org/index.php?page=viewproblem2&cpid=1114
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-1114.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #dynamicprogramming #rangedp #cplusplus

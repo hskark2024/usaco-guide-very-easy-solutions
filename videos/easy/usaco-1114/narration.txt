@@ -1,0 +1,17 @@
+1. In Modern Art 3, our canvas is one row of colored cells. One brush stroke paints any continuous interval one color. Later strokes may cover older paint. We want the fewest strokes that leave exactly the target row.
+
+2. Overpainting is the key. If two cells finish with the same color, one long early stroke may paint both. Other strokes can later replace the unwanted color between them.
+
+3. Let D P of left, right be the minimum strokes for that target interval. A single cell needs one stroke. We fill the table from short intervals to long ones.
+
+4. The simple choice paints the left cell separately. Then we need one stroke for that cell plus the best answer for everything to its right.
+
+5. A better choice may exist when position k has the same final color as the left cell. Extend the stroke that handles k leftward so it also covers the left cell. We do not pay for that color twice.
+
+6. The cells between left and k still need their own final layers. The cost becomes D P of left plus one through k minus one, plus D P of k through right. Try every matching k.
+
+7. In the sample, the symmetric colors one, two, three, and four can share wide strokes. A final color-one stroke repairs the center, and color six handles the last cell. The minimum is six.
+
+8. Every optimal painting either handles the left cell separately or shares its finishing color stroke with some later matching cell. Our recurrence tests both cases, so it misses no optimal plan.
+
+9. N is at most three hundred. We store O of N squared intervals and try up to N matching positions for each, giving O of N cubed time and O of N squared memory.

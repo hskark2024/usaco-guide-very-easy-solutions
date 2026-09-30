@@ -1,0 +1,9 @@
+Space Jazz	Restore missing notes	Start from doubled notes	Insert doubled pairs
+Pair viewpoint	Remove adjacent equal notes	Draw equal-note arcs	Arcs never cross
+Range DP state	dp left right	Minimum inserted notes	Solve short intervals first
+Choice one	Insert a copy of the left note	Remove that finished pair	Pay one plus the suffix
+Choice two	Find a later equal note	Pair it with the left note	Split inside from suffix
+The recurrence	Try every equal partner	Add two smaller costs	Keep the minimum
+Sample aagog	Pair the two a notes	Pair the two g notes	Insert one o
+Why it works	The first note needs one partner	Inserted or already observed	Every case is considered
+Complexity	N squared intervals	Up to N partners each	O N cubed time

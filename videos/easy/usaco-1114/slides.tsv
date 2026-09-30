@@ -1,0 +1,9 @@
+Modern Art 3	Paint a continuous interval	One color per stroke	Later paint may cover it
+Overpainting helps	Matching colors share a stroke	Repaint the middle later	Save brush strokes
+Range DP state	dp left right	Minimum strokes for one interval	Solve short intervals first
+Choice one	Paint the left cell separately	Pay one stroke	Add the best suffix
+Choice two	Find a later matching color	Extend its stroke leftward	Avoid paying twice
+The recurrence	Paint the middle independently	Reuse dp k right	Try every matching k
+Official sample	Nested colors share wide strokes	Repair the center later	The answer is six
+Why it works	The left stroke is separate or shared	Both cases are tested	Every plan is paintable
+Complexity	N squared intervals	Up to N matches each	O N cubed time

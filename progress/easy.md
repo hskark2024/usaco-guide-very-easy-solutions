@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-09-29 (the live Guide source and all module problem data were checked directly)
-- Listing snapshot: USACO Guide source commit [`1f63a5e`](https://github.com/cpinitiative/usaco-guide/commit/1f63a5eea89f25ee8e71178d1596b92f0b87bb46) (423 unique module-listed Easy IDs; selected module entries checked)
-- Completed Easy solutions: 55
-- Complete video packages: 55
+- Last listing check: 2026-09-30 (the live Guide source and all module problem data were checked directly)
+- Listing snapshot: USACO Guide source commit [`ed367e8`](https://github.com/cpinitiative/usaco-guide/commit/ed367e8953e137e603d09a36fd7040dcf2e30667) (423 unique module-listed Easy IDs; selected module entries checked)
+- Completed Easy solutions: 57
+- Complete video packages: 57
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -66,6 +66,19 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1316E` | Team Building | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-494` | Guard Mark | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-515` | Moovie Mooving | complete | complete | complete | generated locally; excluded from Git |
+| `sapo-15-SpaceJazz` | Space Jazz | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-1114` | Modern Art 3 | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-09-30
+
+- New entries: `sapo-15-SpaceJazz` Space Jazz and `usaco-1114` Modern Art 3.
+- The live USACO Guide source is at commit `ed367e8`; both selected entries remain labeled Easy. A full module-data scan found 423 unique Easy IDs.
+- All 88 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 89 smoke cases and all 54 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and frame QA passed. Video durations: 110.4 seconds (`sapo-15-SpaceJazz`) and 106.0 seconds (`usaco-1114`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Range DP is complete. The next Easy module in the progression is Tree DP, beginning with `cses-1130`, `ac-IndependentSet`, and `usaco-766`; overall Easy work remains in progress.
 
 ## Batch verification — 2026-09-29
 

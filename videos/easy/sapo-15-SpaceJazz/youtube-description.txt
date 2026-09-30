@@ -1,0 +1,7 @@
+Learn range DP by completing a performed melody with the fewest missing notes. We turn the construction into noncrossing equal-note pairs, derive the recurrence, trace examples, and code the O(N^3) solution in C++17.
+
+Official problem: https://saco-evaluator.org.za/cms/sapo2015z/tasks/jazz/description
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/sapo-15-SpaceJazz.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #dynamicprogramming #rangedp #cplusplus

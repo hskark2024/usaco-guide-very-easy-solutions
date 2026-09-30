@@ -1903,6 +1903,111 @@ def verify_moovie_mooving() -> None:
     assert int(run('usaco-515', f'20 20\n{chain}')) == 20
 
 
+def verify_space_jazz() -> None:
+    def brute_minimum_insertions(notes):
+        @lru_cache(maxsize=None)
+        def maximum_existing_pairs(left, right):
+            if left > right:
+                return 0
+
+            # Leave the first observed note unmatched; an inserted copy can
+            # eventually pair with it.  Or match it with any equal observed
+            # note and recurse into the two noncrossing regions.
+            best = maximum_existing_pairs(left + 1, right)
+            for partner in range(left + 1, right + 1):
+                if notes[left] == notes[partner]:
+                    best = max(
+                        best,
+                        1
+                        + maximum_existing_pairs(left + 1, partner - 1)
+                        + maximum_existing_pairs(partner + 1, right),
+                    )
+            return best
+
+        pair_count = maximum_existing_pairs(0, len(notes) - 1)
+        # Every matched observed pair saves the two insertions that those two
+        # notes would otherwise need individually.
+        return len(notes) - 2 * pair_count
+
+    cases = [
+        'a',
+        'aa',
+        'ab',
+        'abba',
+        'aagog',
+        'ababa',
+        'abcabc',
+    ]
+    alphabet = 'abcd'
+    for length in range(1, 11):
+        for _ in range(32):
+            cases.append(''.join(RNG.choice(alphabet) for _ in range(length)))
+
+    for notes in cases:
+        expected = brute_minimum_insertions(notes)
+        assert int(run('sapo-15-SpaceJazz', notes + '\n')) == expected
+
+    # The maximum-length equal string is already fully pairable and also
+    # checks the cubic loop's largest allocation and boundary indexing.
+    assert int(run('sapo-15-SpaceJazz', 'a' * 500 + '\n')) == 0
+
+
+def verify_modern_art_three() -> None:
+    def brute_minimum_strokes(target):
+        @lru_cache(maxsize=None)
+        def remove_last_strokes(state):
+            if not any(state):
+                return 0
+
+            best = len(state)
+            for left in range(len(state)):
+                for right in range(left, len(state)):
+                    visible = {
+                        state[index]
+                        for index in range(left, right + 1)
+                        if state[index] != 0
+                    }
+                    # In reverse, a valid last stroke may span cells already
+                    # erased by later strokes, but every still-visible cell it
+                    # covers must show one common color.
+                    if len(visible) != 1:
+                        continue
+                    next_state = list(state)
+                    for index in range(left, right + 1):
+                        if next_state[index] != 0:
+                            next_state[index] = 0
+                    best = min(
+                        best,
+                        1 + remove_last_strokes(tuple(next_state)),
+                    )
+            return best
+
+        return remove_last_strokes(tuple(target))
+
+    cases = [
+        [1],
+        [1, 1, 1],
+        [1, 2, 3, 4],
+        [1, 2, 1],
+        [1, 2, 3, 2, 1],
+        [1, 2, 3, 4, 1, 4, 3, 2, 1, 6],
+    ]
+    for length in range(1, 9):
+        for _ in range(28):
+            cases.append([RNG.randint(1, 4) for _ in range(length)])
+
+    for colors in cases:
+        expected = brute_minimum_strokes(colors)
+        input_text = f'{len(colors)}\n' + ' '.join(map(str, colors)) + '\n'
+        assert int(run('usaco-1114', input_text)) == expected
+
+    # The two maximum-size extremes force opposite answers and exercise the
+    # complete DP table without making the independent oracle expensive.
+    assert int(run('usaco-1114', '300\n' + ' '.join(['7'] * 300) + '\n')) == 1
+    distinct = ' '.join(map(str, range(1, 301)))
+    assert int(run('usaco-1114', f'300\n{distinct}\n')) == 300
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -1957,6 +2062,8 @@ if __name__ == "__main__":
         verify_team_building,
         verify_guard_mark,
         verify_moovie_mooving,
+        verify_space_jazz,
+        verify_modern_art_three,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

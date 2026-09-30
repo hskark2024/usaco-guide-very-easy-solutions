@@ -74,6 +74,8 @@ The official statements remain at their original judge links. These notes intent
 | `cf-1316E` | CF | [Team Building](problems/cf-1316E/README.md) | [Bitmask DP, Sorting, Greedy] | [C++](solutions/cf-1316E.cpp) | [Package](videos/easy/cf-1316E/README.md) |
 | `usaco-494` | USACO Gold | [Guard Mark](problems/usaco-494/README.md) | [Bitmask DP, Subsets, Optimization] | [C++](solutions/usaco-494.cpp) | [Package](videos/easy/usaco-494/README.md) |
 | `usaco-515` | USACO Gold | [Moovie Mooving](problems/usaco-515/README.md) | [Bitmask DP, Binary Search, Scheduling] | [C++](solutions/usaco-515.cpp) | [Package](videos/easy/usaco-515/README.md) |
+| `sapo-15-SpaceJazz` | SAPO | [Space Jazz](problems/sapo-15-SpaceJazz/README.md) | [Range DP, Strings, Noncrossing Matching] | [C++](solutions/sapo-15-SpaceJazz.cpp) | [Package](videos/easy/sapo-15-SpaceJazz/README.md) |
+| `usaco-1114` | USACO Gold | [Modern Art 3](problems/usaco-1114/README.md) | [Range DP, Interval Painting] | [C++](solutions/usaco-1114.cpp) | [Package](videos/easy/usaco-1114/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 
