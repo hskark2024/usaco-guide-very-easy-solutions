@@ -1,0 +1,15 @@
+1. In Independent Set, every tree vertex becomes white or black. The only rule is that two neighbors cannot both be black. We count all valid colorings modulo one billion and seven.
+
+2. Root the tree anywhere. At each vertex, store two counts: the number of valid subtree colorings when this vertex is white, and the number when it is black.
+
+3. If the parent is white, a child may be white or black. For that child, add its two counts. Different child branches are independent, so multiply those sums.
+
+4. If the parent is black, each child must be white. Multiply only the white count from every child. That single rule prevents every black to black edge.
+
+5. A leaf starts with one white choice and one black choice. Once all children are processed, the root may also be either color, so add its two counts.
+
+6. For a three-vertex path, the eight possible black-white patterns lose the three containing adjacent black vertices. Five remain, matching the official sample.
+
+7. The DP is exact because fixing a vertex color makes each child subtree independent. The transition allows precisely the child colors compatible with the connecting edge.
+
+8. We use an iterative parent order and process it backward. Each edge does constant work, giving O of N time, O of N memory, and no recursion-stack risk.

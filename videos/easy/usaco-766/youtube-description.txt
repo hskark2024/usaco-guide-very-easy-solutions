@@ -1,0 +1,7 @@
+Learn how to count valid three-colorings of a tree when some barns are already painted. We build the three tree DP states, enforce fixed colors, prove the recurrence, trace the sample, and code an iterative C++17 solution.
+
+Official problem: https://www.usaco.org/index.php?page=viewproblem2&cpid=766
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-766.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #treedp #graphcoloring #cplusplus

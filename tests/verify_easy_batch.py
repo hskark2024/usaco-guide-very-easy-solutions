@@ -2008,6 +2008,120 @@ def verify_modern_art_three() -> None:
     assert int(run('usaco-1114', f'300\n{distinct}\n')) == 300
 
 
+def random_tree(node_count: int):
+    """Generate a uniformly parent-attached labeled tree for small oracles."""
+    return [
+        (vertex, RNG.randrange(vertex))
+        for vertex in range(1, node_count)
+    ]
+
+
+def tree_input(node_count: int, edges) -> str:
+    return (
+        f'{node_count}\n'
+        + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+    )
+
+
+def verify_tree_matching() -> None:
+    def brute_maximum_matching(node_count, edges):
+        best = 0
+        # Directly enumerate edge subsets.  A subset is a matching exactly
+        # when no endpoint has appeared before.
+        for mask in range(1 << len(edges)):
+            used = [False] * node_count
+            chosen = 0
+            valid = True
+            for index, (first, second) in enumerate(edges):
+                if not (mask >> index & 1):
+                    continue
+                if used[first] or used[second]:
+                    valid = False
+                    break
+                used[first] = used[second] = True
+                chosen += 1
+            if valid:
+                best = max(best, chosen)
+        return best
+
+    for node_count in range(1, 11):
+        for _ in range(45):
+            edges = random_tree(node_count)
+            expected = brute_maximum_matching(node_count, edges)
+            actual = int(run('cses-1130', tree_input(node_count, edges)))
+            assert actual == expected
+
+    # A maximum-size chain checks both the answer and the nonrecursive design.
+    node_count = 200_000
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    assert int(run('cses-1130', f'{node_count}\n{edges_text}')) == node_count // 2
+
+
+def verify_independent_set() -> None:
+    def brute_count(node_count, edges):
+        valid_count = 0
+        # A set bit means black.  Reject a mask if any edge has two set bits.
+        for mask in range(1 << node_count):
+            if all(not (mask >> first & 1 and mask >> second & 1)
+                   for first, second in edges):
+                valid_count += 1
+        return valid_count
+
+    for node_count in range(1, 13):
+        for _ in range(36):
+            edges = random_tree(node_count)
+            expected = brute_count(node_count, edges)
+            actual = int(run('ac-IndependentSet', tree_input(node_count, edges)))
+            assert actual == expected
+
+    node_count = 100_000
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    # For a path, independent sets follow Fibonacci: f(n)=f(n-1)+f(n-2).
+    before_previous, previous = 1, 2
+    for _ in range(2, node_count + 1):
+        before_previous, previous = previous, (before_previous + previous) % 1_000_000_007
+    assert int(run('ac-IndependentSet', f'{node_count}\n{edges_text}')) == previous
+
+
+def verify_barn_painting() -> None:
+    def brute_count(node_count, edges, fixed):
+        valid_count = 0
+        # Enumerate all three-color assignments and filter the two constraints
+        # directly, independently of the solution's rooted-tree recurrence.
+        for colors in product(range(3), repeat=node_count):
+            if any(colors[vertex] != color for vertex, color in fixed.items()):
+                continue
+            if any(colors[first] == colors[second] for first, second in edges):
+                continue
+            valid_count += 1
+        return valid_count
+
+    for node_count in range(1, 9):
+        for _ in range(32):
+            edges = random_tree(node_count)
+            fixed = {
+                vertex: RNG.randrange(3)
+                for vertex in range(node_count)
+                if RNG.random() < 0.40
+            }
+            expected = brute_count(node_count, edges, fixed)
+            input_text = (
+                f'{node_count} {len(fixed)}\n'
+                + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+                + ''.join(f'{vertex + 1} {color + 1}\n' for vertex, color in fixed.items())
+            )
+            assert int(run('usaco-766', input_text)) == expected
+
+    # Equal fixed colors on one edge make a tiny impossible instance.
+    assert int(run('usaco-766', '2 2\n1 2\n1 1\n2 1\n')) == 0
+
+    # With no fixed colors, every tree has 3 * 2^(N-1) valid paintings.
+    node_count = 100_000
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    expected = 3 * pow(2, node_count - 1, 1_000_000_007) % 1_000_000_007
+    assert int(run('usaco-766', f'{node_count} 0\n{edges_text}')) == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2064,6 +2178,9 @@ if __name__ == "__main__":
         verify_moovie_mooving,
         verify_space_jazz,
         verify_modern_art_three,
+        verify_tree_matching,
+        verify_independent_set,
+        verify_barn_painting,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

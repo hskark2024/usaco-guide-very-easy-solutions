@@ -1,0 +1,8 @@
+Barn Painting	Three colors on a tree	Neighbors must differ	Some barns are fixed
+Three DP states	Root the tree anywhere	One count per parent color	Count the whole subtree
+Initialize states	Unpainted keeps all three	Fixed keeps one color	Other states become zero
+Combine one child	Parent red forbids child red	Add blue and green	Repeat for every parent color
+Combine branches	Fixing the parent separates children	Multiply allowed sums	Take results modulo M
+Official sample	Barn four is color three	Center has two choices	Eight valid paintings
+Why it works	Fixed rules in initialization	Edge rules in transitions	Every painting counted once
+Complexity	Iterative postorder	Three states per vertex	O N time and memory

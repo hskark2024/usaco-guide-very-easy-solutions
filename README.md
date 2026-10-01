@@ -76,6 +76,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-515` | USACO Gold | [Moovie Mooving](problems/usaco-515/README.md) | [Bitmask DP, Binary Search, Scheduling] | [C++](solutions/usaco-515.cpp) | [Package](videos/easy/usaco-515/README.md) |
 | `sapo-15-SpaceJazz` | SAPO | [Space Jazz](problems/sapo-15-SpaceJazz/README.md) | [Range DP, Strings, Noncrossing Matching] | [C++](solutions/sapo-15-SpaceJazz.cpp) | [Package](videos/easy/sapo-15-SpaceJazz/README.md) |
 | `usaco-1114` | USACO Gold | [Modern Art 3](problems/usaco-1114/README.md) | [Range DP, Interval Painting] | [C++](solutions/usaco-1114.cpp) | [Package](videos/easy/usaco-1114/README.md) |
+| `cses-1130` | CSES | [Tree Matching](problems/cses-1130/README.md) | [Tree DP, Matching] | [C++](solutions/cses-1130.cpp) | [Package](videos/easy/cses-1130/README.md) |
+| `ac-IndependentSet` | AtCoder | [Independent Set](problems/ac-IndependentSet/README.md) | [Tree DP, Counting] | [C++](solutions/ac-IndependentSet.cpp) | [Package](videos/easy/ac-IndependentSet/README.md) |
+| `usaco-766` | USACO Gold | [Barn Painting](problems/usaco-766/README.md) | [Tree DP, Coloring] | [C++](solutions/usaco-766.cpp) | [Package](videos/easy/usaco-766/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

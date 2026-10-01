@@ -1,0 +1,15 @@
+1. Barn Painting gives us a tree of connected barns and three paint colors. Neighboring barns must be different, and some barns already have a fixed color. We count every valid completion.
+
+2. Root the tree anywhere. For each vertex, keep three counts. State c is the number of valid ways to paint the whole subtree when this vertex uses color c.
+
+3. An unpainted leaf starts with one way for each color. A pre-painted barn starts with one only for its required color and zero for the other two.
+
+4. Suppose the parent is red. Its child may be blue or green, but not red. So the child's contribution is the sum of its two differently colored states.
+
+5. Repeat that rule for each possible parent color. Child branches are independent after the parent color is fixed, so multiply their allowed sums together.
+
+6. In the official star sample, barn four is fixed to color three. The center can use either other color, and each remaining leaf then has two choices. That gives eight paintings.
+
+7. The initialization handles every fixed-color rule. The transition handles every edge rule. Multiplication combines each compatible set of child paintings exactly once.
+
+8. Process an iterative tree order backward, then add the root's three color states. The solution uses O of N time and memory and works safely on a very deep tree.

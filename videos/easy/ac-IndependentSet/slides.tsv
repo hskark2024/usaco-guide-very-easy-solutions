@@ -1,0 +1,8 @@
+Independent Set	Color every vertex white or black	No adjacent black vertices	Count modulo one billion plus seven
+Two DP states	Root the tree anywhere	Ways when white	Ways when black
+White parent	Child may use either color	Add child white and black	Multiply across branches
+Black parent	Every child must be white	Multiply child white counts	Forbidden edges disappear
+Base and answer	A leaf has one of each	Process children first	Add both root states
+Three-node path	Eight total patterns	Three break the rule	Five are valid
+Why it works	Fixing the parent separates branches	Allow exactly compatible colors	Count every coloring once
+Complexity	Iterative traversal	Constant work per edge	O N time and memory

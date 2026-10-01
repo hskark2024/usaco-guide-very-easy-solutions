@@ -1,0 +1,15 @@
+1. Tree Matching asks us to choose as many tree edges as possible, but no vertex may touch two chosen edges. Think of each chosen edge as pairing two vertices. Once paired, both are unavailable.
+
+2. Root the tree anywhere. For every vertex, we need two answers. Blocked means this vertex cannot match a child. Best means it is free to match at most one child.
+
+3. If the vertex uses no child edge, every child subtree is independent. Add the best answer from every child. This sum is the blocked state and is also our first choice for best.
+
+4. Now try matching the vertex with one child. Remove that child's best answer, because the child is no longer free. Add its blocked answer, then add one for the new matching edge.
+
+5. Try each child separately and keep the largest result. We never choose two children because those two edges would share the parent vertex and break the matching rule.
+
+6. In the official five-node sample, we can pair one with two and three with four. The remaining vertex five stays unmatched, giving an answer of two.
+
+7. The recurrence is complete. Every legal matching either uses no downward edge at a vertex, or uses exactly one. Our two cases test all possibilities without overlap.
+
+8. Build a parent order iteratively, then process it backward so children are ready before parents. Every edge is examined a constant number of times, for O of N time and O of N memory.

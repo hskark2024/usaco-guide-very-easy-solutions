@@ -1,0 +1,8 @@
+Tree Matching	Choose the most tree edges	No shared endpoints	Each edge pairs two vertices
+Two states	Root the tree anywhere	Blocked cannot use a child	Best may use one child
+Use no child edge	Child subtrees are independent	Add every child best	This becomes blocked
+Match one child	Replace that child's best	Use its blocked value	Add one chosen edge
+Why only one	Two child edges share the parent	That is not a matching	Try children separately
+Official sample	Pair one with two	Pair three with four	Maximum size is two
+Why it works	Zero child edges or exactly one	Every legal case appears	Take the maximum
+Complexity	Iterative parent order	Process children first	O N time and memory

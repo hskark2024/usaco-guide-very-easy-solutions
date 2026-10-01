@@ -1,0 +1,7 @@
+Learn maximum matching on a tree with two simple DP states. We derive the transition, trace the official sample, prove why only one child can match a parent, and code an iterative C++17 solution safe for deep trees.
+
+Official problem: https://cses.fi/problemset/task/1130
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-1130.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#cses #usacoguide #treedp #matching #cplusplus
