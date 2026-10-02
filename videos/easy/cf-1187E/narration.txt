@@ -1,0 +1,15 @@
+1. Tree Painting begins with every vertex white. We choose one vertex, then grow one connected black region. Each newly chosen vertex scores the size of its white connected component. Our goal is the largest total.
+
+2. Suppose the first painted vertex is the root. Before any non-root vertex can be painted, its parent must already be black. None of its descendants could be reached first. Therefore its white component is exactly its rooted subtree.
+
+3. This turns the game into a simple number: for a chosen root, the total score is the sum of every subtree size. We can compute that for one temporary root with a bottom-up pass.
+
+4. We still need to try every possible starting vertex, but recomputing every subtree would be quadratic. Instead, move the root across one edge from a parent into one child.
+
+5. Let S be the child's old subtree size. Those S vertices become one level closer to the root, so together they remove S from the score. The other N minus S vertices become one level farther, so they add N minus S.
+
+6. Combine those changes and the new score equals the old score plus N minus two S. That one formula lets us send a score from each parent to every child in constant time.
+
+7. In the second official example, rooting at vertex three gives the best total of fourteen. The reroot formula reaches that value while checking all five starting vertices, even though we only built subtree sizes once.
+
+8. The code uses iterative traversal so a long path is safe. One reverse pass finds subtree sizes, and one forward pass reroots the score. The total complexity is O of N time and O of N memory.

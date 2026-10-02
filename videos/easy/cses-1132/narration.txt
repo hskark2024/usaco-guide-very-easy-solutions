@@ -1,0 +1,15 @@
+1. Tree Distances One asks for every vertex's farthest distance to any other vertex. Running a full search from all two hundred thousand vertices would repeat far too much work, so we will share information with rerooting dynamic programming.
+
+2. Root the tree anywhere. For each vertex, downward means the longest path that stays inside its rooted subtree. A leaf has downward zero. Every other vertex takes one plus the largest downward value among its children.
+
+3. That handles descendants, but the farthest vertex may be above us or inside a sibling's subtree. We call the best distance that begins by crossing the parent edge upward.
+
+4. When we send an upward answer from a parent to a child, we may continue along the parent's upward path. We may also turn into one of the parent's other child branches. We add one for the edge back to the parent.
+
+5. Here is the important rerooting detail. If the current child supplied the parent's deepest branch, we cannot use that same branch again. It points right back into the child's subtree. Save both the tallest and second-tallest branches, then use the runner-up in this case.
+
+6. In the official sample, vertex one is at most two edges from another vertex. Vertex two reaches vertices four or five in three edges. The answers are two, three, two, three, and three.
+
+7. The proof splits every possible path into two groups. It either stays in the vertex's subtree, which downward covers, or first crosses the parent edge, which upward covers. Taking their maximum is therefore complete.
+
+8. We build the parent order without recursion. The reverse pass computes downward values, and the forward pass computes upward values. Every edge is examined only a constant number of times, so time and memory are both O of N.

@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-01 (the live Guide source and Tree DP module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`ed367e8`](https://github.com/cpinitiative/usaco-guide/commit/ed367e8953e137e603d09a36fd7040dcf2e30667) (423 unique module-listed Easy IDs; selected module entries checked)
-- Completed Easy solutions: 60
-- Complete video packages: 60
+- Last listing check: 2026-10-02 (the live Guide source and All Roots module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`74a8cf6`](https://github.com/cpinitiative/usaco-guide/commit/74a8cf603185c1cb84020b7a483a0e1bacef186e) (423 unique module-listed Easy IDs in the latest full scan; today's module entries rechecked)
+- Completed Easy solutions: 62
+- Complete video packages: 62
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -71,6 +71,19 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cses-1130` | Tree Matching | complete | complete | complete | generated locally; excluded from Git |
 | `ac-IndependentSet` | Independent Set | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-766` | Barn Painting | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1132` | Tree Distances I | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1187E` | Tree Painting | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-02
+
+- New entries: `cses-1132` Tree Distances I and `cf-1187E` Tree Painting.
+- The live USACO Guide source is at commit `74a8cf6`; both All Roots entries remain labeled Easy. The latest full module-data scan contains 423 unique Easy IDs.
+- All 93 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 94 smoke cases and all 59 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and frame QA passed. Durations: 117.3 seconds (`cses-1132`) and 105.8 seconds (`cf-1187E`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy All Roots is complete. The next Easy module in the progression is Euler Tour, beginning with `cses-1137` Subtree Queries and `cses-1139` Distinct Colors; overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-01
 

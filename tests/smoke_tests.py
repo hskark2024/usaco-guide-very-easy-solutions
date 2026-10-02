@@ -6,6 +6,8 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "cses-1132": ("5\n1 2\n1 3\n3 4\n3 5\n", "2 3 2 3 3\n"),
+    "cf-1187E": ("5\n1 2\n1 3\n2 4\n2 5\n", "14\n"),
     "cses-1130": ("5\n1 2\n1 3\n3 4\n3 5\n", "2\n"),
     "ac-IndependentSet": ("3\n1 2\n2 3\n", "5\n"),
     "usaco-766": ("4 1\n1 2\n1 3\n1 4\n4 3\n", "8\n"),

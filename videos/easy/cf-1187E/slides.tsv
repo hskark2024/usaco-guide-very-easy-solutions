@@ -1,0 +1,8 @@
+Tree Painting	Grow one connected black region	Score a white component size	Maximize the total
+Choose a root	Parent must turn black first	Descendants are still white	Gain equals subtree size
+One root score	Compute all subtree sizes	Add every size	Use a bottom-up pass
+Try all roots	Recomputing is too slow	Move root across one edge	Reuse the old score
+What changes	Child side size is S	That side moves one level closer	Other N minus S move farther
+Reroot formula	Subtract S	Add N minus S	New = old + N - 2S
+Official example	Check all five roots	Best root reaches fourteen	Keep the maximum
+Complexity	Iterative parent order	Reverse then forward pass	O N time and memory

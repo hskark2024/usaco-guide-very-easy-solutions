@@ -1,0 +1,7 @@
+Turn Codeforces Tree Painting into a clean rerooting DP. We connect the game score to subtree sizes, derive `new = old + N - 2s`, verify it on examples, and code an iterative C++17 solution.
+
+Official problem: https://codeforces.com/contest/1187/problem/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1187E.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#codeforces #usacoguide #treedp #rerooting #cplusplus

@@ -1,0 +1,8 @@
+Tree Distances I	Find every farthest distance	A tree has one simple path	Avoid N separate searches
+Downward DP	Root the tree anywhere	Leaf value is zero	Parent takes best child plus one
+Missing direction	Farthest node may be above	Or inside a sibling subtree	Define an upward value
+Send to a child	Cross child to parent	Continue upward or turn sideways	Add one for the crossed edge
+Top two branches	Never reuse the child's own branch	Use the runner-up when needed	Ties remain safe
+Official sample	Vertex one answer two	Vertex two answer three	Output: 2 3 2 3 3
+Why it works	Path stays below or goes through parent	The two groups are complete	Take their maximum
+Complexity	Iterative traversal	Reverse pass then forward pass	O N time and memory

@@ -79,6 +79,8 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1130` | CSES | [Tree Matching](problems/cses-1130/README.md) | [Tree DP, Matching] | [C++](solutions/cses-1130.cpp) | [Package](videos/easy/cses-1130/README.md) |
 | `ac-IndependentSet` | AtCoder | [Independent Set](problems/ac-IndependentSet/README.md) | [Tree DP, Counting] | [C++](solutions/ac-IndependentSet.cpp) | [Package](videos/easy/ac-IndependentSet/README.md) |
 | `usaco-766` | USACO Gold | [Barn Painting](problems/usaco-766/README.md) | [Tree DP, Coloring] | [C++](solutions/usaco-766.cpp) | [Package](videos/easy/usaco-766/README.md) |
+| `cses-1132` | CSES | [Tree Distances I](problems/cses-1132/README.md) | [Tree DP, Rerooting] | [C++](solutions/cses-1132.cpp) | [Package](videos/easy/cses-1132/README.md) |
+| `cf-1187E` | Codeforces | [Tree Painting](problems/cf-1187E/README.md) | [Tree DP, Rerooting] | [C++](solutions/cf-1187E.cpp) | [Package](videos/easy/cf-1187E/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

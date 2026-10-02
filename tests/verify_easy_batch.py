@@ -2122,6 +2122,105 @@ def verify_barn_painting() -> None:
     assert int(run('usaco-766', f'{node_count} 0\n{edges_text}')) == expected
 
 
+def verify_tree_distances_one() -> None:
+    def brute_eccentricities(node_count, edges):
+        graph = [[] for _ in range(node_count)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+
+        answers = []
+        # A fresh BFS from every source is deliberately different from the
+        # solution's two rerooting passes and is tiny enough for random cases.
+        for source in range(node_count):
+            distance = [-1] * node_count
+            distance[source] = 0
+            queue = deque([source])
+            while queue:
+                vertex = queue.popleft()
+                for next_vertex in graph[vertex]:
+                    if distance[next_vertex] != -1:
+                        continue
+                    distance[next_vertex] = distance[vertex] + 1
+                    queue.append(next_vertex)
+            answers.append(max(distance))
+        return answers
+
+    for node_count in range(1, 18):
+        for _ in range(40):
+            edges = random_tree(node_count)
+            expected = brute_eccentricities(node_count, edges)
+            actual = list(map(int, run('cses-1132', tree_input(node_count, edges)).split()))
+            assert actual == expected
+
+    # On a path, the farthest endpoint is easy to identify at every index.
+    node_count = 200_000
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    actual = list(map(int, run('cses-1132', f'{node_count}\n{edges_text}').split()))
+    expected = [max(vertex, node_count - 1 - vertex) for vertex in range(node_count)]
+    assert actual == expected
+
+
+def verify_tree_painting() -> None:
+    def brute_best_game(node_count, edges):
+        graph = [[] for _ in range(node_count)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+        full_mask = (1 << node_count) - 1
+
+        @lru_cache(maxsize=None)
+        def best_from(black_mask):
+            if black_mask == full_mask:
+                return 0
+
+            if black_mask == 0:
+                choices = range(node_count)
+            else:
+                choices = [
+                    vertex
+                    for vertex in range(node_count)
+                    if not (black_mask >> vertex & 1)
+                    and any(black_mask >> neighbor & 1 for neighbor in graph[vertex])
+                ]
+
+            best = 0
+            for chosen in choices:
+                # Measure the chosen vertex's white component before painting
+                # it, directly following the game rule rather than reroot DP.
+                component = 0
+                seen = 1 << chosen
+                queue = deque([chosen])
+                while queue:
+                    vertex = queue.popleft()
+                    component += 1
+                    for next_vertex in graph[vertex]:
+                        if black_mask >> next_vertex & 1 or seen >> next_vertex & 1:
+                            continue
+                        seen |= 1 << next_vertex
+                        queue.append(next_vertex)
+                best = max(
+                    best,
+                    component + best_from(black_mask | (1 << chosen)),
+                )
+            return best
+
+        return best_from(0)
+
+    for node_count in range(2, 10):
+        for _ in range(35):
+            edges = random_tree(node_count)
+            expected = brute_best_game(node_count, edges)
+            actual = int(run('cf-1187E', tree_input(node_count, edges)))
+            assert actual == expected
+
+    # An endpoint is optimal on a path, producing N + (N-1) + ... + 1.
+    node_count = 200_000
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    expected = node_count * (node_count + 1) // 2
+    assert int(run('cf-1187E', f'{node_count}\n{edges_text}')) == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2181,6 +2280,8 @@ if __name__ == "__main__":
         verify_tree_matching,
         verify_independent_set,
         verify_barn_painting,
+        verify_tree_distances_one,
+        verify_tree_painting,
     ):
         verifier()
         print(f"passed {verifier.__name__}")
