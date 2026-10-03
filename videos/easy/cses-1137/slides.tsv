@@ -1,0 +1,9 @@
+Subtree Queries	Replace one vertex value	Sum one rooted subtree	Avoid walking every descendant
+Flatten the tree	Start DFS at vertex one	Write a vertex on entry	Finish each child before the next
+One subtree, one interval	Entry is the left endpoint	Exit is just after descendants	No unrelated vertex appears inside
+Simpler operations	Vertex replacement is one cell	Subtree total is one range	The tree shape is now preprocessed
+Fenwick tree	Maintain prefix sums	Point update in O log N	Range equals right prefix minus left
+Update by difference	Old value five, new value three	Add negative two	Remember the new value
+Official sample	Vertex three starts at eight	Vertex five changes to three	New total is ten
+Why it works	Euler interval is exact	Fenwick values stay current	Interval sum is the answer
+Safe and fast	Explicit enter and exit events	No recursion overflow	O N build, O log N per query

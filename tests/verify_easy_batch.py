@@ -2221,6 +2221,134 @@ def verify_tree_painting() -> None:
     assert int(run('cf-1187E', f'{node_count}\n{edges_text}')) == expected
 
 
+def verify_subtree_queries() -> None:
+    def subtree_vertices(node_count, edges):
+        graph = [[] for _ in range(node_count)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+
+        parent = [-1] * node_count
+        children = [[] for _ in range(node_count)]
+        order = [0]
+        for vertex in order:
+            for next_vertex in graph[vertex]:
+                if next_vertex == parent[vertex]:
+                    continue
+                parent[next_vertex] = vertex
+                children[vertex].append(next_vertex)
+                order.append(next_vertex)
+
+        result = []
+        # Explicitly walk down from every root. This tiny oracle does not use
+        # an Euler tour or any range-sum data structure.
+        for root in range(node_count):
+            members = []
+            pending = [root]
+            while pending:
+                vertex = pending.pop()
+                members.append(vertex)
+                pending.extend(children[vertex])
+            result.append(members)
+        return result
+
+    for node_count in range(1, 19):
+        for _ in range(35):
+            edges = random_tree(node_count)
+            members = subtree_vertices(node_count, edges)
+            values = [RNG.randint(1, 50) for _ in range(node_count)]
+            initial_values = values.copy()
+            operations = []
+            expected = []
+            for _ in range(75):
+                vertex = RNG.randrange(node_count)
+                if RNG.random() < 0.48:
+                    new_value = RNG.randint(1, 10**9)
+                    values[vertex] = new_value
+                    operations.append(f'1 {vertex + 1} {new_value}')
+                else:
+                    operations.append(f'2 {vertex + 1}')
+                    expected.append(sum(values[item] for item in members[vertex]))
+
+            input_text = (
+                f'{node_count} {len(operations)}\n'
+                + ' '.join(map(str, initial_values)) + '\n'
+                + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+                + '\n'.join(operations) + '\n'
+            )
+            actual = list(map(int, run('cses-1137', input_text).split()))
+            assert actual == expected
+
+    # A maximum-depth tree catches recursive DFS implementations and checks
+    # that 64-bit subtree sums survive the largest values.
+    node_count = 200_000
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    input_text = (
+        f'{node_count} 3\n'
+        + ' '.join(['1000000000'] * node_count) + '\n'
+        + edges_text
+        + f'2 1\n1 {node_count} 1\n2 1\n'
+    )
+    assert list(map(int, run('cses-1137', input_text).split())) == [
+        200_000_000_000_000,
+        199_999_000_000_001,
+    ]
+
+
+def verify_distinct_colors() -> None:
+    def brute_answers(node_count, colors, edges):
+        graph = [[] for _ in range(node_count)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+
+        parent = [-1] * node_count
+        children = [[] for _ in range(node_count)]
+        order = [0]
+        for vertex in order:
+            for next_vertex in graph[vertex]:
+                if next_vertex == parent[vertex]:
+                    continue
+                parent[next_vertex] = vertex
+                children[vertex].append(next_vertex)
+                order.append(next_vertex)
+
+        answers = []
+        # Build the color set of each subtree from scratch. This intentionally
+        # shares neither the Euler flattening nor the Fenwick invariant.
+        for root in range(node_count):
+            seen_colors = set()
+            pending = [root]
+            while pending:
+                vertex = pending.pop()
+                seen_colors.add(colors[vertex])
+                pending.extend(children[vertex])
+            answers.append(len(seen_colors))
+        return answers
+
+    for node_count in range(1, 24):
+        for _ in range(45):
+            edges = random_tree(node_count)
+            colors = [RNG.randint(1, 9) for _ in range(node_count)]
+            expected = brute_answers(node_count, colors, edges)
+            input_text = (
+                f'{node_count}\n' + ' '.join(map(str, colors)) + '\n'
+                + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+            )
+            actual = list(map(int, run('cses-1139', input_text).split()))
+            assert actual == expected
+
+    # Unique colors on a long path make every suffix answer predictable and
+    # verify that iterative traversal handles the maximum depth.
+    node_count = 200_000
+    colors_text = ' '.join(map(str, range(1, node_count + 1)))
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    actual = list(map(int, run(
+        'cses-1139', f'{node_count}\n{colors_text}\n{edges_text}'
+    ).split()))
+    assert actual == list(range(node_count, 0, -1))
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2282,6 +2410,8 @@ if __name__ == "__main__":
         verify_barn_painting,
         verify_tree_distances_one,
         verify_tree_painting,
+        verify_subtree_queries,
+        verify_distinct_colors,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

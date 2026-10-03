@@ -1,0 +1,9 @@
+Distinct Colors	Count different colors per subtree	Repeated values should count once	Avoid rebuilding every set
+Euler preorder	Write each vertex on entry	Finish descendants together	Each subtree is one interval
+Array version	One distinct-value query per vertex	Intervals are known in advance	Answer them offline
+Right-to-left sweep	Keep one marker per color	Marker is leftmost in suffix	Fenwick stores marker sums
+Move repeated colors	Remove the old right-side marker	Mark the current position	Never keep two for one color
+Answer a subtree	Sweep reaches its entry	Every present color has one marker	Range sum counts colors
+Official sample	Root answer is three	Vertex three answer is two	Output: 3 1 2 1 1
+Why it works	One representative per color	Old marker removal prevents duplicates	Missing colors have no marker
+Complexity	Iterative Euler tour	At most two updates and one query	O N log N time, O N memory

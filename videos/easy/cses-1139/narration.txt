@@ -1,0 +1,17 @@
+1. Distinct Colors asks how many different colors appear in every rooted subtree. Combining a set for every vertex from scratch repeats work, so we will flatten the tree and answer all intervals together.
+
+2. Use a depth-first preorder starting at vertex one. When we first enter a vertex, append it to an array. Every subtree becomes one continuous interval because DFS finishes all descendants before leaving.
+
+3. Our new problem is this: count distinct values in one interval for every vertex. We can answer those intervals offline by sweeping the array from right to left.
+
+4. At every moment, keep one marker for each color in the suffix we have already scanned. The marker sits on that color's leftmost suffix occurrence. A Fenwick tree stores all the zero-or-one markers.
+
+5. When the sweep sees a color for the first time, add a marker. If that color already has a marker farther right, remove the old marker and place the new one at the current position.
+
+6. When we reach a vertex's entry position, its full subtree interval begins here. Every color appearing in that interval has exactly one marker inside it, so the marker range sum is the distinct-color answer.
+
+7. In the official example, the root's subtree contains colors two, three, and one, giving three. Vertex three's subtree contains colors two and one, giving two. Every leaf gives one.
+
+8. Why does one marker work? A repeated color must count once, and its leftmost occurrence from our current position represents every later copy. Removing the older marker prevents double counting.
+
+9. The Euler tour is iterative, so a maximum-depth tree is safe. Each vertex causes at most two Fenwick updates and one query. The total time is O of N log N, with O of N memory.

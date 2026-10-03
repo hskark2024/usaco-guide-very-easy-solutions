@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-02 (the live Guide source and All Roots module data were checked directly)
+- Last listing check: 2026-10-03 (the live Guide source and Euler Tour module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`74a8cf6`](https://github.com/cpinitiative/usaco-guide/commit/74a8cf603185c1cb84020b7a483a0e1bacef186e) (423 unique module-listed Easy IDs in the latest full scan; today's module entries rechecked)
-- Completed Easy solutions: 62
-- Complete video packages: 62
+- Completed Easy solutions: 64
+- Complete video packages: 64
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -73,6 +73,19 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-766` | Barn Painting | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1132` | Tree Distances I | complete | complete | complete | generated locally; excluded from Git |
 | `cf-1187E` | Tree Painting | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1137` | Subtree Queries | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1139` | Distinct Colors | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-03
+
+- New entries: `cses-1137` Subtree Queries and `cses-1139` Distinct Colors.
+- The live USACO Guide source is at commit `74a8cf6`; both Euler Tour entries remain labeled Easy. The latest full module-data scan contains 423 unique Easy IDs.
+- All 95 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 96 smoke cases and all 61 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and representative-frame QA passed. Durations: 116.5 seconds (`cses-1137`) and 112.8 seconds (`cses-1139`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Euler Tour is complete. The next module is LCA; its remaining Easy entries are `cses-1688` Company Queries II and `cses-1135` Distance Queries (`ys-StaticRMQ` is already complete). Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-02
 

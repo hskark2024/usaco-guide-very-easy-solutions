@@ -81,6 +81,8 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-766` | USACO Gold | [Barn Painting](problems/usaco-766/README.md) | [Tree DP, Coloring] | [C++](solutions/usaco-766.cpp) | [Package](videos/easy/usaco-766/README.md) |
 | `cses-1132` | CSES | [Tree Distances I](problems/cses-1132/README.md) | [Tree DP, Rerooting] | [C++](solutions/cses-1132.cpp) | [Package](videos/easy/cses-1132/README.md) |
 | `cf-1187E` | Codeforces | [Tree Painting](problems/cf-1187E/README.md) | [Tree DP, Rerooting] | [C++](solutions/cf-1187E.cpp) | [Package](videos/easy/cf-1187E/README.md) |
+| `cses-1137` | CSES | [Subtree Queries](problems/cses-1137/README.md) | [Euler Tour, Fenwick Tree, Range Sum] | [C++](solutions/cses-1137.cpp) | [Package](videos/easy/cses-1137/README.md) |
+| `cses-1139` | CSES | [Distinct Colors](problems/cses-1139/README.md) | [Euler Tour, Fenwick Tree, Offline Queries] | [C++](solutions/cses-1139.cpp) | [Package](videos/easy/cses-1139/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

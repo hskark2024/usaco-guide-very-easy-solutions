@@ -1,0 +1,17 @@
+1. Subtree Queries gives every vertex a value. A query either replaces one value or asks for the total inside one rooted subtree. Walking through that subtree for every request could take far too long, so we will turn the tree into an array.
+
+2. Start a depth-first traversal at vertex one. Write each vertex into an array the first time we enter it. We completely finish one child's descendants before moving to the next child.
+
+3. Because of that rule, every vertex in one subtree appears in one uninterrupted array segment. Entry marks the segment's first position. Exit is the first position after its last descendant.
+
+4. Now the tree operations look much simpler. Replacing one vertex changes one array cell. Asking for a subtree total asks for the sum of one continuous array range.
+
+5. A Fenwick tree supports both jobs in logarithmic time. It stores prefix sums. A range sum is the right prefix minus the left prefix, and a point update adds a difference.
+
+6. Suppose a vertex currently holds five and must become three. We add negative two at its Euler position, then save three as its current value. Using the difference keeps every Fenwick total correct.
+
+7. In the official sample, vertex three's subtree contains values five, two, and one, totaling eight. After vertex five changes from one to three, the same subtree totals ten.
+
+8. The proof has two pieces. Euler order makes the subtree exactly one interval. The Fenwick tree always stores the current value at every position. Therefore its interval sum is exactly the requested subtree sum.
+
+9. We simulate depth-first search with explicit enter and exit events, so a two-hundred-thousand-vertex path cannot overflow recursion. Building the tour takes O of N, and every query takes O of log N.
