@@ -1,0 +1,9 @@
+Distance Queries	Count edges between two vertices	A tree has one unique route	Many queries need preprocessing
+Root and depth	Choose vertex one as root	Depth counts edges from root	Traverse iteratively
+Lowest common ancestor	Root paths share a prefix	The last shared vertex is LCA	Call that vertex c
+Distance formula	a to c is depth a minus depth c	b to c is depth b minus depth c	Add: depth a + depth b - 2 depth c
+Binary lifting	Store ancestors 1, 2, 4, 8 steps up	Join two half-jumps	Find LCA quickly
+LCA query	Level the deeper endpoint	Try largest safe paired jumps	Shared parent is the answer
+Official sample	Distance 1 to 3 is one	Distance 2 to 5 is three	Distance 1 to 4 is two
+Why it works	Tree path is unique	Split it at the LCA	The two edge counts add exactly
+C++ and complexity	Iterative traversal avoids overflow	O N log N preprocessing	O log N per query

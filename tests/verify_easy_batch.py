@@ -2349,6 +2349,110 @@ def verify_distinct_colors() -> None:
     assert actual == list(range(node_count, 0, -1))
 
 
+def verify_company_queries_two() -> None:
+    def brute_lca(first, second, parent):
+        # This deliberately simple oracle records every ancestor of the first
+        # endpoint, then walks the second endpoint upward to its first match.
+        first_ancestors = set()
+        while True:
+            first_ancestors.add(first)
+            if parent[first] == first:
+                break
+            first = parent[first]
+
+        while second not in first_ancestors:
+            second = parent[second]
+        return second
+
+    for node_count in range(1, 55):
+        for _ in range(35):
+            # Choosing a smaller-numbered boss matches the special ordering
+            # guaranteed by the Company Queries II input.
+            parent = [0] + [RNG.randrange(vertex) for vertex in range(1, node_count)]
+            queries = [
+                (RNG.randrange(node_count), RNG.randrange(node_count))
+                for _ in range(100)
+            ]
+            expected = [
+                brute_lca(first, second, parent) + 1
+                for first, second in queries
+            ]
+            input_text = (
+                f'{node_count} {len(queries)}\n'
+                + (' '.join(str(boss + 1) for boss in parent[1:]) + '\n'
+                   if node_count > 1 else '\n')
+                + ''.join(f'{first + 1} {second + 1}\n' for first, second in queries)
+            )
+            actual = list(map(int, run('cses-1688', input_text).split()))
+            assert actual == expected
+
+    # A maximum-depth hierarchy checks every lifting level without recursion.
+    node_count = 200_000
+    bosses = ' '.join(map(str, range(1, node_count)))
+    queries = [(node_count, 1), (node_count, node_count // 2),
+               (131_073, 65_537), (node_count, node_count)]
+    input_text = (
+        f'{node_count} {len(queries)}\n{bosses}\n'
+        + ''.join(f'{first} {second}\n' for first, second in queries)
+    )
+    assert list(map(int, run('cses-1688', input_text).split())) == [
+        1, node_count // 2, 65_537, node_count,
+    ]
+
+
+def verify_distance_queries() -> None:
+    def brute_distances(node_count, edges):
+        graph = [[] for _ in range(node_count)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+
+        distances = []
+        for source in range(node_count):
+            distance = [-1] * node_count
+            distance[source] = 0
+            queue = deque([source])
+            while queue:
+                vertex = queue.popleft()
+                for next_vertex in graph[vertex]:
+                    if distance[next_vertex] != -1:
+                        continue
+                    distance[next_vertex] = distance[vertex] + 1
+                    queue.append(next_vertex)
+            distances.append(distance)
+        return distances
+
+    for node_count in range(1, 45):
+        for _ in range(35):
+            edges = random_tree(node_count)
+            distances = brute_distances(node_count, edges)
+            queries = [
+                (RNG.randrange(node_count), RNG.randrange(node_count))
+                for _ in range(100)
+            ]
+            expected = [distances[first][second] for first, second in queries]
+            input_text = (
+                f'{node_count} {len(queries)}\n'
+                + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+                + ''.join(f'{first + 1} {second + 1}\n' for first, second in queries)
+            )
+            actual = list(map(int, run('cses-1135', input_text).split()))
+            assert actual == expected
+
+    # The longest legal path verifies iterative traversal and deep lifting.
+    node_count = 200_000
+    edges_text = ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, node_count))
+    queries = [(1, node_count), (50_000, 150_000),
+               (node_count, node_count), (1, 1)]
+    input_text = (
+        f'{node_count} {len(queries)}\n{edges_text}'
+        + ''.join(f'{first} {second}\n' for first, second in queries)
+    )
+    assert list(map(int, run('cses-1135', input_text).split())) == [
+        node_count - 1, 100_000, 0, 0,
+    ]
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2412,6 +2516,8 @@ if __name__ == "__main__":
         verify_tree_painting,
         verify_subtree_queries,
         verify_distinct_colors,
+        verify_company_queries_two,
+        verify_distance_queries,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

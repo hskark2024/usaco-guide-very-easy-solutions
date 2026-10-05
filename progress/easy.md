@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-03 (the live Guide source and Euler Tour module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`74a8cf6`](https://github.com/cpinitiative/usaco-guide/commit/74a8cf603185c1cb84020b7a483a0e1bacef186e) (423 unique module-listed Easy IDs in the latest full scan; today's module entries rechecked)
-- Completed Easy solutions: 64
-- Complete video packages: 64
+- Last listing check: 2026-10-04 (the live Guide source and LCA module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`e8b01d6`](https://github.com/cpinitiative/usaco-guide/commit/e8b01d6c58badcabbdd922b15d408d76e2beebf1) (424 unique module-listed Easy IDs in today's full scan)
+- Completed Easy solutions: 66
+- Complete video packages: 66
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -75,6 +75,19 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1187E` | Tree Painting | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1137` | Subtree Queries | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1139` | Distinct Colors | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1688` | Company Queries II | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1135` | Distance Queries | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-04
+
+- New entries: `cses-1688` Company Queries II and `cses-1135` Distance Queries.
+- The live USACO Guide source is at commit `e8b01d6`; both LCA entries remain labeled Easy. Today's full module-data scan contains 424 unique Easy IDs.
+- All 97 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 98 smoke cases and all 63 independent Easy verifier groups passed.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and representative-frame QA passed. Video durations: 130.1 seconds (`cses-1688`) and 117.1 seconds (`cses-1135`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy LCA is complete. The next Easy module is Ternary Search, beginning with `spoj-KOPC12A` Building Construction, `cf-427E` Police Patrol, and `cf-1355E` Restorer Distance. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-03
 

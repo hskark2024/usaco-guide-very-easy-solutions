@@ -1,0 +1,7 @@
+Answer tree distance queries with depths and lowest common ancestors. We derive the distance formula, build binary-lifting jumps, trace the sample, and code an iterative C++17 solution.
+
+Official problem: https://cses.fi/problemset/task/1135
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-1135.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#cses #usacoguide #treedistance #lca #cplusplus

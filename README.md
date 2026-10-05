@@ -83,6 +83,8 @@ The official statements remain at their original judge links. These notes intent
 | `cf-1187E` | Codeforces | [Tree Painting](problems/cf-1187E/README.md) | [Tree DP, Rerooting] | [C++](solutions/cf-1187E.cpp) | [Package](videos/easy/cf-1187E/README.md) |
 | `cses-1137` | CSES | [Subtree Queries](problems/cses-1137/README.md) | [Euler Tour, Fenwick Tree, Range Sum] | [C++](solutions/cses-1137.cpp) | [Package](videos/easy/cses-1137/README.md) |
 | `cses-1139` | CSES | [Distinct Colors](problems/cses-1139/README.md) | [Euler Tour, Fenwick Tree, Offline Queries] | [C++](solutions/cses-1139.cpp) | [Package](videos/easy/cses-1139/README.md) |
+| `cses-1688` | CSES | [Company Queries II](problems/cses-1688/README.md) | [LCA, Binary Lifting, Trees] | [C++](solutions/cses-1688.cpp) | [Package](videos/easy/cses-1688/README.md) |
+| `cses-1135` | CSES | [Distance Queries](problems/cses-1135/README.md) | [LCA, Binary Lifting, Tree Distance] | [C++](solutions/cses-1135.cpp) | [Package](videos/easy/cses-1135/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

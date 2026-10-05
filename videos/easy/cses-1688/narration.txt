@@ -1,0 +1,17 @@
+1. Company Queries Two gives us a hierarchy rooted at employee one, the director. For every pair of employees, we must find their lowest common boss: the shared boss closest to them, not just any boss near the top.
+
+2. Following one boss pointer at a time can take almost two hundred thousand steps for one query. Instead, we prepare elevator buttons. One button moves up one boss, the next moves up two, then four, eight, and every other power of two.
+
+3. Our table entry up k v means the boss two to the power k levels above employee v. A two-step jump is two one-step jumps. A four-step jump is two two-step jumps. This doubling rule builds the whole table in N log N time.
+
+4. For a query, the employees might start at different depths. Lift the deeper employee by exactly the depth difference. We read the binary digits of that difference, so at most one jump of each size is needed.
+
+5. If leveling makes the employees equal, we are done. The shallower employee was already an ancestor of the deeper one, and it is clearly their lowest shared boss.
+
+6. Otherwise, inspect jump sizes from largest to smallest. When the two jump destinations are different, take that jump from both sides. We move as high as possible without letting them meet. At the end, they are different children of the answer.
+
+7. In the official sample, employees four and five meet at employee three. Employees two and five first meet at employee one. Employee one is already above employee four, so the last answer is also one.
+
+8. The proof uses two facts. Every table cell represents its exact power-of-two climb. During the query, we never jump both employees to the same ancestor. Therefore we stay below the lowest common boss until both direct parents are that boss.
+
+9. The C++ code fills each employee's jump row as the input is read, because every boss has a smaller number. Preprocessing uses O of N log N time and memory, and each query needs O of log N time.

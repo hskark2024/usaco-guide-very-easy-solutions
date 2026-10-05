@@ -1,0 +1,7 @@
+Find the lowest common boss of two employees with binary lifting. We build powers-of-two ancestor jumps, level each query pair, prove the greedy jump scan, and code the complete C++17 solution.
+
+Official problem: https://cses.fi/problemset/task/1688
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-1688.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#cses #usacoguide #lca #binarylifting #cplusplus

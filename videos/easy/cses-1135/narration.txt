@@ -1,0 +1,17 @@
+1. Distance Queries gives us a tree and asks for the number of edges between many pairs of vertices. A tree has exactly one route between any two vertices, but walking that route for every query could still be much too slow.
+
+2. Root the tree at vertex one. The depth of a vertex is its number of edges from the root. We find every parent and depth with one iterative traversal, which also stays safe on a very long path.
+
+3. Look at the root path for vertex a and the root path for vertex b. They share a beginning, then split. The last shared vertex is their lowest common ancestor, or LCA. Call it c.
+
+4. The climb from a to c has depth a minus depth c edges. The climb from b to c has depth b minus depth c edges. Adding gives depth a plus depth b minus two times depth c.
+
+5. To find c quickly, prepare a binary-lifting table. Each vertex stores the ancestor one step above, two steps above, four steps above, and so on. Two equal smaller jumps build the next larger jump.
+
+6. First lift the deeper endpoint until the depths match. If they are not equal, scan jump sizes from largest to smallest. Jump both upward whenever their destinations differ. Their next shared parent is the LCA.
+
+7. In the official sample, one and three are one edge apart. The route from two to five uses three edges: two to one, one to three, and three to five. The route from one to four uses two edges.
+
+8. Why is the formula correct? The unique path goes from a up to the LCA and then down to b. Those two pieces share only the LCA itself, so their edge counts add without overlap.
+
+9. The C++ solution avoids recursive depth limits, stores about N log N ancestors, and answers each query in O of log N time. The total preprocessing time is also O of N log N.

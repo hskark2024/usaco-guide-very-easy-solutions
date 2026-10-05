@@ -1,0 +1,9 @@
+Company Queries II	Find the lowest common boss	Hierarchy rooted at employee one	Closest shared ancestor wins
+Climbing faster	One parent step can be too slow	Prepare jumps of 1, 2, 4, 8...	Like elevator buttons
+Binary-lifting table	up k v climbs 2 to the k	Combine two half-sized jumps	Build all rows in N log N
+Match the depths	Find which employee is deeper	Lift by the depth difference	Use the one bits of the difference
+Ancestor shortcut	Leveling may make them equal	One endpoint was already an ancestor	That employee is the answer
+Largest safe jumps	Scan powers from large to small	Jump when destinations differ	Finish as children of the LCA
+Official sample	Four and five meet at three	Two and five meet at one	One and four meet at one
+Why it works	Every jump length is exact	Never jump onto the same ancestor	Shared parent is the lowest one
+C++ and complexity	Build rows while reading	O N log N preprocessing	O log N per query
