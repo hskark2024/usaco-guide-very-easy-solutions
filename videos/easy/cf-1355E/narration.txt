@@ -1,0 +1,17 @@
+1. Restorer Distance asks us to make every pillar the same height. We can add a brick, remove a brick, or move one brick from a tall pillar to a short pillar. Each operation has its own price.
+
+2. First, compare the move price with the price of one removal plus one addition. If moving is more expensive, we can simulate it with those two operations. So replace M with the smaller of M and A plus R.
+
+3. Now choose a possible final height x. Pillars below x create missing bricks, and pillars above x create extra bricks. Add all missing amounts into one deficit and all extra amounts into one surplus.
+
+4. Pair one extra brick with one missing brick to make a move. Because we capped the move price, this pairing is never worse than removing and adding separately. The number of moves is the smaller of deficit and surplus.
+
+5. After all possible moves, any remaining deficit must be filled with additions. Any remaining surplus must be handled with removals. This produces the cheapest cost for that chosen target.
+
+6. As the target height rises, the total cost forms a convex valley. Compare the cost at middle and middle plus one. If middle is no worse, keep the left half. Otherwise, keep the right half.
+
+7. In the third official example, moving is very cheap. The pillars have heights one, three, and eight. Moving bricks from the tall pillar to the short pillars lets the solution reuse material and reach the minimum cost four.
+
+8. Search only from zero through the maximum starting height. Targets outside this range cannot help because every pillar would need the same one-direction operation. Use long long for brick totals and costs.
+
+9. One cost evaluation scans every pillar, and the binary search needs O of log H evaluations. The total is O of N log H time and O of N space, with a short and reliable C++ implementation.

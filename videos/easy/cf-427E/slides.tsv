@@ -1,0 +1,10 @@
+Police Patrol	Choose one station on a line	Car capacity is M	Every trip returns
+Farthest first	Reach the farthest uncollected criminal	Pick up closer criminals on return	Fill up to capacity
+Left trip leaders	Sorted indices 0, M, 2M, ...	One leader sets each distance	Sum station minus leader
+Mirror the right	Leaders N-1, N-1-M, ...	Left and right are independent	Use the same idea backward
+Useful station positions	Try criminal coordinates	Between neighbors cost is linear	An endpoint is optimal
+Left sweep	Maintain leader count	Maintain leader coordinate sum	count*x minus sum
+Right sweep	Move from right to left	Mirrored leader sequence	sum minus count*x
+Sample idea	Capacity can cover all three	Try each criminal position	Round trips choose the minimum
+Final distance	Add left and right one-way costs	Choose the smallest	Double for return travel
+Complexity	Two sweeps plus one scan	O(N) time	O(N) space

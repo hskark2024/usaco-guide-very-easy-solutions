@@ -1,0 +1,7 @@
+Group criminals farthest-first, sweep every useful station location in linear time, and derive the left/right distance formulas for Codeforces 427E.
+
+Official problem: https://codeforces.com/problemset/problem/427/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-427E.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#codeforces #usacoguide #greedy #linearsweep #cplusplus

@@ -1,0 +1,9 @@
+Restorer Distance	Make every pillar equal	Add, remove, or move bricks	Minimize price
+Cap move price	A move can be remove plus add	Use min(M, A + R)	Never overpay
+Pick target x	Short pillars create deficit	Tall pillars create surplus	Sum both totals
+Pair into moves	moved = min(deficit, surplus)	Reuse extra bricks	Moves are now worthwhile
+Handle leftovers	Add unmatched deficit	Remove unmatched surplus	This is optimal for fixed x
+Convex search	Total cost has one valley	Compare cost(mid) and cost(mid + 1)	Discard one side
+Cheap-move sample	Heights 1, 3, 8	Transfer material	Minimum cost is 4
+Boundaries and types	Search 0 through maximum height	Outside cannot improve	Use long long
+Complexity	O(N) per evaluation	O(log H) evaluations	O(N log H) total

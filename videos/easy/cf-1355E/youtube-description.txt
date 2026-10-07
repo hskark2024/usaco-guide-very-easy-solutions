@@ -1,0 +1,7 @@
+Balance missing and extra bricks, cap an overpriced move, and binary-search the convex cost curve for Codeforces Restorer Distance.
+
+Official problem: https://codeforces.com/contest/1355/problem/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1355E.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#codeforces #usacoguide #binarysearch #greedy #cplusplus

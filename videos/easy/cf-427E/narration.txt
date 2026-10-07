@@ -1,0 +1,19 @@
+1. Police Patrol places one station on a number line. One car can carry at most M criminals, and every trip must leave the station and return. We want the station location with the smallest total driving distance.
+
+2. Fix a station for a moment and look only to its left. The car should first reach the farthest uncollected criminal. On its way back, it can pick up as many as M minus one closer criminals for no extra distance.
+
+3. That means the left-side trip leaders are criminals at sorted indices zero, M, two M, and so on, as long as they remain left of the station. Only each leader's distance determines its trip.
+
+4. The right side is a mirror image. Start at index N minus one and step left by M. The left and right trips never need to mix, because any trip crossing the station could be split there without increasing distance.
+
+5. We only need to try station locations where criminals stand. Between two neighboring positions, the selected trip leaders stay the same and total distance is linear. A minimum on that interval occurs at one of its endpoints.
+
+6. As the station sweeps right, maintain how many left trip leaders are active and the sum of their positions. The one-way left distance is trip count times station position minus that coordinate sum.
+
+7. Sweep from right to left for the mirror formula. The one-way right distance is the selected coordinate sum minus trip count times station position. Add both arrays for each possible station.
+
+8. In the first sample, the car holds all three criminals at positions one, two, and three. A station at position one can drive to position three, collect everyone along the route, and return. That round trip has distance four, which is optimal.
+
+9. Be careful that every stored side cost is only one-way. Multiply the best left-plus-right total by two because every group returns to the station. Use long long because positions and the number of trips are large.
+
+10. Each sweep visits every criminal once, and the final scan is also linear. The solution runs in O of N time and O of N space, which is fast enough even for one million criminals.

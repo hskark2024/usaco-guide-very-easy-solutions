@@ -1,0 +1,7 @@
+Learn why weighted rebuilding cost forms a convex curve, how to search that curve using neighboring integer heights, and how to code the solution safely with 64-bit arithmetic.
+
+Official problem: https://www.spoj.com/problems/KOPC12A/
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/spoj-KOPC12A.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#spoj #usacoguide #binarysearch #convexity #cplusplus

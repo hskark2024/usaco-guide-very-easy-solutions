@@ -2453,6 +2453,153 @@ def verify_distance_queries() -> None:
     ]
 
 
+def verify_building_construction() -> None:
+    def brute_minimum(heights, prices):
+        return min(
+            sum(abs(target - height) * price
+                for height, price in zip(heights, prices))
+            for target in range(max(heights) + 1)
+        )
+
+    cases = [
+        ([1, 2, 3], [10, 100, 1000]),
+        ([0], [10_000]),
+        ([0, 10], [1, 1]),
+        ([0, 5, 10], [0, 0, 0]),
+        ([10_000] * 5, [10_000] * 5),
+    ]
+    for _ in range(350):
+        size = RNG.randint(1, 10)
+        cases.append((
+            [RNG.randint(0, 35) for _ in range(size)],
+            [RNG.randint(0, 40) for _ in range(size)],
+        ))
+
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f"{len(heights)}\n"
+        + ' '.join(map(str, heights)) + '\n'
+        + ' '.join(map(str, prices)) + '\n'
+        for heights, prices in cases
+    )
+    actual = list(map(int, run('spoj-KOPC12A', input_text).split()))
+    expected = [brute_minimum(heights, prices) for heights, prices in cases]
+    assert actual == expected
+
+    # Maximum legal values require a 64-bit total even though each input
+    # value fits comfortably in a 32-bit integer.
+    size = 10_000
+    heights = [0] * (size // 2) + [10_000] * (size // 2)
+    prices = [10_000] * size
+    input_text = (
+        f"1\n{size}\n"
+        + ' '.join(map(str, heights)) + '\n'
+        + ' '.join(map(str, prices)) + '\n'
+    )
+    assert int(run('spoj-KOPC12A', input_text)) == 500_000_000_000
+
+
+def verify_police_patrol() -> None:
+    def brute_minimum(positions, capacity):
+        best = 10**30
+        for station in range(min(positions), max(positions) + 1):
+            left = [value for value in positions if value < station]
+            right = [value for value in positions if value > station]
+
+            # The lists remain sorted.  Every capacity-sized block starts
+            # with the farthest still-uncollected criminal on that side.
+            left_one_way = sum(
+                station - left[index]
+                for index in range(0, len(left), capacity)
+            )
+            right_one_way = sum(
+                right[index] - station
+                for index in range(len(right) - 1, -1, -capacity)
+            )
+            best = min(best, 2 * (left_one_way + right_one_way))
+        return best
+
+    cases = [
+        ([1, 2, 3], 6),
+        ([0], 369),
+        ([-7, -6, -3, -1, 1], 5),
+        ([-5, -5, 0, 5, 5], 1),
+    ]
+    for _ in range(400):
+        size = RNG.randint(1, 11)
+        positions = sorted(RNG.randint(-18, 18) for _ in range(size))
+        capacity = RNG.randint(1, size + 3)
+        cases.append((positions, capacity))
+
+    for positions, capacity in cases:
+        input_text = (
+            f"{len(positions)} {capacity}\n"
+            + ' '.join(map(str, positions)) + '\n'
+        )
+        assert int(run('cf-427E', input_text)) == brute_minimum(
+            positions, capacity
+        )
+
+    # Exercise the full input-size bound while keeping the oracle obvious.
+    size = 1_000_000
+    input_text = f"{size} 1\n" + ('0 ' * size) + '\n'
+    assert int(run('cf-427E', input_text)) == 0
+
+
+def verify_restorer_distance() -> None:
+    def cost_at(heights, add_cost, remove_cost, move_cost, target):
+        move_cost = min(move_cost, add_cost + remove_cost)
+        missing = sum(max(0, target - value) for value in heights)
+        extra = sum(max(0, value - target) for value in heights)
+        moved = min(missing, extra)
+        return (
+            moved * move_cost
+            + (missing - moved) * add_cost
+            + (extra - moved) * remove_cost
+        )
+
+    def brute_minimum(heights, add_cost, remove_cost, move_cost):
+        return min(
+            cost_at(heights, add_cost, remove_cost, move_cost, target)
+            for target in range(max(heights) + 1)
+        )
+
+    cases = [
+        ([1, 3, 8], 1, 100, 100),
+        ([1, 3, 8], 100, 1, 100),
+        ([1, 3, 8], 100, 100, 1),
+        ([5, 5, 5], 7, 9, 3),
+        ([0, 10], 0, 5, 100),
+        ([0, 10], 5, 0, 100),
+    ]
+    for _ in range(400):
+        size = RNG.randint(1, 10)
+        cases.append((
+            [RNG.randint(0, 35) for _ in range(size)],
+            RNG.randint(0, 20),
+            RNG.randint(0, 20),
+            RNG.randint(0, 30),
+        ))
+
+    for heights, add_cost, remove_cost, move_cost in cases:
+        input_text = (
+            f"{len(heights)} {add_cost} {remove_cost} {move_cost}\n"
+            + ' '.join(map(str, heights)) + '\n'
+        )
+        assert int(run('cf-1355E', input_text)) == brute_minimum(
+            heights, add_cost, remove_cost, move_cost
+        )
+
+    # A large symmetric case has the same cost at every target and verifies
+    # that totals around 5e17 do not overflow.
+    size = 100_000
+    heights = [0] * (size // 2) + [1_000_000_000] * (size // 2)
+    input_text = (
+        f"{size} 10000 10000 20000\n"
+        + ' '.join(map(str, heights)) + '\n'
+    )
+    assert int(run('cf-1355E', input_text)) == 500_000_000_000_000_000
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2518,6 +2665,9 @@ if __name__ == "__main__":
         verify_distinct_colors,
         verify_company_queries_two,
         verify_distance_queries,
+        verify_building_construction,
+        verify_police_patrol,
+        verify_restorer_distance,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

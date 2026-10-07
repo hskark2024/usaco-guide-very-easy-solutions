@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-04 (the live Guide source and LCA module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`e8b01d6`](https://github.com/cpinitiative/usaco-guide/commit/e8b01d6c58badcabbdd922b15d408d76e2beebf1) (424 unique module-listed Easy IDs in today's full scan)
-- Completed Easy solutions: 66
-- Complete video packages: 66
+- Last listing check: 2026-10-06 (the live Guide page and Ternary Search module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`7bf6d95`](https://github.com/cpinitiative/usaco-guide/commit/7bf6d95ba5cbca9c37bc5cb96514a80b134bd4a5) (424 unique module-listed Easy IDs in today's full scan)
+- Completed Easy solutions: 69
+- Complete video packages: 69
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -77,6 +77,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cses-1139` | Distinct Colors | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1688` | Company Queries II | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1135` | Distance Queries | complete | complete | complete | generated locally; excluded from Git |
+| `spoj-KOPC12A` | Building Construction | complete | complete | complete | generated locally; excluded from Git |
+| `cf-427E` | Police Patrol | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1355E` | Restorer Distance | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-06
+
+- New entries: `spoj-KOPC12A` Building Construction, `cf-427E` Police Patrol, and `cf-1355E` Restorer Distance.
+- The live USACO Guide source is at commit `7bf6d95`; all three selected Ternary Search entries remain labeled Easy. Today's full module-data scan contains 424 unique Easy IDs.
+- All 100 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 101 smoke cases and all 66 independent Easy verifier groups passed, including maximum-size and 64-bit stress cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Video durations: 130.8 seconds (`spoj-KOPC12A`), 131.7 seconds (`cf-427E`), and 115.5 seconds (`cf-1355E`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Ternary Search has two remaining listed entries: `cf-2063D` Game With Triangles and `ac-freefall` Freefall. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-04
 

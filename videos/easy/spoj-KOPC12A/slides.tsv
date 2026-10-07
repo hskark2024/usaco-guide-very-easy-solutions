@@ -1,0 +1,9 @@
+Building Construction	Make every height equal	Each building has its own brick price	Minimize total cost
+Cost at target x	Changes are absolute height difference	Multiply by that building's price	Add all buildings
+One building is a V	Zero at its current height	Equal rise per step	The curve is convex
+Sum stays convex	Only one valley	A flat bottom is allowed	No second dip later
+Search neighboring heights	Compare f(mid) and f(mid + 1)	Keep the side containing the valley	Repeat until one target
+Sample walkthrough	Heights 1, 2, 3	Prices 10, 100, 1000	Target 3 costs 120
+Search range	Start at zero	End at maximum current height	Anything outside only costs more
+Safe arithmetic	Products can exceed int	Accumulate with long long	Keep input arrays simple
+Complexity	O(N) per cost check	O(log H) checks	O(N log H) total

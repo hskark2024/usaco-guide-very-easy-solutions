@@ -1,0 +1,17 @@
+1. Building Construction asks us to make every building the same height. Changing one brick on building i costs c i, so a tall expensive building may matter much more than several cheap buildings. We need the minimum total cost, not the average height.
+
+2. Suppose we try final height x. Building i needs the absolute difference between x and its current height in brick changes. Multiply that difference by its price, then add the values for every building. This gives a cost function f of x.
+
+3. One building's graph looks like the letter V. Its cost is zero at its original height, and it rises by the same amount with every step away. That V shape is convex: its slope never decreases as we move right.
+
+4. Adding all the V shapes gives another convex curve. It may have one lowest point or a flat lowest section, but it cannot go down, then up, and then go down again. That structure lets us remove half the search range at a time.
+
+5. Compare f at middle and middle plus one. If middle is no more expensive, the curve has stopped descending, so some best answer is at middle or to the left. Otherwise, moving right improves the cost, so the best answer is to the right.
+
+6. In the sample, the heights are one, two, and three, with prices ten, one hundred, and one thousand. Choosing height three costs twenty for the first building and one hundred for the second, for a total of one hundred twenty. The expensive third building strongly pulls the answer toward height three.
+
+7. The search starts at zero and ends at the largest current height. A target below zero is unnecessary, and a target above every building only adds more work. When the two endpoints meet, we evaluate that target once more.
+
+8. Use long long for the answer. Even though each height and price fits in an int, multiplying a difference by a price and adding thousands of buildings can exceed a 32-bit integer.
+
+9. Each cost check scans N buildings, and binary search performs O of log H checks. The final complexity is O of N log H time and O of N space. The same convex-search idea appears in many optimization problems.
