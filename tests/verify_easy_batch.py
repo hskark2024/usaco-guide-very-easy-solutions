@@ -3,7 +3,7 @@ from collections import Counter
 from collections import deque
 from fractions import Fraction
 from functools import lru_cache
-from math import atan2, gcd
+from math import atan2, floor, gcd, sqrt
 from itertools import combinations, permutations, product
 from pathlib import Path
 import random
@@ -2600,6 +2600,118 @@ def verify_restorer_distance() -> None:
     assert int(run('cf-1355E', input_text)) == 500_000_000_000_000_000
 
 
+def verify_game_with_triangles() -> None:
+    def brute_scores(lower, upper):
+        points = [(0, value) for value in lower]
+        points += [(1, value) for value in upper]
+        point_count = len(points)
+
+        # Enumerate every possible non-collinear triangle.  Its three-bit
+        # mask lets the DP reject triangles that reuse an erased point.
+        triangles = []
+        for chosen in combinations(range(point_count), 3):
+            rows = [points[index][0] for index in chosen]
+            if rows.count(0) not in (1, 2):
+                continue
+            paired_row = 0 if rows.count(0) == 2 else 1
+            paired_x = [
+                points[index][1]
+                for index in chosen
+                if points[index][0] == paired_row
+            ]
+            area = abs(paired_x[0] - paired_x[1])
+            mask = sum(1 << index for index in chosen)
+            triangles.append((mask, area))
+
+        # This oracle knows nothing about prefix sums or concave search: it
+        # tries every sequence of disjoint triangles on the small instance.
+        best_by_mask = {0: 0}
+        for mask in range(1 << point_count):
+            if mask not in best_by_mask:
+                continue
+            for triangle_mask, area in triangles:
+                if mask & triangle_mask:
+                    continue
+                combined = mask | triangle_mask
+                best_by_mask[combined] = max(
+                    best_by_mask.get(combined, -1),
+                    best_by_mask[mask] + area,
+                )
+
+        maximum = min(len(lower), len(upper), point_count // 3)
+        scores = [0] * (maximum + 1)
+        for mask, score in best_by_mask.items():
+            used = bin(mask).count('1')
+            if used % 3 == 0 and used // 3 <= maximum:
+                scores[used // 3] = max(scores[used // 3], score)
+        return scores[1:]
+
+    cases = [
+        ([0], [0]),
+        ([0], [-1, 0, 1]),
+        ([0, 100], [-100, -50, 0, 50]),
+        ([-1_000_000_000, -999_999_999, 0, 999_999_999, 1_000_000_000],
+         [-1_000_000_000, -500_000_000, 0, 500_000_000, 1_000_000_000]),
+    ]
+    for _ in range(140):
+        lower_count = RNG.randint(1, 4)
+        upper_count = RNG.randint(1, 4)
+        lower = RNG.sample(range(-12, 13), lower_count)
+        upper = RNG.sample(range(-12, 13), upper_count)
+        cases.append((lower, upper))
+
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f"{len(lower)} {len(upper)}\n"
+        + ' '.join(map(str, lower)) + '\n'
+        + ' '.join(map(str, upper)) + '\n'
+        for lower, upper in cases
+    )
+    output_lines = iter(run('cf-2063D', input_text).splitlines())
+    for lower, upper in cases:
+        expected = brute_scores(lower, upper)
+        actual_count = int(next(output_lines))
+        assert actual_count == len(expected)
+        actual = [] if actual_count == 0 else list(map(int, next(output_lines).split()))
+        assert actual == expected
+    assert list(output_lines) == []
+
+
+def verify_freefall() -> None:
+    def value(initial, cost, operations):
+        return cost * operations + initial / sqrt(operations + 1)
+
+    # Exhaustive enumeration is an independent oracle for small values.
+    for _ in range(500):
+        initial = RNG.randint(1, 1200)
+        cost = RNG.randint(1, 1200)
+        expected = min(
+            value(initial, cost, operations)
+            for operations in range(initial // cost + 1)
+        )
+        actual = float(run('ac-freefall', f'{initial} {cost}\n'))
+        assert abs(actual - expected) <= 1e-9 * max(1.0, expected)
+
+    # For huge inputs, calculus locates the continuous minimum.  Convexity
+    # means the best integer is among nearby floor/ceiling candidates.
+    for initial, cost in (
+        (10, 1),
+        (5, 10),
+        (10**18, 100),
+        (10**18, 1),
+        (10**18, 10**18),
+    ):
+        center = (initial / (2.0 * cost)) ** (2.0 / 3.0) - 1.0
+        base = max(0, floor(center))
+        candidates = {0}
+        candidates.update(
+            operation
+            for operation in range(max(0, base - 20), base + 21)
+        )
+        expected = min(value(initial, cost, operation) for operation in candidates)
+        actual = float(run('ac-freefall', f'{initial} {cost}\n'))
+        assert abs(actual - expected) <= 1e-11 * max(1.0, expected)
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2668,6 +2780,8 @@ if __name__ == "__main__":
         verify_building_construction,
         verify_police_patrol,
         verify_restorer_distance,
+        verify_game_with_triangles,
+        verify_freefall,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

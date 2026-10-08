@@ -1,0 +1,7 @@
+Balance power-up time against a faster fall and minimize a convex integer function for AtCoder ABC279 D Freefall.
+
+Official problem: https://atcoder.jp/contests/abc279/tasks/abc279_d
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ac-freefall.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#atcoder #usacoguide #ternarysearch #math #cplusplus

@@ -1,0 +1,7 @@
+Turn triangle areas into extreme-pair gains, combine two prefix sums, and search a discrete concave score for Codeforces 2063D.
+
+Official problem: https://codeforces.com/problemset/problem/2063/D
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-2063D.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#codeforces #usacoguide #ternarysearch #greedy #cplusplus

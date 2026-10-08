@@ -1,0 +1,10 @@
+Game With Triangles	Points lie on two parallel lines	Remove one triangle per move	Maximize every move count
+Area becomes distance	Two points form a horizontal base	The height is exactly 2	Area equals base length
+Best pairs	Sort each row	Pair outermost unused points	Save decreasing gains
+Split k triangles	x pairs come from the lower row	k - x pairs come from the upper row	Add two prefix scores
+Feasible interval	Lower row uses x + k points	Upper row uses 2k - x points	Intersect both limits
+Concave score	Marginal pair gains decrease	Score rises then falls	Compare neighbors to find the peak
+Official example	Lower: 0, 100	Upper: -100, -50, 0, 50	Pair gains are 100 and 150, 50
+Answers	One triangle scores 150	Two triangles score 200	Resource limits choose the split
+Maximum moves	min(n, m, (n + m) / 3)	Sort and build prefixes	Search once for each k
+Complexity	Use long long	O((N + M) log(N + M)) sorting	O(K log(N + M)) searches

@@ -88,6 +88,8 @@ The official statements remain at their original judge links. These notes intent
 | `spoj-KOPC12A` | SPOJ | [Building Construction](problems/spoj-KOPC12A/README.md) | [Convex Functions, Binary Search, Ternary Search] | [C++](solutions/spoj-KOPC12A.cpp) | [Package](videos/easy/spoj-KOPC12A/README.md) |
 | `cf-427E` | Codeforces | [Police Patrol](problems/cf-427E/README.md) | [Greedy Grouping, Linear Sweep, Convexity] | [C++](solutions/cf-427E.cpp) | [Package](videos/easy/cf-427E/README.md) |
 | `cf-1355E` | Codeforces | [Restorer Distance](problems/cf-1355E/README.md) | [Convex Functions, Binary Search, Greedy Pairing] | [C++](solutions/cf-1355E.cpp) | [Package](videos/easy/cf-1355E/README.md) |
+| `cf-2063D` | Codeforces | [Game With Triangles](problems/cf-2063D/README.md) | [Greedy Pairing, Prefix Sums, Discrete Concavity] | [C++](solutions/cf-2063D.cpp) | [Package](videos/easy/cf-2063D/README.md) |
+| `ac-freefall` | AtCoder | [Freefall](problems/ac-freefall/README.md) | [Convex Functions, Integer Ternary Search, Floating Point] | [C++](solutions/ac-freefall.cpp) | [Package](videos/easy/ac-freefall/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

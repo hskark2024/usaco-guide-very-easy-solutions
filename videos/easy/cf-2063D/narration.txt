@@ -1,0 +1,19 @@
+1. Game With Triangles gives us points on two horizontal lines. Every move removes three points that form a triangle. We must find how many moves are possible and the greatest total area for every move count.
+
+2. A valid triangle has two points on one line and one point on the other. The lines are two units apart, so base times height divided by two means the area is simply the horizontal distance between the two same-line points.
+
+3. Suppose we need several pairs from one sorted row. The first best pair uses the farthest left and farthest right points. Remove those, repeat inward, and save the running totals in a prefix array.
+
+4. For exactly k triangles, let x triangles use a pair from the lower row. Then k minus x triangles use a pair from the upper row. Their best total is lower prefix x plus upper prefix k minus x.
+
+5. Not every x fits. The lower row uses x plus k points, so x is at most n minus k. The upper row uses two k minus x points, so x is at least two k minus m. We also keep x between zero and k.
+
+6. Pair gains shrink as we move inward. Moving one triangle's pair from the upper row to the lower row therefore creates a score that rises and then falls. This discrete concave hill can be searched by comparing neighboring values.
+
+7. With lower points zero and one hundred, their only pair adds one hundred. With upper points minus one hundred, minus fifty, zero, and fifty, the first upper pair adds one hundred fifty and the next adds fifty.
+
+8. For one triangle, choose the upper pair for score one hundred fifty. For two triangles, the resource limits force one pair from each row, producing two hundred. These match the official second example.
+
+9. The maximum move count is the minimum of n, m, and n plus m divided by three. We sort once, build both prefix arrays, and do a logarithmic peak search for each answer.
+
+10. Use long long because coordinates can be a billion apart and many triangle areas are added. The total complexity is sorting plus K logarithmic searches, fast enough for two hundred thousand points.

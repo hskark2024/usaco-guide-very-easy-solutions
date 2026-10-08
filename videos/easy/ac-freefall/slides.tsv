@@ -1,0 +1,10 @@
+Freefall	Power-ups take time	Stronger gravity shortens the fall	Choose when to jump
+Objective function	x power-ups cost B times x	Gravity becomes x + 1	Fall takes A / sqrt(x + 1)
+One convex valley	Setup time rises	Fall time drops and flattens	Their sum falls then rises
+Finite boundary	Doing nothing costs A	If B times x exceeds A, x cannot win	Search through floor(A / B)
+Integer ternary search	Place two third-points	Compare their total times	Discard one outer third
+Finish exactly	Stop with a short interval	Check every remaining integer	Keep the smallest value
+Sample one	A = 10 and B = 1	Times: 10, 8.07, 7.77, 8	Two operations win
+Sample two	A = 5 and B = 10	One power-up already costs too much	Zero operations win
+Precision	Use long double	Call sqrtl	Print fifteen decimal places
+Complexity	Constant fraction removed each step	O(log(A / B)) time	O(1) memory

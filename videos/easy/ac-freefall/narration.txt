@@ -1,0 +1,19 @@
+1. Freefall asks when to stop powering up and start falling. Every power-up costs B time units, but stronger gravity makes the later fall faster. We need the earliest total arrival time.
+
+2. After x power-ups, gravity is x plus one. The setup takes B times x, and the fall takes A divided by the square root of x plus one. Add those pieces to get our objective function.
+
+3. The setup line always rises. The fall curve drops quickly at first, then flattens. Their sum forms one convex valley: at first a power-up may help, but eventually its fixed cost is larger than the tiny time saved.
+
+4. We also need a finite search boundary. Doing nothing finishes at time A. If x is greater than A divided by B, the power-ups alone already cost more than A, so that choice cannot win.
+
+5. Search integer x from zero through floor A divided by B. Place two probes at one third and two thirds. If the left value is smaller, discard the far-right part. Otherwise discard the far-left part.
+
+6. Stop when only a handful of integers remain. Evaluate every one of them, because the true choice must be an integer and the minimum might sit between the two probes or at a boundary.
+
+7. For A equals ten and B equals one, zero power-ups take ten. One takes about eight point zero seven, two take about seven point seven seven, and three take eight. The best integer is two.
+
+8. For A equals five and B equals ten, even one power-up costs more than the entire original fall. The best choice is zero, and the answer is exactly five.
+
+9. Use long double for the square root and the large products. Print many digits so the result easily meets the judge's absolute or relative error limit.
+
+10. Each ternary step removes a constant fraction of the interval, so the algorithm takes logarithmic time and constant memory. The same pattern works whenever an integer cost decreases and then increases exactly once.
