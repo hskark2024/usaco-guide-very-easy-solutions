@@ -1,0 +1,7 @@
+Build the longest chunked palindrome by greedily matching the shortest equal outer chunks with rolling hashes.
+
+Official problem: https://qoj.ac/problem/793/
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ceoi-17-PalindromicPartitions.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#ceoi #usacoguide #greedy #rollinghash #cplusplus

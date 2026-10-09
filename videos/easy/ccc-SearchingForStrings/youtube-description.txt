@@ -1,0 +1,7 @@
+Combine a letter-count sliding window with ordered double hashing to count distinct needle permutations in CCC 2020 S3.
+
+Official problem: https://dmoj.ca/problem/ccc20s3
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ccc-SearchingForStrings.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#ccc #usacoguide #rollinghash #slidingwindow #cplusplus

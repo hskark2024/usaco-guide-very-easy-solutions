@@ -1,0 +1,19 @@
+1. Searching For Strings gives us a needle and a haystack. We want the number of different rearrangements of the needle that appear as consecutive characters in the haystack. Seeing the same rearrangement again does not increase the answer.
+
+2. A rearrangement keeps the needle's length, so we inspect only haystack windows with exactly that many characters. Shorter and longer substrings can never qualify.
+
+3. Two strings are rearrangements when they contain the same number of every letter. We count a through z in the needle and in the current window, then compare those twenty-six counters.
+
+4. Sliding the window is cheap. Remove the letter that leaves on the left and add the new letter entering on the right. The other counts stay unchanged.
+
+5. Letter counts ignore order, which is perfect for recognizing candidates. But we also need distinct ordered strings. A polynomial rolling hash gives each order a compact fingerprint.
+
+6. Prefix hashes work like prefix sums. Subtract the hash before a window, with the correct base power, and we get that window's fingerprint in constant time. We do this with two large prime moduli for safety.
+
+7. In the official example, the needle is a a b and the haystack is a b a c a b a a. The window a b a matches the letter counts, and later b a a matches too.
+
+8. The string a b a appears twice, but both copies have the same ordered fingerprint. A set keeps only one copy, while b a a creates a second entry. The answer is two.
+
+9. The complete plan is count, slide, test the counters, hash valid windows, and insert them into a set. If the needle is longer than the haystack, we immediately print zero.
+
+10. The alphabet has only twenty-six letters, so the running time is linear in the input size. Prefix arrays and the set use linear space. Random brute-force tests compare our answer with storing the actual small substrings.

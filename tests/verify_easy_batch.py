@@ -2712,6 +2712,98 @@ def verify_freefall() -> None:
         assert abs(actual - expected) <= 1e-11 * max(1.0, expected)
 
 
+def verify_searching_for_strings() -> None:
+    def brute(needle: str, haystack: str) -> int:
+        length = len(needle)
+        wanted = sorted(needle)
+        return len({
+            haystack[start:start + length]
+            for start in range(len(haystack) - length + 1)
+            if sorted(haystack[start:start + length]) == wanted
+        })
+
+    # Small random cases use the literal substrings as an independent oracle,
+    # so this checks both the anagram filter and distinctness bookkeeping.
+    for _ in range(700):
+        needle_length = RNG.randint(1, 9)
+        haystack_length = RNG.randint(1, 18)
+        needle = ''.join(RNG.choice('abcd') for _ in range(needle_length))
+        haystack = ''.join(RNG.choice('abcd') for _ in range(haystack_length))
+        expected = brute(needle, haystack)
+        actual = int(run(
+            'ccc-SearchingForStrings',
+            f'{needle}\n{haystack}\n',
+        ))
+        assert actual == expected
+
+    # Exercise the official maximum length and a huge run of overlapping
+    # matching windows.  Every window is the same ordering, so the answer is 1.
+    needle = 'a' * 100_000
+    haystack = 'a' * 200_000
+    assert int(run(
+        'ccc-SearchingForStrings',
+        f'{needle}\n{haystack}\n',
+    )) == 1
+
+
+def verify_censoring() -> None:
+    def brute(source: str, forbidden: str) -> str:
+        # Follow the statement literally: locate the leftmost copy, erase it,
+        # and start the search again until no copy remains.
+        while True:
+            position = source.find(forbidden)
+            if position == -1:
+                return source
+            source = source[:position] + source[position + len(forbidden):]
+
+    for _ in range(900):
+        source = ''.join(RNG.choice('abc') for _ in range(RNG.randint(1, 24)))
+        forbidden = ''.join(RNG.choice('abc') for _ in range(RNG.randint(1, 7)))
+        expected = brute(source, forbidden)
+        actual = run('usaco-529', f'{source}\n{forbidden}\n').rstrip('\n')
+        assert actual == expected
+
+    # This overlap-heavy case repeatedly creates and deletes suffix matches.
+    source = 'a' * 200_001
+    actual = run('usaco-529', f'{source}\naa\n').rstrip('\n')
+    assert actual == 'a'
+
+
+def verify_palindromic_partitions() -> None:
+    def brute(text: str) -> int:
+        # A length-n string has 2^(n-1) possible placements of cuts.  Enumerate
+        # all of them for small n and keep the longest palindromic chunk list.
+        best = 1
+        for cut_mask in range(1 << (len(text) - 1)):
+            chunks = []
+            start = 0
+            for position in range(len(text) - 1):
+                if cut_mask & (1 << position):
+                    chunks.append(text[start:position + 1])
+                    start = position + 1
+            chunks.append(text[start:])
+            if chunks == chunks[::-1]:
+                best = max(best, len(chunks))
+        return best
+
+    cases = [
+        ''.join(RNG.choice('abc') for _ in range(RNG.randint(1, 10)))
+        for _ in range(1_200)
+    ]
+    expected = [brute(text) for text in cases]
+    input_text = str(len(cases)) + '\n' + '\n'.join(cases) + '\n'
+    actual = list(map(int, run(
+        'ceoi-17-PalindromicPartitions', input_text
+    ).split()))
+    assert actual == expected
+
+    # Every character can be its own matching chunk in an all-equal string.
+    maximum = 'a' * 1_000_000
+    assert int(run(
+        'ceoi-17-PalindromicPartitions', f'1\n{maximum}\n'
+    )) == len(maximum)
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2782,6 +2874,9 @@ if __name__ == "__main__":
         verify_restorer_distance,
         verify_game_with_triangles,
         verify_freefall,
+        verify_searching_for_strings,
+        verify_censoring,
+        verify_palindromic_partitions,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

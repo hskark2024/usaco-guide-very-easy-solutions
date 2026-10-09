@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "ccc-SearchingForStrings": ("aab\nabacabaa\n", "2\n"),
+    "usaco-529": ("whatthemomooofun\nmoo\n", "whatthefun\n"),
+    "ceoi-17-PalindromicPartitions": ("4\nbonobo\ndeleted\nracecar\nracecars\n", "3\n5\n7\n1\n"),
     "cf-2063D": ("5\n1 3\n0\n0 1 -1\n2 4\n0 100\n-100 -50 0 50\n2 4\n0 1000\n-100 -50 0 50\n6 6\n20 1 27 100 43 42\n100 84 1 24 22 77\n8 2\n564040265 -509489796 469913620 198872582 -400714529 553177666 131159391 -20796763\n-1000000000 1000000000\n", "1\n2\n2\n150 200\n2\n1000 200\n4\n99 198 260 283\n2\n2000000000 2027422256\n"),
     "ac-freefall": ("5 10\n", "5.000000000000000\n"),
     "spoj-KOPC12A": ("1\n3\n1 2 3\n10 100 1000\n", "120\n"),

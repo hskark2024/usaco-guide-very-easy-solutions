@@ -1,0 +1,10 @@
+Palindromic Partitions	Split a word into chunks	Chunk sequence reads both ways	Maximize the number of chunks
+Chunks are atomic	Each chunk may be any string	Outer chunks must be equal	Do not reverse inside a chunk
+Two boundaries	Focus on the remaining interval	A multi-chunk answer needs equal ends	Solve inward
+Grow candidates	Try length 1, then 2, then 3	Prefix and suffix use equal lengths	Stop before overlap
+Greedy cut	Take the shortest equal border	Earn two chunks immediately	Leave the largest interior
+Rolling hashes	Grow the left hash forward	Grow the right hash from its left	Use two 64-bit fingerprints
+Example: deleted	d matches d	e matches e	let is the center: answer 5
+No outer match	No pair can start a palindrome	Use the whole remainder	One center chunk
+Algorithm	Grow, compare, confirm	Cut and reset	Repeat toward the center
+Complexity	Expected O(n) time	O(1) extra space	Verified by every small partition

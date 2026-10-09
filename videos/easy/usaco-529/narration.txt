@@ -1,0 +1,19 @@
+1. Censoring repeatedly deletes the first copy of one forbidden word. The tricky part is that a deletion can join characters and create a new copy that was not next to each other before.
+
+2. Searching the entire text, erasing, and starting again is too slow for a million characters. Moving a long string after every deletion can make the work nearly quadratic.
+
+3. Instead, read the source from left to right and build the answer in a stack. Pushing a character adds it to the end. Popping several characters performs a deletion without shifting the safe prefix.
+
+4. Before a push, the stack is already fully censored. After one new character arrives, any new forbidden copy must end at that character. So we only test the newest suffix.
+
+5. Two rolling prefix hashes travel with the stack. They let us calculate the fingerprint of the final pattern-length characters in constant time.
+
+6. When both suffix fingerprints equal the forbidden word, we also compare the actual letters. That final check means even an impossible-looking hash collision cannot delete the wrong text.
+
+7. In the official example, we process what the mo moo ofun with moo forbidden. As soon as m o o completes at the end of the stack, those three letters disappear. The final text becomes what the fun.
+
+8. The prefix-hash arrays have one state per stack length. When we pop three letters, resizing the hash arrays rolls them back to the matching earlier state too.
+
+9. Our invariant is simple: after each source character, the stack equals the fully censored processed prefix. Only a new suffix can break it, and we immediately remove that suffix.
+
+10. Each character is pushed once and true matched characters are popped once, giving expected linear time and linear space. Random tests compare the answer with literal repeated leftmost deletion.

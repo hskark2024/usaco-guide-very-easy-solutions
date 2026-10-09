@@ -1,0 +1,10 @@
+Censoring	Delete the first forbidden copy	Repeat until none remain	Deletions can create new matches
+Slow approach	Search the whole string	Erase and restart	Can become nearly quadratic
+Output stack	Read source left to right	Push ordinary characters	Pop a completed forbidden suffix
+Why only the suffix?	Old stack is already safe	One new character was added	Any new match ends there
+Rolling hash states	Two prefix hashes follow the stack	Extract the newest suffix in O(1)	Compare with the pattern
+Collision guard	Both hashes must match	Then compare actual letters	Wrong deletion is impossible
+Official example	Source: whatthemo moo ofun	Forbidden: moo	Result: whatthefun
+Rollback together	Resize the result string	Resize both prefix arrays	Continue from the safe state
+Invariant	Stack equals censored processed prefix	Check after every push	Induction proves the answer
+Complexity	Expected O(|S| + |T|) time	O(|S|) space	Tested against literal deletion

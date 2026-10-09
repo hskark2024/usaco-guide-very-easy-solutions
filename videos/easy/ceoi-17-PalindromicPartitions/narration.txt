@@ -1,0 +1,19 @@
+1. Palindromic Partitions asks us to cut a word into as many chunks as possible. The list of whole chunk strings must read the same from the front and from the back.
+
+2. A chunk itself does not need to be a character palindrome. For example, a b can match another a b at the other end. We compare equal strings, not reversed strings.
+
+3. Put one boundary at each end of the remaining word. Any solution with more than one remaining chunk needs an equal prefix chunk and suffix chunk.
+
+4. Grow candidates one character at a time from both ends. First compare chunks of length one, then length two, and continue until they match or would overlap.
+
+5. When we find the shortest matching outer pair, take it immediately. Those two chunks are now fixed, and choosing the earliest border leaves the largest interior for more matching pairs.
+
+6. Comparing longer strings from scratch would be slow. We update two sixty-four-bit polynomial hashes as the left chunk grows rightward and the right chunk grows leftward. Matching hashes are confirmed with the actual letters.
+
+7. Consider deleted. The outer d characters match, then the outer e characters match. The middle l e t becomes one chunk, giving d, e, let, e, d for five chunks.
+
+8. If no equal outer candidates exist before the center, the entire remainder must be one center chunk. That center is always allowed, regardless of its letters.
+
+9. Repeat: grow, match the shortest border, add two, and move inward. Our invariant is that all accepted chunks already form matching pairs around the still-unsolved middle.
+
+10. Each successful exact comparison consumes its characters, so the expected running time is linear and extra space is constant. Exhaustive tests try every partition of thousands of short words to verify the greedy answer.

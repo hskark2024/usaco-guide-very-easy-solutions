@@ -1,0 +1,7 @@
+Process Censoring in one pass with an output stack, rolling suffix hashes, and collision-proof exact confirmation.
+
+Official problem: https://usaco.org/index.php?cpid=529&page=viewproblem2
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-529.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #rollinghash #strings #cplusplus

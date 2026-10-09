@@ -1,0 +1,10 @@
+Searching For Strings	Needle plus haystack	Find appearing permutations	Count each ordering once
+Choose the windows	A permutation keeps the same length	Inspect windows of size |needle|	Ignore every other substring length
+Letter counters	Count a through z for the needle	Count the current window	Equal tables mean permutation
+Slide in O(1)	Remove the outgoing letter	Add the incoming letter	Keep the other counts
+Two different questions	Frequencies: is this a permutation?	Hash: which ordering is this?	Both are needed
+Prefix hashes	Build two modular hash rulers	Extract any window in O(1)	Double hashing reduces collisions
+Official sample	Needle: aab	Haystack: abacabaa	Candidates include aba and baa
+Distinct set	aba appears twice	Same fingerprint, one entry	baa creates the second entry
+Algorithm pipeline	Count, slide, compare	Hash matching windows	Early exit when needle is longer
+Complexity	O(|N| + 26|H|) time	O(|H|) space	Checked against brute force

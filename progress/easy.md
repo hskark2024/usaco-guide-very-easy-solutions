@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-07 (the live Guide page and Ternary Search module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`81339ee`](https://github.com/cpinitiative/usaco-guide/commit/81339eea4b5e43a0a1e26365f8dc8dfaa60f7705) (440 unique module-listed Easy IDs in today's full scan)
-- Completed Easy solutions: 71
-- Complete video packages: 71
+- Last listing check: 2026-10-08 (the live Guide source and Hashing module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`ff59fe9`](https://github.com/cpinitiative/usaco-guide/commit/ff59fe9483c6e72b738d607950bf6634455bd8db) (424 unique module-listed Easy IDs in today's full scan)
+- Completed Easy solutions: 74
+- Complete video packages: 74
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -82,6 +82,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1355E` | Restorer Distance | complete | complete | complete | generated locally; excluded from Git |
 | `cf-2063D` | Game With Triangles | complete | complete | complete | generated locally; excluded from Git |
 | `ac-freefall` | Freefall | complete | complete | complete | generated locally; excluded from Git |
+| `ccc-SearchingForStrings` | Searching For Strings | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-529` | Censoring | complete | complete | complete | generated locally; excluded from Git |
+| `ceoi-17-PalindromicPartitions` | Palindromic Partitions | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-08
+
+- New entries: `ccc-SearchingForStrings` Searching For Strings, `usaco-529` Censoring, and `ceoi-17-PalindromicPartitions` Palindromic Partitions.
+- The live USACO Guide source is at commit `ff59fe9`; all three selected Hashing entries are still labeled Easy. Today's full module-data scan contains 424 unique Easy IDs.
+- All 105 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 106 smoke cases and all 71 independent Easy verifier groups passed, including literal-substring, repeated-deletion, exhaustive-partition, and maximum-length stress checks for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 116.1 seconds (`ccc-SearchingForStrings`), 113.2 seconds (`usaco-529`), and 114.9 seconds (`ceoi-17-PalindromicPartitions`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Hashing remains in progress. Its next three listed Easy entries are `cf-1056E` Check Transcription, `cf-104048K` Fullmetal Alchemist II, and `ac-PrefixEquality` Prefix Equality.
 
 ## Batch verification — 2026-10-07
 
