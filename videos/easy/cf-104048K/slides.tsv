@@ -1,0 +1,10 @@
+Fullmetal Alchemist II	One phrase must contain every input phrase	Minimize total length	N is at most 10
+Remove redundancy	Contained phrases are already covered	Keep one duplicate	Shrink the real problem
+Exact substring test	Use KMP failure links	Never restart the whole scan	No hash collision risk
+Merge two phrases	Match suffix of A to prefix of B	Reuse the longest overlap	Add only the uncovered tail
+Direction matters	overlap A to B can differ from B to A	Precompute every ordered pair	Store overlap lengths
+Why bitmasks	At most ten surviving phrases	One bit means already used	Avoid N factorial orders
+DP state	dp mask last is shortest merged length	Append one unused phrase	Pay length minus overlap
+Example	abcd then defg reuses d	then fghi reuses f	abcdefghi has length 9
+Invariant	All mask phrases are contained	Merged string ends at last	Length is best for those facts
+Complexity	O(N squared L plus 2 to N N squared)	Exact deterministic matching	Exhaustively verified

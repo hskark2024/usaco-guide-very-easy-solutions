@@ -2804,6 +2804,132 @@ def verify_palindromic_partitions() -> None:
     )) == len(maximum)
 
 
+def verify_check_transcription() -> None:
+    def brute(pattern: str, target: str) -> int:
+        answer = 0
+        zero_count = pattern.count('0')
+        one_count = len(pattern) - zero_count
+
+        # Literal slicing and expansion form an oracle independent of hashing.
+        for zero_length in range(1, len(target) + 1):
+            remaining = len(target) - zero_count * zero_length
+            if remaining <= 0 or remaining % one_count:
+                continue
+            one_length = remaining // one_count
+
+            position = 0
+            replacements = {}
+            valid = True
+            for symbol in pattern:
+                length = zero_length if symbol == '0' else one_length
+                block = target[position:position + length]
+                position += length
+                if symbol in replacements and replacements[symbol] != block:
+                    valid = False
+                    break
+                replacements[symbol] = block
+            if valid and replacements['0'] != replacements['1']:
+                answer += 1
+        return answer
+
+    for _ in range(900):
+        while True:
+            pattern = ''.join(
+                RNG.choice('01') for _ in range(RNG.randint(2, 9))
+            )
+            if '0' in pattern and '1' in pattern:
+                break
+        target = ''.join(
+            RNG.choice('abc') for _ in range(RNG.randint(1, 20))
+        )
+        expected = brute(pattern, target)
+        actual = int(run('cf-1056E', f'{pattern}\n{target}\n'))
+        assert actual == expected
+
+    # The rare symbol occurs once and the frequent symbol occurs 99,999
+    # times.  Enumerating the wrong symbol would be far too expensive.
+    pattern = '0' * 99_999 + '1'
+    target = 'a' * 1_000_000
+    assert int(run('cf-1056E', f'{pattern}\n{target}\n')) == 9
+
+
+def verify_fullmetal_alchemist_two() -> None:
+    def merge(left: str, right: str) -> str:
+        if right in left:
+            return left
+        overlap = 0
+        for length in range(1, min(len(left), len(right)) + 1):
+            if left[-length:] == right[:length]:
+                overlap = length
+        return left + right[overlap:]
+
+    def brute(phrases: list[str]) -> int:
+        # Test every order and build strings literally.  This oracle does not
+        # use KMP, masks, or the C++ transition table.
+        best = sum(map(len, phrases))
+        for order in permutations(phrases):
+            combined = ''
+            for phrase in order:
+                combined = merge(combined, phrase)
+            if all(phrase in combined for phrase in phrases):
+                best = min(best, len(combined))
+        return best
+
+    fixed = [
+        ['abc'],
+        ['abc', 'abc'],
+        ['bc', 'abcd'],
+        ['ab', 'bc', 'ca'],
+        ['aaaa', 'aaa', 'aa', 'a'],
+    ]
+    cases = fixed[:]
+    for _ in range(260):
+        count = RNG.randint(1, 7)
+        cases.append([
+            ''.join(RNG.choice('abc') for _ in range(RNG.randint(1, 6)))
+            for _ in range(count)
+        ])
+
+    for phrases in cases:
+        input_text = f'{len(phrases)}\n' + '\n'.join(phrases) + '\n'
+        assert int(run('cf-104048K', input_text)) == brute(phrases)
+
+    longest = 'a' * 10_000
+    input_text = f'3\n{longest}\n{longest[:-1]}\n{longest}\n'
+    assert int(run('cf-104048K', input_text)) == 10_000
+
+
+def verify_prefix_equality() -> None:
+    for _ in range(320):
+        length = RNG.randint(1, 24)
+        first = [RNG.randint(1, 15) for _ in range(length)]
+        second = [RNG.randint(1, 18) for _ in range(length)]
+        queries = [
+            (RNG.randint(1, length), RNG.randint(1, length))
+            for _ in range(80)
+        ]
+        expected = [
+            'Yes' if set(first[:x]) == set(second[:y]) else 'No'
+            for x, y in queries
+        ]
+        input_text = (
+            f'{length}\n'
+            + ' '.join(map(str, first)) + '\n'
+            + ' '.join(map(str, second)) + '\n'
+            + f'{len(queries)}\n'
+            + ''.join(f'{x} {y}\n' for x, y in queries)
+        )
+        actual = run('ac-PrefixEquality', input_text).split()
+        assert actual == expected
+
+    length = 200_000
+    repeated = '1000000000 ' * length
+    input_text = (
+        f'{length}\n{repeated}\n{repeated}\n3\n1 1\n{length} 1\n{length} {length}\n'
+    )
+    assert run('ac-PrefixEquality', input_text).split() == ['Yes', 'Yes', 'Yes']
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -2877,6 +3003,9 @@ if __name__ == "__main__":
         verify_searching_for_strings,
         verify_censoring,
         verify_palindromic_partitions,
+        verify_check_transcription,
+        verify_fullmetal_alchemist_two,
+        verify_prefix_equality,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

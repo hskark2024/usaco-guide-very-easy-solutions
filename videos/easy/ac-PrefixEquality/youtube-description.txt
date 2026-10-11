@@ -1,0 +1,7 @@
+Answer prefix-set equality queries with deterministic first-occurrence ranks and no hash collisions.
+
+Official problem: https://atcoder.jp/contests/abc250/tasks/abc250_e?lang=en
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ac-PrefixEquality.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#atcoder #usacoguide #sets #prefixes #cplusplus

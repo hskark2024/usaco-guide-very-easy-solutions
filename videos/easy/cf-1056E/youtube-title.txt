@@ -1,0 +1,1 @@
+Codeforces 1056E Check Transcription: Length Math + Hashing | C++

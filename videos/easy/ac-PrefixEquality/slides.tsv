@@ -1,0 +1,10 @@
+Prefix Equality	Compare sets inside two prefixes	Ignore order and duplicates	Answer many queries
+Rank A values	First new value gets rank 1	Next new value gets rank 2	Continue by first appearance
+A prefix shape	k distinct values means ranks 1 through k	Store k as its set ID	Every A prefix is valid
+Scan B	Ignore duplicates	Look up each new value's A rank	Notice values absent from A
+Three trackers	Distinct B count	Maximum A rank	Unknown-value flag
+Consecutive-set test	Maximum rank is k	k distinct known ranks fill 1 through k	Otherwise a rank is missing
+Prefix IDs	Good B prefix stores k	Bad prefix stores minus 1	Queries compare IDs
+Sample insight	A first 2 is set 1,2	B first 3 is also set 1,2	Duplicate 2 changes nothing
+Invariant	ID k means the first k A values	Equal IDs mean equal sets	No collision probability
+Complexity	Expected O(N plus Q) time	O(N) memory	Literal-set verified

@@ -1,0 +1,7 @@
+Build the shortest common superstring length with exact KMP overlaps and subset dynamic programming.
+
+Official problem: https://codeforces.com/gym/104048/problem/K
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-104048K.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#codeforces #usacoguide #bitmaskdp #kmp #cplusplus

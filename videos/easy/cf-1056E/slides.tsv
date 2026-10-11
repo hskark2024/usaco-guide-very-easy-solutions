@@ -1,0 +1,10 @@
+Check Transcription	Binary pattern plus lowercase target	Replace every 0 and every 1	Count valid ordered pairs
+Length equation	c0 times L0 plus c1 times L1 equals target length	Both lengths are positive	One guess determines the other
+Feasible guesses	Try L0	Compute the remaining length	Skip non-integer or empty L1
+Important normalization	Enumerate the more frequent symbol	At least half the pattern uses it	Keeps total scanning linear
+Cut the target	Walk through pattern symbols	Take a block of that symbol's length	First block defines its replacement
+Repeated blocks	Later 0 blocks must match r0	Later 1 blocks must match r1	Any mismatch rejects the guess
+Double rolling hash	Precompute two prefix hashes	Compare any block in O(1)	Two fingerprints reduce collision risk
+Example 01 and aaaaaa	Five positive length splits	Reject 3 plus 3 because strings equal	Answer 4
+Invariant	Processed blocks match their symbol	Pointer marks next unread target letter	End means a complete expansion
+Complexity	Expected O(target length) time	O(target length) memory	Brute-force verified

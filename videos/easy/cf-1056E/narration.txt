@@ -1,0 +1,19 @@
+1. Check Transcription gives us a zero-one pattern and a lowercase target. Every zero becomes one nonempty string, every one becomes another nonempty string, and we count the different valid pairs.
+
+2. The first key idea is length math. If the pattern has c zeroes and d ones, replacement lengths x and y must satisfy c times x plus d times y equals the target length.
+
+3. That means we only guess one length. Once x is chosen, the remaining target length determines y. We skip the guess if y is not a positive whole number.
+
+4. We rename the more frequent pattern symbol to zero. Then at least half of the pattern uses the length we enumerate, sharply limiting the number of guesses.
+
+5. For each feasible length pair, draw cuts through the target according to the pattern. The first zero block chooses r zero, and the first one block chooses r one.
+
+6. Every later block under the same symbol must have identical content. Prefix rolling hashes compare any two blocks in constant time instead of reading all their letters again.
+
+7. We use two modular hashes. They are like two independent fingerprints: both must agree before blocks count as equal.
+
+8. In the target aaaaaa with pattern zero-one, the positive length pairs sum to six. Five splits exist, but the three-three split is rejected because the two replacement strings would be equal. The answer is four.
+
+9. Our invariant is simple: after reading part of the pattern, every processed zero uses the chosen zero block, every processed one uses the chosen one block, and the target pointer is exactly at the next unread letter.
+
+10. The more-frequent-symbol trick keeps all candidate scans linear in the target length. Random brute-force tests expand literal strings and confirm the same count.

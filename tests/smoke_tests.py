@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "cf-1056E": ("01\naaaaaa\n", "4\n"),
+    "cf-104048K": ("3\nabcd\ndefg\nfghi\n", "9\n"),
+    "ac-PrefixEquality": ("5\n1 2 3 4 5\n1 2 2 4 3\n7\n1 1\n2 2\n2 3\n3 3\n4 4\n4 5\n5 5\n", "Yes\nYes\nYes\nNo\nNo\nYes\nNo\n"),
     "ccc-SearchingForStrings": ("aab\nabacabaa\n", "2\n"),
     "usaco-529": ("whatthemomooofun\nmoo\n", "whatthefun\n"),
     "ceoi-17-PalindromicPartitions": ("4\nbonobo\ndeleted\nracecar\nracecars\n", "3\n5\n7\n1\n"),
@@ -116,6 +119,8 @@ tests = {
 failed = []
 cases = [(stem, inp, expected) for stem, (inp, expected) in tests.items()]
 cases.append(("cf-687C", "3 50\n25 25 50\n", "3\n0 25 50\n"))
+cases.append(("cf-1056E", "001\nkokokokotlin\n", "2\n"))
+cases.append(("cf-104048K", "4\nwoofer\nfloofer\nerror\ntwo\n", "17\n"))
 for stem, inp, expected in cases:
     exe = build / stem
     if not exe.exists():

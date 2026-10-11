@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-08 (the live Guide source and Hashing module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`ff59fe9`](https://github.com/cpinitiative/usaco-guide/commit/ff59fe9483c6e72b738d607950bf6634455bd8db) (424 unique module-listed Easy IDs in today's full scan)
-- Completed Easy solutions: 74
-- Complete video packages: 74
+- Last listing check: 2026-10-11 (the live Guide source and Hashing module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`6ee0cc9`](https://github.com/cpinitiative/usaco-guide/commit/6ee0cc90b1b5477592fb71ddb1071dac1e1356f8) (424 unique module-listed Easy IDs in today's full scan)
+- Completed Easy solutions: 77
+- Complete video packages: 77
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -85,6 +85,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `ccc-SearchingForStrings` | Searching For Strings | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-529` | Censoring | complete | complete | complete | generated locally; excluded from Git |
 | `ceoi-17-PalindromicPartitions` | Palindromic Partitions | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1056E` | Check Transcription | complete | complete | complete | generated locally; excluded from Git |
+| `cf-104048K` | Fullmetal Alchemist II | complete | complete | complete | generated locally; excluded from Git |
+| `ac-PrefixEquality` | Prefix Equality | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-11
+
+- New entries: `cf-1056E` Check Transcription, `cf-104048K` Fullmetal Alchemist II, and `ac-PrefixEquality` Prefix Equality.
+- The live USACO Guide source is at commit `6ee0cc9`; all three selected Hashing entries are still labeled Easy. Today's full module-data scan contains 424 unique Easy IDs.
+- Check Transcription uses double rolling hashes with frequent-symbol length enumeration; Fullmetal Alchemist II uses collision-free KMP plus subset DP; Prefix Equality uses deterministic first-occurrence set IDs.
+- All 108 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 111 smoke cases and all 74 independent Easy verifier groups passed, including literal expansion, exhaustive superstring ordering, literal prefix-set comparisons, and maximum-size stress checks for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 112.0 seconds (`cf-1056E`), 102.1 seconds (`cf-104048K`), and 97.2 seconds (`ac-PrefixEquality`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Hashing is complete. Hashmaps has no Easy entries; the next Easy module is Meet in the Middle, beginning with `cses-1628` Meet in the Middle, `cf-888E` Maximum Subsequence, and `usaco-1207` Robot Instructions. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-08
 

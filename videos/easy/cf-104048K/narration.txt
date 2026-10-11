@@ -1,0 +1,19 @@
+1. Fullmetal Alchemist Two asks for the shortest single phrase containing every given phrase as a substring. We only need its minimum length.
+
+2. First remove redundant work. If cat is already inside scatter, any answer containing scatter automatically contains cat. Equal duplicates also need only one copy.
+
+3. We use KMP for exact substring checks. Its failure table remembers how much of a pattern can still match after a mismatch, so each scan is linear.
+
+4. Now place two surviving phrases. A suffix of the first may equal a prefix of the second. Reusing the longest such overlap adds the fewest new letters.
+
+5. Overlap is directed. ABC followed by BCD reuses BC, but BCD followed by ABC may reuse nothing. We precompute every ordered pair.
+
+6. There are at most ten phrases, but trying every order is factorial. Instead, a bitmask records which phrases are already used.
+
+7. DP of mask and last stores the shortest length for that used set when the merged string ends with last. Append an unused phrase and pay its length minus the overlap.
+
+8. For abcd, defg, and fghi, one best order merges d, then f, producing abcdefghi with length nine.
+
+9. The invariant says every DP state contains all phrases in its mask, ends with its last phrase, and has the smallest possible length among orders with those facts.
+
+10. Exact KMP avoids hash collisions. The running time is quadratic string preprocessing plus about two to the N times N squared DP work, easily fitting N at most ten.

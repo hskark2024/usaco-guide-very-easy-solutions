@@ -1,0 +1,7 @@
+Count valid binary-pattern substitutions using a length equation and double rolling hashes.
+
+Official problem: https://codeforces.com/problemset/problem/1056/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1056E.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#codeforces #usacoguide #rollinghash #strings #cplusplus

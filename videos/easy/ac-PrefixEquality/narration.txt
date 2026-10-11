@@ -1,0 +1,19 @@
+1. Prefix Equality asks whether two chosen array prefixes contain the same set of values. Repeats and order do not matter.
+
+2. We could hash each set, but there is a clean deterministic method. Watch values appear for the first time in array A and give them ranks one, two, three, and so on.
+
+3. Every A prefix now has a special shape. If it has seen k different values, its set of ranks is exactly one through k.
+
+4. While scanning B, ignore repeated values because a set stores membership only once. For each new value, look up its rank from A.
+
+5. Track three facts for the B prefix: how many distinct values it has, the largest A rank seen, and whether an unknown value appeared.
+
+6. Suppose the largest rank is k. If B has exactly k distinct known ranks, those ranks must fill every slot from one through k. No rank can be skipped.
+
+7. So a good B prefix receives set ID k. A prefix receives its distinct count as the same kind of ID. Invalid B prefixes receive minus one.
+
+8. In the sample, A prefix two and B prefix three both represent the set one-two even though B repeats the number two. Their IDs are both two, so the answer is Yes.
+
+9. Our invariant is that an ID k represents exactly the first k distinct values introduced by A. Equal IDs therefore mean equal actual sets.
+
+10. Each array position and query takes expected constant time with hash tables. Random tests compare every answer with literal sets, and no randomized fingerprints are needed.
