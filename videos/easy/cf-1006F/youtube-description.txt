@@ -1,0 +1,7 @@
+Count target-XOR grid paths by meeting in the middle on one anti-diagonal.
+
+Official problem: https://codeforces.com/contest/1006/problem/F
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1006F.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #meetinthemiddle #xor #cplusplus

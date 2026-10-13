@@ -6,6 +6,7 @@ from functools import lru_cache
 from math import atan2, comb, floor, gcd, sqrt
 from itertools import combinations, permutations, product
 from pathlib import Path
+import heapq
 import random
 import subprocess
 import sys
@@ -3028,6 +3029,186 @@ def verify_robot_instructions() -> None:
     assert actual == expected
 
 
+def verify_xor_paths() -> None:
+    def brute(grid: list[list[int]], target: int) -> int:
+        rows = len(grid)
+        columns = len(grid[0])
+
+        def visit(row: int, column: int, path_xor: int) -> int:
+            path_xor ^= grid[row][column]
+            if row == rows - 1 and column == columns - 1:
+                return path_xor == target
+
+            answer = 0
+            if row + 1 < rows:
+                answer += visit(row + 1, column, path_xor)
+            if column + 1 < columns:
+                answer += visit(row, column + 1, path_xor)
+            return answer
+
+        return visit(0, 0, 0)
+
+    for _ in range(550):
+        rows = RNG.randint(1, 6)
+        columns = RNG.randint(1, 6)
+        grid = [
+            [RNG.randrange(1 << 10) for _ in range(columns)]
+            for _ in range(rows)
+        ]
+        target = RNG.randrange(1 << 10)
+        expected = brute(grid, target)
+        input_text = (
+            f'{rows} {columns} {target}\n'
+            + ''.join(' '.join(map(str, row)) + '\n' for row in grid)
+        )
+        assert int(run('cf-1006F', input_text)) == expected
+
+    # Every monotone path through an all-zero maximum grid is valid.  This
+    # checks the largest path count and both recursion depths.
+    input_text = '20 20 0\n' + ('0 ' * 20 + '\n') * 20
+    assert int(run('cf-1006F', input_text)) == comb(38, 19)
+
+    # Values and target use the full advertised 64-bit range.
+    big = 10**18
+    assert int(run('cf-1006F', f'1 2 {big}\n0 {big}\n')) == 1
+
+
+def verify_tenzing_and_balls() -> None:
+    def brute(values: tuple[int, ...]) -> int:
+        @lru_cache(maxsize=None)
+        def solve(state: tuple[int, ...]) -> int:
+            best = 0
+            for left in range(len(state)):
+                for right in range(left + 1, len(state)):
+                    if state[left] != state[right]:
+                        continue
+                    removed = right - left + 1
+                    remaining = state[:left] + state[right + 1:]
+                    best = max(best, removed + solve(remaining))
+            return best
+
+        return solve(values)
+
+    cases = []
+    expected = []
+    for _ in range(350):
+        length = RNG.randint(1, 8)
+        values = tuple(RNG.randint(1, length) for _ in range(length))
+        cases.append(values)
+        expected.append(brute(values))
+
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f'{len(values)}\n{" ".join(map(str, values))}\n'
+        for values in cases
+    )
+    actual = list(map(int, run('cf-1842C', input_text).split()))
+    assert actual == expected
+
+    length = 200_000
+    input_text = f'1\n{length}\n' + ('1 ' * length) + '\n'
+    assert int(run('cf-1842C', input_text)) == length
+
+
+def verify_island_travels() -> None:
+    directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
+
+    def oracle(grid: list[str]) -> int:
+        rows = len(grid)
+        columns = len(grid[0])
+        island = [[-1] * columns for _ in range(rows)]
+        island_count = 0
+
+        # This verifier deliberately uses a simple list frontier instead of
+        # sharing the solution's queue-based flood-fill implementation.
+        for start_row in range(rows):
+            for start_column in range(columns):
+                if grid[start_row][start_column] != 'X' or island[start_row][start_column] != -1:
+                    continue
+                frontier = [(start_row, start_column)]
+                island[start_row][start_column] = island_count
+                for row, column in frontier:
+                    for dr, dc in directions:
+                        nr, nc = row + dr, column + dc
+                        if not (0 <= nr < rows and 0 <= nc < columns):
+                            continue
+                        if grid[nr][nc] == 'X' and island[nr][nc] == -1:
+                            island[nr][nc] = island_count
+                            frontier.append((nr, nc))
+                island_count += 1
+
+        costs = [[10**9] * island_count for _ in range(island_count)]
+        for source in range(island_count):
+            distance = [[10**9] * columns for _ in range(rows)]
+            heap = []
+            for row in range(rows):
+                for column in range(columns):
+                    if island[row][column] == source:
+                        distance[row][column] = 0
+                        heapq.heappush(heap, (0, row, column))
+
+            # Heap Dijkstra is slower but algorithmically independent from the
+            # production 0-1 deque and is ideal on these tiny maps.
+            while heap:
+                current, row, column = heapq.heappop(heap)
+                if current != distance[row][column]:
+                    continue
+                for dr, dc in directions:
+                    nr, nc = row + dr, column + dc
+                    if not (0 <= nr < rows and 0 <= nc < columns):
+                        continue
+                    if grid[nr][nc] == '.':
+                        continue
+                    candidate = current + (grid[nr][nc] == 'S')
+                    if candidate < distance[nr][nc]:
+                        distance[nr][nc] = candidate
+                        heapq.heappush(heap, (candidate, nr, nc))
+
+            for row in range(rows):
+                for column in range(columns):
+                    target = island[row][column]
+                    if target != -1:
+                        costs[source][target] = min(
+                            costs[source][target], distance[row][column]
+                        )
+
+        # Tiny random maps have few islands, so enumerating every visit order
+        # is a direct oracle for the subset DP.
+        return min(
+            sum(costs[order[index]][order[index + 1]]
+                for index in range(island_count - 1))
+            for order in permutations(range(island_count))
+        )
+
+    fixed = [
+        ['X'],
+        ['XSXSX'],
+        ['X.X', 'SSS', 'X.X'],
+        ['XXSS', 'XSSX', 'SSSX'],
+    ]
+    for grid in fixed:
+        input_text = f'{len(grid)} {len(grid[0])}\n' + '\n'.join(grid) + '\n'
+        assert int(run('usaco-230', input_text)) == oracle(grid)
+
+    for _ in range(240):
+        rows = RNG.randint(1, 4)
+        columns = RNG.randint(1, 5)
+        while True:
+            grid = [
+                ''.join('X' if RNG.random() < 0.42 else 'S'
+                        for _ in range(columns))
+                for _ in range(rows)
+            ]
+            if any('X' in row for row in grid):
+                break
+        expected = oracle(grid)
+        input_text = f'{rows} {columns}\n' + '\n'.join(grid) + '\n'
+        assert int(run('usaco-230', input_text)) == expected
+
+    # Alternating land and shallow water creates the maximum fifteen islands.
+    chain = 'XS' * 14 + 'X'
+    assert int(run('usaco-230', f'1 {len(chain)}\n{chain}\n')) == 14
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -3107,6 +3288,9 @@ if __name__ == "__main__":
         verify_meet_in_the_middle,
         verify_maximum_subsequence,
         verify_robot_instructions,
+        verify_xor_paths,
+        verify_tenzing_and_balls,
+        verify_island_travels,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

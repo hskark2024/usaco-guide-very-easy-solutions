@@ -1,0 +1,19 @@
+1. Island Travels gives us land, shallow water, and blocked deep water. We may start on any island and want the least swimming needed to visit them all.
+
+2. First, flood-fill connected X cells. Each four-directionally connected group receives one island number, and there are at most fifteen groups.
+
+3. Next, turn the grid into a smaller graph. Every island becomes a vertex, and an edge records the cheapest number of shallow squares between two islands.
+
+4. We find those edge costs with zero-one BFS. Moving onto island land costs zero, moving onto shallow water costs one, and deep water cannot be entered.
+
+5. Start each search from every cell of one island at distance zero. Zero-cost moves go to the front of the deque, while one-cost moves go to the back.
+
+6. After one search, the smallest distance on each target island is its pairwise travel cost. Repeat this for every source island.
+
+7. Now solve the visit order with bitmask DP. A mask says which islands are visited, and last says where the route currently ends.
+
+8. Every one-island state starts at zero because the helicopter may land on any first island. Add an unvisited island using its pairwise swimming cost.
+
+9. Zero-one BFS guarantees every graph edge is realizable and cheapest. The subset DP checks every possible island order, so their combination finds the global optimum.
+
+10. The expensive part is roughly K squared times two to the K, with K at most fifteen. Random maps and a fifteen-island chain verify all three stages.

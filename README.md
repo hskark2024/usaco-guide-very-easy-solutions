@@ -99,6 +99,9 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1628` | CSES | [Meet in the Middle](problems/cses-1628/README.md) | [Meet in the Middle, Subset Sums, Binary Search] | [C++](solutions/cses-1628.cpp) | [Package](videos/easy/cses-1628/README.md) |
 | `cf-888E` | Codeforces | [Maximum Subsequence](problems/cf-888E/README.md) | [Meet in the Middle, Binary Search, Modular Arithmetic] | [C++](solutions/cf-888E.cpp) | [Package](videos/easy/cf-888E/README.md) |
 | `usaco-1207` | USACO Silver | [Robot Instructions](problems/usaco-1207/README.md) | [Meet in the Middle, 2D Subset Sums, Counting] | [C++](solutions/usaco-1207.cpp) | [Package](videos/easy/usaco-1207/README.md) |
+| `cf-1006F` | Codeforces | [Xor-Paths](problems/cf-1006F/README.md) | [Meet in the Middle, DFS, Grid Paths, XOR] | [C++](solutions/cf-1006F.cpp) | [Package](videos/easy/cf-1006F/README.md) |
+| `cf-1842C` | Codeforces | [Tenzing and Balls](problems/cf-1842C/README.md) | [Dynamic Programming, Prefix Optimization] | [C++](solutions/cf-1842C.cpp) | [Package](videos/easy/cf-1842C/README.md) |
+| `usaco-230` | USACO Gold | [Island Travels](problems/usaco-230/README.md) | [Flood Fill, 0-1 BFS, Bitmask DP] | [C++](solutions/usaco-230.cpp) | [Package](videos/easy/usaco-230/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

@@ -1,0 +1,19 @@
+1. Tenzing and Balls lets us choose two equal colors and erase the entire interval between them. We want to erase as many balls as possible.
+
+2. It is easier to minimize how many balls survive. Let kept i mean the fewest survivors after decisions inside the first i original positions.
+
+3. At the current ball, one choice is to keep it. Then the survivor count is kept i minus one plus one.
+
+4. The other choice is to end a deleted interval here. Its left endpoint must be an earlier ball with the same color.
+
+5. If that earlier endpoint is j, deleting positions j through i leaves only the optimal prefix before j. Its survivor count is kept j minus one.
+
+6. Checking every earlier matching j would be too slow. For each color, remember the smallest kept j minus one seen before a ball of that color.
+
+7. The transition becomes the smaller of keeping the current ball and using that color shortcut. Then we update the shortcut so this position may start a future deletion.
+
+8. The update happens after the transition. That order prevents one ball from pretending to be both endpoints of a deletion.
+
+9. Any useful deletion plan can be represented by disjoint original intervals. Our prefix DP considers whether the last position survives or closes the last interval, so it covers every optimal plan.
+
+10. Each ball needs constant work, giving linear time. Exhaustive deletion sequences on small arrays and a two-hundred-thousand-ball stress case verify the result.

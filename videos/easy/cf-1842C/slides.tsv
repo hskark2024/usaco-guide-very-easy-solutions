@@ -1,0 +1,10 @@
+Tenzing and Balls	Equal colors may erase an interval	Operations may repeat	Maximize removed balls
+Flip the goal	Minimize survivors	kept[i] handles prefix 1 through i	Answer is N minus kept[N]
+Choice one: keep	Current ball survives	Use kept[i-1] plus 1	Always available
+Choice two: delete	Current ball closes an interval	Earlier endpoint has same color	Erase everything between them
+Prefix before endpoint	Choose earlier position j	Interval j through i disappears	Cost becomes kept[j-1]
+Color shortcut	Store minimum kept[j-1] per color	Avoid scanning old positions	Constant-time transition
+DP transition	Take keep or delete minimum	Then record current as future endpoint	One left-to-right pass
+Update order	Compute kept[i] first	Update using kept[i-1] second	Endpoints stay distinct
+Why correct	Optimal intervals can be disjoint	Last ball survives or closes last deletion	Both cases are tested
+Complexity	O(N) time	O(N) memory	Exhaustive small cases verified

@@ -1,0 +1,7 @@
+Label islands, compute swim distances with 0-1 BFS, and visit them all with bitmask DP.
+
+Official problem: http://www.usaco.org/index.php?page=viewproblem2&cpid=230
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-230.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #01bfs #bitmaskdp #cplusplus

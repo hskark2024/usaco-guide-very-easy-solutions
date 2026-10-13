@@ -1,0 +1,7 @@
+Turn interval deletion into a linear prefix DP with one best shortcut per color.
+
+Official problem: https://codeforces.com/problemset/problem/1842/C
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1842C.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #dynamicprogramming #dp #cplusplus

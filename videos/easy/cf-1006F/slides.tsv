@@ -1,0 +1,10 @@
+Xor-Paths	Move only right or down	XOR every visited cell	Count paths matching target K
+Why split the path?	A 20 by 20 grid has billions of paths	Each half has at most 19 moves	Meet in the middle
+Forward enumeration	Stop after half the moves	All endpoints share one anti-diagonal	Count XOR values per cell
+Backward enumeration	Start at the bottom-right	Move up or left	Reach the same anti-diagonal
+The shared cell	Both halves include it	Two copies cancel under XOR	We must restore one copy
+Complement equation	full = left XOR right XOR cell	Need left = K XOR right XOR cell	All values use 64 bits
+Frequency lookup	Choose the matching meeting cell	Find needed left XOR	Add its number of paths
+Why correct	Every path crosses once	Each split is unique	Only target-XOR pairs match
+Boundary cases	One row or one column	One cell	Zero and large values
+Complexity	About O(2^((N+M)/2)) time	Same order of stored states	Brute-force verified

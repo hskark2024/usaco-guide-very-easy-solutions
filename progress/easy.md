@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-12 (the live Guide source and Meet in the Middle module data were checked directly)
+- Last listing check: 2026-10-13 (the live Guide source, Meet in the Middle, and Gold Conclusion module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`ef5573b`](https://github.com/cpinitiative/usaco-guide/commit/ef5573bfbe9dc873486eed6502d6439d9c7fa97a) (424 unique module-listed Easy IDs in today's full scan)
-- Completed Easy solutions: 80
-- Complete video packages: 80
+- Completed Easy solutions: 83
+- Complete video packages: 83
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -91,6 +91,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cses-1628` | Meet in the Middle | complete | complete | complete | generated locally; excluded from Git |
 | `cf-888E` | Maximum Subsequence | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-1207` | Robot Instructions | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1006F` | Xor-Paths | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1842C` | Tenzing and Balls | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-230` | Island Travels | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-13
+
+- New entries: `cf-1006F` Xor-Paths, `cf-1842C` Tenzing and Balls, and `usaco-230` Island Travels.
+- The live USACO Guide source is at commit `ef5573b`; all three selected entries remain labeled Easy. Today's full module-data scan contains 424 unique Easy IDs.
+- Xor-Paths meets forward and backward XOR-frequency searches on one anti-diagonal; Tenzing and Balls compresses equal-color interval choices into a linear prefix DP; Island Travels combines flood fill, 0-1 BFS, and visit-all-islands bitmask DP.
+- All 114 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 118 smoke cases and all 80 independent Easy verifier groups passed, including exhaustive path and deletion enumeration, independent heap-Dijkstra/permutation map checks, and maximum-size stress cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed.
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Meet in the Middle is complete. Easy Gold Conclusion is in progress; its next listed entries are `cf-1904D2` Set To Max, `cf-1525C` Robot Collisions, and `ac-SinkingLand` Sinking Land. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-12
 

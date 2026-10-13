@@ -1,0 +1,19 @@
+1. Xor-Paths asks us to move right or down across a grid and count the routes whose cell values XOR to one target.
+
+2. A twenty by twenty grid has over thirty-five billion full paths, but each half of a path has at most nineteen moves. That suggests meet in the middle.
+
+3. Stop every forward route after half the moves. They all land on one anti-diagonal. For each meeting cell, count how often each partial XOR appears.
+
+4. Now start at the finish and enumerate the other half backward, moving only up or left. Each backward route reaches the same anti-diagonal.
+
+5. There is one XOR detail to handle. Both partial routes include the meeting cell, so combining their XOR values cancels that cell because equal values XOR to zero.
+
+6. To include the meeting value exactly once, the full XOR is forward XOR backward XOR meeting value. Rearranging gives the forward value we need.
+
+7. We look up target XOR backward XOR meeting value in that cell's forward frequency map. The stored frequency is the number of full routes contributed.
+
+8. Every complete route has exactly one meeting cell and one split into these two halves, so no route is missed or counted twice.
+
+9. A one-cell grid also works without special code: both searches stop immediately, and the duplicated meeting-cell correction tests its value against the target.
+
+10. The work is about two to the power of half the path length instead of enumerating every path. Exhaustive small grids and a twenty by twenty stress case verify the implementation.

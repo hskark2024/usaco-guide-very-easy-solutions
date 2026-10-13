@@ -1,0 +1,10 @@
+Island Travels	X means island land	S means shallow water	Deep water is blocked
+Stage 1: label islands	Flood-fill connected X cells	Four-direction movement	At most 15 components
+Stage 2: shrink the map	One vertex per island	Edge equals minimum swimming	Build a weighted island graph
+Why 0-1 BFS?	Entering X costs 0	Entering S costs 1	Deep water is forbidden
+Deque rule	Seed every source-island cell	Cost 0 goes to front	Cost 1 goes to back
+Pairwise distances	Run once per source island	Read minimum on every target	Fill K by K cost table
+Stage 3: subset DP	dp[mask][last]	Visited islands plus endpoint	Try each unvisited next island
+Free starting island	Helicopter lands anywhere	Every singleton state costs 0	No return trip required
+Why correct	Pair costs are shortest	Every visit order is considered	Every transition is realizable
+Complexity	O(KRC + K^2 2^K) time	K is at most 15	Random maps verified
