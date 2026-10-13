@@ -1,0 +1,19 @@
+1. Robot Instructions gives us movement cards. We need to reach one goal point and report how many winning subsets use exactly K cards for every K.
+
+2. Forty cards create too many full subsets, so split them into left and right halves with at most twenty cards each.
+
+3. Every half-subset has three useful facts: its total x movement, its total y movement, and how many cards it used.
+
+4. Enumerate all right subsets. Group them by cards used, and inside each group count how many subsets reach each coordinate.
+
+5. Now enumerate a left subset that reaches point p using i cards. The right half must supply exactly goal minus p.
+
+6. Look up that needed point in every right-size group j. If its frequency is f, add f to answer bucket i plus j.
+
+7. Frequencies matter because duplicate movement cards can create the same coordinate in several different ways. Each index subset is a separate answer.
+
+8. Negative moves work naturally. Subtracting the left point from the goal finds the correct complement whether movement goes right, left, up, or down.
+
+9. Each winning full subset has exactly one left part and one right part. Our lookup finds it once and places it in the bucket for its total number of cards.
+
+10. This takes roughly N times two to the N over two expected time. Brute-force random grids and a forty-identical-move binomial case verify every output line.

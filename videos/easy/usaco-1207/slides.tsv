@@ -1,0 +1,10 @@
+Robot Instructions	Select movement cards	Reach one goal point	Count answers for every size K
+Split the cards	At most 20 on the left	At most 20 on the right	Enumerate about one million each
+Half-subset state	Total x movement	Total y movement	Number of cards used
+Right frequency maps	One map per subset size	Key is destination point	Value is number of subsets
+Required complement	Left subset reaches p	Right must reach goal minus p	Works in two dimensions
+Fill answer buckets	Left uses i cards	Right group uses j cards	Add frequency to answer i plus j
+Duplicates matter	Equal movement cards are distinct	Many subsets may reach one point	Store frequencies
+Negative movement	Coordinates use signed 64-bit values	Subtraction still finds complement	No special direction cases
+Why correct	Every full subset splits uniquely	Matching points reach the goal	Size bucket is exact
+Complexity	Expected O(N times 2^(N/2)) time	O(2^(N/2)) memory	All buckets brute-force verified

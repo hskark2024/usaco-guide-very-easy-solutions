@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-11 (the live Guide source and Hashing module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`6ee0cc9`](https://github.com/cpinitiative/usaco-guide/commit/6ee0cc90b1b5477592fb71ddb1071dac1e1356f8) (424 unique module-listed Easy IDs in today's full scan)
-- Completed Easy solutions: 77
-- Complete video packages: 77
+- Last listing check: 2026-10-12 (the live Guide source and Meet in the Middle module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`ef5573b`](https://github.com/cpinitiative/usaco-guide/commit/ef5573bfbe9dc873486eed6502d6439d9c7fa97a) (424 unique module-listed Easy IDs in today's full scan)
+- Completed Easy solutions: 80
+- Complete video packages: 80
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -88,6 +88,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1056E` | Check Transcription | complete | complete | complete | generated locally; excluded from Git |
 | `cf-104048K` | Fullmetal Alchemist II | complete | complete | complete | generated locally; excluded from Git |
 | `ac-PrefixEquality` | Prefix Equality | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1628` | Meet in the Middle | complete | complete | complete | generated locally; excluded from Git |
+| `cf-888E` | Maximum Subsequence | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-1207` | Robot Instructions | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-12
+
+- New entries: `cses-1628` Meet in the Middle, `cf-888E` Maximum Subsequence, and `usaco-1207` Robot Instructions.
+- The live USACO Guide source is at commit `ef5573b`; all three selected Meet in the Middle entries are still labeled Easy. Today's full module-data scan contains 424 unique Easy IDs.
+- Meet in the Middle counts exact subset sums by complement multiplicity; Maximum Subsequence searches the best non-wrapping residue partner; Robot Instructions matches two-dimensional subset displacements in separate size buckets.
+- All 111 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 115 smoke cases and all 77 independent Easy verifier groups passed, including exhaustive subset enumeration, modular wraparound, two-dimensional displacement buckets, and maximum-size 64-bit binomial stress checks for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed.
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Meet in the Middle remains in progress with one listed Easy entry: `cf-1006F` Xor-Paths. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-11
 

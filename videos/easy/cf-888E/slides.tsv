@@ -1,0 +1,10 @@
+Maximum Subsequence	Choose any subset	Maximize sum modulo m	N can be 35
+Split and enumerate	Two halves	All subset residues per half	Include empty subset 0
+Combine choices	Left residue x	Right residue y	Result is x plus y modulo m
+Sort the right side	Place residues on 0 through m minus 1	Fix one left residue x	Search efficiently
+Safe boundary	Need y at most m minus 1 minus x	Choose greatest safe y	Use upper bound
+Ignore wrapping	Wrapped result is x plus y minus m	That is smaller than x	Empty right subset already gives x
+Best for each x	Take greatest safe y	Compute x plus y	Maximize across all left choices
+Sample	Modulus 4	Subset sum 7	Residue 3 is optimal
+Empty subset	Residue 0 is always present	One half may solve it alone	Search always has a candidate
+Complexity	O(N times 2^(N/2)) time	O(2^(N/2)) memory	Exhaustively verified

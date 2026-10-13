@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "cses-1628": ("4 5\n1 2 3 2\n", "3\n"),
+    "cf-888E": ("4 4\n5 2 4 1\n", "3\n"),
+    "usaco-1207": ("7\n5 10\n-2 0\n3 0\n4 0\n5 0\n0 10\n0 -10\n0 10\n", "0\n2\n0\n3\n0\n1\n0\n"),
     "cf-1056E": ("01\naaaaaa\n", "4\n"),
     "cf-104048K": ("3\nabcd\ndefg\nfghi\n", "9\n"),
     "ac-PrefixEquality": ("5\n1 2 3 4 5\n1 2 2 4 3\n7\n1 1\n2 2\n2 3\n3 3\n4 4\n4 5\n5 5\n", "Yes\nYes\nYes\nNo\nNo\nYes\nNo\n"),
@@ -121,6 +124,7 @@ cases = [(stem, inp, expected) for stem, (inp, expected) in tests.items()]
 cases.append(("cf-687C", "3 50\n25 25 50\n", "3\n0 25 50\n"))
 cases.append(("cf-1056E", "001\nkokokokotlin\n", "2\n"))
 cases.append(("cf-104048K", "4\nwoofer\nfloofer\nerror\ntwo\n", "17\n"))
+cases.append(("cf-888E", "3 20\n199 41 299\n", "19\n"))
 for stem, inp, expected in cases:
     exe = build / stem
     if not exe.exists():

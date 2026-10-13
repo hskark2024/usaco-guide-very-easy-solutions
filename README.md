@@ -96,6 +96,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-1056E` | Codeforces | [Check Transcription](problems/cf-1056E/README.md) | [Strings, Enumeration, Rolling Hash] | [C++](solutions/cf-1056E.cpp) | [Package](videos/easy/cf-1056E/README.md) |
 | `cf-104048K` | Codeforces Gym | [Fullmetal Alchemist II](problems/cf-104048K/README.md) | [Strings, KMP, Bitmask DP] | [C++](solutions/cf-104048K.cpp) | [Package](videos/easy/cf-104048K/README.md) |
 | `ac-PrefixEquality` | AtCoder | [Prefix Equality](problems/ac-PrefixEquality/README.md) | [Prefixes, Sets, Coordinate Ranking] | [C++](solutions/ac-PrefixEquality.cpp) | [Package](videos/easy/ac-PrefixEquality/README.md) |
+| `cses-1628` | CSES | [Meet in the Middle](problems/cses-1628/README.md) | [Meet in the Middle, Subset Sums, Binary Search] | [C++](solutions/cses-1628.cpp) | [Package](videos/easy/cses-1628/README.md) |
+| `cf-888E` | Codeforces | [Maximum Subsequence](problems/cf-888E/README.md) | [Meet in the Middle, Binary Search, Modular Arithmetic] | [C++](solutions/cf-888E.cpp) | [Package](videos/easy/cf-888E/README.md) |
+| `usaco-1207` | USACO Silver | [Robot Instructions](problems/usaco-1207/README.md) | [Meet in the Middle, 2D Subset Sums, Counting] | [C++](solutions/usaco-1207.cpp) | [Package](videos/easy/usaco-1207/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

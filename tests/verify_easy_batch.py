@@ -3,7 +3,7 @@ from collections import Counter
 from collections import deque
 from fractions import Fraction
 from functools import lru_cache
-from math import atan2, floor, gcd, sqrt
+from math import atan2, comb, floor, gcd, sqrt
 from itertools import combinations, permutations, product
 from pathlib import Path
 import random
@@ -2930,6 +2930,104 @@ def verify_prefix_equality() -> None:
     assert run('ac-PrefixEquality', input_text).split() == ['Yes', 'Yes', 'Yes']
 
 
+def verify_meet_in_the_middle() -> None:
+    def brute(values: list[int], target: int) -> int:
+        answer = 0
+        for mask in range(1 << len(values)):
+            total = sum(
+                values[index]
+                for index in range(len(values))
+                if mask & (1 << index)
+            )
+            answer += total == target
+        return answer
+
+    for _ in range(700):
+        length = RNG.randint(1, 16)
+        values = [RNG.randint(1, 20) for _ in range(length)]
+        target = RNG.randint(1, 100)
+        expected = brute(values, target)
+        input_text = (
+            f'{length} {target}\n' + ' '.join(map(str, values)) + '\n'
+        )
+        assert int(run('cses-1628', input_text)) == expected
+
+    # Every size-20 subset works, so this also verifies 64-bit multiplicity.
+    values = [1] * 40
+    input_text = '40 20\n' + ' '.join(map(str, values)) + '\n'
+    assert int(run('cses-1628', input_text)) == comb(40, 20)
+
+
+def verify_maximum_subsequence() -> None:
+    def brute(values: list[int], modulus: int) -> int:
+        best = 0
+        for mask in range(1 << len(values)):
+            total = sum(
+                values[index]
+                for index in range(len(values))
+                if mask & (1 << index)
+            )
+            best = max(best, total % modulus)
+        return best
+
+    for _ in range(700):
+        length = RNG.randint(1, 16)
+        modulus = RNG.randint(1, 60)
+        values = [RNG.randint(1, 150) for _ in range(length)]
+        expected = brute(values, modulus)
+        input_text = (
+            f'{length} {modulus}\n' + ' '.join(map(str, values)) + '\n'
+        )
+        assert int(run('cf-888E', input_text)) == expected
+
+    values = [1_000_000_000] * 35
+    input_text = '35 1000000000\n' + ' '.join(map(str, values)) + '\n'
+    assert int(run('cf-888E', input_text)) == 0
+
+
+def verify_robot_instructions() -> None:
+    def brute(moves: list[tuple[int, int]], goal: tuple[int, int]) -> list[int]:
+        answer = [0] * (len(moves) + 1)
+        for mask in range(1 << len(moves)):
+            x = 0
+            y = 0
+            used = 0
+            for index, (dx, dy) in enumerate(moves):
+                if mask & (1 << index):
+                    x += dx
+                    y += dy
+                    used += 1
+            if used and (x, y) == goal:
+                answer[used] += 1
+        return answer[1:]
+
+    for _ in range(450):
+        length = RNG.randint(1, 14)
+        moves = []
+        while len(moves) < length:
+            move = (RNG.randint(-5, 5), RNG.randint(-5, 5))
+            if move != (0, 0):
+                moves.append(move)
+        while True:
+            goal = (RNG.randint(-12, 12), RNG.randint(-12, 12))
+            if goal != (0, 0):
+                break
+        expected = brute(moves, goal)
+        input_text = (
+            f'{length}\n{goal[0]} {goal[1]}\n'
+            + ''.join(f'{x} {y}\n' for x, y in moves)
+        )
+        actual = list(map(int, run('usaco-1207', input_text).split()))
+        assert actual == expected
+
+    # The only winning subsets choose exactly twenty of forty identical moves.
+    input_text = '40\n20 0\n' + '1 0\n' * 40
+    actual = list(map(int, run('usaco-1207', input_text).split()))
+    expected = [0] * 40
+    expected[19] = comb(40, 20)
+    assert actual == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -3006,6 +3104,9 @@ if __name__ == "__main__":
         verify_check_transcription,
         verify_fullmetal_alchemist_two,
         verify_prefix_equality,
+        verify_meet_in_the_middle,
+        verify_maximum_subsequence,
+        verify_robot_instructions,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

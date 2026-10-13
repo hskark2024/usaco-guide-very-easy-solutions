@@ -1,0 +1,7 @@
+Count robot instruction subsets by size with two-dimensional meet in the middle and coordinate frequency maps.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=1207
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-1207.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usaco #usacoguide #meetinthemiddle #silver #cplusplus

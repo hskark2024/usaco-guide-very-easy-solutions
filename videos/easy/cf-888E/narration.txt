@@ -1,0 +1,19 @@
+1. Maximum Subsequence lets us choose any subset and asks for the largest subset sum modulo m. With thirty-five values, plain subset enumeration is too slow.
+
+2. Split the values into two halves. Enumerate every subset sum modulo m in each half, including residue zero for choosing nothing.
+
+3. A full subset is one left choice plus one right choice. If their residues are x and y, the final result is x plus y modulo m.
+
+4. Sort the right residues. Fix a left residue x and picture the right residues as dots from zero to m minus one.
+
+5. To avoid wrapping, y must be at most m minus one minus x. Use upper bound to find the greatest right residue inside that limit.
+
+6. Why can we ignore wrapped pairs? A wrapped result subtracts m and becomes smaller than x. But the empty right subset already lets us keep x, so wrapping cannot improve this fixed left choice.
+
+7. Therefore x plus the greatest safe y is the best partner for x. Check every left residue and keep the largest result.
+
+8. In the first sample, modulus four and values five, two, four, one can produce sum seven. Seven modulo four is three, the largest possible residue.
+
+9. The empty subset also matters, especially when one half alone is best. It guarantees residue zero is always available for the binary search.
+
+10. Meet in the middle reduces the work to about two to the N over two. Exhaustive random tests verify the binary-search boundary, wraparound, and modulus one.

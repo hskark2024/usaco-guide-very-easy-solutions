@@ -1,0 +1,19 @@
+1. Meet in the Middle asks us to count subsets that add to a target. With forty numbers, checking all two-to-the-forty subsets is far too much work.
+
+2. The trick is to split the array into two halves. Each half has at most twenty numbers, so it has about one million subsets instead of one trillion.
+
+3. For each half, create a list of every subset sum. Start with zero for the empty subset. When reading a new value, copy every old sum and add the value to each copy.
+
+4. Now every full subset is a pair: one subset chosen from the left and one chosen from the right. Their two sums must add to the target.
+
+5. Sort the right-half sums. For a left sum s, the partner we need is exactly target minus s.
+
+6. Use lower bound and upper bound to find the whole block of matching right sums. The block length tells us how many right subsets work with this left subset.
+
+7. Keep duplicates. If two different right subsets both total three, they are two different choices and both must count.
+
+8. In the sample, values one, two, three, two target five. The valid choices are two different one-two-two style index choices and the two-plus-three choice, for three total subsets.
+
+9. Every original subset splits in exactly one way at the middle, so it is counted once. Every pair we count adds exactly to the target, so it is valid.
+
+10. The running time is roughly N times two to the N over two. Random brute force and the forty-ones stress case verify both multiplicity and 64-bit counting.

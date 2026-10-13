@@ -1,0 +1,10 @@
+Meet in the Middle	Count subsets totaling x	N can be 40	Full 2^N is too large
+Split the search	Left half at most 20	Right half at most 20	About one million subsets each
+Generate sums	Begin with empty sum 0	Double the list per value	Keep every occurrence
+Recombine halves	Full subset equals left choice plus right choice	Need left plus right equals x	One unique split
+Find a partner	Sort right sums	For left sum s need x minus s	Binary search the value
+Count a range	Lower bound finds first match	Upper bound finds after last	Difference is the frequency
+Duplicates matter	Equal sums may use different indices	Each subset is distinct	Never deduplicate
+Sample	Values 1 2 3 2	Target 5	Three valid subsets
+Why correct	Every valid subset becomes one pair	Every counted pair totals x	Counted exactly once
+Complexity	O(N times 2^(N/2)) time	O(2^(N/2)) memory	Brute-force verified

@@ -1,0 +1,7 @@
+Maximize a subset sum modulo m with meet in the middle and one clean binary-search boundary.
+
+Official problem: https://codeforces.com/contest/888/problem/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-888E.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#codeforces #usacoguide #meetinthemiddle #bitmasks #cplusplus
