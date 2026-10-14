@@ -1,0 +1,7 @@
+Learn the exact two interval conditions that make an interval-maximum transformation possible.
+
+Official problem: https://codeforces.com/contest/1904/problem/D2
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1904D2.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #segmenttree #greedy #cplusplus

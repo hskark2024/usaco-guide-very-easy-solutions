@@ -1,0 +1,19 @@
+1. Sinking Land is an elevation grid surrounded by sea. Each year the water rises, but a low cell sinks only after water can reach it from the outside.
+
+2. Every cell has two requirements. It must touch the sea, directly or through sunk neighbors, and the current year must reach its elevation.
+
+3. Suppose a cell first becomes sea-adjacent in year t. Its earliest sinking year is the larger of t and its elevation.
+
+4. This formula suggests buckets. Bucket y stores every cell whose earliest sinking time is exactly year y.
+
+5. Boundary cells already touch the outside sea at year zero, so we schedule each boundary cell at its elevation. A visited flag prevents duplicate corners.
+
+6. Now process years in increasing order. Every cell in the current bucket sinks, so we subtract one from the remaining land area.
+
+7. When a cell sinks, each unseen neighbor becomes sea-adjacent for the first time. We schedule that neighbor at the larger of the current year and its own elevation.
+
+8. A low neighbor may join the same year's bucket. The processing loop keeps going through newly appended cells, which captures the whole instant chain reaction.
+
+9. Each cell is scheduled at most once. Cells whose sinking year is beyond the requested horizon need no bucket because they cannot change an answer.
+
+10. The total time is H times W plus Y, with linear memory. A separate flood fill recomputed from the boundary checks hundreds of random small grids.

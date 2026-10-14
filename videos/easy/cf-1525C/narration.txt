@@ -1,0 +1,21 @@
+1. Robot Collisions has robots moving between two reflecting walls. We need the explosion time of every robot, but only meetings at integer coordinates count.
+
+2. Start with parity. At any integer time, a robot keeps the parity of its starting coordinate plus the time. Two different starting parities can never share an integer coordinate.
+
+3. So we split the robots into even and odd groups. Inside each group, sort by position while remembering every robot's original input index.
+
+4. During a left-to-right scan, a right-moving robot waits on a stack. When a left-moving robot appears, it pairs with the nearest waiting right-mover.
+
+5. That direct pair meets after half their distance. No outside robot can reach either one sooner, so removing the pair is safe.
+
+6. Any left-mover with no waiting right-mover must first bounce off wall zero. After direct pairs disappear, these leftover left-movers are all before the leftover right-movers.
+
+7. Pair leftover left-movers from left to right. Unfolding the reflection shows that their meeting time is their two starting positions added together, divided by two.
+
+8. Pair leftover right-movers from right to left. Their time is two M minus both positions, divided by two.
+
+9. If one left-mover and one right-mover remain, both use a wall. Their unfolded meeting time is two M plus the left position minus the right position, all divided by two.
+
+10. A single remaining robot has no same-parity partner, so its answer stays minus one. The four pairing cases cover every possible collision.
+
+11. Sorting costs N log N and the scans are linear. A separate time-step simulator checks random small corridors, reflections, and multi-robot meetings.

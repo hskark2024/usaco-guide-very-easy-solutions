@@ -1,0 +1,11 @@
+Robot Collisions	Robots reflect between 0 and M	Only integer-coordinate meetings explode	Find every explosion time
+Parity split	At integer times parity changes together	Different starting parities never match	Solve even and odd separately
+Sort by position	Geometry depends on left-to-right order	Keep original indices	Restore output order later
+Direct pairs	Save each R on a stack	Next L takes nearest R	Adjacent robots meet first
+Direct time	Distance is xL minus xR	Both move one unit per second	Time is distance divided by two
+Left leftovers	No R existed before them	They must bounce at wall 0	All come before leftover R robots
+Pair two L robots	Use leftmost pair first	Unfold wall 0	Time is x1 plus x2 over two
+Pair two R robots	Use rightmost pair first	Unfold wall M	Time is 2M minus x1 minus x2 over two
+Final cross pair	One L and one R remain	Both reflect from a wall	Time is 2M plus xL minus xR over two
+Unmatched robot	No same-parity partner exists	It never explodes	Answer stays minus one
+Complexity	O(N log N) time	O(N) memory	Independent motion simulation verified

@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-13 (the live Guide source, Meet in the Middle, and Gold Conclusion module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`ef5573b`](https://github.com/cpinitiative/usaco-guide/commit/ef5573bfbe9dc873486eed6502d6439d9c7fa97a) (424 unique module-listed Easy IDs in today's full scan)
-- Completed Easy solutions: 83
-- Complete video packages: 83
+- Last listing check: 2026-10-14 (the live Guide source and Gold Conclusion module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`092bf54`](https://github.com/cpinitiative/usaco-guide/commit/092bf547cf4f63140057b220dba2861f884e1905) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 86
+- Complete video packages: 86
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -94,6 +94,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1006F` | Xor-Paths | complete | complete | complete | generated locally; excluded from Git |
 | `cf-1842C` | Tenzing and Balls | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-230` | Island Travels | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1904D2` | Set To Max | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1525C` | Robot Collisions | complete | complete | complete | generated locally; excluded from Git |
+| `ac-SinkingLand` | Sinking Land | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-14
+
+- New entries: `cf-1904D2` Set To Max, `cf-1525C` Robot Collisions, and `ac-SinkingLand` Sinking Land.
+- The live USACO Guide source is at commit `092bf54`; all three selected Gold Conclusion entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Set To Max validates nearest value sources with range maximum/minimum queries; Robot Collisions separates parity and pairs direct or reflected trajectories; Sinking Land schedules each cell at its earliest sinking year with linear buckets.
+- All 117 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 121 smoke cases and all 83 independent Easy verifier groups passed, including exhaustive interval-operation reachability, reflected-motion simulation, independent per-year boundary flood fills, and constraint-scale stress cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 95.4 seconds (`cf-1904D2`), 109.6 seconds (`cf-1525C`), and 91.0 seconds (`ac-SinkingLand`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Gold Conclusion remains in progress. Its next listed entries are `usaco-401` Cow Decathlon, `cf-1509C` The Sports Festival, and `cf-1970C3` Game on Tree. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-13
 

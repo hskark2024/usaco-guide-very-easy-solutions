@@ -1,0 +1,19 @@
+1. Set To Max lets us choose an interval and replace every number there with that interval's maximum. We must decide whether one array can become another.
+
+2. First notice that values never go down. If an original value is already larger than its target, the answer is immediately no.
+
+3. Now focus on one position whose target is x. To create x there, an operation needs to reach some position that originally contains x.
+
+4. That source cannot cross an original value larger than x. Such a value would become the interval maximum, so the operation would paint the wrong number.
+
+5. The source also cannot cross a position whose final target is smaller than x. Once we paint that position with x, no later maximum operation can lower it.
+
+6. These are exactly two range questions: is the maximum original value at most x, and is the minimum target value at least x?
+
+7. A segment tree stores both facts for every queried interval. Lists of original positions let binary search find the closest copy of x on the left and right.
+
+8. We only need those closest copies. If a farther copy has no blocker, the shorter interval to a nearer equal copy also has no blocker.
+
+9. The conditions are sufficient too. Imagine applying valid operations from smaller target values to larger ones. Larger targets can safely overwrite temporary smaller paint.
+
+10. Every position makes two binary searches and at most two segment-tree queries, so the total time is N log N. Exhaustive small arrays verify the condition against literal operations.

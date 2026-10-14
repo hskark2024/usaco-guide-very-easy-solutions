@@ -3209,6 +3209,191 @@ def verify_island_travels() -> None:
     assert int(run('usaco-230', f'1 {len(chain)}\n{chain}\n')) == 14
 
 
+def verify_set_to_max() -> None:
+    def reachable(start: tuple[int, ...]) -> set[tuple[int, ...]]:
+        """Enumerate every array obtainable by literal interval operations."""
+        seen = {start}
+        queue = deque([start])
+        while queue:
+            state = queue.popleft()
+            for left in range(len(state)):
+                maximum = 0
+                for right in range(left, len(state)):
+                    maximum = max(maximum, state[right])
+                    candidate = (
+                        state[:left]
+                        + (maximum,) * (right - left + 1)
+                        + state[right + 1:]
+                    )
+                    if candidate not in seen:
+                        seen.add(candidate)
+                        queue.append(candidate)
+        return seen
+
+    cases = [
+        ((1,), (1,)),
+        ((1, 1), (1, 2)),
+        ((1, 3, 1), (3, 3, 1)),
+        ((3, 1, 2), (3, 2, 2)),
+        ((2, 1, 3, 1), (2, 3, 3, 1)),
+    ]
+    for _ in range(180):
+        length = RNG.randint(1, 6)
+        original = tuple(RNG.randint(1, length) for _ in range(length))
+        target = tuple(RNG.randint(1, length) for _ in range(length))
+        cases.append((original, target))
+
+    expected = [target in reachable(original) for original, target in cases]
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f'{len(original)}\n'
+        + ' '.join(map(str, original)) + '\n'
+        + ' '.join(map(str, target)) + '\n'
+        for original, target in cases
+    )
+    actual = [token == 'YES' for token in run('cf-1904D2', input_text).split()]
+    assert actual == expected
+
+    # Maximum total input length; every position is already correct.
+    length = 200_000
+    values = '1 ' * length
+    assert run('cf-1904D2', f'1\n{length}\n{values}\n{values}\n').strip() == 'YES'
+
+
+def verify_robot_collisions() -> None:
+    def simulate(
+        positions: list[int], directions: list[str], wall: int
+    ) -> list[int]:
+        """Use literal one-second motion; integer collisions happen at integer times."""
+        count = len(positions)
+        current = positions[:]
+        velocity = [1 if direction == 'R' else -1 for direction in directions]
+        active = [True] * count
+        answer = [-1] * count
+
+        # With no explosions, every robot's reflected state repeats after 2M
+        # seconds. If the remaining configuration survives one full period,
+        # it survives forever.
+        for time in range(1, 2 * wall + 1):
+            for index in range(count):
+                if not active[index]:
+                    continue
+                current[index] += velocity[index]
+                if current[index] == 0:
+                    velocity[index] = 1
+                elif current[index] == wall:
+                    velocity[index] = -1
+
+            at_position: dict[int, list[int]] = {}
+            for index in range(count):
+                if active[index]:
+                    at_position.setdefault(current[index], []).append(index)
+
+            for meeting in at_position.values():
+                if len(meeting) < 2:
+                    continue
+                for index in meeting:
+                    active[index] = False
+                    answer[index] = time
+
+        return answer
+
+    cases = []
+    for _ in range(500):
+        wall = RNG.randint(2, 12)
+        count = RNG.randint(1, min(8, wall - 1))
+        positions = RNG.sample(range(1, wall), count)
+        directions = [RNG.choice('LR') for _ in range(count)]
+        cases.append((positions, directions, wall))
+
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f'{len(positions)} {wall}\n'
+        + ' '.join(map(str, positions)) + '\n'
+        + ' '.join(directions) + '\n'
+        for positions, directions, wall in cases
+    )
+    output_lines = run('cf-1525C', input_text).strip().splitlines()
+    assert len(output_lines) == len(cases)
+    for line, (positions, directions, wall) in zip(output_lines, cases):
+        assert list(map(int, line.split())) == simulate(positions, directions, wall)
+
+    # Exercise the advertised total N with a single large sorted case.
+    count = 300_000
+    positions = ' '.join(map(str, range(1, count + 1)))
+    directions = 'R ' * count
+    actual = run(
+        'cf-1525C',
+        f'1\n{count} 100000000\n{positions}\n{directions}\n',
+    ).split()
+    assert len(actual) == count
+
+
+def verify_sinking_land() -> None:
+    directions = ((1, 0), (-1, 0), (0, 1), (0, -1))
+
+    def oracle(grid: list[list[int]], years: int) -> list[int]:
+        height = len(grid)
+        width = len(grid[0])
+        answer = []
+
+        # Recompute boundary reachability from scratch each year. This is much
+        # slower than the production buckets but makes an independent oracle.
+        for year in range(1, years + 1):
+            flooded = [[False] * width for _ in range(height)]
+            queue = deque()
+
+            def add(row: int, column: int) -> None:
+                if not flooded[row][column] and grid[row][column] <= year:
+                    flooded[row][column] = True
+                    queue.append((row, column))
+
+            for row in range(height):
+                add(row, 0)
+                add(row, width - 1)
+            for column in range(width):
+                add(0, column)
+                add(height - 1, column)
+
+            while queue:
+                row, column = queue.popleft()
+                for dr, dc in directions:
+                    next_row, next_column = row + dr, column + dc
+                    if 0 <= next_row < height and 0 <= next_column < width:
+                        add(next_row, next_column)
+
+            sunk = sum(sum(row) for row in flooded)
+            answer.append(height * width - sunk)
+        return answer
+
+    fixed = [
+        ([[10, 2, 10], [3, 1, 4], [10, 5, 10]], 5),
+        ([[2, 2, 3, 3, 3], [2, 1, 2, 1, 3], [2, 2, 3, 3, 3]], 3),
+        ([[1, 5, 1, 5, 1]], 5),
+        ([[1], [3], [2], [7]], 7),
+    ]
+    cases = fixed[:]
+    for _ in range(320):
+        height = RNG.randint(1, 5)
+        width = RNG.randint(1, 5)
+        years = RNG.randint(1, 8)
+        grid = [
+            [RNG.randint(1, 10) for _ in range(width)]
+            for _ in range(height)
+        ]
+        cases.append((grid, years))
+
+    for grid, years in cases:
+        input_text = (
+            f'{len(grid)} {len(grid[0])} {years}\n'
+            + ''.join(' '.join(map(str, row)) + '\n' for row in grid)
+        )
+        actual = list(map(int, run('ac-SinkingLand', input_text).split()))
+        assert actual == oracle(grid, years)
+
+    # A million high cells remain dry during the only requested year.
+    row = '100000 ' * 1000 + '\n'
+    assert run('ac-SinkingLand', '1000 1000 1\n' + row * 1000).strip() == '1000000'
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -3291,6 +3476,9 @@ if __name__ == "__main__":
         verify_xor_paths,
         verify_tenzing_and_balls,
         verify_island_travels,
+        verify_set_to_max,
+        verify_robot_collisions,
+        verify_sinking_land,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

@@ -102,6 +102,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-1006F` | Codeforces | [Xor-Paths](problems/cf-1006F/README.md) | [Meet in the Middle, DFS, Grid Paths, XOR] | [C++](solutions/cf-1006F.cpp) | [Package](videos/easy/cf-1006F/README.md) |
 | `cf-1842C` | Codeforces | [Tenzing and Balls](problems/cf-1842C/README.md) | [Dynamic Programming, Prefix Optimization] | [C++](solutions/cf-1842C.cpp) | [Package](videos/easy/cf-1842C/README.md) |
 | `usaco-230` | USACO Gold | [Island Travels](problems/usaco-230/README.md) | [Flood Fill, 0-1 BFS, Bitmask DP] | [C++](solutions/usaco-230.cpp) | [Package](videos/easy/usaco-230/README.md) |
+| `cf-1904D2` | Codeforces | [Set To Max](problems/cf-1904D2/README.md) | [Segment Tree, Binary Search, Constructive] | [C++](solutions/cf-1904D2.cpp) | [Package](videos/easy/cf-1904D2/README.md) |
+| `cf-1525C` | Codeforces | [Robot Collisions](problems/cf-1525C/README.md) | [Sorting, Stack, Parity, Reflection] | [C++](solutions/cf-1525C.cpp) | [Package](videos/easy/cf-1525C/README.md) |
+| `ac-SinkingLand` | AtCoder | [Sinking Land](problems/ac-SinkingLand/README.md) | [Flood Fill, Bucket Queue, Minimax Paths] | [C++](solutions/ac-SinkingLand.cpp) | [Package](videos/easy/ac-SinkingLand/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

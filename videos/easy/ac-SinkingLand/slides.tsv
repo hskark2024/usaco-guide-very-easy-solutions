@@ -1,0 +1,10 @@
+Sinking Land	Sea level rises each year	Low land sinks only when water reaches it	Report remaining area
+Two requirements	Cell must touch the sea	Year must reach its elevation	Both are necessary
+Earliest sink year	First sea contact happens in year t	Elevation is A	Sink at max of t and A
+Year buckets	Bucket y stores cells sinking in year y	Process buckets in order	No priority queue needed
+Seed the boundary	Outside sea touches every border cell at year 0	Schedule at elevation	Mark corners only once
+Process one year	Sink every scheduled cell	Decrease remaining area	Then expose its neighbors
+Schedule neighbors	First sea contact is current year	Use max of year and elevation	Each cell scheduled once
+Same-year cascade	Low neighbor enters current bucket	Loop includes appended cells	Flood spreads instantly
+Beyond the horizon	Sink year above Y	Cannot affect requested output	No bucket required
+Complexity	O(HW plus Y) time	O(HW plus Y) memory	Independent flood fill verified

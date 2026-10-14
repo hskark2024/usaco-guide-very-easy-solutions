@@ -1,0 +1,7 @@
+Schedule each grid cell at its exact earliest sinking year with a linear-time bucket flood.
+
+Official problem: https://atcoder.jp/contests/abc363/tasks/abc363_e
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ac-SinkingLand.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #atcoder #floodfill #graphs #cplusplus

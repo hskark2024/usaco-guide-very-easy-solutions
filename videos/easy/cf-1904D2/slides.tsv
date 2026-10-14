@@ -1,0 +1,10 @@
+Set To Max	Replace an interval by its maximum	Values can only increase	Can A become B
+First rejection	If A[i] is above B[i]	No operation can decrease it	Answer is NO
+Every target needs a source	Position i needs value x	Find an original copy of x	Spread x across an interval
+Original blocker	Any original value above x	Interval maximum becomes too large	That source cannot work
+Target blocker	Any final target below x	Painting x would overshoot it	Values cannot be lowered later
+Two range facts	maximum original must be at most x	minimum target must be at least x	Both conditions are required
+Fast data structures	Occurrence lists find nearby x	Segment tree answers both facts	Logarithmic checks
+Nearest copies are enough	Check left and right	Shorter interval has fewer blockers	At most two candidates
+Why sufficient	Apply targets in increasing order	Higher targets overwrite later	Lower targets are protected
+Complexity	O(N log N) time	O(N) memory	Exhaustive small cases verified
