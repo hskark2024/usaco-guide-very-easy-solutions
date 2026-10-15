@@ -1,0 +1,19 @@
+1. The Sports Festival lets us reorder relay runners. After each runner, we pay the fastest speed seen minus the slowest speed seen, and we want the smallest total.
+
+2. Sort all speeds on a number line. The discrepancy of any chosen group depends only on its leftmost and rightmost values.
+
+3. It helps to think backward. The final stage always contains everyone, so its cost is the overall maximum minus the overall minimum.
+
+4. Just before the final stage, an optimal order can be missing one extreme: either the smallest speed or the largest speed.
+
+5. Removing a middle value would leave the same minimum and maximum. Moving that middle runner earlier cannot increase the cost, so an extreme can safely be last.
+
+6. Define DP left right as the smallest cost for the sorted interval from left through right. A one-person interval costs zero.
+
+7. For a longer interval, choose the cheaper smaller state: remove the left endpoint or remove the right endpoint.
+
+8. Then add the current interval width, speed right minus speed left. That width is the discrepancy after all runners in this interval have appeared.
+
+9. For speeds one, two, and three, the best costs grow from zero to one to three. This matches an order beginning near the middle.
+
+10. There are quadratic intervals and constant work per interval, so time and memory are O of N squared. Brute-force permutations verify small arrays.

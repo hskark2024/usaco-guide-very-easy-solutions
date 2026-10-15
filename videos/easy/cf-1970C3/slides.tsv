@@ -1,0 +1,10 @@
+Game on Tree	Move to an inactive neighbor	Ron moves first	No move means a loss
+Visited shape	Tree has no cycles	Visited nodes trail as one path	Last edge is blocked
+Directed state	Current node plus incoming edge	No giant visited mask	Local choices are enough
+Winning rule	Move to a losing state means win	All moves winning means loss	Leaf state is losing
+Bottom-up pass	Root the tree anywhere	Compute child-side states	Process children before parents
+Child recurrence	Any losing child gives a win	No losing child means loss	Store one boolean
+Why reroot	Queries can start anywhere	Parent direction also matters	Send outside information down
+Count losing moves	Include children and parent side	Positive count means Ron wins	Zero means Hermione wins
+Exclude one child	Subtract its losing contribution	Remaining choices define parent state	Pass result to child
+Complexity	Two O of N passes	O of 1 per query	Small-tree minimax verified

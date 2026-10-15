@@ -3394,6 +3394,152 @@ def verify_sinking_land() -> None:
     assert run('ac-SinkingLand', '1000 1000 1\n' + row * 1000).strip() == '1000000'
 
 
+def verify_cow_decathlon() -> None:
+    def oracle(
+        skills: list[list[int]], bonus_rules: list[tuple[int, int, int]]
+    ) -> int:
+        """Enumerate every assignment, independently of the subset DP."""
+        count = len(skills)
+        by_prefix: list[list[tuple[int, int]]] = [[] for _ in range(count + 1)]
+        for prefix, threshold, award in bonus_rules:
+            by_prefix[prefix].append((threshold, award))
+        for rules in by_prefix:
+            rules.sort()
+
+        answer = 0
+        for assignment in permutations(range(count)):
+            score = 0
+            for event, cow in enumerate(assignment):
+                score += skills[cow][event]
+                for threshold, award in by_prefix[event + 1]:
+                    if score >= threshold:
+                        score += award
+            answer = max(answer, score)
+        return answer
+
+    cases = [
+        (
+            [[5, 1, 7], [2, 2, 4], [4, 2, 1]],
+            [(2, 7, 6)],
+        ),
+        # The first same-prefix bonus lifts the score over the second threshold.
+        ([[5]], [(1, 5, 3), (1, 8, 10)]),
+        ([[2, 9], [8, 1]], []),
+    ]
+    for _ in range(70):
+        count = RNG.randint(1, 7)
+        skills = [
+            [RNG.randint(1, 20) for _ in range(count)]
+            for _ in range(count)
+        ]
+        bonus_rules = []
+        for _ in range(RNG.randint(0, 8)):
+            bonus_rules.append(
+                (
+                    RNG.randint(1, count),
+                    RNG.randint(1, count * 20 + 30),
+                    RNG.randint(1, 20),
+                )
+            )
+        cases.append((skills, bonus_rules))
+
+    for skills, bonus_rules in cases:
+        count = len(skills)
+        input_text = (
+            f'{count} {len(bonus_rules)}\n'
+            + ''.join(
+                f'{prefix} {threshold} {award}\n'
+                for prefix, threshold, award in bonus_rules
+            )
+            + ''.join(' '.join(map(str, row)) + '\n' for row in skills)
+        )
+        assert int(run('usaco-401', input_text)) == oracle(skills, bonus_rules)
+
+    # Exercise every mask at the maximum N without making the expected answer
+    # complicated: every assignment earns exactly one point per event.
+    count = 20
+    row = '1 ' * count + '\n'
+    assert run('usaco-401', f'{count} 0\n' + row * count).strip() == '20'
+
+
+def verify_sports_festival() -> None:
+    def score(order: tuple[int, ...]) -> int:
+        low = high = order[0]
+        total = 0
+        for value in order:
+            low = min(low, value)
+            high = max(high, value)
+            total += high - low
+        return total
+
+    cases = [
+        [3, 1, 2],
+        [5],
+        [1, 6, 3, 3, 6, 3],
+        [1, 1, 1, 1],
+    ]
+    for _ in range(100):
+        count = RNG.randint(1, 8)
+        cases.append([RNG.randint(1, 25) for _ in range(count)])
+
+    for speeds in cases:
+        # A set removes duplicate permutations; n <= 8 keeps this oracle small.
+        expected = min(score(order) for order in set(permutations(speeds)))
+        input_text = f'{len(speeds)}\n' + ' '.join(map(str, speeds)) + '\n'
+        assert int(run('cf-1509C', input_text)) == expected
+
+    # Equal values make every discrepancy zero and exercise the maximum table.
+    assert run('cf-1509C', '2000\n' + '7 ' * 2000 + '\n').strip() == '0'
+
+
+def verify_game_on_tree() -> None:
+    def oracle(graph: list[list[int]], start: int) -> bool:
+        """Literal minimax with the complete active-node mask."""
+        @lru_cache(maxsize=None)
+        def winning(node: int, active: int) -> bool:
+            for neighbor in graph[node]:
+                if active & (1 << neighbor):
+                    continue
+                if not winning(neighbor, active | (1 << neighbor)):
+                    return True
+            return False
+
+        return winning(start, 1 << start)
+
+    edge_sets = [
+        [(0, 1)],
+        [(0, 1), (1, 2)],
+        [(0, 1), (0, 2), (0, 3), (0, 4)],
+    ]
+    for _ in range(100):
+        count = RNG.randint(2, 10)
+        edge_sets.append(
+            [(node, RNG.randrange(node)) for node in range(1, count)]
+        )
+
+    for edges in edge_sets:
+        count = len(edges) + 1
+        graph = [[] for _ in range(count)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+        expected = [oracle(graph, start) for start in range(count)]
+        input_text = (
+            f'{count} {count}\n'
+            + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+            + ' '.join(map(str, range(1, count + 1)))
+            + '\n'
+        )
+        actual = [name == 'Ron' for name in run('cf-1970C3', input_text).split()]
+        assert actual == expected
+
+    # A long path verifies the iterative implementation and O(N) preprocessing.
+    count = 200_000
+    edges = ''.join(f'{node} {node + 1}\n' for node in range(1, count))
+    output = run('cf-1970C3', f'{count} 3\n{edges}1 2 {count}\n').split()
+    assert output == ['Ron', 'Ron', 'Ron']
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -3479,6 +3625,9 @@ if __name__ == "__main__":
         verify_set_to_max,
         verify_robot_collisions,
         verify_sinking_land,
+        verify_cow_decathlon,
+        verify_sports_festival,
+        verify_game_on_tree,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

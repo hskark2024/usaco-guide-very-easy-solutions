@@ -105,6 +105,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-1904D2` | Codeforces | [Set To Max](problems/cf-1904D2/README.md) | [Segment Tree, Binary Search, Constructive] | [C++](solutions/cf-1904D2.cpp) | [Package](videos/easy/cf-1904D2/README.md) |
 | `cf-1525C` | Codeforces | [Robot Collisions](problems/cf-1525C/README.md) | [Sorting, Stack, Parity, Reflection] | [C++](solutions/cf-1525C.cpp) | [Package](videos/easy/cf-1525C/README.md) |
 | `ac-SinkingLand` | AtCoder | [Sinking Land](problems/ac-SinkingLand/README.md) | [Flood Fill, Bucket Queue, Minimax Paths] | [C++](solutions/ac-SinkingLand.cpp) | [Package](videos/easy/ac-SinkingLand/README.md) |
+| `usaco-401` | USACO Gold | [Cow Decathlon](problems/usaco-401/README.md) | [Bitmask DP, Assignment, Bonus Thresholds] | [C++](solutions/usaco-401.cpp) | [Package](videos/easy/usaco-401/README.md) |
+| `cf-1509C` | Codeforces | [The Sports Festival](problems/cf-1509C/README.md) | [Range DP, Sorting, Greedy] | [C++](solutions/cf-1509C.cpp) | [Package](videos/easy/cf-1509C/README.md) |
+| `cf-1970C3` | Codeforces | [Game on Tree](problems/cf-1970C3/README.md) | [Game DP, Trees, Rerooting] | [C++](solutions/cf-1970C3.cpp) | [Package](videos/easy/cf-1970C3/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

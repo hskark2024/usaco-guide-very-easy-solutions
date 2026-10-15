@@ -1,0 +1,10 @@
+The Sports Festival	Reorder relay runners	Pay current max minus min	Minimize the total
+Sort the speeds	Put values on a number line	Only two extremes set the cost	Middle order matters less
+Think backward	Last stage contains everyone	Final discrepancy is fixed	Remove one last runner
+Which runner is last	Choose current smallest	Or choose current largest	Leaves a smaller interval
+Why not the middle	Extremes would stay unchanged	Move middle earlier safely	An extreme can be last
+Interval DP	DP left right is minimum cost	One value costs zero	Grow outward
+Two choices	Previous state left plus one	Or previous state right minus one	Take the cheaper
+Pay interval width	Add speed right minus speed left	This stage's discrepancy	Repeat by length
+Small example	Speeds 1 comma 2 comma 3	Widths 0 then 1 then 2	Minimum total 3
+Complexity	O of N squared time	O of N squared memory	Permutations verified

@@ -1,0 +1,7 @@
+Build a subset DP that assigns cows to events and correctly chains prefix-score bonuses.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=401
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-401.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #usaco #bitmaskdp #dynamicprogramming #cplusplus

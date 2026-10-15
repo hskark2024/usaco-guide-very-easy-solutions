@@ -1,0 +1,7 @@
+Derive the sorted-interval recurrence that minimizes every prefix speed discrepancy.
+
+Official problem: https://codeforces.com/contest/1509/problem/C
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1509C.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #intervaldp #dynamicprogramming #cplusplus

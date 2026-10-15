@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-14 (the live Guide source and Gold Conclusion module data were checked directly)
+- Last listing check: 2026-10-15 (the live Guide source and Gold Conclusion module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`092bf54`](https://github.com/cpinitiative/usaco-guide/commit/092bf547cf4f63140057b220dba2861f884e1905) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 86
-- Complete video packages: 86
+- Completed Easy solutions: 89
+- Complete video packages: 89
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -97,6 +97,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-1904D2` | Set To Max | complete | complete | complete | generated locally; excluded from Git |
 | `cf-1525C` | Robot Collisions | complete | complete | complete | generated locally; excluded from Git |
 | `ac-SinkingLand` | Sinking Land | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-401` | Cow Decathlon | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1509C` | The Sports Festival | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1970C3` | Game on Tree | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-15
+
+- New entries: `usaco-401` Cow Decathlon, `cf-1509C` The Sports Festival, and `cf-1970C3` Game on Tree.
+- The live USACO Guide source remains at commit `092bf54`; all three selected Gold Conclusion entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Cow Decathlon uses assignment bitmask DP with ordered bonus cascades; The Sports Festival removes sorted interval extremes in a range DP; Game on Tree computes every directed game state with iterative rerooting.
+- All 120 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 124 smoke cases and all 86 independent Easy verifier groups passed, including exhaustive assignments, brute-force runner permutations, literal active-mask game minimax, and constraint-scale cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 99.9 seconds (`usaco-401`), 88.6 seconds (`cf-1509C`), and 87.7 seconds (`cf-1970C3`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Gold Conclusion remains in progress. Its next listed entries are `ac-CountSequences2` Count Sequences 2, `spoj-marbles` MARBLES - Marbles, and `cf-781C` Underground Lab. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-14
 

@@ -1,0 +1,10 @@
+Cow Decathlon	Assign each cow to one event	Skills earn points	Prefix bonuses can unlock
+Why subsets	N is at most 20	N factorial is enormous	2 to the N is manageable
+Mask meaning	One bit per cow	k set bits means k events finished	Next event is k
+DP state	DP mask is best prefix score	Try every unused cow	Keep the maximum
+Transition	Add skill cow comma event	Set the cow's bit	Reach the next prefix
+Group bonuses	Rule belongs to one prefix	Check after that event	Earlier bonuses stay in score
+Bonus order	Sort by required score	Small award may unlock another	Apply every reachable rule
+Dominance	Same mask means same future cows	Larger score never hurts	One value per mask is enough
+Sample path	Cows one comma three comma two	Bonus triggers after event two	Final score is 17
+Complexity	O of N times 2 to N time	O of 2 to N memory	Brute permutations verified

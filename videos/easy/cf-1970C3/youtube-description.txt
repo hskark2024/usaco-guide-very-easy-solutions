@@ -1,0 +1,7 @@
+Precompute every starting winner with directed game states and two iterative tree passes.
+
+Official problem: https://codeforces.com/contest/1970/problem/C3
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1970C3.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #treedp #rerooting #cplusplus

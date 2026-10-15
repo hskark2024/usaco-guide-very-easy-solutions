@@ -1,0 +1,19 @@
+1. Cow Decathlon asks us to match every cow to a different event. Skills earn points, and certain event prefixes can unlock bonus points.
+
+2. With up to twenty cows, trying every complete assignment is far too large. But two to the twentieth subsets are manageable, which points us toward bitmask dynamic programming.
+
+3. A mask records which cows already have events. If the mask contains k cows, then events zero through k minus one are finished, so event k must be filled next.
+
+4. Let DP of mask be the largest score possible for exactly that prefix. From this state, try every cow whose bit is still zero.
+
+5. Assigning that cow adds her skill for event k. Then set her bit and use the result to improve the new mask.
+
+6. Bonuses need one careful step. Group them by prefix length, because a rule for k events is checked immediately after event k is filled.
+
+7. Sort bonuses for the same prefix by required score. A small bonus can raise the total enough to unlock a larger-threshold bonus, so the order matters.
+
+8. It is safe to keep only the best score for each mask. Future event choices depend on unused cows, and a larger current score can only help future bonus checks.
+
+9. In the sample, assigning cows one, three, and two to the three events earns seven points after event two, unlocks six bonus points, and finishes with seventeen.
+
+10. The running time is about N times two to the N, and memory is one value per subset. Exhaustive permutations verify random small cases and cascading bonuses.

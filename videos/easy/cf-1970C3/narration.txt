@@ -1,0 +1,19 @@
+1. In Game on Tree, Ron and Hermione move one stone to an inactive neighbor. Ron starts, and whoever gets stuck loses.
+
+2. Because the graph is a tree, the visited nodes always form the path behind the stone. The stone can never cross the last edge backward.
+
+3. So a game position can be described by the current node and the blocked neighbor it came from. No full visited set is needed.
+
+4. Use the standard game rule: a position is winning if it has at least one move to a losing position. With no available move, it is losing.
+
+5. Root the tree anywhere. In a bottom-up pass, compute the result at each node when its parent edge is blocked.
+
+6. A leaf is losing. Any node with a losing child is winning, because the player can move there and give the bad position to the opponent.
+
+7. Queries may start anywhere, so child information alone is incomplete. A top-down rerooting pass adds the game state through each parent direction.
+
+8. At a node, count how many neighboring directions lead to losing states. The unblocked starting position is winning exactly when this count is positive.
+
+9. To send information to one child, subtract that child's contribution. What remains is exactly the state at the parent when the child's edge is blocked.
+
+10. Two iterative passes take linear time, then every query is constant time. Full minimax on random small trees verifies every reported winner.
