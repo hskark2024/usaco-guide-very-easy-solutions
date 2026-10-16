@@ -1,0 +1,10 @@
+MARBLES	Split identical marbles among colors	Every color must be nonempty	Count the distributions
+Remove positivity	Give one marble to each color	Zeros are now allowed	Distribute what remains
+Stars and bars	One star per remaining marble	Bars separate color groups	Each picture is one answer
+Count positions	N minus K stars	K minus 1 bars	N minus 1 total
+Formula	Choose the bar positions	Answer C of N minus 1 comma K minus 1	One-to-one mapping
+Use symmetry	C of n comma k equals C of n comma n minus k	Choose the smaller k	Fewer loop steps
+Exact product	Start result at one	Multiply next numerator	Divide by the step
+Overflow detail	Final answer fits 64 bits	Temporary product may not	Use 128 bits
+Example 30 and 7	Choose 6 bars among 29	29 choose 6	Answer 475020
+Proof and tests	Distribution matches one picture	O of minimum K time	Exact integer oracle

@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-15 (the live Guide source and Gold Conclusion module data were checked directly)
+- Last listing check: 2026-10-16 (the live Guide source and Gold Conclusion module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`092bf54`](https://github.com/cpinitiative/usaco-guide/commit/092bf547cf4f63140057b220dba2861f884e1905) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 89
-- Complete video packages: 89
+- Completed Easy solutions: 92
+- Complete video packages: 92
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -100,6 +100,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-401` | Cow Decathlon | complete | complete | complete | generated locally; excluded from Git |
 | `cf-1509C` | The Sports Festival | complete | complete | complete | generated locally; excluded from Git |
 | `cf-1970C3` | Game on Tree | complete | complete | complete | generated locally; excluded from Git |
+| `ac-CountSequences2` | Count Sequences 2 | complete | complete | complete | generated locally; excluded from Git |
+| `spoj-marbles` | MARBLES - Marbles | complete | complete | complete | generated locally; excluded from Git |
+| `cf-781C` | Underground Lab | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-16
+
+- New entries: `ac-CountSequences2` Count Sequences 2, `spoj-marbles` MARBLES - Marbles, and `cf-781C` Underground Lab.
+- The live USACO Guide source remains at commit `092bf54`; all three selected Gold Conclusion entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Count Sequences 2 multiplies insertion binomials from a division-free Pascal table for an arbitrary modulus; MARBLES applies positive stars and bars with overflow-safe exact binomial products; Underground Lab splits an iterative DFS tree walk into bounded legal routes.
+- All 123 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 127 smoke cases and all 89 independent Easy verifier groups passed, including exact multinomial residues for composite moduli, exact arbitrary-precision binomial comparisons, structural route validation, random multigraphs, and constraint-scale cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 105.4 seconds (`ac-CountSequences2`), 100.0 seconds (`spoj-marbles`), and 101.1 seconds (`cf-781C`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Gold Conclusion remains in progress. Its next listed entries are `cf-2176D` Fibonacci Paths, `cf-1886D` Monocarp and the Set, and `cf-2260D` Signs of Prefix Sums. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-15
 

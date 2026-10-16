@@ -1,0 +1,10 @@
+Count Sequences 2	Exact copies of every value	Count distinct arrangements	Answer modulo M
+Tiny example	Two ones and two twos	Choose two of four positions	Six sequences
+Insert one value	s symbols already arranged	Add c identical copies	Choose their new positions
+Product rule	Multiply by C of s plus c comma c	Update s and repeat	Build the multinomial
+Composite warning	M is not always prime	Some inverses do not exist	Avoid factorial division
+Pascal rule	C of n comma k is two parent sums	Only addition modulo M	Works for every modulus
+Shared precompute	Maximum total length is 5000	Build once	Each case is O of N
+Compact storage	Only k at most n is needed	Store a triangle in one vector	About 50 megabytes
+Example 4 2 5	Factors 1 comma 15 comma 462	Product is 6930	Matches the sample
+Correctness and tests	Position choice is reversible	O of S squared precompute	Exact random checks

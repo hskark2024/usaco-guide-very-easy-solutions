@@ -108,6 +108,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-401` | USACO Gold | [Cow Decathlon](problems/usaco-401/README.md) | [Bitmask DP, Assignment, Bonus Thresholds] | [C++](solutions/usaco-401.cpp) | [Package](videos/easy/usaco-401/README.md) |
 | `cf-1509C` | Codeforces | [The Sports Festival](problems/cf-1509C/README.md) | [Range DP, Sorting, Greedy] | [C++](solutions/cf-1509C.cpp) | [Package](videos/easy/cf-1509C/README.md) |
 | `cf-1970C3` | Codeforces | [Game on Tree](problems/cf-1970C3/README.md) | [Game DP, Trees, Rerooting] | [C++](solutions/cf-1970C3.cpp) | [Package](videos/easy/cf-1970C3/README.md) |
+| `ac-CountSequences2` | AtCoder | [Count Sequences 2](problems/ac-CountSequences2/README.md) | [Combinatorics, Multinomial Coefficients, Pascal's Triangle] | [C++](solutions/ac-CountSequences2.cpp) | [Package](videos/easy/ac-CountSequences2/README.md) |
+| `spoj-marbles` | SPOJ | [MARBLES - Marbles](problems/spoj-marbles/README.md) | [Combinatorics, Stars and Bars, Binomial Coefficients] | [C++](solutions/spoj-marbles.cpp) | [Package](videos/easy/spoj-marbles/README.md) |
+| `cf-781C` | Codeforces | [Underground Lab](problems/cf-781C/README.md) | [DFS, Euler Walk, Constructive Algorithms] | [C++](solutions/cf-781C.cpp) | [Package](videos/easy/cf-781C/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

@@ -1,0 +1,7 @@
+Learn the stars-and-bars formula for positive distributions and compute the binomial coefficient safely in C++.
+
+Official problem: https://www.spoj.com/problems/MARBLES/
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/spoj-marbles.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #spoj #combinatorics #starsandbars #cplusplus

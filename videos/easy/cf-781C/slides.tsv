@@ -1,0 +1,10 @@
+Underground Lab	Cover a connected graph	Exactly K nonempty routes	Each route has a short limit
+Routes are walks	Consecutive vertices need an edge	Arbitrary grouping fails	Preserve movement
+DFS tree	Visit from vertex one	Discovery edges reach everyone	Ignore extra graph edges
+Record movement	Write node on entry	Write parent after a child	Every pair is one edge
+Length bound	N minus 1 tree edges	Each crossed at most twice	At most 2N minus 1 entries
+Split the walk	Use consecutive chunks	Each chunk stays connected	All recorded visits remain
+Chunk limit	Ceiling of 2N divided by K	Less than 2N total	At most K chunks
+Unused clones	Give route vertex one	Nonempty and legal	Coverage is already complete
+Iterative DFS	Stack stores node and edge index	No recursion overflow	Linear traversal
+Validate output	Check K rows and size	Check every step and coverage	Random and maximum tests

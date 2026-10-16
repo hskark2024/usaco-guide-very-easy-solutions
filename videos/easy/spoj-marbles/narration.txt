@@ -1,0 +1,19 @@
+1. MARBLES asks how many ways identical marbles can be split among several colors, with every color receiving at least one marble.
+
+2. Positive groups are slightly awkward. Fix that first by handing one marble to every color. Now the remaining marbles may be distributed with zero allowed.
+
+3. Represent each remaining marble by a star. Put separators between stars to create one group for each color.
+
+4. With N total marbles and K colors, this picture contains N minus K stars and K minus one separators, so it has N minus one positions altogether.
+
+5. Choosing the separator positions gives N minus one choose K minus one. This is the stars-and-bars formula for positive group sizes.
+
+6. To calculate the binomial coefficient, use its smaller side. N choose K equals N choose N minus K, so fewer loop steps are always better.
+
+7. Start at one. At step i, multiply by the next numerator factor and divide by i. Every division is exact because each partial value is another binomial coefficient.
+
+8. The final answer fits in a signed 64-bit integer, but multiplying before dividing can briefly be larger. A 128-bit temporary keeps that intermediate safe.
+
+9. For thirty marbles and seven colors, the answer is twenty-nine choose six, which equals four hundred seventy-five thousand twenty.
+
+10. The proof is a one-to-one translation between distributions and star-separator strings. Exact integer tests cover one color, one marble per color, symmetry, random cases, and large inputs.

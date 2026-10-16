@@ -1,0 +1,19 @@
+1. Count Sequences 2 gives the required number of copies of each value. We need the number of different sequences, reduced modulo M.
+
+2. Suppose two ones and two twos are required. There are six ways to choose the two positions occupied by the twos, and every remaining position must contain a one.
+
+3. This idea works one value at a time. If s symbols are already arranged and the next value appears c times, choose c of the new s plus c positions for those identical copies.
+
+4. So we multiply by s plus c choose c, update s, and repeat. The product is exactly the usual multinomial coefficient, but this view is easier to compute safely.
+
+5. The dangerous detail is the modulus. M may be composite, so factorial division and modular inverses can fail. For example, a number sharing a factor with M has no inverse modulo M.
+
+6. Pascal's rule avoids division completely. Each binomial value is the sum of the two values above it, reduced modulo M.
+
+7. The maximum sequence length is five thousand. We precompute all needed rows once, then every test case takes only one multiplication per distinct value.
+
+8. We store only the lower triangle in a flat vector. Row n begins after all shorter rows, saving about half the memory of a square table.
+
+9. For counts four, two, and five, the factors are one, fifteen, and four hundred sixty-two. Their product is six thousand nine hundred thirty.
+
+10. The proof follows from a perfect two-way mapping: choose new positions to extend an arrangement, or remove the newest value to recover it. Random exact multinomial checks test both prime and composite moduli.

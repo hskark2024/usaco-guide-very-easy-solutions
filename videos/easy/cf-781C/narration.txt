@@ -1,0 +1,19 @@
+1. Underground Lab asks us to cover a connected graph with K clone routes. Every route must be nonempty and contain at most the ceiling of two N divided by K visited vertices.
+
+2. A list of arbitrary vertices is not enough. Consecutive entries in one route must share an edge, because a clone has to walk between them.
+
+3. Run depth-first search and keep only the edges used to discover new vertices. Those edges form a spanning tree that still reaches every graph vertex.
+
+4. Record each vertex when DFS enters it. After finishing a child, record the parent again. Now every neighboring pair in the list is one real tree-edge move.
+
+5. Each tree edge is crossed at most once down and once back up. The complete walk therefore contains at most two N minus one entries.
+
+6. Cut this walk into consecutive chunks. Because a chunk stays consecutive, it is automatically a legal route instead of a disconnected list.
+
+7. Set the chunk limit to the ceiling of two N divided by K. A walk shorter than two N fits into at most K chunks of that size.
+
+8. Sometimes the walk needs fewer than K chunks. Every leftover clone can stay at vertex one, producing a legal nonempty one-vertex route.
+
+9. We implement DFS with explicit stack frames containing a vertex and its next edge index. This safely handles a path with two hundred thousand vertices.
+
+10. The checker accepts any valid construction. It verifies route limits, every consecutive edge, complete coverage, self-loops, repeated edges, random graphs, and the maximum path size.

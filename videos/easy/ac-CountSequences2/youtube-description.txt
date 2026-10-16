@@ -1,0 +1,7 @@
+Count repeated-value sequences with a multinomial product and Pascal's triangle, even when the modulus is composite.
+
+Official problem: https://atcoder.jp/contests/abc425/tasks/abc425_e
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ac-CountSequences2.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #atcoder #combinatorics #pascaltriangle #cplusplus

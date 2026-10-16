@@ -3540,6 +3540,114 @@ def verify_game_on_tree() -> None:
     assert output == ['Ron', 'Ron', 'Ron']
 
 
+def verify_count_sequences_two() -> None:
+    def exact_multinomial(counts):
+        ways = 1
+        placed = 0
+        # Python's exact binomial arithmetic is independent of the submitted
+        # Pascal-modulo table and lets composite moduli be tested directly.
+        for count in counts:
+            placed += count
+            ways *= comb(placed, count)
+        return ways
+
+    moduli = [2, 6, 12, 97, 1_000_000_000]
+    for modulus in moduli:
+        cases = [[1], [5], [2, 2], [4, 2, 5], [1, 1, 1, 1, 1]]
+        for _ in range(70):
+            value_count = RNG.randint(1, 8)
+            cases.append([RNG.randint(1, 6) for _ in range(value_count)])
+
+        input_text = f'{len(cases)} {modulus}\n' + ''.join(
+            f"{len(counts)}\n{' '.join(map(str, counts))}\n"
+            for counts in cases
+        )
+        actual = list(map(int, run('ac-CountSequences2', input_text).split()))
+        expected = [exact_multinomial(counts) % modulus for counts in cases]
+        assert actual == expected
+
+    # Force every Pascal row through the official maximum total length. Equal
+    # counts make the exact expected multinomial easy for Python to construct.
+    counts = [500] * 10
+    modulus = 998_244_353
+    input_text = f"1 {modulus}\n10\n{' '.join(map(str, counts))}\n"
+    assert int(run('ac-CountSequences2', input_text)) == (
+        exact_multinomial(counts) % modulus
+    )
+
+
+def verify_marbles() -> None:
+    cases = [
+        (1, 1),
+        (10, 10),
+        (30, 7),
+        (100, 2),
+        (100, 99),
+    ]
+    for _ in range(500):
+        marble_count = RNG.randint(1, 65)
+        color_count = RNG.randint(1, marble_count)
+        cases.append((marble_count, color_count))
+
+    # These larger cases exercise both binomial symmetry and the 128-bit
+    # multiply-before-divide temporary while retaining signed-64-bit answers.
+    cases.extend([(1_000_000, 1), (1_000_000, 2), (1_000_000, 1_000_000)])
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f'{marbles} {colors}\n' for marbles, colors in cases
+    )
+    actual = list(map(int, run('spoj-marbles', input_text).split()))
+    expected = [comb(marbles - 1, colors - 1) for marbles, colors in cases]
+    assert actual == expected
+
+
+def verify_underground_lab() -> None:
+    def check(node_count, edges, clone_count):
+        input_text = (
+            f'{node_count} {len(edges)} {clone_count}\n'
+            + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+        )
+        lines = run('cf-781C', input_text).strip().splitlines()
+        assert len(lines) == clone_count
+
+        allowed_steps = [set() for _ in range(node_count)]
+        for first, second in edges:
+            allowed_steps[first].add(second)
+            allowed_steps[second].add(first)
+
+        route_limit = (2 * node_count + clone_count - 1) // clone_count
+        covered = set()
+        for line in lines:
+            values = list(map(int, line.split()))
+            route_size = values[0]
+            route = [vertex - 1 for vertex in values[1:]]
+            assert route_size == len(route)
+            assert 1 <= route_size <= route_limit
+            assert all(0 <= vertex < node_count for vertex in route)
+            assert all(
+                second in allowed_steps[first]
+                for first, second in zip(route, route[1:])
+            )
+            covered.update(route)
+        assert covered == set(range(node_count))
+
+    check(1, [], 1)
+    check(5, [(0, 1), (0, 2), (0, 3), (0, 4)], 2)
+    check(4, [(0, 0), (0, 1), (0, 1), (1, 2), (2, 3)], 4)
+
+    for _ in range(90):
+        node_count = RNG.randint(2, 35)
+        edges = [(node, RNG.randrange(node)) for node in range(1, node_count)]
+        # Add extra edges, including occasional self-loops and duplicates.
+        for _ in range(RNG.randint(0, node_count * 2)):
+            edges.append((RNG.randrange(node_count), RNG.randrange(node_count)))
+        check(node_count, edges, RNG.randint(1, node_count))
+
+    # Maximum depth and size must not depend on the process call stack.
+    node_count = 200_000
+    path = [(node, node + 1) for node in range(node_count - 1)]
+    check(node_count, path, 97_531)
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -3628,6 +3736,9 @@ if __name__ == "__main__":
         verify_cow_decathlon,
         verify_sports_festival,
         verify_game_on_tree,
+        verify_count_sequences_two,
+        verify_marbles,
+        verify_underground_lab,
     ):
         verifier()
         print(f"passed {verifier.__name__}")
