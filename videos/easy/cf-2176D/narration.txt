@@ -1,0 +1,19 @@
+1. Fibonacci Paths gives every vertex a positive number. We count directed paths with at least one edge where each value after the first two equals their sum.
+
+2. Any directed edge is already a valid path. A two-number sequence has no recurrence check yet, so the edge by itself contributes one answer.
+
+3. Suppose the first edge is u to v. A third vertex must have value a of u plus a of v. That turns the graph problem into a lookup by value.
+
+4. Define ways at u and x as the number of valid paths starting at u whose second vertex has value x. Different neighbors with the same value share one bucket.
+
+5. For edge u to v, begin with one for the edge alone. Then add the bucket at v keyed by a of u plus a of v. These are exactly its legal continuations.
+
+6. There seems to be a circular dependency because graph edges may form cycles. Positive labels give us the order that breaks this cycle.
+
+7. A continuation edge has a larger endpoint sum than the current edge. Sort every edge by endpoint sum from largest to smallest, and every needed state is ready on time.
+
+8. Add the computed edge count into the bucket at u keyed by a of v. Also add it to the global answer, all modulo nine hundred ninety-eight million two hundred forty-four thousand three hundred fifty-three.
+
+9. Values strictly grow from the third term onward. A counted route cannot return to an earlier vertex value, so the dynamic program automatically counts simple paths.
+
+10. Random small graphs are checked by literally listing every simple path. Large labels and a two-hundred-thousand-edge case test overflow safety and performance.

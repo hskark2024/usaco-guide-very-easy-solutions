@@ -1,0 +1,19 @@
+1. Monocarp inserts every number from one through N in some order. After the first insertion, the record says new minimum, new maximum, or neither.
+
+2. Instead of choosing actual numbers immediately, describe each insertion by its rank among the values inserted so far. A complete rank sequence identifies exactly one permutation.
+
+3. At record position i using zero-based indexing, the new value joins i plus one old values. A less sign forces the smallest rank, and a greater sign forces the largest rank.
+
+4. A question mark means the new value is not an extreme. Remove the smallest and largest ranks, and exactly i interior ranks remain.
+
+5. The first record position is special. Only two values are present, so the new one must be either smaller or larger. A question mark there means zero permutations.
+
+6. Every later record position makes an independent rank choice. The total number of permutations is the product of index i for every question mark after position zero.
+
+7. A query changes only one character, so recomputing the whole product would waste time. We update only that position's factor.
+
+8. When an old question mark disappears, multiply by the modular inverse of its index. When a new question mark appears, multiply by the index.
+
+9. Position zero is tracked separately because its factor would be zero and zero cannot be divided out. The product for all other positions stays valid in the background.
+
+10. Exhaustive tests generate every permutation through size eight, rebuild its exact record, and compare frequency counts after random updates. A maximum-size case confirms constant work per query.

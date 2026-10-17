@@ -111,6 +111,9 @@ The official statements remain at their original judge links. These notes intent
 | `ac-CountSequences2` | AtCoder | [Count Sequences 2](problems/ac-CountSequences2/README.md) | [Combinatorics, Multinomial Coefficients, Pascal's Triangle] | [C++](solutions/ac-CountSequences2.cpp) | [Package](videos/easy/ac-CountSequences2/README.md) |
 | `spoj-marbles` | SPOJ | [MARBLES - Marbles](problems/spoj-marbles/README.md) | [Combinatorics, Stars and Bars, Binomial Coefficients] | [C++](solutions/spoj-marbles.cpp) | [Package](videos/easy/spoj-marbles/README.md) |
 | `cf-781C` | Codeforces | [Underground Lab](problems/cf-781C/README.md) | [DFS, Euler Walk, Constructive Algorithms] | [C++](solutions/cf-781C.cpp) | [Package](videos/easy/cf-781C/README.md) |
+| `cf-2176D` | Codeforces | [Fibonacci Paths](problems/cf-2176D/README.md) | [Graph DP, Sorting, Maps] | [C++](solutions/cf-2176D.cpp) | [Package](videos/easy/cf-2176D/README.md) |
+| `cf-1886D` | Codeforces | [Monocarp and the Set](problems/cf-1886D/README.md) | [Combinatorics, Modular Arithmetic, Updates] | [C++](solutions/cf-1886D.cpp) | [Package](videos/easy/cf-1886D/README.md) |
+| `cf-2260D` | Codeforces | [Signs of Prefix Sums](problems/cf-2260D/README.md) | [Dynamic Programming, Prefix Sums] | [C++](solutions/cf-2260D.cpp) | [Package](videos/easy/cf-2260D/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

@@ -1,0 +1,7 @@
+Turn insertion records into independent rank choices and maintain their product in constant time per update.
+
+Official problem: https://codeforces.com/contest/1886/problem/D
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1886D.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #combinatorics #modulararithmetic #cplusplus

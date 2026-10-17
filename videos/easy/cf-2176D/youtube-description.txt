@@ -1,0 +1,7 @@
+Count generalized Fibonacci paths by sorting directed edges and combining value-keyed dynamic-programming states.
+
+Official problem: https://codeforces.com/contest/2176/problem/D
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-2176D.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #dynamicprogramming #graphs #cplusplus

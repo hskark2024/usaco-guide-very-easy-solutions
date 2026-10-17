@@ -1,0 +1,19 @@
+1. Signs of Prefix Sums gives only the sign of every running total. We must build nonzero array values while making the largest absolute value as small as possible.
+
+2. Work with prefix sums instead of the array. If consecutive prefix sums are old and new, the array value is new minus old.
+
+3. That difference cannot be zero. So every move must change the prefix sum, and the move cost is the absolute distance between the two sums.
+
+4. A plus character allows a positive prefix sum, a minus allows a negative one, and zero forces prefix sum zero. We need the cheapest path through those sign groups.
+
+5. We only need the seven values from negative three through positive three. Small alternating values can realize every feasible sign pattern with maximum step at most three.
+
+6. Let D P at x be the smallest possible largest step after the processed prefix ends at x. Initially only prefix sum zero is reachable with cost zero.
+
+7. For each next sign, try every old state and every different new state with the required sign. The new cost is the larger of the old cost and this step's distance.
+
+8. Keep the smallest cost reaching each new prefix sum. After the last character, the smallest reachable state is the answer.
+
+9. A zero at the first position is impossible because the first array value would be zero. Two consecutive zero signs fail for the same reason, and the dynamic program rejects both naturally.
+
+10. Exhaustive short strings are compared with a separate search over array values. Long alternating and single-sign strings confirm the linear running time.

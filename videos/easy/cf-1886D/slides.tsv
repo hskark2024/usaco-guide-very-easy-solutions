@@ -1,0 +1,10 @@
+Monocarp and the Set	Insert numbers one through N	Record min max or neither	Count matching permutations
+Think in ranks	Each insertion chooses a rank	Rank sequence identifies a permutation	Actual labels come later
+Extreme symbols	Less means new minimum	Greater means new maximum	Each has one rank choice
+Question mark	Neither minimum nor maximum	Exactly i interior ranks	Factor equals zero-based index
+First position	Only two values are present	One must be an extreme	Question mark means zero
+Multiply choices	Positions choose ranks independently	Product of question-mark factors	Work modulo 998244353
+Point updates	Only one character changes	Only one factor changes	Avoid a full rescan
+Modular division	Remove old factor with inverse	Insert new factor normally	Constant work per query
+Separate zero factor	Do not divide by zero	Track s zero directly	Keep later product ready
+Verification	Enumerate every small permutation	Compare all record frequencies	Stress 300000 updates

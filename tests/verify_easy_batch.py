@@ -3648,6 +3648,197 @@ def verify_underground_lab() -> None:
     check(node_count, path, 97_531)
 
 
+def verify_fibonacci_paths() -> None:
+    modulus = 998_244_353
+
+    def oracle(values, edges):
+        graph = [[] for _ in values]
+        for first, second in edges:
+            graph[first].append(second)
+
+        answer = 0
+
+        def extend(path, used):
+            nonlocal answer
+            last = path[-1]
+            for following in graph[last]:
+                if following in used:
+                    continue
+                if len(path) >= 2 and values[following] != (
+                    values[path[-2]] + values[last]
+                ):
+                    continue
+
+                # Every successful extension creates one new path containing
+                # at least two vertices. Recursing lists every longer path.
+                answer += 1
+                used.add(following)
+                path.append(following)
+                extend(path, used)
+                path.pop()
+                used.remove(following)
+
+        for start in range(len(values)):
+            extend([start], {start})
+        return answer % modulus
+
+    cases = []
+    for _ in range(180):
+        count = RNG.randint(2, 8)
+        values = [RNG.randint(1, 12) for _ in range(count)]
+        possible = [
+            (first, second)
+            for first in range(count)
+            for second in range(count)
+            if first != second
+        ]
+        RNG.shuffle(possible)
+        edges = possible[: RNG.randint(1, min(len(possible), count * 3))]
+        cases.append((values, edges))
+
+    # Explicit equal-label cycles check that one-edge paths count but an
+    # impossible Fibonacci continuation does not.
+    cases.append(([10, 10], [(0, 1), (1, 0)]))
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f"{len(values)} {len(edges)}\n"
+        + ' '.join(map(str, values))
+        + '\n'
+        + ''.join(f'{first + 1} {second + 1}\n' for first, second in edges)
+        for values, edges in cases
+    )
+    actual = list(map(int, run('cf-2176D', input_text).split()))
+    expected = [oracle(values, edges) for values, edges in cases]
+    assert actual == expected
+
+    # With every label equal to one, no path has three vertices. A large
+    # directed cycle therefore contributes exactly one path per edge.
+    count = 100_000
+    edges = ''.join(
+        f'{node + 1} {(node + 1) % count + 1}\n' for node in range(count)
+    )
+    input_text = f"1\n{count} {count}\n" + '1 ' * count + '\n' + edges
+    assert int(run('cf-2176D', input_text)) == count
+
+
+def verify_monocarp_and_set() -> None:
+    modulus = 998_244_353
+
+    def record_for(permutation):
+        minimum = maximum = permutation[0]
+        result = []
+        for value in permutation[1:]:
+            if value < minimum:
+                result.append('<')
+                minimum = value
+            elif value > maximum:
+                result.append('>')
+                maximum = value
+            else:
+                result.append('?')
+        return ''.join(result)
+
+    for count in range(2, 9):
+        frequencies = Counter(
+            record_for(order) for order in permutations(range(1, count + 1))
+        )
+        record = ''.join(RNG.choice('<?>' ) for _ in range(count - 1))
+        queries = []
+        expected = [frequencies[record] % modulus]
+
+        for _ in range(45):
+            position = RNG.randrange(count - 1)
+            replacement = RNG.choice('<?>' )
+            queries.append((position, replacement))
+            record = record[:position] + replacement + record[position + 1:]
+            expected.append(frequencies[record] % modulus)
+
+        # Replay from a separately generated initial string because record was
+        # mutated while the expected answers were assembled.
+        initial = ''.join(RNG.choice('<?>' ) for _ in range(count - 1))
+        expected = [frequencies[initial] % modulus]
+        replay = initial
+        for position, replacement in queries:
+            replay = replay[:position] + replacement + replay[position + 1:]
+            expected.append(frequencies[replay] % modulus)
+
+        input_text = (
+            f'{count} {len(queries)}\n{initial}\n'
+            + ''.join(
+                f'{position + 1} {replacement}\n'
+                for position, replacement in queries
+            )
+        )
+        actual = list(map(int, run('cf-1886D', input_text).split()))
+        assert actual == expected
+
+    # Maximum length with question marks everywhere after a fixed first
+    # symbol exercises inverse precomputation and constant-time updates.
+    count = 300_000
+    record = '<' + '?' * (count - 2)
+    queries = [(count - 1, '<'), (count - 1, '?'), (1, '?'), (1, '>')]
+    input_text = (
+        f'{count} {len(queries)}\n{record}\n'
+        + ''.join(f'{position} {char}\n' for position, char in queries)
+    )
+    outputs = list(map(int, run('cf-1886D', input_text).split()))
+    assert len(outputs) == len(queries) + 1
+    assert outputs[0] == outputs[2] == outputs[4]
+    assert outputs[1] != outputs[0]
+    assert outputs[3] == 0
+
+
+def verify_signs_of_prefix_sums() -> None:
+    def matches(value, sign):
+        return (sign == '0' and value == 0) or (
+            sign == '+' and value > 0
+        ) or (sign == '-' and value < 0)
+
+    def oracle(signs):
+        # This oracle searches array values directly. Prefix sums are not
+        # artificially bounded, so it independently checks the seven-state
+        # normalization used by the C++ solution.
+        for cost in range(1, 4):
+            reachable = {0}
+            steps = [value for value in range(-cost, cost + 1) if value != 0]
+            for sign in signs:
+                reachable = {
+                    prefix + step
+                    for prefix in reachable
+                    for step in steps
+                    if matches(prefix + step, sign)
+                }
+                if not reachable:
+                    break
+            if reachable:
+                return cost
+        return -1
+
+    cases = [
+        ''.join(chars)
+        for length in range(1, 8)
+        for chars in product('0+-', repeat=length)
+    ]
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f'{len(signs)}\n{signs}\n' for signs in cases
+    )
+    actual = list(map(int, run('cf-2260D', input_text).split()))
+    expected = [oracle(signs) for signs in cases]
+    assert actual == expected
+
+    # These long cases cover homogeneous signs, rapid crossings, and isolated
+    # zeros while keeping the total length at the official bound.
+    long_cases = [
+        '+' * 100_000,
+        '+-' * 50_000,
+        ('+0-' * 33_333) + '+',
+    ]
+    input_text = str(len(long_cases)) + '\n' + ''.join(
+        f'{len(signs)}\n{signs}\n' for signs in long_cases
+    )
+    actual = list(map(int, run('cf-2260D', input_text).split()))
+    assert actual == [1, 2, 2]
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -3739,6 +3930,9 @@ if __name__ == "__main__":
         verify_count_sequences_two,
         verify_marbles,
         verify_underground_lab,
+        verify_fibonacci_paths,
+        verify_monocarp_and_set,
+        verify_signs_of_prefix_sums,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

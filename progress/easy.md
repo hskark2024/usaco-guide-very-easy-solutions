@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-16 (the live Guide source and Gold Conclusion module data were checked directly)
+- Last listing check: 2026-10-17 (the live Guide source and Gold Conclusion module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`092bf54`](https://github.com/cpinitiative/usaco-guide/commit/092bf547cf4f63140057b220dba2861f884e1905) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 92
-- Complete video packages: 92
+- Completed Easy solutions: 95
+- Complete video packages: 95
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -103,6 +103,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `ac-CountSequences2` | Count Sequences 2 | complete | complete | complete | generated locally; excluded from Git |
 | `spoj-marbles` | MARBLES - Marbles | complete | complete | complete | generated locally; excluded from Git |
 | `cf-781C` | Underground Lab | complete | complete | complete | generated locally; excluded from Git |
+| `cf-2176D` | Fibonacci Paths | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1886D` | Monocarp and the Set | complete | complete | complete | generated locally; excluded from Git |
+| `cf-2260D` | Signs of Prefix Sums | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-17
+
+- New entries: `cf-2176D` Fibonacci Paths, `cf-1886D` Monocarp and the Set, and `cf-2260D` Signs of Prefix Sums.
+- The live USACO Guide source remains at commit `092bf54`; all three selected Gold Conclusion entries remain labeled Easy. The full recursive module-data snapshot continues to contain 425 unique Easy IDs.
+- Fibonacci Paths sorts edge states by decreasing endpoint-label sum; Monocarp and the Set maintains the product of independent insertion-rank choices; Signs of Prefix Sums uses a seven-state minimax DP over small prefix sums.
+- All 126 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 130 smoke cases and all 92 independent Easy verifier groups passed, including literal simple-path enumeration, exhaustive permutation-record frequencies, unbounded-prefix reachability, and official constraint-scale cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 99.5 seconds (`cf-2176D`), 106.8 seconds (`cf-1886D`), and 99.9 seconds (`cf-2260D`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Gold Conclusion remains in progress with one listed Easy entry: `cf-2266E` Prime Destruction. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-16
 

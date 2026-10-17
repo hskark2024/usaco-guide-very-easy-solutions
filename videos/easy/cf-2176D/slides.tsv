@@ -1,0 +1,10 @@
+Fibonacci Paths	Directed graph with positive labels	Count paths with Fibonacci values	Answer modulo 998244353
+Every edge counts	Two starting values are arbitrary	No recurrence check yet	Begin every edge state at one
+The next value	For u to v to w	Need a w equals a u plus a v	Look up by label
+Compressed states	ways u x groups paths	Second vertex has value x	Equal labels share a bucket
+Edge transition	One for u to v	Add matching paths from v	No invalid continuation enters
+Dependency challenge	Graphs may contain cycles	DP still needs an order	Use positive label growth
+Sort by sum	Next edge has larger endpoint sum	Process largest sums first	Needed states are ready
+Update	Add count under u and a v	Add count to total	Reduce modulo the prime
+Simple automatically	Later values strictly increase	No vertex can repeat	No visited set in the DP
+Verification	Enumerate small simple paths	Test huge labels	Stress 200000 edges

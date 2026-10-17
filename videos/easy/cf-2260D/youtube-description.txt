@@ -1,0 +1,7 @@
+Choose tiny prefix-sum states and solve the minimum possible maximum array value with a seven-state dynamic program.
+
+Official problem: https://codeforces.com/contest/2260/problem/D
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-2260D.cpp
+Playlist: USACO Guide Easy C++ Solutions
+
+#usacoguide #codeforces #dynamicprogramming #prefixsums #cplusplus

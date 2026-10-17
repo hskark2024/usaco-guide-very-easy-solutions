@@ -1,0 +1,10 @@
+Signs of Prefix Sums	Know only each running-total sign	Array values must be nonzero	Minimize the largest magnitude
+Choose prefix sums	Array value is new minus old	Prefix sequence defines the array	Optimize its moves
+Nonzero elements	Equal neighboring sums are forbidden	Step cost is their distance	Track the largest step
+Sign groups	Plus chooses a positive state	Minus chooses a negative state	Zero forces state zero
+Seven states	Use values negative three to three	Small alternating witnesses suffice	Constant state space
+DP meaning	Best maximum cost ending at x	Start at empty prefix zero	Other states unreachable
+Transition	Try old and matching new states	Reject equal values	Take max with step distance
+Keep minima	Best route to each new state	Roll two tiny rows	Minimum final state wins
+Impossible zeros	First zero forces a zero element	Consecutive zeros do too	DP leaves no reachable state
+Verification	Exhaust every short sign string	Compare an independent array search	Stress 300000 characters
