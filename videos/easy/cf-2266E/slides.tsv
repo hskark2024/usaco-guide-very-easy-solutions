@@ -1,0 +1,10 @@
+Prime Destruction	Break each large number into smaller equal copies	Choose only prime divisors	Minimize operations
+One operation	Pick x and prime divisor p	Remove x	Create p copies of x divided by p
+Independent trees	Different original values never merge	Solve one value	Add the costs
+DP state	dp of x is minimum cost for one x	Base case x at most k costs zero
+First choice	Using p costs one operation	Creates p identical children	Each child is x divided by p
+Recurrence	dp x equals minimum of one plus p times dp x over p	Try distinct prime divisors
+Evaluation order	x divided by p is smaller	Compute x from small to large	Every dependency is ready
+Fast factors	Precompute smallest prime factors	Skip repeated copies of p	Near linear total work
+Example k equals one	dp two is one	dp four is three	dp eight is seven
+Finish	Sum dp of every input value	Use 64-bit totals	Verify with literal multiset search

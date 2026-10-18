@@ -1,0 +1,21 @@
+1. Prime Destruction starts with a bag of positive integers. We want every value to become at most k using as few operations as possible.
+
+2. One operation chooses a value x and a prime divisor p. We remove x, then create p copies of x divided by p.
+
+3. Here is the key simplification: descendants of different original numbers never mix. We can solve one number at a time, then add all those answers.
+
+4. Let dp of x be the minimum operations for one copy of x. If x is already at most k, dp of x is zero.
+
+5. When x is too large, suppose our first divisor is p. That move costs one and creates p identical copies of x over p.
+
+6. Each smaller copy needs dp of x over p operations. Since there are p copies, this choice costs one plus p times that smaller dp value.
+
+7. We try every distinct prime divisor of x and keep the cheapest choice. Because x over p is smaller than x, computing dp from small to large works.
+
+8. A smallest-prime-factor sieve lets us list those divisors quickly. Repeated factors, like the three twos in eight, only describe the same first choice once.
+
+9. For example, with k equal to one, eight chooses p equal to two. Its costs build as dp two equals one, dp four equals three, and dp eight equals seven.
+
+10. Finally, add dp for every original value. Use long long because many individually small operation trees can create a large total.
+
+11. The verifier literally explores every reachable small multiset, then compares that brute-force answer with the dynamic program. It also tests the full input limit.

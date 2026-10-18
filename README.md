@@ -114,6 +114,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-2176D` | Codeforces | [Fibonacci Paths](problems/cf-2176D/README.md) | [Graph DP, Sorting, Maps] | [C++](solutions/cf-2176D.cpp) | [Package](videos/easy/cf-2176D/README.md) |
 | `cf-1886D` | Codeforces | [Monocarp and the Set](problems/cf-1886D/README.md) | [Combinatorics, Modular Arithmetic, Updates] | [C++](solutions/cf-1886D.cpp) | [Package](videos/easy/cf-1886D/README.md) |
 | `cf-2260D` | Codeforces | [Signs of Prefix Sums](problems/cf-2260D/README.md) | [Dynamic Programming, Prefix Sums] | [C++](solutions/cf-2260D.cpp) | [Package](videos/easy/cf-2260D/README.md) |
+| `cf-2266E` | Codeforces | [Prime Destruction](problems/cf-2266E/README.md) | [Dynamic Programming, Divisibility, Sieve] | [C++](solutions/cf-2266E.cpp) | [Package](videos/easy/cf-2266E/README.md) |
+| `cses-1143` | CSES | [Hotel Queries](problems/cses-1143/README.md) | [Segment Tree, First Valid Position] | [C++](solutions/cses-1143.cpp) | [Package](videos/easy/cses-1143/README.md) |
+| `spoj-OrderSet` | SPOJ | [Ordered Set](problems/spoj-OrderSet/README.md) | [Fenwick Tree, Coordinate Compression, Order Statistics] | [C++](solutions/spoj-OrderSet.cpp) | [Package](videos/easy/spoj-OrderSet/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

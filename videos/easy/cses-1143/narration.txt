@@ -1,0 +1,21 @@
+1. Hotel Queries gives us a row of hotels and the number of free rooms in each one. Every arriving group must use the first hotel with enough space.
+
+2. Scanning from the beginning for every group is correct, but two hundred thousand groups and hotels make that far too slow.
+
+3. We build a segment tree. Every node stores the maximum remaining capacity anywhere inside its interval.
+
+4. Before searching, inspect the root. If its maximum is smaller than the request, no hotel works and we print zero.
+
+5. Otherwise, the tree can guide us to the first answer. At each node, ask whether the left child's maximum is large enough.
+
+6. If yes, go left. That entire interval comes before the right side and contains at least one valid hotel.
+
+7. If the left maximum is too small, no hotel there can work, so we safely go right. Repeating this reaches one leaf.
+
+8. Subtract the group's rooms from that leaf. Then recompute the maximum at every ancestor so the next search sees current capacities.
+
+9. In the sample, the first group needs four rooms. Hotels one and two fail, so the search reaches hotel three. Its capacity drops from four to zero.
+
+10. Each search and update follows one root-to-leaf path, taking logarithmic time. The complete solution runs in n plus m log n time.
+
+11. Random tests compare every answer with a direct scan, and a maximum-size test confirms that the logarithmic search stays fast.

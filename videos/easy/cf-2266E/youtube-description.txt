@@ -1,0 +1,6 @@
+Learn how to turn Prime Destruction into a one-dimensional dynamic program over smaller factors, with a smallest-prime-factor sieve and a full correctness argument.
+
+Official problem: https://codeforces.com/contest/2266/problem/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-2266E.cpp
+
+Topics: dynamic programming, prime factors, sieve, divisibility, C++17

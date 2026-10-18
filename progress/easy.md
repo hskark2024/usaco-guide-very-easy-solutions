@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-17 (the live Guide source and Gold Conclusion module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`092bf54`](https://github.com/cpinitiative/usaco-guide/commit/092bf547cf4f63140057b220dba2861f884e1905) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 95
-- Complete video packages: 95
+- Last listing check: 2026-10-18 (the live Guide source, Gold Conclusion, and Extended Segment Trees module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`e8348ee`](https://github.com/cpinitiative/usaco-guide/commit/e8348ee03cdf518afc28fd49d0f557e13358bbe2) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 98
+- Complete video packages: 98
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -106,6 +106,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-2176D` | Fibonacci Paths | complete | complete | complete | generated locally; excluded from Git |
 | `cf-1886D` | Monocarp and the Set | complete | complete | complete | generated locally; excluded from Git |
 | `cf-2260D` | Signs of Prefix Sums | complete | complete | complete | generated locally; excluded from Git |
+| `cf-2266E` | Prime Destruction | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1143` | Hotel Queries | complete | complete | complete | generated locally; excluded from Git |
+| `spoj-OrderSet` | Ordered Set | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-18
+
+- New entries: `cf-2266E` Prime Destruction, `cses-1143` Hotel Queries, and `spoj-OrderSet` Ordered Set.
+- The live USACO Guide source is at commit `e8348ee`; all three selected entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Prime Destruction uses an increasing prime-divisor DP; Hotel Queries descends a maximum segment tree to the first valid capacity; Ordered Set combines offline coordinate compression with Fenwick prefix counts and binary lifting.
+- All 129 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 133 smoke cases and all 95 independent Easy verifier groups passed, including literal multiset-state search, direct hotel simulation, sorted-set command modeling, and official constraint-scale cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 107.8 seconds (`cf-2266E`), 94.1 seconds (`cses-1143`), and 93.1 seconds (`spoj-OrderSet`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Gold Conclusion is complete. Easy Platinum Extended Segment Trees is in progress; the next listed Easy entry is `ys-PointSetRangeComposite` Point Set Range Composite. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-17
 

@@ -1,0 +1,21 @@
+1. Ordered Set asks us to insert and delete values, count stored values below x, and find the k-th smallest stored value.
+
+2. The values can be as large as positive or negative one billion, but there are at most two hundred thousand operations.
+
+3. Read every operation first. Collect values used by insert, delete, and count commands, then sort and remove duplicates.
+
+4. This coordinate compression replaces huge numbers with compact indices while preserving their exact order.
+
+5. A Fenwick tree stores one at an index when its value is present, and zero when absent. A separate Boolean array enforces set behavior.
+
+6. Insert adds one only if the value is missing. Delete subtracts one only if it is present. Duplicate commands become harmless no-ops.
+
+7. To count values smaller than x, find the first compressed coordinate at least x. The Fenwick prefix before that position is the answer.
+
+8. For the k-th smallest query, first compare k with the set size. If k is too large, print invalid.
+
+9. Otherwise, binary lifting through the Fenwick tree finds the largest prefix containing fewer than k elements. The next coordinate is the answer.
+
+10. For the sample set containing negative one and two, count below zero is one, and the second smallest value is two.
+
+11. Sorting costs Q log Q once, and every command costs log Q. Random command streams are checked against a simple sorted Python list.

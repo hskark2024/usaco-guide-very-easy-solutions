@@ -1,4 +1,4 @@
-from bisect import insort
+from bisect import bisect_left, insort
 from collections import Counter
 from collections import deque
 from fractions import Fraction
@@ -3839,6 +3839,158 @@ def verify_signs_of_prefix_sums() -> None:
     assert actual == [1, 2, 2]
 
 
+def verify_prime_destruction() -> None:
+    def prime_divisors(value):
+        result = []
+        divisor = 2
+        while divisor * divisor <= value:
+            if value % divisor == 0:
+                result.append(divisor)
+                while value % divisor == 0:
+                    value //= divisor
+            divisor += 1
+        if value > 1:
+            result.append(value)
+        return result
+
+    def literal_search(value, limit):
+        # Search actual multisets, not the editorial recurrence. The sum of
+        # all elements is invariant, so the small state space is finite.
+        start = (value,)
+        queue = deque([(start, 0)])
+        seen = {start}
+        while queue:
+            state, distance = queue.popleft()
+            if all(item <= limit for item in state):
+                return distance
+            for index, item in enumerate(state):
+                if item <= limit:
+                    continue
+                for prime in prime_divisors(item):
+                    following = list(state[:index] + state[index + 1:])
+                    following.extend([item // prime] * prime)
+                    following = tuple(sorted(following))
+                    if following not in seen:
+                        seen.add(following)
+                        queue.append((following, distance + 1))
+        raise AssertionError('a finite positive multiset must reach ones')
+
+    single_cost = {
+        (value, limit): literal_search(value, limit)
+        for value in range(1, 13)
+        for limit in range(1, 13)
+    }
+    cases = []
+    expected = []
+    for _ in range(100):
+        count = RNG.randint(1, 12)
+        limit = RNG.randint(1, count)
+        values = [RNG.randint(1, count) for _ in range(count)]
+        cases.append((count, limit, values))
+        expected.append(sum(single_cost[value, limit] for value in values))
+
+    input_text = str(len(cases)) + '\n' + ''.join(
+        f'{count} {limit}\n' + ' '.join(map(str, values)) + '\n'
+        for count, limit, values in cases
+    )
+    actual = list(map(int, run('cf-2266E', input_text).split()))
+    assert actual == expected
+
+    # The all-power-of-two case reaches the largest branching cost while the
+    # prime values ensure every candidate can finish in one operation.
+    count = 200_000
+    values = [131_072] * (count // 2) + [199_999] * (count // 2)
+    input_text = f'1\n{count} 1\n' + ' '.join(map(str, values)) + '\n'
+    expected_total = (count // 2) * (131_072 - 1) + count // 2
+    assert int(run('cf-2266E', input_text)) == expected_total
+
+
+def verify_hotel_queries() -> None:
+    for _ in range(220):
+        hotel_count = RNG.randint(1, 50)
+        group_count = RNG.randint(1, 90)
+        capacities = [RNG.randint(1, 40) for _ in range(hotel_count)]
+        requests = [RNG.randint(1, 50) for _ in range(group_count)]
+
+        remaining = capacities.copy()
+        expected = []
+        for request in requests:
+            chosen = 0
+            for index, capacity in enumerate(remaining):
+                if capacity >= request:
+                    chosen = index + 1
+                    remaining[index] -= request
+                    break
+            expected.append(chosen)
+
+        input_text = (
+            f'{hotel_count} {group_count}\n'
+            + ' '.join(map(str, capacities))
+            + '\n'
+            + ' '.join(map(str, requests))
+            + '\n'
+        )
+        actual = list(map(int, run('cses-1143', input_text).split()))
+        assert actual == expected
+
+    count = 200_000
+    input_text = (
+        f'{count} {count}\n'
+        + '1 ' * count
+        + '\n'
+        + '1 ' * count
+        + '\n'
+    )
+    actual = list(map(int, run('cses-1143', input_text).split()))
+    assert actual == list(range(1, count + 1))
+
+
+def verify_ordered_set() -> None:
+    for _ in range(180):
+        model = []
+        operations = []
+        expected = []
+        for _ in range(RNG.randint(1, 220)):
+            operation = RNG.choice('IIDCCKK')
+            if operation == 'K':
+                argument = RNG.randint(1, 45)
+                operations.append((operation, argument))
+                expected.append(
+                    str(model[argument - 1]) if argument <= len(model)
+                    else 'invalid'
+                )
+                continue
+
+            argument = RNG.randint(-40, 40)
+            operations.append((operation, argument))
+            position = bisect_left(model, argument)
+            exists = position < len(model) and model[position] == argument
+            if operation == 'I' and not exists:
+                model.insert(position, argument)
+            elif operation == 'D' and exists:
+                model.pop(position)
+            elif operation == 'C':
+                expected.append(str(position))
+
+        input_text = str(len(operations)) + '\n' + ''.join(
+            f'{operation} {argument}\n' for operation, argument in operations
+        )
+        actual = run('spoj-OrderSet', input_text).splitlines()
+        assert actual == expected
+
+    # Cover both signed extremes and the official operation limit without
+    # producing an impractically large expected-output file.
+    operations = [('I', -1_000_000_000), ('I', 1_000_000_000)]
+    operations += [('I', value) for value in range(99_999)]
+    operations += [('I', value) for value in range(99_998)]
+    operations.append(('C', 1_000_000_000))
+    assert len(operations) == 200_000
+    input_text = str(len(operations)) + '\n' + ''.join(
+        f'{operation} {argument}\n' for operation, argument in operations
+    )
+    assert run('spoj-OrderSet', input_text) == '100000\n'
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -3933,6 +4085,9 @@ if __name__ == "__main__":
         verify_fibonacci_paths,
         verify_monocarp_and_set,
         verify_signs_of_prefix_sums,
+        verify_prime_destruction,
+        verify_hotel_queries,
+        verify_ordered_set,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

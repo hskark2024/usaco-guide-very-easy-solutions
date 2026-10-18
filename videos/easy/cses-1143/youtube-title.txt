@@ -1,0 +1,1 @@
+Hotel Queries | Find the First Valid Index with a Segment Tree

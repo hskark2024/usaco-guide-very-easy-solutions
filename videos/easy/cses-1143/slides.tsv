@@ -1,0 +1,10 @@
+Hotel Queries	Assign each group to the first hotel with room	Update capacity after assignment	Avoid repeated scans
+Why scanning fails	Up to two hundred thousand hotels	Up to two hundred thousand groups	Quadratic work is too slow
+Tree information	Each leaf is one hotel	Each parent stores interval maximum	The root stores the global maximum
+Reject quickly	If root maximum is below the request	No hotel can work	Output zero
+Find the first	Ask whether the left maximum works	If yes descend left	Earlier indices win
+Go right safely	Left maximum is too small	No left hotel works	The answer must be right
+Reserve rooms	Reach one leaf	Subtract the group size	Keep the hotel index
+Repair the tree	Walk toward the root	Parent is max of children	Next query sees fresh values
+Sample request	Four rooms skips capacities three and two	Hotel three fits exactly	Its capacity becomes zero
+Complexity	Linear build	Logarithmic query and update	Random scan oracle plus full-scale test

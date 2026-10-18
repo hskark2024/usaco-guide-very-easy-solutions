@@ -1,0 +1,6 @@
+Learn coordinate compression and Fenwick-tree binary lifting for insert, delete, rank-count, and k-th-smallest queries.
+
+Official problem: https://www.spoj.com/problems/ORDERSET/
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/spoj-OrderSet.cpp
+
+Topics: Fenwick tree, coordinate compression, order statistics, C++17

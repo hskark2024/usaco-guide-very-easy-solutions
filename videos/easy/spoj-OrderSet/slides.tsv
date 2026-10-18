@@ -1,0 +1,10 @@
+Ordered Set	Insert and delete unique values	Count values below x	Find the k-th smallest
+Large coordinates	Values range from negative to positive one billion	Only two hundred thousand commands	Compress offline
+Coordinate compression	Collect value-based arguments	Sort and deduplicate	Order is preserved
+Fenwick meaning	One means value is present	Zero means absent	Prefix sums count members
+Set updates	Insert only when missing	Delete only when present	Duplicates are no-ops
+Count query	Find first coordinate at least x	Query prefix before it	Counts strictly smaller values
+K-th validation	Compute total set size	If k is too large print invalid	Otherwise search
+Binary lifting	Build largest prefix with count below k	Next position is k-th one	Map back to original value
+Sample	Store negative one and two	Count below zero is one	Second smallest is two
+Complexity	Sort in Q log Q	Each command in log Q	Random model and full-scale test
