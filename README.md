@@ -117,6 +117,9 @@ The official statements remain at their original judge links. These notes intent
 | `cf-2266E` | Codeforces | [Prime Destruction](problems/cf-2266E/README.md) | [Dynamic Programming, Divisibility, Sieve] | [C++](solutions/cf-2266E.cpp) | [Package](videos/easy/cf-2266E/README.md) |
 | `cses-1143` | CSES | [Hotel Queries](problems/cses-1143/README.md) | [Segment Tree, First Valid Position] | [C++](solutions/cses-1143.cpp) | [Package](videos/easy/cses-1143/README.md) |
 | `spoj-OrderSet` | SPOJ | [Ordered Set](problems/spoj-OrderSet/README.md) | [Fenwick Tree, Coordinate Compression, Order Statistics] | [C++](solutions/spoj-OrderSet.cpp) | [Package](videos/easy/spoj-OrderSet/README.md) |
+| `ys-PointSetRangeComposite` | Library Checker | [Point Set Range Composite](problems/ys-PointSetRangeComposite/README.md) | [Segment Tree, Affine Functions, Composition] | [C++](solutions/ys-PointSetRangeComposite.cpp) | [Package](videos/easy/ys-PointSetRangeComposite/README.md) |
+| `cses-2206` | CSES | [Pizzeria Queries](problems/cses-2206/README.md) | [Segment Tree, Transformed Minima] | [C++](solutions/cses-2206.cpp) | [Package](videos/easy/cses-2206/README.md) |
+| `usaco-495` | USACO Gold | [Marathon](problems/usaco-495/README.md) | [Segment Tree, Range Sum, Range Maximum] | [C++](solutions/usaco-495.cpp) | [Package](videos/easy/usaco-495/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

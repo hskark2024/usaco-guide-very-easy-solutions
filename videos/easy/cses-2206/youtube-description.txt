@@ -1,0 +1,6 @@
+Learn how to split an absolute-value delivery cost into two transformed range minima and support price updates with a segment tree.
+
+Official problem: https://cses.fi/problemset/task/2206
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-2206.cpp
+
+Topics: segment tree, transformed minima, absolute values, point updates, C++17

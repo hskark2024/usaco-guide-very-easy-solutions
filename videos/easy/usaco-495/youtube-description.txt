@@ -1,0 +1,6 @@
+Learn how to turn an optional checkpoint skip into a range-maximum saving, combine it with edge range sums, and handle coordinate updates efficiently.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=495
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-495.cpp
+
+Topics: segment tree, Manhattan distance, range sum, range maximum, point updates, C++17

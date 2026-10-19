@@ -1,0 +1,6 @@
+Learn how affine-function composition becomes an associative, order-sensitive segment-tree operation with fast point updates and range queries.
+
+Official problem: https://judge.yosupo.jp/problem/point_set_range_composite
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ys-PointSetRangeComposite.cpp
+
+Topics: segment tree, affine functions, composition, non-commutative operations, C++17

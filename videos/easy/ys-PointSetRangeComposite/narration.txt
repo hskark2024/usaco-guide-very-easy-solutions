@@ -1,0 +1,19 @@
+1. Point Set Range Composite gives us a row of simple functions. Each one multiplies its input, adds a constant, and takes the result modulo nine hundred ninety-eight million two hundred forty-four thousand three hundred fifty-three.
+
+2. We must replace individual functions and answer range questions. A range question starts with x, then applies every selected function from left to right.
+
+3. Repeating every function would be linear per query. Instead, notice that combining two affine functions creates another affine function.
+
+4. Suppose the first function is A x plus B and the second is C x plus D. Applying first and then second gives C times A x plus B, plus D.
+
+5. So the combined multiplier is C times A, and the combined constant is C times B plus D. We reduce both values modulo the required prime.
+
+6. A segment-tree leaf stores one function. Each parent stores the composition of its left interval followed by its right interval. The identity function x fills unused leaves.
+
+7. Order is the tricky part. Composition is associative, so a segment tree works, but it is not commutative. Swapping two functions can change the answer.
+
+8. During an iterative query, we build one result from the left and another from the right. Left pieces are appended, while right pieces are prepended. Then we join the two results.
+
+9. A point update replaces one leaf and recomputes the logarithmic number of ancestors. A range query also visits only logarithmically many nodes.
+
+10. Random verification literally applies each function in order after every update. It catches reversed composition immediately and also checks single-function and empty-identity behavior.

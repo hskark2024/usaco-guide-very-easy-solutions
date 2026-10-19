@@ -1,0 +1,10 @@
+Marathon	Ordered grid checkpoints	One optional interior skip	Coordinate updates and route queries
+Normal route	Use Manhattan distance	Add adjacent edge lengths	A range-sum problem
+What a skip changes	Remove two edges touching i	Add one direct neighbor edge	Only a local triple matters
+Saving formula	Old left edge plus old right edge	Minus direct neighbor distance	Never negative
+Query answer	Sum edges from l to r	Maximum legal interior saving	Subtract the saving
+Two trees	Range sum for edges	Range maximum for savings	Logarithmic queries
+Endpoint rule	First checkpoint cannot be skipped	Last checkpoint cannot be skipped	Query only strict interior centers
+Coordinate update	Refresh two nearby edges	Refresh three nearby savings	All other values stay valid
+Sample idea	Compare full route and best shortcut	Updates change local geometry	Queries see repaired trees
+Complexity and checks	Logarithmic update and query	Linear-size storage	Direct enumeration oracle

@@ -3991,6 +3991,166 @@ def verify_ordered_set() -> None:
     assert run('spoj-OrderSet', input_text) == '100000\n'
 
 
+def verify_point_set_range_composite() -> None:
+    modulus = 998_244_353
+
+    for _ in range(180):
+        function_count = RNG.randint(1, 28)
+        operation_count = RNG.randint(1, 100)
+        functions = [
+            [RNG.randrange(modulus), RNG.randrange(modulus)]
+            for _ in range(function_count)
+        ]
+        initial = [function.copy() for function in functions]
+        operations = []
+        expected = []
+
+        for _ in range(operation_count):
+            if RNG.random() < 0.45:
+                index = RNG.randrange(function_count)
+                multiplier = RNG.randrange(modulus)
+                constant = RNG.randrange(modulus)
+                operations.append((0, index, multiplier, constant))
+                functions[index] = [multiplier, constant]
+            else:
+                left = RNG.randrange(function_count)
+                right = RNG.randint(left + 1, function_count)
+                value = RNG.randrange(modulus)
+                operations.append((1, left, right, value))
+
+                # Literal evaluation is independent of the segment-tree
+                # composition formula and makes reversed order obvious.
+                for multiplier, constant in functions[left:right]:
+                    value = (multiplier * value + constant) % modulus
+                expected.append(value)
+
+        input_text = (
+            f'{function_count} {operation_count}\n'
+            + ''.join(f'{a} {b}\n' for a, b in initial)
+            + ''.join(f'{t} {p} {c} {d}\n' for t, p, c, d in operations)
+        )
+        actual = list(map(int, run('ys-PointSetRangeComposite', input_text).split()))
+        assert actual == expected
+
+    # Exercise the official maximum n and q with identity functions. Every
+    # full-range query must return its input even after identity updates.
+    count = 500_000
+    query_count = 500_000
+    lines = [f'{count} {query_count}', *(['1 0'] * count)]
+    expected = []
+    for operation in range(query_count):
+        if operation % 2 == 0:
+            index = operation // 2 % count
+            lines.append(f'0 {index} 1 0')
+        else:
+            value = operation
+            lines.append(f'1 0 {count} {value}')
+            expected.append(value)
+    actual = list(map(int, run('ys-PointSetRangeComposite', '\n'.join(lines) + '\n').split()))
+    assert actual == expected
+
+
+def verify_pizzeria_queries() -> None:
+    for _ in range(220):
+        building_count = RNG.randint(1, 55)
+        operation_count = RNG.randint(1, 110)
+        prices = [RNG.randint(1, 80) for _ in range(building_count)]
+        initial = prices.copy()
+        operations = []
+        expected = []
+
+        for _ in range(operation_count):
+            index = RNG.randrange(building_count)
+            if RNG.random() < 0.45:
+                new_price = RNG.randint(1, 80)
+                operations.append((1, index + 1, new_price))
+                prices[index] = new_price
+            else:
+                operations.append((2, index + 1))
+                expected.append(min(
+                    price + abs(source - index)
+                    for source, price in enumerate(prices)
+                ))
+
+        input_text = (
+            f'{building_count} {operation_count}\n'
+            + ' '.join(map(str, initial))
+            + '\n'
+            + ''.join(' '.join(map(str, operation)) + '\n' for operation in operations)
+        )
+        actual = list(map(int, run('cses-2206', input_text).split()))
+        assert actual == expected
+
+    count = 200_000
+    query_count = 200_000
+    input_text = (
+        f'{count} {query_count}\n'
+        + ' '.join(['1'] * count)
+        + '\n'
+        + ''.join(f'2 {index % count + 1}\n' for index in range(query_count))
+    )
+    assert list(map(int, run('cses-2206', input_text).split())) == [1] * query_count
+
+
+def verify_marathon() -> None:
+    def distance(first, second):
+        return abs(first[0] - second[0]) + abs(first[1] - second[1])
+
+    for _ in range(180):
+        checkpoint_count = RNG.randint(1, 35)
+        operation_count = RNG.randint(1, 90)
+        points = [
+            (RNG.randint(-25, 25), RNG.randint(-25, 25))
+            for _ in range(checkpoint_count)
+        ]
+        initial = points.copy()
+        operations = []
+        expected = []
+
+        for _ in range(operation_count):
+            if RNG.random() < 0.45:
+                index = RNG.randrange(checkpoint_count)
+                point = (RNG.randint(-25, 25), RNG.randint(-25, 25))
+                points[index] = point
+                operations.append(f'U {index + 1} {point[0]} {point[1]}')
+            else:
+                left = RNG.randrange(checkpoint_count)
+                right = RNG.randint(left, checkpoint_count - 1)
+                operations.append(f'Q {left + 1} {right + 1}')
+
+                full = sum(
+                    distance(points[index], points[index + 1])
+                    for index in range(left, right)
+                )
+                best = full
+                for skipped in range(left + 1, right):
+                    saving = (
+                        distance(points[skipped - 1], points[skipped])
+                        + distance(points[skipped], points[skipped + 1])
+                        - distance(points[skipped - 1], points[skipped + 1])
+                    )
+                    best = min(best, full - saving)
+                expected.append(best)
+
+        input_text = (
+            f'{checkpoint_count} {operation_count}\n'
+            + ''.join(f'{x} {y}\n' for x, y in initial)
+            + '\n'.join(operations)
+            + '\n'
+        )
+        actual = list(map(int, run('usaco-495', input_text).split()))
+        assert actual == expected
+
+    count = 100_000
+    query_count = 100_000
+    input_text = (
+        f'{count} {query_count}\n'
+        + ''.join(f'{index} 0\n' for index in range(count))
+        + ''.join(f'Q 1 {count}\n' for _ in range(query_count))
+    )
+    assert list(map(int, run('usaco-495', input_text).split())) == [count - 1] * query_count
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -4088,6 +4248,9 @@ if __name__ == "__main__":
         verify_prime_destruction,
         verify_hotel_queries,
         verify_ordered_set,
+        verify_point_set_range_composite,
+        verify_pizzeria_queries,
+        verify_marathon,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

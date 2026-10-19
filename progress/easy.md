@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-18 (the live Guide source, Gold Conclusion, and Extended Segment Trees module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`e8348ee`](https://github.com/cpinitiative/usaco-guide/commit/e8348ee03cdf518afc28fd49d0f557e13358bbe2) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 98
-- Complete video packages: 98
+- Last listing check: 2026-10-19 (the live Guide source and Extended Segment Trees module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`44e001c`](https://github.com/cpinitiative/usaco-guide/commit/44e001ca6d97442c1e7720d3b9eed60bd5e41a59) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 101
+- Complete video packages: 101
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -109,6 +109,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cf-2266E` | Prime Destruction | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1143` | Hotel Queries | complete | complete | complete | generated locally; excluded from Git |
 | `spoj-OrderSet` | Ordered Set | complete | complete | complete | generated locally; excluded from Git |
+| `ys-PointSetRangeComposite` | Point Set Range Composite | complete | complete | complete | generated locally; excluded from Git |
+| `cses-2206` | Pizzeria Queries | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-495` | Marathon | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-19
+
+- New entries: `ys-PointSetRangeComposite` Point Set Range Composite, `cses-2206` Pizzeria Queries, and `usaco-495` Marathon.
+- The live USACO Guide source is at commit `44e001c`; all three selected Extended Segment Trees entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Point Set Range Composite uses order-preserving affine composition; Pizzeria Queries stores two transformed range minima; Marathon subtracts the best local skip saving from an adjacent-edge range sum.
+- All 132 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 136 smoke cases and all 98 independent Easy verifier groups passed, including literal function evaluation, direct pizzeria scans, route-and-skip enumeration, and official constraint-scale cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 106.4 seconds (`ys-PointSetRangeComposite`), 84.7 seconds (`cses-2206`), and 89.3 seconds (`usaco-495`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Platinum Extended Segment Trees remains in progress; the next listed Easy entries are `cses-1188` Bit Inversions, `cf-104380H` 01 (Hard Version), and `usaco-577` High Card Low Card. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-18
 

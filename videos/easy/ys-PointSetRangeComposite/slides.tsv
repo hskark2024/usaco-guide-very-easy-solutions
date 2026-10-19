@@ -1,0 +1,10 @@
+Point Set Range Composite	Maintain affine functions	Point updates and range evaluation	Modulo 998244353
+What a query does	Start with x	Apply functions from left to right	Order must be preserved
+Closure	Affine after affine is still affine	Store one pair for a whole interval	Avoid replaying every function
+Composition formula	First: A x plus B	Second: C x plus D	Combined: C A x plus C B plus D
+Segment tree	Leaves store individual functions	Parents store left then right	Identity is x
+Order matters	Composition is associative	It is not commutative	Swapping children can change the result
+Two accumulators	Append nodes found on the left	Prepend nodes found on the right	Join them in array order
+Point update	Replace one function	Recompose its ancestors	Logarithmic work
+Walkthrough	Compose a short interval	Evaluate the final pair at x	Reduce every operation modulo MOD
+Complexity and checks	Linear build	Logarithmic updates and queries	Literal random evaluation oracle

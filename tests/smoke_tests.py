@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "ys-PointSetRangeComposite": ("3 5\n1 1\n2 2\n3 3\n1 0 3 1\n1 1 3 1\n0 1 1 0\n1 0 3 1\n1 0 1 7\n", "21\n15\n9\n8\n"),
+    "cses-2206": ("6 3\n8 6 4 5 7 5\n2 2\n1 5 1\n2 2\n", "5\n4\n"),
+    "usaco-495": ("5 5\n-4 4\n-5 -3\n-1 5\n-3 4\n0 5\nQ 1 5\nU 4 0 1\nU 4 -1 1\nQ 2 4\nQ 1 4\n", "11\n8\n8\n"),
     "cf-2266E": ("6\n1 1\n1\n6 2\n6 6 4 3 2 1\n8 1\n8 6 4 3 2 1 8 6\n12 3\n12 10 9 8 7 6 5 4 3 2 1 12\n10 9\n10 9 8 7 6 5 4 3 2 1\n5 5\n5 4 3 2 1\n", "0\n4\n25\n15\n1\n0\n"),
     "cses-1143": ("8 5\n3 2 4 1 5 5 2 6\n4 4 7 1 1\n", "3 5 0 1 1\n"),
     "spoj-OrderSet": ("8\nI -1\nI -1\nI 2\nC 0\nK 2\nD -1\nK 1\nK 2\n", "1\n2\n2\ninvalid\n"),

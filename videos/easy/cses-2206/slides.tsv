@@ -1,0 +1,10 @@
+Pizzeria Queries	Base price plus delivery distance	Point price updates	Cheapest order at a building
+Why scanning fails	Up to 200000 buildings	Up to 200000 queries	Quadratic work is too slow
+Split at customer	Sources on the left	Sources on the right	Remove the absolute value separately
+Left formula	Cost is price plus k minus i	Store price minus i	Add k after the query
+Right formula	Cost is price plus i minus k	Store price plus i	Subtract k after the query
+Tree node	Minimum price-minus-index	Minimum price-plus-index	Combine with componentwise minimum
+Answer query	Prefix minimum plus k	Suffix minimum minus k	Take the smaller result
+Price update	Change both transformed leaf values	Repair ancestors	Logarithmic time
+Sample idea	A farther cheap pizza can win	Delivery changes the comparison	Both sides are considered
+Complexity and checks	Linear build	Logarithmic operations	Direct-scan random oracle

@@ -1,0 +1,19 @@
+1. Marathon describes a route through checkpoints on a city grid. A runner follows them in order, but may skip one checkpoint inside a requested sub-route.
+
+2. We also move checkpoints between questions. Recomputing every route and trying every skip would be far too slow.
+
+3. First ignore the skip. The route distance is simply the sum of Manhattan distances between neighboring checkpoints.
+
+4. Skipping checkpoint i replaces the edge into i and the edge out of i with one direct edge from its previous checkpoint to its next checkpoint.
+
+5. The saving is the two old edge lengths minus that direct distance. Because Manhattan distance obeys the triangle inequality, this saving is never negative.
+
+6. For a query from l to r, find the sum of all adjacent edges in that interval. Then find the largest saving centered strictly between l and r.
+
+7. Subtracting that best saving gives the shortest allowed route. If there is no interior checkpoint, the saving is zero.
+
+8. We maintain edge lengths in a sum segment tree and skip savings in a maximum segment tree. Both range results take logarithmic time.
+
+9. Moving one checkpoint changes only its edge to the left, its edge to the right, and the three skip triples that contain it. Everything farther away stays valid.
+
+10. Random tests directly rebuild each small queried path and try every legal skip. The official example and a full-size update stream check both correctness and performance.

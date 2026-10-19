@@ -1,0 +1,19 @@
+1. Pizzeria Queries puts a pizzeria and an apartment in every building on one street. The delivered cost is the menu price plus the distance between buildings.
+
+2. We process price changes and questions asking for the cheapest delivered pizza at one building. Scanning all pizzerias for every question is too slow.
+
+3. The absolute value is the obstacle, so split possible sources into two sides of the customer.
+
+4. If pizzeria i is left of customer k, the cost is price i plus k minus i. Rewrite that as price i minus i, plus k.
+
+5. If pizzeria i is right of k, the cost is price i plus i minus k. Rewrite that as price i plus i, minus k.
+
+6. Now every building contributes two transformed numbers: price minus index and price plus index. A segment-tree node stores the minimum of both values.
+
+7. For a customer at k, query the minimum price-minus-index on the prefix ending at k and add k.
+
+8. Query the minimum price-plus-index on the suffix starting at k and subtract k. The smaller candidate is the overall answer.
+
+9. When a pizzeria changes its price, update both transformed values at its leaf and repair the ancestors.
+
+10. Each update or question takes logarithmic time. Random tests compare the tree with a direct scan of every pizzeria, including customers at both ends of the street.
