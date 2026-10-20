@@ -1,0 +1,10 @@
+01 Hard Version	Delete adjacent 01 pairs	Point flips plus substring queries	Find shortest remainder
+Bracket viewpoint	Zero acts like open	One acts like close	Each deletion matches one pair
+Canonical remainder	No 01 may remain	All unmatched ones come first	All unmatched zeroes come last
+Node summary	Count unmatched ones	Count unmatched zeroes	No stored substring needed
+Merge boundary	Left unmatched zeroes	Right unmatched ones	Match the smaller count
+Parent summary	Subtract cross-boundary matches	Add surviving ones	Add surviving zeroes
+Ordered query	Merge left picks forward	Merge right picks backward	Preserve original string order
+Bit flip	Zero leaf is 0 ones and 1 zero	One leaf is 1 one and 0 zero	Swap the counters
+Sample	110 leaves length three	Full sample leaves length four	Flip changes matches, not final length
+Complexity and checks	O(log n) updates	O(log n) queries	Literal stack-reduction oracle

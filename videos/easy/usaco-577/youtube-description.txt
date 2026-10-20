@@ -1,0 +1,6 @@
+Learn how two greedy ordered-set matchings build every high-card prefix score and low-card suffix score, then find the best rule-switch point.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=577
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-577.cpp
+
+Topics: greedy matching, ordered sets, prefix and suffix preprocessing, USACO Platinum, C++17

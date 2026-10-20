@@ -120,6 +120,9 @@ The official statements remain at their original judge links. These notes intent
 | `ys-PointSetRangeComposite` | Library Checker | [Point Set Range Composite](problems/ys-PointSetRangeComposite/README.md) | [Segment Tree, Affine Functions, Composition] | [C++](solutions/ys-PointSetRangeComposite.cpp) | [Package](videos/easy/ys-PointSetRangeComposite/README.md) |
 | `cses-2206` | CSES | [Pizzeria Queries](problems/cses-2206/README.md) | [Segment Tree, Transformed Minima] | [C++](solutions/cses-2206.cpp) | [Package](videos/easy/cses-2206/README.md) |
 | `usaco-495` | USACO Gold | [Marathon](problems/usaco-495/README.md) | [Segment Tree, Range Sum, Range Maximum] | [C++](solutions/usaco-495.cpp) | [Package](videos/easy/usaco-495/README.md) |
+| `cses-1188` | CSES | [Bit Inversions](problems/cses-1188/README.md) | [Segment Tree, Longest Run, Point Updates] | [C++](solutions/cses-1188.cpp) | [Package](videos/easy/cses-1188/README.md) |
+| `cf-104380H` | Codeforces Gym | [01 (Hard Version)](problems/cf-104380H/README.md) | [Segment Tree, String Reduction, Associative Summaries] | [C++](solutions/cf-104380H.cpp) | [Package](videos/easy/cf-104380H/README.md) |
+| `usaco-577` | USACO Platinum | [High Card Low Card](problems/usaco-577/README.md) | [Greedy Matching, Prefixes, Suffixes, Ordered Sets] | [C++](solutions/usaco-577.cpp) | [Package](videos/easy/usaco-577/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

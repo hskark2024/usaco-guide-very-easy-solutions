@@ -1,0 +1,10 @@
+High Card Low Card	Deck 1 through 2N	Elsie's order is known	Bessie owns the complement
+One rule switch	Higher card wins first	Lower card wins later	Switch immediately or never
+Try every split	Best high score for each prefix	Best low score for each suffix	Add at one boundary
+High-card greedy	Find smallest card above Elsie's	Win without wasting a larger card	Ordered-set upper bound
+Unmatched rounds	Record only winning matches	Do not consume a helper card	Assign losing cards afterward
+Low-card greedy	Scan rounds backward	Find largest card below Elsie's	Ordered-set lower bound
+Two arrays	Prefix scores left to right	Suffix scores right to left	O(log N) per match
+Official sample	Elsie 1, 8, 4, 3	Bessie 2, 5, 6, 7	Best score is three
+Choose answer	Check splits 0 through N	Add prefix and suffix wins	Take maximum
+Complexity and checks	O(N log N) time	O(N) space	Exhaustive small-game oracle

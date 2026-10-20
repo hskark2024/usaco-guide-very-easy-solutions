@@ -1,0 +1,19 @@
+1. Bit Inversions starts with a string of zeroes and ones. Each update flips one bit, and after every flip we need the longest block whose bits are all equal.
+
+2. A full scan after every update could inspect two hundred thousand bits two hundred thousand times. That is far too much work, so we need to reuse summaries of unchanged pieces.
+
+3. A segment-tree node stores six facts about its interval: its length, first bit, last bit, longest equal-bit prefix, longest equal-bit suffix, and best run anywhere inside.
+
+4. Suppose we merge a left interval and a right interval. The best run might stay completely inside either child. There is only one new possibility: a run that crosses the boundary.
+
+5. The crossing run exists when the left interval's last bit equals the right interval's first bit. Its length is the left suffix length plus the right prefix length.
+
+6. The parent prefix usually equals the left prefix. It can keep going into the right child only when the entire left child is one matching run. The suffix follows the mirror-image rule.
+
+7. For the sample string zero zero one zero one one, flipping position three creates zero zero zero zero one one. The boundary summaries join into a run of four zeroes.
+
+8. A flip changes one leaf from zero to one or one to zero. Only the nodes on that leaf's path to the root can change, so we rebuild just those nodes.
+
+9. The root describes the whole string, and its best-run field is printed after every update. Empty padding leaves act like identities and never create fake runs.
+
+10. Building costs linear time. Each flip costs logarithmic time. Random tests compare every reported answer with a simple direct scan, including repeated flips, endpoints, and the maximum input size.

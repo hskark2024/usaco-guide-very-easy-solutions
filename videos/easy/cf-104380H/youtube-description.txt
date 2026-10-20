@@ -1,0 +1,6 @@
+Learn how to reduce a binary substring to two unmatched counts and combine those summaries in an order-aware segment tree with point flips.
+
+Official problem: https://codeforces.com/gym/104380/problem/H
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-104380H.cpp
+
+Topics: segment tree, string reduction, bracket matching, point updates, C++17

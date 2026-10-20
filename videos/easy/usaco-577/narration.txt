@@ -1,0 +1,19 @@
+1. High Card Low Card uses a deck numbered one through two N. Elsie owns N known cards and plays them in a fixed order. Bessie owns every card not in Elsie's hand.
+
+2. At first, the higher card wins a point. Bessie may switch the rule once, and then the lower card wins. Switching immediately and never switching are both allowed.
+
+3. Try every possible split. We need the best high-card score for every prefix and the best low-card score for every suffix, so we can add the two values at each boundary.
+
+4. For a high-card round, choose Bessie's smallest available card that is strictly larger than Elsie's. It wins now and saves every larger card for harder opponents later.
+
+5. If no card can win, this helper matching records no win and consumes nothing. Losing cards can be placed into non-scoring rounds after the winning matches are chosen.
+
+6. The low-card greedy is the mirror image. Scanning from right to left, use the largest available Bessie card that is still strictly smaller than Elsie's card.
+
+7. Ordered sets find both choices in logarithmic time. Prefix high scores grow left to right, while suffix low scores grow right to left.
+
+8. In the sample, Elsie plays one, eight, four, three. Bessie owns two, five, six, seven. Winning high against one and then switching allows two more low-card wins, for three points.
+
+9. For every split from zero through N, add prefix-high at the split to suffix-low at the same split. Take the largest sum.
+
+10. The algorithm runs in N log N time. Exhaustive tests try every Bessie card order and every split on small games, while a fifty-thousand-round test checks the official limit.

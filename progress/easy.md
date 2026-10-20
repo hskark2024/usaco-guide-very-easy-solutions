@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-19 (the live Guide source and Extended Segment Trees module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`44e001c`](https://github.com/cpinitiative/usaco-guide/commit/44e001ca6d97442c1e7720d3b9eed60bd5e41a59) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 101
-- Complete video packages: 101
+- Last listing check: 2026-10-20 (the live Guide source and Extended Segment Trees module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`c81f85b`](https://github.com/cpinitiative/usaco-guide/commit/c81f85bf2ada7dca254dcf88d56b450ada9acf9c) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 104
+- Complete video packages: 104
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -112,6 +112,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `ys-PointSetRangeComposite` | Point Set Range Composite | complete | complete | complete | generated locally; excluded from Git |
 | `cses-2206` | Pizzeria Queries | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-495` | Marathon | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1188` | Bit Inversions | complete | complete | complete | generated locally; excluded from Git |
+| `cf-104380H` | 01 (Hard Version) | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-577` | High Card Low Card | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-20
+
+- New entries: `cses-1188` Bit Inversions, `cf-104380H` 01 (Hard Version), and `usaco-577` High Card Low Card.
+- The live USACO Guide source is at commit `c81f85b`; all three selected Extended Segment Trees entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Bit Inversions stores exact boundary-run summaries; 01 stores unmatched reduced-string counts with an ordered merge; High Card Low Card combines greedy high-prefix and low-suffix matchings.
+- All 135 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 139 smoke cases and all 101 independent Easy verifier groups passed, including direct run scans, literal stack reductions, exhaustive card-assignment DP, and official constraint-scale cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 114.0 seconds (`cses-1188`), 112.2 seconds (`cf-104380H`), and 105.2 seconds (`usaco-577`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Platinum Extended Segment Trees is complete. The next Easy module is Range Sweep, beginning with `cses-1740` Intersection Points and `he-TwinPermutations` Twin Permutations. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-19
 

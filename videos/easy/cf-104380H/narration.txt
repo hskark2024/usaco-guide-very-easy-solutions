@@ -1,0 +1,19 @@
+1. In zero one, Hard Version, we repeatedly delete adjacent zero-one pairs. The string also receives bit flips, and queries ask for the shortest remaining length inside a chosen substring.
+
+2. Think of zero as an opening bracket and one as a closing bracket. Deleting zero one is the same as matching one opening token with a later closing token.
+
+3. When no more pairs can be deleted, the remaining string must look like some ones followed by some zeroes. If a zero still appeared before a later one, there would be a zero-one boundary we could delete.
+
+4. So a segment-tree node needs only two numbers: unmatched ones at the front and unmatched zeroes at the back. We do not need to store the reduced string itself.
+
+5. When joining left and right nodes, left-side unmatched zeroes can pair with right-side unmatched ones. The number of new pairs is the smaller of those two counts.
+
+6. Subtract those matches. The remaining ones from both children and remaining zeroes from both children form the exact summary of the combined interval.
+
+7. The merge is order-sensitive. For a range query, left nodes are appended forward while right nodes are prepended. Finally, the two accumulators are joined in original string order.
+
+8. A bit flip is especially simple at a leaf. A zero leaf stores zero unmatched ones and one unmatched zero. A one leaf stores the reverse, so flipping just swaps the counters.
+
+9. For one one zero zero one zero zero one, the full reduction removes two pairs and leaves four characters. After the sample flip, the answer is still four, but the matched positions change.
+
+10. Every update and range query costs logarithmic time. A literal stack reducer checks hundreds of random cases, and a maximum-size test confirms the implementation stays fast.

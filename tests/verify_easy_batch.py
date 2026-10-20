@@ -4151,6 +4151,151 @@ def verify_marathon() -> None:
     assert list(map(int, run('usaco-495', input_text).split())) == [count - 1] * query_count
 
 
+def verify_bit_inversions() -> None:
+    def longest_run(bits):
+        best = current = 1
+        for index in range(1, len(bits)):
+            if bits[index] == bits[index - 1]:
+                current += 1
+            else:
+                current = 1
+            best = max(best, current)
+        return best
+
+    for _ in range(220):
+        length = RNG.randint(1, 60)
+        change_count = RNG.randint(1, 120)
+        bits = [RNG.choice('01') for _ in range(length)]
+        initial = ''.join(bits)
+        changes = []
+        expected = []
+
+        for _ in range(change_count):
+            position = RNG.randrange(length)
+            changes.append(position + 1)
+            bits[position] = '1' if bits[position] == '0' else '0'
+            expected.append(longest_run(bits))
+
+        input_text = (
+            initial + '\n'
+            + str(change_count) + '\n'
+            + ' '.join(map(str, changes)) + '\n'
+        )
+        actual = list(map(int, run('cses-1188', input_text).split()))
+        assert actual == expected
+
+    # Repeatedly flipping one endpoint of a maximum-length uniform string has
+    # a closed-form answer and exercises the official n and m limits.
+    length = change_count = 200_000
+    input_text = (
+        '0' * length + '\n'
+        + str(change_count) + '\n'
+        + ' '.join(['1'] * change_count) + '\n'
+    )
+    expected = [length - 1 if change % 2 == 0 else length
+                for change in range(change_count)]
+    assert list(map(int, run('cses-1188', input_text).split())) == expected
+
+
+def verify_zero_one_hard() -> None:
+    def literal_reduced_length(bits):
+        stack = []
+        for bit in bits:
+            if bit == '1' and stack and stack[-1] == '0':
+                stack.pop()
+            else:
+                stack.append(bit)
+        return len(stack)
+
+    for _ in range(220):
+        length = RNG.randint(1, 55)
+        operation_count = RNG.randint(1, 120)
+        bits = [RNG.choice('01') for _ in range(length)]
+        initial = ''.join(bits)
+        operations = []
+        expected = []
+
+        for _ in range(operation_count):
+            if RNG.random() < 0.45:
+                position = RNG.randrange(length)
+                operations.append(f'1 {position + 1}')
+                bits[position] = '1' if bits[position] == '0' else '0'
+            else:
+                left = RNG.randrange(length)
+                right = RNG.randint(left, length - 1)
+                operations.append(f'2 {left + 1} {right + 1}')
+                expected.append(literal_reduced_length(bits[left:right + 1]))
+
+        input_text = (
+            initial + '\n'
+            + str(operation_count) + '\n'
+            + '\n'.join(operations) + '\n'
+        )
+        actual = list(map(int, run('cf-104380H', input_text).split()))
+        assert actual == expected
+
+    # Alternate one flip and one full-range query. An all-one string has no
+    # deletions; changing its first bit to zero creates exactly one 01 pair.
+    length = 200_000
+    pair_count = 100_000
+    lines = ['1' * length, str(2 * pair_count)]
+    expected = []
+    for pair in range(pair_count):
+        lines.append('1 1')
+        lines.append(f'2 1 {length}')
+        expected.append(length - 2 if pair % 2 == 0 else length)
+    actual = list(map(int, run('cf-104380H', '\n'.join(lines) + '\n').split()))
+    assert actual == expected
+
+
+def verify_high_card_low_card() -> None:
+    def exhaustive_score(elsie):
+        round_count = len(elsie)
+        elsie_set = set(elsie)
+        bessie = [card for card in range(1, 2 * round_count + 1)
+                  if card not in elsie_set]
+        answer = 0
+
+        # For each split, this assignment DP tries every Bessie card in every
+        # round. It is independent of both ordered-set greedy passes.
+        for split in range(round_count + 1):
+            dp = [-1] * (1 << round_count)
+            dp[0] = 0
+            for mask in range(1 << round_count):
+                if dp[mask] < 0:
+                    continue
+                # Keep compatibility with the older Python bundled on some
+                # macOS runners, where int.bit_count is not available.
+                round_index = bin(mask).count('1')
+                if round_index == round_count:
+                    answer = max(answer, dp[mask])
+                    continue
+                for card_index, card in enumerate(bessie):
+                    if mask >> card_index & 1:
+                        continue
+                    wins = (card > elsie[round_index]) if round_index < split \
+                        else (card < elsie[round_index])
+                    next_mask = mask | (1 << card_index)
+                    dp[next_mask] = max(dp[next_mask], dp[mask] + wins)
+        return answer
+
+    for _ in range(140):
+        round_count = RNG.randint(2, 9)
+        elsie = RNG.sample(range(1, 2 * round_count + 1), round_count)
+        expected = exhaustive_score(elsie)
+        input_text = str(round_count) + '\n' + '\n'.join(map(str, elsie)) + '\n'
+        assert int(run('usaco-577', input_text)) == expected
+
+    # Elsie owns the entire lower half of the deck, so every Bessie card wins
+    # under the high-card rule. This covers N=50,000 with answer N.
+    round_count = 50_000
+    input_text = (
+        str(round_count) + '\n'
+        + '\n'.join(map(str, range(1, round_count + 1))) + '\n'
+    )
+    assert int(run('usaco-577', input_text)) == round_count
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -4251,6 +4396,9 @@ if __name__ == "__main__":
         verify_point_set_range_composite,
         verify_pizzeria_queries,
         verify_marathon,
+        verify_bit_inversions,
+        verify_zero_one_hard,
+        verify_high_card_low_card,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

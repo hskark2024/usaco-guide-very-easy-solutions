@@ -1,0 +1,10 @@
+Bit Inversions	Flip one binary position	Report the longest equal-bit run	CSES Easy segment tree
+Why scanning fails	Up to 200,000 bits	Up to 200,000 flips	Reuse summaries of unchanged intervals
+Node summary	Length and endpoint bits	Longest prefix and suffix	Longest run anywhere
+Merge candidates	Best entirely in left	Best entirely in right	One possible boundary-crossing run
+Boundary join	Left last bit equals right first bit	Crossing length = left suffix + right prefix	Otherwise no crossing run
+Prefix and suffix	Prefix extends only through uniform left	Suffix extends only through uniform right	Keep exact boundary information
+Sample flip	001011 flip position 3	000011	Longest run becomes four
+Point update	Toggle one leaf	Rebuild one root path	All other nodes stay valid
+Answer	Root summarizes full string	Read root best field	Padding nodes are empty identities
+Complexity and checks	O(n) build	O(log n) per flip	Direct-scan random oracle
