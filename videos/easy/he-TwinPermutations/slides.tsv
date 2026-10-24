@@ -1,0 +1,10 @@
+Twin Permutations	Two permutations, two selected ranges	Make the value sets match	Minimum arbitrary swaps
+Key observation	Shared values can stay	Missing values need swaps	Answer = length - shared count
+Turn values into points	One point per value	Need fast shared-value counts	Move from sets to geometry
+Point coordinates	x = position in second permutation	y = position in first permutation	All values are unique
+Query rectangle	Second range chooses x interval	First range chooses y interval	Points inside are shared values
+Prefix difference	Rectangle through right edge	Subtract prefix before left edge	Two signed events per query
+Offline sweep	Move x left to right	Add each point's y	Fenwick counts seen y-values
+Walkthrough	123 versus 543	Only value 3 is shared	Length 3 minus 1 equals 2
+Correctness	Prefix difference selects exact x-range	Fenwick query selects exact y-range	Each missing value needs one swap
+Complexity and checks	O((n+q) log n) time	O(n+q) memory	Random set oracle plus limit test

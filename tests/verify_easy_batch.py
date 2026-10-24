@@ -4296,6 +4296,119 @@ def verify_high_card_low_card() -> None:
     assert int(run('usaco-577', input_text)) == round_count
 
 
+def verify_intersection_points() -> None:
+    def direct_count(segments):
+        answer = 0
+        horizontal = []
+        vertical = []
+        for x1, y1, x2, y2 in segments:
+            if y1 == y2:
+                horizontal.append((min(x1, x2), max(x1, x2), y1))
+            else:
+                vertical.append((x1, min(y1, y2), max(y1, y2)))
+
+        # This quadratic oracle deliberately uses the geometric definition,
+        # independent of the event ordering and Fenwick representation.
+        for left, right, y in horizontal:
+            for x, bottom, top in vertical:
+                answer += left <= x <= right and bottom <= y <= top
+        return answer
+
+    for _ in range(260):
+        horizontal_count = RNG.randint(0, 10)
+        vertical_count = RNG.randint(0, 10)
+        if horizontal_count + vertical_count == 0:
+            horizontal_count = 1
+
+        # Distinct even line coordinates prevent parallel segments from
+        # overlapping. Odd endpoints guarantee that a perpendicular crossing
+        # can never land on an endpoint, matching the official promises.
+        horizontal_y = RNG.sample(range(-20, 21, 2), horizontal_count)
+        vertical_x = RNG.sample(range(-20, 21, 2), vertical_count)
+        odd_coordinates = list(range(-21, 22, 2))
+        segments = []
+
+        for y in horizontal_y:
+            x1, x2 = RNG.sample(odd_coordinates, 2)
+            segments.append((x1, y, x2, y))
+        for x in vertical_x:
+            y1, y2 = RNG.sample(odd_coordinates, 2)
+            segments.append((x, y1, x, y2))
+
+        RNG.shuffle(segments)
+        input_text = str(len(segments)) + '\n' + ''.join(
+            f'{x1} {y1} {x2} {y2}\n' for x1, y1, x2, y2 in segments
+        )
+        assert int(run('cses-1740', input_text)) == direct_count(segments)
+
+    # Every horizontal crosses every vertical. The 64-bit answer deliberately
+    # exceeds signed 32-bit range while the input reaches the N=100,000 limit.
+    half = 50_000
+    segments = []
+    for index in range(half):
+        y = 2 * index - half
+        segments.append((-999_999, y, 999_999, y))
+    for index in range(half):
+        x = 2 * index - half
+        segments.append((x, -999_999, x, 999_999))
+    input_text = str(len(segments)) + '\n' + ''.join(
+        f'{x1} {y1} {x2} {y2}\n' for x1, y1, x2, y2 in segments
+    )
+    assert int(run('cses-1740', input_text)) == half * half
+
+
+def verify_twin_permutations() -> None:
+    for _ in range(240):
+        size = RNG.randint(1, 35)
+        first = list(range(1, size + 1))
+        second = first.copy()
+        RNG.shuffle(first)
+        RNG.shuffle(second)
+
+        query_count = RNG.randint(1, 100)
+        queries = []
+        expected = []
+        for _ in range(query_count):
+            length = RNG.randint(1, size)
+            first_left = RNG.randint(1, size - length + 1)
+            second_left = RNG.randint(1, size - length + 1)
+            first_right = first_left + length - 1
+            second_right = second_left + length - 1
+            queries.append((first_left, first_right, second_left, second_right))
+
+            # The answer is the number of target values absent from the first
+            # selected range. Direct Python sets form a simple independent
+            # oracle for the offline two-dimensional counting solution.
+            shared = len(
+                set(first[first_left - 1:first_right])
+                & set(second[second_left - 1:second_right])
+            )
+            expected.append(length - shared)
+
+        input_text = (
+            f'{size}\n'
+            + ' '.join(map(str, first)) + '\n'
+            + ' '.join(map(str, second)) + '\n'
+            + f'{query_count}\n'
+            + ''.join(f'{l1} {r1} {l2} {r2}\n' for l1, r1, l2, r2 in queries)
+        )
+        actual = list(map(int, run('he-TwinPermutations', input_text).split()))
+        assert actual == expected
+
+    # Identical full ranges always need zero swaps. This reaches both official
+    # limits and checks the memory layout for 100,000 prefix-event buckets.
+    size = query_count = 100_000
+    permutation = list(range(size, 0, -1))
+    input_text = (
+        f'{size}\n'
+        + ' '.join(map(str, permutation)) + '\n'
+        + ' '.join(map(str, permutation)) + '\n'
+        + f'{query_count}\n'
+        + ''.join(f'1 {size} 1 {size}\n' for _ in range(query_count))
+    )
+    assert list(map(int, run('he-TwinPermutations', input_text).split())) == [0] * query_count
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -4399,6 +4512,8 @@ if __name__ == "__main__":
         verify_bit_inversions,
         verify_zero_one_hard,
         verify_high_card_low_card,
+        verify_intersection_points,
+        verify_twin_permutations,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

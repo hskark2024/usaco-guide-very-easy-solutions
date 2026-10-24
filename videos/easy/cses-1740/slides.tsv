@@ -1,0 +1,10 @@
+Intersection Points	Count horizontal-vertical crossings	Up to 100,000 segments	CSES Easy range sweep
+Why pairs are too slow	Quadratic comparison can reach billions	Sweep through one coordinate	Reuse active-segment information
+Active verticals	Add at the bottom	Keep active through its y-range	Remove at the top
+Horizontal query	Look only at active verticals	Require x inside the horizontal span	Each match is one crossing
+Event list	Vertical: add and remove	Horizontal: range query	Sort all events by y
+Fenwick tree	Point update at a vertical x	Prefix count up to x	Range count by subtraction
+Coordinate compression	Collect vertical x-values	Sort and remove duplicates	Use binary search for query bounds
+Walkthrough	Active x-values are 2 and 5	Horizontal spans 0 through 10	Query contributes two
+Correctness	Active means y-ranges overlap	Range query means x lies inside	Every crossing counted once
+Complexity and checks	O(n log n) time	O(n) memory	Random oracle plus 64-bit stress test

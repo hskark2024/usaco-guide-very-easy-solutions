@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-20 (the live Guide source and Extended Segment Trees module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`c81f85b`](https://github.com/cpinitiative/usaco-guide/commit/c81f85bf2ada7dca254dcf88d56b450ada9acf9c) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 104
-- Complete video packages: 104
+- Last listing check: 2026-10-24 (the live Guide source and Range Sweep module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`3309d00`](https://github.com/cpinitiative/usaco-guide/commit/3309d00ba8bade3b5bd1c8ece393907455de8414) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 106
+- Complete video packages: 106
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -115,6 +115,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cses-1188` | Bit Inversions | complete | complete | complete | generated locally; excluded from Git |
 | `cf-104380H` | 01 (Hard Version) | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-577` | High Card Low Card | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1740` | Intersection Points | complete | complete | complete | generated locally; excluded from Git |
+| `he-TwinPermutations` | Twin Permutations | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-24
+
+- New entries: `cses-1740` Intersection Points and `he-TwinPermutations` Twin Permutations.
+- The live USACO Guide source is at commit `3309d00`; both Range Sweep entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Intersection Points sweeps add/query/remove events while a compressed Fenwick tree stores active vertical x-coordinates; Twin Permutations maps values to two-dimensional points and answers rectangle counts with signed prefix events.
+- All 137 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 141 smoke cases and all 103 independent Easy verifier groups passed, including direct geometric pair counting, direct set intersections, and official constraint-scale cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 113.2 seconds (`cses-1740`) and 109.9 seconds (`he-TwinPermutations`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Platinum Range Sweep is complete. The next Easy module is Range Update Range Query, beginning with `spoj-HorribleQueries` Horrible Queries, `cses-1736` Polynomial Queries, and `cses-1735` Range Updates & Sums. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-20
 

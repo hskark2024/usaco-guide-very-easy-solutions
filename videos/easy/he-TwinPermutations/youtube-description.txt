@@ -1,0 +1,6 @@
+Learn how to turn two permutation ranges into rectangle queries, count shared values with an offline sweep and Fenwick tree, and derive the exact minimum swap count.
+
+Official problem: https://www.hackerearth.com/practice/data-structures/advanced-data-structures/fenwick-binary-indexed-trees/practice-problems/algorithm/mancunian-and-twin-permutations-d988930c/
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/he-TwinPermutations.cpp
+
+Topics: offline queries, Fenwick tree, permutations, 2D range counting, C++17

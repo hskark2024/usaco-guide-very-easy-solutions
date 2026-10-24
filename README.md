@@ -123,6 +123,8 @@ The official statements remain at their original judge links. These notes intent
 | `cses-1188` | CSES | [Bit Inversions](problems/cses-1188/README.md) | [Segment Tree, Longest Run, Point Updates] | [C++](solutions/cses-1188.cpp) | [Package](videos/easy/cses-1188/README.md) |
 | `cf-104380H` | Codeforces Gym | [01 (Hard Version)](problems/cf-104380H/README.md) | [Segment Tree, String Reduction, Associative Summaries] | [C++](solutions/cf-104380H.cpp) | [Package](videos/easy/cf-104380H/README.md) |
 | `usaco-577` | USACO Platinum | [High Card Low Card](problems/usaco-577/README.md) | [Greedy Matching, Prefixes, Suffixes, Ordered Sets] | [C++](solutions/usaco-577.cpp) | [Package](videos/easy/usaco-577/README.md) |
+| `cses-1740` | CSES | [Intersection Points](problems/cses-1740/README.md) | [Sweep Line, Fenwick Tree, Coordinate Compression] | [C++](solutions/cses-1740.cpp) | [Package](videos/easy/cses-1740/README.md) |
+| `he-TwinPermutations` | HackerEarth | [Twin Permutations](problems/he-TwinPermutations/README.md) | [Offline Queries, Sweep Line, Fenwick Tree, Permutations] | [C++](solutions/he-TwinPermutations.cpp) | [Package](videos/easy/he-TwinPermutations/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

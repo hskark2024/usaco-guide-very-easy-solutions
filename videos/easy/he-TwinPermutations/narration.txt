@@ -1,0 +1,19 @@
+1. Twin Permutations gives us two arrangements of the same values. A query chooses one range from each arrangement and asks how many swaps the first arrangement needs so the chosen ranges contain the same values.
+
+2. Any value already present in both ranges can stay. Every value missing from the first range needs one swap with an unwanted value, so the answer is the range length minus the number of shared values.
+
+3. The hard part is counting shared values quickly for up to one hundred thousand queries. We can turn each value into a point on a grid.
+
+4. A point's x-coordinate is that value's position in the second permutation. Its y-coordinate is the value's position in the first permutation.
+
+5. A value belongs to both selected ranges exactly when its point lies inside the query rectangle. Now every query is a two-dimensional rectangle-count problem.
+
+6. Count a rectangle by subtracting two x-prefixes: all points through the rectangle's right edge, minus all points before its left edge.
+
+7. Sweep x from left to right. When we reach a point, add its y-coordinate to a Fenwick tree. The tree can count how many seen y-values fall inside the first range.
+
+8. For reversed permutations of length five, the first three positions contain sets one-two-three and five-four-three. Only value three is shared, so two values must be swapped in.
+
+9. Each signed query event reads exactly the points inside one x-prefix and y-range. Their difference gives the rectangle count, and length minus that count gives the minimum swaps.
+
+10. Building events takes linear time, and the sweep takes O of n plus q times log n. Random tests compare with direct set intersections, followed by a maximum-size zero-swap stress test.

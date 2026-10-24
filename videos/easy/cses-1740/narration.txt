@@ -1,0 +1,19 @@
+1. Intersection Points gives us horizontal and vertical line segments. Our job is to count every place where one horizontal segment crosses one vertical segment.
+
+2. Comparing every pair would take about ten billion checks when there are one hundred thousand segments. Instead, imagine moving a scanner upward across the coordinate plane.
+
+3. A vertical segment becomes active when the scanner reaches its bottom endpoint. It stays active until the scanner reaches its top endpoint, and then we remove it.
+
+4. When the scanner reaches a horizontal segment, a crossing happens for every active vertical whose x-coordinate lies between the horizontal segment's left and right endpoints.
+
+5. We turn the geometry into events. A vertical creates an add event and a remove event. A horizontal creates one range-query event. Sorting by y gives the sweep order.
+
+6. A Fenwick tree stores how many active verticals have each x-coordinate. A prefix sum counts active x-values up to one point, so subtracting two prefixes answers a whole x-range.
+
+7. Coordinates may be negative or very large. We sort the vertical x-coordinates and replace each with its rank. Binary search converts each horizontal range into Fenwick indices.
+
+8. In a small example, verticals at x equals two and five are both active at y equals zero. A horizontal from zero through ten crosses both, so that query contributes two.
+
+9. Each real crossing is counted exactly once, when its horizontal query is processed. Non-crossing pairs fail either the active-y test or the x-range test.
+
+10. Sorting and all Fenwick operations take O of n log n time and O of n memory. Random geometry tests compare against direct pair checking, and a one-hundred-thousand-segment test confirms the 64-bit answer.
