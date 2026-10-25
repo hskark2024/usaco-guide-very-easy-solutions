@@ -1,0 +1,19 @@
+1. Horrible Queries starts each test case with an array full of zeros. We need to add a value across a whole interval and later ask for the sum of another interval.
+
+2. Changing every element one by one can take one hundred thousand steps per update. With one hundred thousand commands, that is much too slow.
+
+3. First think like a difference array. To add x from left through right, start plus x at left and start minus x at right plus one.
+
+4. At one position, a prefix of those boundary events tells us the value there. But our query needs the sum of many positions, which is a prefix of those prefixes.
+
+5. One update starting at l contributes x times p minus l plus one to a prefix ending at p. Rewrite that as p times x minus x times l minus one.
+
+6. This rewrite separates the answer into two parts. One Fenwick tree stores x, and a second Fenwick tree stores the correction x times l minus one.
+
+7. The prefix formula becomes p times the first Fenwick sum minus the second Fenwick sum. A range sum is the prefix at right minus the prefix before left.
+
+8. In the sample, adding twenty-six on positions two through four and eighty on four through eight makes position eight equal eighty. Later changes make the sum from four through eight equal five hundred eight.
+
+9. Each boundary event is included in exactly the prefixes it should affect. Its formula grows inside the interval and becomes the full update total after the interval ends.
+
+10. Every update and query takes O of log n time with O of n memory. Random direct-array tests, multiple test cases, and a near ten-to-the-seventeenth stress answer check the implementation.

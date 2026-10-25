@@ -4409,6 +4409,145 @@ def verify_twin_permutations() -> None:
     assert list(map(int, run('he-TwinPermutations', input_text).split())) == [0] * query_count
 
 
+def verify_horrible_queries() -> None:
+    cases = []
+    expected = []
+
+    for _ in range(90):
+        size = RNG.randint(1, 35)
+        model = [0] * size
+        commands = []
+        case_expected = []
+
+        for _ in range(RNG.randint(1, 100)):
+            left = RNG.randint(1, size)
+            right = RNG.randint(left, size)
+            if RNG.random() < 0.62:
+                value = RNG.randint(1, 100)
+                commands.append(f'0 {left} {right} {value}')
+                for index in range(left - 1, right):
+                    model[index] += value
+            else:
+                commands.append(f'1 {left} {right}')
+                case_expected.append(sum(model[left - 1:right]))
+
+        cases.append(f'{size} {len(commands)}\n' + '\n'.join(commands) + '\n')
+        expected.extend(case_expected)
+
+    # Batching many test cases also confirms that each all-zero array is reset.
+    input_text = str(len(cases)) + '\n' + ''.join(cases)
+    assert list(map(int, run('spoj-HorribleQueries', input_text).split())) == expected
+
+    # Reach both official limits and force a result far beyond 32-bit range.
+    size = command_count = 100_000
+    update_count = command_count - 1
+    input_text = (
+        f'1\n{size} {command_count}\n'
+        + f'0 1 {size} 10000000\n' * update_count
+        + f'1 1 {size}\n'
+    )
+    assert int(run('spoj-HorribleQueries', input_text)) == (
+        size * update_count * 10_000_000
+    )
+
+
+def verify_polynomial_queries() -> None:
+    for _ in range(220):
+        size = RNG.randint(1, 35)
+        values = [RNG.randint(1, 100) for _ in range(size)]
+        model = values.copy()
+        operations = []
+        expected = []
+
+        for _ in range(RNG.randint(1, 110)):
+            left = RNG.randint(1, size)
+            right = RNG.randint(left, size)
+            if RNG.random() < 0.62:
+                operations.append(f'1 {left} {right}')
+                for index in range(left - 1, right):
+                    model[index] += index - (left - 1) + 1
+            else:
+                operations.append(f'2 {left} {right}')
+                expected.append(sum(model[left - 1:right]))
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ' '.join(map(str, values)) + '\n'
+            + '\n'.join(operations) + '\n'
+        )
+        actual = list(map(int, run('cses-1736', input_text).split()))
+        assert actual == expected
+
+    # Repeated full-range progressions make the 64-bit total large while
+    # reaching N=Q=200,000.  Every update adds n(n+1)/2 to the total.
+    size = query_count = 200_000
+    update_count = query_count - 1
+    input_text = (
+        f'{size} {query_count}\n'
+        + ('1 ' * size).rstrip() + '\n'
+        + f'1 1 {size}\n' * update_count
+        + f'2 1 {size}\n'
+    )
+    expected = size + update_count * size * (size + 1) // 2
+    assert int(run('cses-1736', input_text)) == expected
+
+
+def verify_range_updates_and_sums() -> None:
+    for _ in range(220):
+        size = RNG.randint(1, 35)
+        values = [RNG.randint(1, 100) for _ in range(size)]
+        model = values.copy()
+        operations = []
+        expected = []
+
+        for _ in range(RNG.randint(1, 120)):
+            left = RNG.randint(1, size)
+            right = RNG.randint(left, size)
+            choice = RNG.random()
+            if choice < 0.40:
+                value = RNG.randint(1, 100)
+                operations.append(f'1 {left} {right} {value}')
+                for index in range(left - 1, right):
+                    model[index] += value
+            elif choice < 0.72:
+                value = RNG.randint(1, 100)
+                operations.append(f'2 {left} {right} {value}')
+                for index in range(left - 1, right):
+                    model[index] = value
+            else:
+                operations.append(f'3 {left} {right}')
+                expected.append(sum(model[left - 1:right]))
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ' '.join(map(str, values)) + '\n'
+            + '\n'.join(operations) + '\n'
+        )
+        actual = list(map(int, run('cses-1735', input_text).split()))
+        assert actual == expected
+
+    # This maximum-size sequence checks both tag orderings: many additions,
+    # an assignment on the right half, and then many later additions.
+    size = query_count = 200_000
+    additions_before = additions_after = 99_999
+    right_half = size // 2 + 1
+    input_text = (
+        f'{size} {query_count}\n'
+        + ('1 ' * size).rstrip() + '\n'
+        + f'1 1 {size} 1000000\n' * additions_before
+        + f'2 {right_half} {size} 3\n'
+        + f'1 1 {size} 1000000\n' * additions_after
+        + f'3 1 {size}\n'
+    )
+    left_count = size // 2
+    right_count = size - left_count
+    expected = (
+        left_count * (1 + (additions_before + additions_after) * 1_000_000)
+        + right_count * (3 + additions_after * 1_000_000)
+    )
+    assert int(run('cses-1735', input_text)) == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -4514,6 +4653,9 @@ if __name__ == "__main__":
         verify_high_card_low_card,
         verify_intersection_points,
         verify_twin_permutations,
+        verify_horrible_queries,
+        verify_polynomial_queries,
+        verify_range_updates_and_sums,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

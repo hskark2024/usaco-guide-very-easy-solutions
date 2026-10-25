@@ -1,0 +1,19 @@
+1. Polynomial Queries maintains an array. An update adds one to the first chosen position, two to the next, three to the next, and a query asks for an interval sum.
+
+2. Updating each cell is too slow for two hundred thousand elements and commands. We need to describe the entire progression with only a few numbers.
+
+3. Suppose an update starts at zero-based position l. At absolute position i, the added amount is i minus l plus one.
+
+4. Rewrite that amount as one times i plus one minus l. This is an affine function: a slope times the index plus an intercept.
+
+5. A segment-tree node knows its left and right indices. The sum of the affine function over that node is slope times the sum of its indices plus intercept times its length.
+
+6. We can compute the index sum with the arithmetic-series formula. That lets one fully covered node absorb a whole progression update in constant time.
+
+7. Each lazy tag stores a pending slope and intercept. Two additions combine by adding their slopes and adding their intercepts, so pushing later is safe.
+
+8. In the sample, the array sum begins at seventeen. Updating positions one through five adds one plus two plus three plus four plus five, so the next sum is thirty-two.
+
+9. Every position receives i minus l plus one, exactly its required place in the progression. Node sums include the update immediately, and lazy tags preserve it for descendants.
+
+10. Building takes O of n time, and each operation takes O of log n time. Random direct simulation and a two-hundred-thousand-operation stress test verify the code and 64-bit totals.

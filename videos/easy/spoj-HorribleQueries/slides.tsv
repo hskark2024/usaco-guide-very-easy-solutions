@@ -1,0 +1,10 @@
+Horrible Queries	Range addition plus range sum	Array begins with zeros	SPOJ Easy
+Why direct updates fail	Up to 100,000 positions	Up to 100,000 commands	Quadratic work is too large
+Boundary events	Start +x at left	Start -x at right plus 1	Difference-array idea
+Prefix of prefixes	Boundary prefix gives one value	We need the sum of values	Find a closed formula
+One update at prefix p	x times p minus l plus 1	Equals p times x minus x times l minus 1	Separate two terms
+Two Fenwick trees	First stores coefficients x	Second stores corrections	Both support prefix sums
+Query formula	prefix p equals p times first minus second	range equals two prefixes	All in logarithmic time
+Sample walkthrough	Position 8 becomes 80	More updates overlap	Query 4 through 8 gives 508
+Correctness	Start event activates update	Stop event ends growth	Each prefix gets exact contribution
+Complexity and checks	O log n per command	O n memory	Random oracle plus maximum limits

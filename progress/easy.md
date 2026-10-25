@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-24 (the live Guide source and Range Sweep module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`3309d00`](https://github.com/cpinitiative/usaco-guide/commit/3309d00ba8bade3b5bd1c8ece393907455de8414) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 106
-- Complete video packages: 106
+- Last listing check: 2026-10-25 (the live Guide source and Range Update Range Query module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`4027972`](https://github.com/cpinitiative/usaco-guide/commit/40279728a239ff54e35df8626b22f8f63ccbf77a) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 109
+- Complete video packages: 109
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -117,6 +117,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-577` | High Card Low Card | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1740` | Intersection Points | complete | complete | complete | generated locally; excluded from Git |
 | `he-TwinPermutations` | Twin Permutations | complete | complete | complete | generated locally; excluded from Git |
+| `spoj-HorribleQueries` | Horrible Queries | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1736` | Polynomial Queries | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1735` | Range Updates & Sums | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-25
+
+- New entries: `spoj-HorribleQueries` Horrible Queries, `cses-1736` Polynomial Queries, and `cses-1735` Range Updates & Sums.
+- The live USACO Guide source is at commit `4027972`; all three selected Range Update Range Query entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Horrible Queries uses two Fenwick trees for range additions and range sums; Polynomial Queries represents each progression as an affine lazy update; Range Updates & Sums composes assignment and addition tags in chronological order.
+- All 140 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 140 smoke cases and all 106 independent Easy verifier groups passed, including literal array simulation, mixed-operation fuzzing, and official maximum-constraint cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 103.1 seconds (`spoj-HorribleQueries`), 102.4 seconds (`cses-1736`), and 99.4 seconds (`cses-1735`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Platinum Range Update Range Query remains in progress. The next listed Easy entries are `ys-RangeAffineRangeSum` Range Affine Range Sum, `usaco-578` Counting Haybales, and `cses-2166` Prefix Sum Queries. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-24
 

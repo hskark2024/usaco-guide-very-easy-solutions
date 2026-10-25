@@ -1,0 +1,19 @@
+1. Range Updates and Sums asks us to maintain an array with three commands: add across a range, set a range to one value, and report a range sum.
+
+2. A lazy segment tree can delay work on a whole interval. The challenge is that add and set do not always combine in the same way.
+
+3. If we set a segment to x, its sum becomes x times its length. That assignment erases every older value and every older pending addition for that segment.
+
+4. If we add y to a segment, its sum increases by y times its length. Without a pending assignment, we simply grow the addition tag.
+
+5. When an assignment is already waiting, adding y after it is the same as changing set x into set x plus y. This keeps the operation order inside one tag.
+
+6. Before we visit children, we push an assignment first because it wipes out older child state. Then we push any later addition on top.
+
+7. Partial updates recurse into both sides as needed. Afterward, the parent sum is rebuilt from its two children, just like an ordinary segment tree.
+
+8. In the sample, the first query gives seven. Adding two on positions two through four changes the next answer to eleven. Setting those positions to five makes the last answer fifteen.
+
+9. The tag rules exactly match the real command order: a set replaces the past, while a later add changes the replacement. So every stored node sum stays current.
+
+10. Building takes O of n time, and every command takes O of log n time. Random operation streams and a two-hundred-thousand-command stress case test the tricky tag ordering.

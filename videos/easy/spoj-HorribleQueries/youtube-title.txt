@@ -1,0 +1,1 @@
+SPOJ Horrible Queries | Two Fenwick Trees Explained

@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "spoj-HorribleQueries": ("1\n8 6\n0 2 4 26\n0 4 8 80\n0 4 5 20\n1 8 8\n0 5 7 14\n1 4 8\n", "80\n508\n"),
+    "cses-1736": ("5 3\n4 2 3 1 7\n2 1 5\n1 1 5\n2 1 5\n", "17\n32\n"),
+    "cses-1735": ("6 5\n2 3 1 1 5 3\n3 3 5\n1 2 4 2\n3 3 5\n2 2 4 5\n3 3 5\n", "7\n11\n15\n"),
     "cses-1188": ("001011\n3\n3 2 5\n", "4 2 3\n"),
     "cf-104380H": ("11001001\n4\n2 1 3\n2 1 8\n1 3\n2 1 8\n", "3\n4\n4\n"),
     "usaco-577": ("4\n1\n8\n4\n3\n", "3\n"),

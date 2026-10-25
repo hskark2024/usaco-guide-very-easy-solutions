@@ -1,0 +1,6 @@
+Learn how to represent the update 1,2,3,... as an affine function and apply it with lazy propagation. We derive the node formula, trace the CSES sample, prove correctness, and test maximum-size 64-bit cases.
+
+Official problem: https://cses.fi/problemset/task/1736
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/cses-1736
+
+Playlist: USACO Guide Easy C++ Solutions

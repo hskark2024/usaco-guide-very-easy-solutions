@@ -1,0 +1,10 @@
+Range Updates and Sums	Add a value on a range	Set a range to one value	Ask range sums
+Lazy segment tree	Delay full-interval work	Update stored sum now	Push only when descending
+Apply set x	Sum becomes x times length	Erase older addition	Remember assignment
+Apply add y	Sum grows by y times length	Accumulate an add tag	Unless a set is waiting
+Set then add	set x followed by add y	Equivalent to set x plus y	Fold tags safely
+Push order	Assignment goes first	Addition goes second	Preserve command history
+Partial overlap	Push before recursion	Visit needed children	Pull their sums back up
+Sample walkthrough	First answer 7	After add answer 11	After set answer 15
+Correctness	Set replaces the past	Add changes current values	Node sums remain exact
+Complexity and checks	O n build	O log n each command	Random oracle plus stress test

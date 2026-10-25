@@ -1,0 +1,10 @@
+Polynomial Queries	Add 1, 2, 3 across a range	Ask interval sums	CSES Easy
+Why loops fail	Up to 200,000 elements	Up to 200,000 operations	Need logarithmic work
+Absolute position	Update begins at l	Position i gains i minus l plus 1	Progression restarts each update
+Affine rewrite	i minus l plus 1	Equals 1 times i plus 1 minus l	Slope plus intercept
+Whole node sum	Slope times index sum	Plus intercept times length	Constant-time apply
+Arithmetic series	Sum indices left through right	Use endpoint formula	No per-cell work
+Lazy tag	Store pending slope	Store pending intercept	Coefficients add together
+Sample walkthrough	Initial sum is 17	Progression adds 15	New sum is 32
+Correctness	Formula matches each position	Node sum updates immediately	Push preserves descendants
+Complexity and checks	O n build	O log n per operation	Random oracle plus maximum stress
