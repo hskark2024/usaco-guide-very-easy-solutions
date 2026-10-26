@@ -1,0 +1,1 @@
+USACO Counting Haybales | Range Add, Min, and Sum

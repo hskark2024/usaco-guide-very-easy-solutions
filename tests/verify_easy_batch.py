@@ -4548,6 +4548,157 @@ def verify_range_updates_and_sums() -> None:
     assert int(run('cses-1735', input_text)) == expected
 
 
+def verify_range_affine_range_sum() -> None:
+    modulus = 998_244_353
+
+    for _ in range(220):
+        size = RNG.randint(1, 32)
+        values = [RNG.randrange(modulus) for _ in range(size)]
+        model = values.copy()
+        operations = []
+        expected = []
+
+        for _ in range(RNG.randint(1, 110)):
+            left = RNG.randrange(size)
+            right = RNG.randint(left + 1, size)
+            if RNG.random() < 0.62:
+                multiply = RNG.randint(1, 25)
+                add = RNG.randint(0, 25)
+                operations.append(
+                    f'0 {left} {right} {multiply} {add}'
+                )
+                for index in range(left, right):
+                    model[index] = (
+                        multiply * model[index] + add
+                    ) % modulus
+            else:
+                operations.append(f'1 {left} {right}')
+                expected.append(sum(model[left:right]) % modulus)
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ' '.join(map(str, values)) + '\n'
+            + '\n'.join(operations) + '\n'
+        )
+        actual = list(map(int, run('ys-RangeAffineRangeSum', input_text).split()))
+        assert actual == expected
+
+    # Reach both official limits with full-cover operations. Repeating
+    # x <- 2*x+1 from zero produces 2^k-1 at every position.
+    size = query_count = 500_000
+    update_count = query_count - 1
+    input_text = (
+        f'{size} {query_count}\n'
+        + ('0 ' * size).rstrip() + '\n'
+        + f'0 0 {size} 2 1\n' * update_count
+        + f'1 0 {size}\n'
+    )
+    one_value = (pow(2, update_count, modulus) - 1) % modulus
+    assert int(run('ys-RangeAffineRangeSum', input_text)) == (
+        size * one_value % modulus
+    )
+
+
+def verify_counting_haybales() -> None:
+    for _ in range(220):
+        size = RNG.randint(1, 35)
+        values = [RNG.randint(0, 100) for _ in range(size)]
+        model = values.copy()
+        operations = []
+        expected = []
+
+        for _ in range(RNG.randint(1, 120)):
+            left = RNG.randint(1, size)
+            right = RNG.randint(left, size)
+            choice = RNG.random()
+            if choice < 0.52:
+                amount = RNG.randint(1, 100)
+                operations.append(f'P {left} {right} {amount}')
+                for index in range(left - 1, right):
+                    model[index] += amount
+            elif choice < 0.76:
+                operations.append(f'M {left} {right}')
+                expected.append(min(model[left - 1:right]))
+            else:
+                operations.append(f'S {left} {right}')
+                expected.append(sum(model[left - 1:right]))
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ' '.join(map(str, values)) + '\n'
+            + '\n'.join(operations) + '\n'
+        )
+        actual = list(map(int, run('usaco-578', input_text).split()))
+        assert actual == expected
+
+    # Maximum N and Q, maximum update value, and a sum far above 32-bit.
+    size = 200_000
+    query_count = 100_000
+    update_count = query_count - 2
+    input_text = (
+        f'{size} {query_count}\n'
+        + ('0 ' * size).rstrip() + '\n'
+        + f'P 1 {size} 100000\n' * update_count
+        + f'M 1 {size}\n'
+        + f'S 1 {size}\n'
+    )
+    value = update_count * 100_000
+    assert list(map(int, run('usaco-578', input_text).split())) == [
+        value,
+        size * value,
+    ]
+
+
+def verify_prefix_sum_queries() -> None:
+    for _ in range(260):
+        size = RNG.randint(1, 40)
+        values = [RNG.randint(-100, 100) for _ in range(size)]
+        model = values.copy()
+        operations = []
+        expected = []
+
+        for _ in range(RNG.randint(1, 130)):
+            if RNG.random() < 0.52:
+                index = RNG.randint(1, size)
+                value = RNG.randint(-100, 100)
+                operations.append(f'1 {index} {value}')
+                model[index - 1] = value
+            else:
+                left = RNG.randint(1, size)
+                right = RNG.randint(left, size)
+                operations.append(f'2 {left} {right}')
+                running_sum = 0
+                best_prefix = 0
+                for value in model[left - 1:right]:
+                    running_sum += value
+                    best_prefix = max(best_prefix, running_sum)
+                expected.append(best_prefix)
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ' '.join(map(str, values)) + '\n'
+            + '\n'.join(operations) + '\n'
+        )
+        actual = list(map(int, run('cses-2166', input_text).split()))
+        assert actual == expected
+
+    # Reach N=Q=200,000 and repeatedly flip one point between the extreme
+    # allowed values before a full-array query.
+    size = query_count = 200_000
+    update_count = query_count - 1
+    updates = ''.join(
+        f'1 1 {1000000000 if index % 2 == 0 else -1000000000}\n'
+        for index in range(update_count)
+    )
+    input_text = (
+        f'{size} {query_count}\n'
+        + ('0 ' * size).rstrip() + '\n'
+        + updates
+        + f'2 1 {size}\n'
+    )
+    assert int(run('cses-2166', input_text)) == 1_000_000_000
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -4656,6 +4807,9 @@ if __name__ == "__main__":
         verify_horrible_queries,
         verify_polynomial_queries,
         verify_range_updates_and_sums,
+        verify_range_affine_range_sum,
+        verify_counting_haybales,
+        verify_prefix_sum_queries,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

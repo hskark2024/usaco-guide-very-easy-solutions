@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-25 (the live Guide source and Range Update Range Query module data were checked directly)
+- Last listing check: 2026-10-26 (the live Guide source and Range Update Range Query module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`4027972`](https://github.com/cpinitiative/usaco-guide/commit/40279728a239ff54e35df8626b22f8f63ccbf77a) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 109
-- Complete video packages: 109
+- Completed Easy solutions: 112
+- Complete video packages: 112
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -120,6 +120,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `spoj-HorribleQueries` | Horrible Queries | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1736` | Polynomial Queries | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1735` | Range Updates & Sums | complete | complete | complete | generated locally; excluded from Git |
+| `ys-RangeAffineRangeSum` | Range Affine Range Sum | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-578` | Counting Haybales | complete | complete | complete | generated locally; excluded from Git |
+| `cses-2166` | Prefix Sum Queries | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-26
+
+- New entries: `ys-RangeAffineRangeSum` Range Affine Range Sum, `usaco-578` Counting Haybales, and `cses-2166` Prefix Sum Queries.
+- The live USACO Guide source remains at commit `4027972`; all three selected Range Update Range Query entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Range Affine Range Sum composes chronological affine lazy tags; Counting Haybales maintains lazy range additions with both minimum and sum summaries; Prefix Sum Queries merges ordered interval sum and maximum-prefix summaries.
+- All 143 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 147 smoke cases and all 109 independent Easy verifier groups passed, including direct array simulation and official maximum-constraint cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 112.8 seconds (`ys-RangeAffineRangeSum`), 99.2 seconds (`usaco-578`), and 98.8 seconds (`cses-2166`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Platinum Range Update Range Query remains in progress. The next listed Easy entry is `usaco-418` The Lazy Cow. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-25
 

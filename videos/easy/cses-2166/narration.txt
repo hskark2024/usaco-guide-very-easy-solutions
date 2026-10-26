@@ -1,0 +1,19 @@
+1. Prefix Sum Queries maintains an array while values change. For any requested interval, we need its largest prefix sum, and choosing an empty prefix with sum zero is allowed.
+
+2. A segment tree can answer this if every node stores two facts: the sum of its entire interval and the best prefix sum inside that interval.
+
+3. Suppose a parent contains a left interval followed by a right interval. Its total sum is simply the two child sums added together.
+
+4. A prefix of the parent has only two possibilities. It can stop somewhere inside the left child, or it can take all of the left child and continue with a prefix of the right child.
+
+5. Therefore the best prefix is the maximum of left best and left sum plus right best. This one merge formula is the heart of the solution.
+
+6. A leaf with value x stores total x and best prefix max of zero and x. Zero represents the allowed empty prefix when x is negative.
+
+7. A point replacement changes one leaf. We walk back toward the root and rebuild each ancestor using the same left-then-right merge.
+
+8. In the first sample range, running sums reach five. After replacing position four with negative two, the best becomes two. The last all-negative slice answers zero.
+
+9. Merge order matters because prefixes begin on the left. The neutral node zero, zero can represent no overlap without changing a valid answer.
+
+10. Building takes O of N, while each replacement or query takes O of log N. Direct prefix scans and a two-hundred-thousand-command stress case verify signs, order, and large sums.

@@ -128,6 +128,9 @@ The official statements remain at their original judge links. These notes intent
 | `spoj-HorribleQueries` | SPOJ | [Horrible Queries](problems/spoj-HorribleQueries/README.md) | [Fenwick Tree, Range Add, Range Sum] | [C++](solutions/spoj-HorribleQueries.cpp) | [Package](videos/easy/spoj-HorribleQueries/README.md) |
 | `cses-1736` | CSES | [Polynomial Queries](problems/cses-1736/README.md) | [Lazy Segment Tree, Arithmetic Progressions, Affine Updates] | [C++](solutions/cses-1736.cpp) | [Package](videos/easy/cses-1736/README.md) |
 | `cses-1735` | CSES | [Range Updates and Sums](problems/cses-1735/README.md) | [Lazy Segment Tree, Range Set, Range Add, Range Sum] | [C++](solutions/cses-1735.cpp) | [Package](videos/easy/cses-1735/README.md) |
+| `ys-RangeAffineRangeSum` | Library Checker | [Range Affine Range Sum](problems/ys-RangeAffineRangeSum/README.md) | [Lazy Segment Tree, Affine Functions, Composition] | [C++](solutions/ys-RangeAffineRangeSum.cpp) | [Package](videos/easy/ys-RangeAffineRangeSum/README.md) |
+| `usaco-578` | USACO Platinum | [Counting Haybales](problems/usaco-578/README.md) | [Lazy Segment Tree, Range Add, Range Minimum, Range Sum] | [C++](solutions/usaco-578.cpp) | [Package](videos/easy/usaco-578/README.md) |
+| `cses-2166` | CSES | [Prefix Sum Queries](problems/cses-2166/README.md) | [Segment Tree, Maximum Prefix Sum, Point Updates] | [C++](solutions/cses-2166.cpp) | [Package](videos/easy/cses-2166/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

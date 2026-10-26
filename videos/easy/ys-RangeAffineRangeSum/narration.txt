@@ -1,0 +1,19 @@
+1. Range Affine Range Sum maintains an array with two commands. We either apply x becomes b times x plus c across a range, or ask for a range sum modulo nine hundred ninety-eight million, two hundred forty-four thousand, three hundred fifty-three.
+
+2. A lazy segment tree lets one node represent an entire covered interval. We update the node's summary now and delay visiting its individual elements.
+
+3. Suppose a node has sum S and length L. Multiplying every value by b multiplies S by b. Adding c to every value adds c times L. So the new sum is b S plus c L.
+
+4. The tricky part is combining delayed functions in the correct order. Imagine the node already stores g of x equals m x plus a, and a newer update is f of x equals b x plus c.
+
+5. Children must eventually receive f of g of x. Expanding it gives b m times x plus b a plus c. That gives the new lazy multiplier and addend.
+
+6. Function order matters. Applying times three plus four and then times five plus six is not the same as reversing them. Our apply method always places the newest function after the older one.
+
+7. When a query or partial update needs children, push sends the combined function to both children and resets the parent tag to the identity function, x becomes x.
+
+8. In the sample, the first total is fifteen. Updating the middle values with one hundred x plus one hundred one makes the first three values add to four hundred four.
+
+9. The sum formula is exact for a fully covered node, and the composition formula preserves the real command order. Therefore every node continues to describe its current interval.
+
+10. Building costs O of N. Each command costs O of log N. Direct random simulation and a five-hundred-thousand-command stress test verify the algebra, modular arithmetic, and performance.

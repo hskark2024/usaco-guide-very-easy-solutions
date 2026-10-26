@@ -1,0 +1,10 @@
+Range Affine Range Sum	Apply x becomes b*x+c on a range	Ask a range sum	All arithmetic modulo 998244353
+Lazy segment tree	One node covers a whole interval	Update its summary now	Delay element work
+Transform a sum	Old interval sum S	Length L	New sum is b*S+c*L
+Two pending functions	Old g(x)=m*x+a	New f(x)=b*x+c	Children need f(g(x))
+Compose in order	f(g(x))=(b*m)x+(b*a+c)	Newest function comes last	Order is not reversible
+Push and reset	Send combined tag to both children	Reset to identity (1,0)	Descend only when needed
+Sample opening	Initial total 15	Update middle with 100*x+101	First three sum to 404
+Correctness	Node sum uses exact algebra	Tag keeps chronological updates	Induction down the tree
+C++ map	apply changes sum and tag	push moves tags	pull joins child sums
+Complexity and checks	O(N) build	O(log N) per command	Random oracle plus max stress

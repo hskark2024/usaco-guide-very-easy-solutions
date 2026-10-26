@@ -1,0 +1,19 @@
+1. Counting Haybales gives us fields in a row and three instructions. P adds haybales across a range, M asks for the minimum, and S asks for the total.
+
+2. Updating every field separately could take too long. A lazy segment tree lets one node summarize a whole covered interval and postpone work on its children.
+
+3. Each node stores two answers: the smallest field value in its interval and the sum of all field values there. It also stores one pending addition.
+
+4. If we add c to every field in a node, the minimum increases by c. This is true because all values move upward by the same amount.
+
+5. The sum increases by c times the interval length, because each field contributes one extra c. We also add c to the lazy tag.
+
+6. A full-cover update stops at that node. If a later operation needs only part of the interval, push sends the pending addition to both children before we continue.
+
+7. A minimum query combines covered nodes with min and uses positive infinity for no overlap. A sum query combines with addition and uses zero for no overlap.
+
+8. In the sample, the first minimum is two and the first sum is six. Adding one to fields two and three changes the next answers to three and eight.
+
+9. Every full-node update changes both summaries by exact arithmetic. Pushing gives children the same additions as their fields, so both kinds of queries remain correct.
+
+10. Building takes O of N time, and each instruction takes O of log N time. Literal random arrays and a maximum-size stress case test overlaps, large totals, and lazy propagation.

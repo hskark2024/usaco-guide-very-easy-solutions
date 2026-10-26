@@ -1,0 +1,6 @@
+Learn how a lazy segment tree applies affine functions to ranges and answers modular range sums. We derive the interval-sum formula, compose functions in chronological order, trace the official sample, and verify the C++ solution.
+
+Official problem: https://judge.yosupo.jp/problem/range_affine_range_sum
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/ys-RangeAffineRangeSum
+
+Playlist: USACO Guide Easy C++ Solutions

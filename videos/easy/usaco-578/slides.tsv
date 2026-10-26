@@ -1,0 +1,10 @@
+Counting Haybales	Fields store haybale counts	P adds on a range	M asks min; S asks sum
+Why lazy?	A range may contain 200,000 fields	One tree node summarizes it	Delay child work
+Node summaries	Minimum in the interval	Total in the interval	Pending addition
+Apply add c	Minimum increases by c	Sum increases by c*length	Lazy tag increases by c
+Push when needed	Full cover stops early	Partial work needs children	Send tag to both sides
+Minimum query	Merge with min	No overlap uses infinity	Answer from covered nodes
+Sum query	Merge with addition	No overlap uses zero	Use 64-bit totals
+Sample	Start [3,1,2,4]	First answers 2 and 6	After update answers 3 and 8
+Correctness	Uniform add updates both summaries	Push preserves every field update	Queries merge exact pieces
+Complexity and checks	O(N) build	O(log N) each instruction	Random oracle plus max stress

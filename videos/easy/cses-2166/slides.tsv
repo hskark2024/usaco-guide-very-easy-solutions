@@ -1,0 +1,10 @@
+Prefix Sum Queries	Replace one array value	Ask best prefix in a range	Empty prefix with sum 0 is allowed
+What each node stores	Complete interval sum	Maximum prefix sum	Both use 64-bit integers
+Join L then R	Parent sum=L.sum+R.sum	Keep original array order	Merge is not commutative
+Prefix case one	Prefix stops inside L	Candidate is L.best	Never enters R
+Prefix case two	Take all of L	Then best prefix of R	Candidate L.sum+R.best
+Merge formula	best=max(L.best, L.sum+R.best)	Leaf best=max(0,x)	Identity is (0,0)
+Point replacement	Change one leaf	Rebuild its ancestors	O(log N)
+Sample	First answer 5	After update answer 2	All-negative slice answers 0
+Correctness	Two prefix cases are exhaustive	Leaves include empty choice	Induction proves every node
+Complexity and checks	O(N) build	O(log N) per command	Random scans plus max stress
