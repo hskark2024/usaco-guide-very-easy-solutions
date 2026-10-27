@@ -1,0 +1,10 @@
+Forest Queries II	Grid cells are tree or empty	Toggle one cell	Count trees in a rectangle
+Why a data structure?	Up to 200,000 operations	Direct rectangle scans repeat work	Need fast updates and queries
+2D Fenwick idea	1D blocks become rectangles	One-based coordinates	Lowest set bit controls size
+Point update	Choose delta +1 or -1	Climb x parents	Climb y parents
+Prefix query	Rectangle from 1,1 to y,x	Walk down both coordinates	Pieces are disjoint
+Four-prefix formula	Add P(y2,x2)	Subtract top and left	Restore their overlap
+Track cell state	Dot to star means +1	Star to dot means -1	Repeated toggles stay correct
+Sample	First count is 3	Toggle row 3 column 3	Second count is 4
+Fast initial build	Copy raw cells	Propagate along x, then y	O(N squared)
+Complexity and checks	O(log squared N) per operation	O(N squared) memory	Random oracle plus max stress

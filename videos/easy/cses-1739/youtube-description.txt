@@ -1,0 +1,6 @@
+Learn how a two-dimensional Fenwick tree handles cell toggles and rectangle sums. We derive the four-prefix formula, build the initial tree efficiently, trace the sample, and verify the C++ solution.
+
+Official problem: https://cses.fi/problemset/task/1739
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/cses-1739
+
+Playlist: USACO Guide Easy C++ Solutions

@@ -1,0 +1,10 @@
+JOI Secret	Fixed array	Hidden associative operation	Answer ordered ranges
+The key rule	Parentheses may change	Element order may not	Do not assume commutativity
+Split the array	Choose a midpoint	Prepare crossing queries	Then recurse into both halves
+Left aggregates	Start at the midpoint	Extend toward smaller indices	Combine A[i] before the suffix
+Right aggregates	Start after the midpoint	Extend toward larger indices	Combine the prefix before A[i]
+Find query split	Descend while both ends share a half	Stop at first crossed midpoint	Saved pieces cover the range
+One final call	Left suffix comes first	Right prefix comes second	Secret joins them
+Sample	Answers 13, 32, 8, 13	Singleton returns original value	Zero calls for singleton
+Why it works	Pieces contain every query element	Order is unchanged	Associativity permits regrouping
+Complexity and checks	O(N log N) preprocessing	At most one Secret call per query	Random ordered-fold oracle

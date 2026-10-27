@@ -1,0 +1,6 @@
+Learn how a coordinate rotation turns Manhattan-distance diamonds into squares. We combine a two-pointer sweep with a lazy range-add maximum tree, prove the method, trace the sample, and test the C++ solution.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=418
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/usaco-418
+
+Playlist: USACO Guide Easy C++ Solutions

@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-26 (the live Guide source and Range Update Range Query module data were checked directly)
+- Last listing check: 2026-10-27 (the live Guide source and selected module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`4027972`](https://github.com/cpinitiative/usaco-guide/commit/40279728a239ff54e35df8626b22f8f63ccbf77a) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 112
-- Complete video packages: 112
+- Completed Easy solutions: 115
+- Complete video packages: 115
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -123,6 +123,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `ys-RangeAffineRangeSum` | Range Affine Range Sum | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-578` | Counting Haybales | complete | complete | complete | generated locally; excluded from Git |
 | `cses-2166` | Prefix Sum Queries | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-418` | The Lazy Cow | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1739` | Forest Queries II | complete | complete | complete | generated locally; excluded from Git |
+| `joi-14-secret` | 2014 - Secret | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-27
+
+- New entries: `usaco-418` The Lazy Cow, `cses-1739` Forest Queries II, and `joi-14-secret` 2014 - Secret.
+- The live USACO Guide source remains at commit `4027972`; all three selected entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- The Lazy Cow rotates Manhattan diamonds into squares and combines a two-pointer sweep with range-add maximums; Forest Queries II uses an `O(N^2)`-built 2D Fenwick tree; Secret precomputes ordered divide-and-conquer aggregates and uses at most one hidden-operation call per query.
+- All 146 C++ solutions compiled with C++17, optimization, and warnings enabled. The JOI submission branch also compiled separately against the official `secret.h` interface.
+- All 150 smoke cases and all 112 independent Easy verifier groups passed, including direct transformed-square enumeration, direct grid scans, ordered associative folds, and official maximum-constraint cases for today's solutions.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 93.7 seconds (`usaco-418`), 92.9 seconds (`cses-1739`), and 90.8 seconds (`joi-14-secret`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Range Update Range Query and the Easy portion of 2D Range Queries are complete; Sparse Segment Trees has no Easy entries. Divide and Conquer Static Range Queries remains in progress, with `cc-ProductOnSegment` Product on Segment next. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-26
 

@@ -1,0 +1,19 @@
+1. Forest Queries Two gives us a square grid. A star means a tree, a dot means empty, and operations either toggle one cell or count a rectangle.
+
+2. Scanning every rectangle would be too slow for two hundred thousand operations. We need both updates and sums to be logarithmic.
+
+3. A two-dimensional Fenwick tree extends the one-dimensional structure. Instead of summarizing number-line blocks, each entry summarizes a rectangle.
+
+4. A point update climbs through y parents and x parents using the lowest set bit. Every visited rectangle contains the changed cell.
+
+5. A prefix query walks downward in both coordinates. The visited Fenwick rectangles are disjoint and exactly cover everything from one, one to y, x.
+
+6. Any requested rectangle comes from four prefixes: add the large bottom-right prefix, subtract the top strip and left strip, then restore their overlap.
+
+7. Keep the original grid too. If a dot changes to a star, add one. If a star changes to a dot, add negative one.
+
+8. In the sample, the first rectangle contains three trees. Toggling one cell inside it changes the second answer to four.
+
+9. We build the initial Fenwick table in N squared time by propagating first along x and then y. That avoids one million logarithmic insertions.
+
+10. Every operation takes O of log squared N time. Random direct scans and a maximum-size grid test toggles, boundaries, and the full operation limit.

@@ -1,0 +1,19 @@
+1. Secret gives us a fixed array and a black-box function. We must combine every value in a requested range from left to right.
+
+2. The function is associative, so parentheses may move. But it might not be commutative, so we must never change the order of the values.
+
+3. Split the array at its midpoint. For every position on the left, precompute the ordered combination from that position through the midpoint.
+
+4. For every position on the right, precompute the ordered combination from just after the midpoint through that position.
+
+5. Then recurse inside both halves. Each depth prepares crossing answers for smaller and smaller segments.
+
+6. During a query, descend until the two endpoints first fall on different sides of a split. That split has exactly the two pieces we need.
+
+7. The saved left suffix comes first, and the saved right prefix comes second. One Secret call joins them into the whole answer.
+
+8. A one-element query simply returns its original value and needs zero black-box calls. In the sample, the answers are thirteen, thirty-two, eight, and thirteen.
+
+9. Associativity proves the two prepared pieces may be joined. Their element order is unchanged, so this remains correct even when swapping arguments would fail.
+
+10. Preprocessing takes O of N log N calls and memory. Each query uses logarithmic comparisons but at most one Secret call, verified by random left-to-right folds.

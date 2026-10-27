@@ -1,0 +1,10 @@
+The Lazy Cow	Weighted patches on a plane	Reach grass within K steps	Choose the best center
+Manhattan geometry	Reachable area is a diamond	Slanted sides are awkward	We want an axis-aligned view
+Rotate coordinates	u = x + y	v = x - y	Diamond becomes a square
+Square dimensions	abs(u-u0) <= K	abs(v-v0) <= K	Width is 2K
+Sweep in u	Sort patches by u	Keep span at most 2K	Each point enters and leaves once
+Valid v centers	Patch coordinate is v	Centers range v-K through v+K	Add the patch weight there
+Lazy maximum tree	Range addition per active patch	Compressed interval endpoints	Root stores the best overlap
+Sample	Reach weights 3, 4, and 1	Total is 8	Weight 7 is outside the group
+Why it works	Rotation preserves distance condition	Sweep sees every useful u window	Tree checks every useful v center
+Complexity and checks	O(N log N) time	O(N) memory	Random oracle plus maximum stress

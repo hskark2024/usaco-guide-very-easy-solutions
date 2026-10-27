@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "usaco-418": ("4 3\n7 8 6\n3 0 0\n4 6 0\n1 4 2\n", "8\n"),
+    "cses-1739": ("4 3\n.*..\n*.**\n**..\n****\n2 2 2 3 4\n1 3 3\n2 2 2 3 4\n", "3\n4\n"),
+    "joi-14-secret": ("8\n1 4 7 2 5 8 3 6\n4\n0 3\n1 7\n5 5\n2 4\n", "13\n32\n8\n13\n"),
     "ys-RangeAffineRangeSum": ("5 7\n1 2 3 4 5\n1 0 5\n0 2 4 100 101\n1 0 3\n0 1 3 102 103\n1 2 5\n0 2 5 104 105\n1 0 5\n", "15\n404\n41511\n4317767\n"),
     "usaco-578": ("4 5\n3 1 2 4\nM 3 4\nS 1 3\nP 2 3 1\nM 3 4\nS 1 3\n", "2\n6\n3\n8\n"),
     "cses-2166": ("8 4\n1 2 -1 3 1 -5 1 4\n2 2 6\n1 4 -2\n2 2 6\n2 3 4\n", "5\n2\n0\n"),

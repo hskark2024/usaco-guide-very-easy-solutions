@@ -131,6 +131,9 @@ The official statements remain at their original judge links. These notes intent
 | `ys-RangeAffineRangeSum` | Library Checker | [Range Affine Range Sum](problems/ys-RangeAffineRangeSum/README.md) | [Lazy Segment Tree, Affine Functions, Composition] | [C++](solutions/ys-RangeAffineRangeSum.cpp) | [Package](videos/easy/ys-RangeAffineRangeSum/README.md) |
 | `usaco-578` | USACO Platinum | [Counting Haybales](problems/usaco-578/README.md) | [Lazy Segment Tree, Range Add, Range Minimum, Range Sum] | [C++](solutions/usaco-578.cpp) | [Package](videos/easy/usaco-578/README.md) |
 | `cses-2166` | CSES | [Prefix Sum Queries](problems/cses-2166/README.md) | [Segment Tree, Maximum Prefix Sum, Point Updates] | [C++](solutions/cses-2166.cpp) | [Package](videos/easy/cses-2166/README.md) |
+| `usaco-418` | USACO Gold | [The Lazy Cow](problems/usaco-418/README.md) | [Manhattan Geometry, Coordinate Rotation, Sweep Line, Lazy Segment Tree] | [C++](solutions/usaco-418.cpp) | [Package](videos/easy/usaco-418/README.md) |
+| `cses-1739` | CSES | [Forest Queries II](problems/cses-1739/README.md) | [2D Fenwick Tree, Point Updates, Rectangle Sums] | [C++](solutions/cses-1739.cpp) | [Package](videos/easy/cses-1739/README.md) |
+| `joi-14-secret` | JOI | [2014 - Secret](problems/joi-14-secret/README.md) | [Associative Operations, Divide and Conquer, Static Range Queries] | [C++](solutions/joi-14-secret.cpp) | [Package](videos/easy/joi-14-secret/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

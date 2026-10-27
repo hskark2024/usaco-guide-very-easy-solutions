@@ -1,0 +1,19 @@
+1. The Lazy Cow gives us weighted grass patches. We may stand anywhere, and we want the most grass within K north, south, east, or west steps.
+
+2. That step distance is Manhattan distance. Its reachable area looks like a diamond, which is awkward for normal rectangle data structures.
+
+3. Rotate the coordinates by setting u equal to x plus y and v equal to x minus y. The diamond becomes an axis-aligned square.
+
+4. A patch is reachable exactly when both transformed coordinate differences are at most K. So the square has width two K in u and in v.
+
+5. Sort patches by u. Two pointers keep the patches whose u values fit in one width-two-K window. Each patch enters once and leaves once.
+
+6. For an active patch at v, which center positions can reach it? Every center v zero from v minus K through v plus K works.
+
+7. Add that patch's grass across its whole valid-center interval. A lazy segment tree handles interval additions and stores the largest total at its root.
+
+8. In the sample, one location reaches weights three, four, and one. Their total is eight, while the weight-seven patch cannot join them.
+
+9. Every possible optimal square appears when the sweep reaches its rightmost patch. At that moment, the tree checks every useful v center, so the best total is found.
+
+10. Sorting and tree operations take O of N log N time. Random brute force and a one-hundred-thousand-patch stress case verify boundaries and large totals.

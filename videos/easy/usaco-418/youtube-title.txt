@@ -1,0 +1,1 @@
+USACO The Lazy Cow | Rotate a Diamond into a Square

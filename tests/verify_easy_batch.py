@@ -4699,6 +4699,155 @@ def verify_prefix_sum_queries() -> None:
     assert int(run('cses-2166', input_text)) == 1_000_000_000
 
 
+def verify_lazy_cow() -> None:
+    def brute_force(patches: list[tuple[int, int, int]], step_limit: int) -> int:
+        transformed = [
+            (x + y, x - y, grass) for grass, x, y in patches
+        ]
+
+        # Any useful transformed square can slide until its lower u and v
+        # boundaries touch contained points, so these candidates are complete.
+        candidate_u = [u for u, _, _ in transformed]
+        candidate_v = [v for _, v, _ in transformed]
+        return max(
+            sum(
+                grass
+                for u, v, grass in transformed
+                if lower_u <= u <= lower_u + 2 * step_limit
+                and lower_v <= v <= lower_v + 2 * step_limit
+            )
+            for lower_u in candidate_u
+            for lower_v in candidate_v
+        )
+
+    for _ in range(240):
+        patch_count = RNG.randint(1, 12)
+        step_limit = RNG.randint(1, 10)
+        positions = RNG.sample(
+            [(x, y) for x in range(16) for y in range(16)],
+            patch_count,
+        )
+        patches = [
+            (RNG.randint(1, 30), x, y) for x, y in positions
+        ]
+        input_text = (
+            f'{patch_count} {step_limit}\n'
+            + ''.join(f'{grass} {x} {y}\n' for grass, x, y in patches)
+        )
+        assert int(run('usaco-418', input_text)) == brute_force(
+            patches, step_limit
+        )
+
+    # All 100,000 maximum-weight patches fit inside one radius-2,000,000
+    # diamond. This reaches the largest possible total of one billion.
+    patch_count = 100_000
+    input_text = (
+        f'{patch_count} 2000000\n'
+        + ''.join(f'10000 {index} 0\n' for index in range(patch_count))
+    )
+    assert int(run('usaco-418', input_text)) == 1_000_000_000
+
+
+def verify_forest_queries_two() -> None:
+    for _ in range(150):
+        size = RNG.randint(1, 12)
+        model = [
+            [RNG.randrange(2) for _ in range(size)] for _ in range(size)
+        ]
+        initial = [row.copy() for row in model]
+        operations = []
+        expected = []
+
+        for _ in range(RNG.randint(1, 120)):
+            if RNG.random() < 0.55:
+                y = RNG.randint(1, size)
+                x = RNG.randint(1, size)
+                operations.append(f'1 {y} {x}')
+                model[y - 1][x - 1] ^= 1
+            else:
+                y1 = RNG.randint(1, size)
+                y2 = RNG.randint(y1, size)
+                x1 = RNG.randint(1, size)
+                x2 = RNG.randint(x1, size)
+                operations.append(f'2 {y1} {x1} {y2} {x2}')
+                expected.append(sum(
+                    model[y][x]
+                    for y in range(y1 - 1, y2)
+                    for x in range(x1 - 1, x2)
+                ))
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ''.join(
+                ''.join('*' if cell else '.' for cell in row) + '\n'
+                for row in initial
+            )
+            + '\n'.join(operations) + '\n'
+        )
+        actual = list(map(int, run('cses-1739', input_text).split()))
+        assert actual == expected
+
+    # Exercise both official maxima. An odd number of toggles leaves one tree.
+    size = 1000
+    query_count = 200_000
+    input_text = (
+        f'{size} {query_count}\n'
+        + ('.' * size + '\n') * size
+        + '1 1 1\n' * (query_count - 1)
+        + f'2 1 1 {size} {size}\n'
+    )
+    assert int(run('cses-1739', input_text)) == 1
+
+
+def verify_secret() -> None:
+    limit = 1_000_000_000
+
+    def secret(left: int, right: int) -> int:
+        # This is the order-sensitive associative function in the public JOI
+        # grader bundled with the task.
+        return min(limit, left + 2 * (right // 2))
+
+    def fold(values: list[int], left: int, right: int) -> int:
+        result = values[left]
+        for index in range(left + 1, right + 1):
+            result = secret(result, values[index])
+        return result
+
+    for _ in range(180):
+        size = RNG.randint(1, 80)
+        values = [RNG.randint(0, 5000) for _ in range(size)]
+        queries = []
+        expected = []
+        for _ in range(RNG.randint(1, 120)):
+            left = RNG.randrange(size)
+            right = RNG.randrange(left, size)
+            queries.append((left, right))
+            expected.append(fold(values, left, right))
+
+        input_text = (
+            f'{size}\n' + ' '.join(map(str, values)) + '\n'
+            + f'{len(queries)}\n'
+            + ''.join(f'{left} {right}\n' for left, right in queries)
+        )
+        actual = list(map(int, run('joi-14-secret', input_text).split()))
+        assert actual == expected
+
+    size = 1000
+    query_count = 10_000
+    values = [1_000_000_000 if index % 7 == 0 else index for index in range(size)]
+    queries = [
+        (index % size, size - 1) for index in range(query_count)
+    ]
+    expected = [fold(values, left, right) for left, right in queries]
+    input_text = (
+        f'{size}\n' + ' '.join(map(str, values)) + '\n'
+        + f'{query_count}\n'
+        + ''.join(f'{left} {right}\n' for left, right in queries)
+    )
+    actual = list(map(int, run('joi-14-secret', input_text).split()))
+    assert actual == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -4810,6 +4959,9 @@ if __name__ == "__main__":
         verify_range_affine_range_sum,
         verify_counting_haybales,
         verify_prefix_sum_queries,
+        verify_lazy_cow,
+        verify_forest_queries_two,
+        verify_secret,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

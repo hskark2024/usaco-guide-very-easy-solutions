@@ -1,0 +1,6 @@
+Learn a divide-and-conquer static range structure for an unknown associative, order-sensitive operation. We precompute midpoint aggregates, answer with one Secret call, prove correctness, and test the C++ judge interface.
+
+Official problem: https://oj.uz/problem/view/JOI14_secret
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/joi-14-secret
+
+Playlist: USACO Guide Easy C++ Solutions
