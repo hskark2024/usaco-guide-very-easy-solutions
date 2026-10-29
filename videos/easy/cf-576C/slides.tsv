@@ -1,0 +1,10 @@
+Points on Plane	Any short-enough path works	No optimization required
+Make Vertical Strips	Width = 1000	At most 1001 strips
+Snake Order	Even strips go up	Odd strips go down
+Small Horizontal Cost	Inside-strip delta x < 1000	Total stays near 1 billion
+Controlled Vertical Cost	Sorted y telescopes	No random bouncing
+Cheap Boundaries	High connects to high	Low connects to low
+C++ Sort Key	x / 1000 first	Alternate y direction
+Output	Print original indices	Every point appears once
+Complexity	O(N log N) time	O(N) memory
+Test	Strip borders	Extreme coordinates and N

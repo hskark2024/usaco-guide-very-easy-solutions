@@ -1,0 +1,6 @@
+Learn a square-root decomposition that combines dense arithmetic progression updates and simulates sparse ones.
+
+Official problem: https://szkopul.edu.pl/problemset/problem/oNnWY6ZuzzhvG-jCmijiXkIk/site/?key=statement
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/poi-17-containers.cpp
+
+Topics: square-root decomposition, difference arrays, arithmetic progressions, C++

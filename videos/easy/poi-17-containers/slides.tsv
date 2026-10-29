@@ -1,0 +1,10 @@
+POI Containers	Arithmetic progression updates	Count every final stack
+Why Direct Simulation Fails	Small steps touch many cells	Too many total placements
+Square-Root Split	Threshold = 320	Treat small and large steps differently
+Large Steps	Touch fewer than N / 320 cells	Simulate directly
+Small Steps	Group by exact d	Save start and stop events
+Residue-Class Sweep	diff[i] += diff[i-d]	Prefix sum along a progression
+Combine	Active small-step counts	Plus direct large-step counts
+Memory Trick	Reuse one difference array	O(N + K) storage
+Complexity	About 320N + KN/320	Fast at 100000
+Final Checks	Boundary steps	Ends, overlaps, residues

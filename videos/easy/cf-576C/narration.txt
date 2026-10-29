@@ -1,0 +1,19 @@
+This problem sounds like a traveling salesperson challenge, but read the goal carefully. We do not need the shortest path. We only need any path whose Manhattan length stays under a generous limit.
+
+That changes everything.
+
+Split the plane into vertical strips of width one thousand. Sort the strips from left to right. Inside strip zero, visit points from low y to high y. Inside strip one, go from high y to low y. Keep alternating, creating a snake.
+
+Why does this work? Inside one strip, two x coordinates differ by less than one thousand. Across at most one million points, that horizontal cost stays around one billion.
+
+For vertical cost, sorting y makes the movement inside a strip telescope. Instead of bouncing randomly, we travel mostly from one extreme to the other. There are at most one thousand and one strips, so that part also stays around one billion.
+
+The snake direction matters at strip boundaries. If one strip ends high, the next strip starts high. Then it travels downward. The following strip begins low and travels upward. We avoid paying a full vertical reset each time.
+
+In code, store each point with its original index. Compare x divided by one thousand first. For equal strip numbers, compare y upward in even strips and downward in odd strips. Extra tie-breaks make the output deterministic.
+
+Finally print the saved original indices. Sorting includes every point exactly once, so the output is a permutation and therefore a Hamiltonian path.
+
+The algorithm is O of N log N because of sorting and uses O of N memory. Always test the strip boundaries at x equals nine hundred ninety-nine and one thousand, plus the maximum coordinate values.
+
+The big lesson is to solve the actual requirement. A strong bound and a simple construction can beat searching for an optimum we never needed.

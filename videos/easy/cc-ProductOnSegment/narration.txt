@@ -1,0 +1,19 @@
+Today we need range products, but the modulus may be composite and the query count is enormous.
+
+Prefix products are tempting. They would make a range look like one prefix divided by another. But modular division may not exist. A zero or a shared factor breaks that idea.
+
+A segment tree is safe, but twenty million logarithmic queries are still too much. We need constant time per query.
+
+The solution is a disjoint sparse table. At each binary level, split blocks in half. On the left half, save every suffix product ending at the split. On the right half, save every prefix product starting at the split.
+
+For two different endpoints, look at the highest bit where their indices differ. That bit identifies a level where the left endpoint and right endpoint sit on opposite sides of one split.
+
+The saved suffix at the left endpoint covers the first part. The saved prefix at the right endpoint covers the second part. Multiply those two values modulo P, and the entire range is answered in constant time.
+
+A one-element query just returns that array value.
+
+The other tricky part is decoding queries. Every sixty-fourth query takes a fresh pair from array B. Other queries reuse the preceding sorted endpoints. Add the current state x, reduce modulo N, swap if needed, and ask the table. Then x becomes answer plus one, modulo P.
+
+Preprocessing takes N log N time and memory, but every query is O of one. No inverses, no prime assumption, and zeros are completely safe.
+
+Test composite moduli, zeros, singleton ranges, and the boundary between query sixty-three and sixty-four. That is the whole pattern behind CodeChef SEGPROD.

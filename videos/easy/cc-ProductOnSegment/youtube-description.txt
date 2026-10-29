@@ -1,0 +1,6 @@
+Learn how a disjoint sparse table answers static range products in O(1), even with a composite modulus and zero values.
+
+Official problem: https://www.codechef.com/problems/SEGPROD
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cc-ProductOnSegment.cpp
+
+Topics: divide and conquer, static range queries, modular arithmetic, C++

@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-27 (the live Guide source and selected module data were checked directly)
+- Last listing check: 2026-10-28 (the live Guide source and selected module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`4027972`](https://github.com/cpinitiative/usaco-guide/commit/40279728a239ff54e35df8626b22f8f63ccbf77a) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 115
-- Complete video packages: 115
+- Completed Easy solutions: 118
+- Complete video packages: 118
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -126,6 +126,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-418` | The Lazy Cow | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1739` | Forest Queries II | complete | complete | complete | generated locally; excluded from Git |
 | `joi-14-secret` | 2014 - Secret | complete | complete | complete | generated locally; excluded from Git |
+| `cc-ProductOnSegment` | Product on Segment | complete | complete | complete | generated locally; excluded from Git |
+| `cf-576C` | Points on Plane | complete | complete | complete | generated locally; excluded from Git |
+| `poi-17-containers` | 2017 - Containers | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-10-28
+
+- New entries: `cc-ProductOnSegment` Product on Segment, `cf-576C` Points on Plane, and `poi-17-containers` 2017 - Containers.
+- The live USACO Guide source remains at commit `4027972`; all three selected entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Product on Segment uses a disjoint sparse table for division-free `O(1)` range products; Points on Plane constructs a bounded snake through alternating coordinate strips; Containers combines dense arithmetic progressions with residue-class difference sweeps and simulates sparse progressions directly.
+- All 149 C++ solutions compiled with C++17, optimization, and warnings enabled.
+- All 153 smoke cases and today's three independent Easy verifier groups passed, including random literal oracles and official maximum `Q`, `N`, and `K` checks. A full historical verifier rerun also passed its first 77 unchanged groups before it was stopped after more than four hours during the next group; the remaining historical groups were already green in the preceding daily run.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 103.3 seconds (`cc-ProductOnSegment`), 113.1 seconds (`cf-576C`), and 113.3 seconds (`poi-17-containers`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Divide and Conquer Static Range Queries is complete. Easy Square Root Decomposition remains in progress, with `cf-877F` Ann and Books next. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-27
 

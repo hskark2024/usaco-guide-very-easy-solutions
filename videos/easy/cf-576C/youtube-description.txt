@@ -1,0 +1,6 @@
+Build a guaranteed short Manhattan Hamiltonian path by sorting points in alternating vertical strips.
+
+Official problem: https://codeforces.com/problemset/problem/576/C
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-576C.cpp
+
+Topics: square-root decomposition, constructive algorithms, sorting, geometry, C++

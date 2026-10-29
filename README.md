@@ -134,6 +134,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-418` | USACO Gold | [The Lazy Cow](problems/usaco-418/README.md) | [Manhattan Geometry, Coordinate Rotation, Sweep Line, Lazy Segment Tree] | [C++](solutions/usaco-418.cpp) | [Package](videos/easy/usaco-418/README.md) |
 | `cses-1739` | CSES | [Forest Queries II](problems/cses-1739/README.md) | [2D Fenwick Tree, Point Updates, Rectangle Sums] | [C++](solutions/cses-1739.cpp) | [Package](videos/easy/cses-1739/README.md) |
 | `joi-14-secret` | JOI | [2014 - Secret](problems/joi-14-secret/README.md) | [Associative Operations, Divide and Conquer, Static Range Queries] | [C++](solutions/joi-14-secret.cpp) | [Package](videos/easy/joi-14-secret/README.md) |
+| `cc-ProductOnSegment` | CodeChef | [Product on Segment](problems/cc-ProductOnSegment/README.md) | [Disjoint Sparse Table, Divide and Conquer, Static Range Queries] | [C++](solutions/cc-ProductOnSegment.cpp) | [Package](videos/easy/cc-ProductOnSegment/README.md) |
+| `cf-576C` | Codeforces | [Points on Plane](problems/cf-576C/README.md) | [Square-Root Decomposition, Constructive, Sorting, Geometry] | [C++](solutions/cf-576C.cpp) | [Package](videos/easy/cf-576C/README.md) |
+| `poi-17-containers` | POI | [2017 - Containers](problems/poi-17-containers/README.md) | [Square-Root Decomposition, Difference Arrays, Arithmetic Progressions] | [C++](solutions/poi-17-containers.cpp) | [Package](videos/easy/poi-17-containers/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

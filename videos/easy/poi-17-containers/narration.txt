@@ -1,0 +1,21 @@
+Each operation places containers along an arithmetic progression. We start at position a, jump by d, and repeat for a given length.
+
+If we simulate every placement, many operations with step one could cost billions of updates. But notice a useful tradeoff. A small step may touch many positions. A large step can only touch a few.
+
+We split step sizes at three hundred twenty, close to the square root of one hundred thousand.
+
+For a large step, just visit every affected position. Because each jump is bigger than three hundred twenty, one operation reaches fewer than about three hundred twelve cells.
+
+For a small step d, group all operations with that same d. Mark plus one at an operation's first position. Mark minus one at the position one jump after its last placement.
+
+Now sweep the ramp from left to right. At position i, add the difference value from i minus d. This is a prefix sum, but it travels along one residue class modulo d. The active count tells us how many grouped progressions cover position i.
+
+Add that active count into the final answer. Repeat for every small step that actually appears.
+
+A giant two-dimensional table would nearly use the whole memory limit. Instead, keep the grouped endpoints and reuse one difference array for each step. Memory stays linear.
+
+Why is it correct? Every start event begins one contribution along exactly the required arithmetic progression. The matching stop event removes it immediately after its final cell. Large-step operations are copied literally. Together they count every container once.
+
+The worst-case work is roughly threshold times N plus K times N divided by threshold. With a square-root threshold, that is fast enough.
+
+Test step three hundred twenty and three hundred twenty-one, progressions ending at N, different residue classes, and many operations piling onto one position.

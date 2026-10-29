@@ -1,0 +1,10 @@
+Product on Segment	20 million online queries	Composite modulus allowed
+Why Prefix Division Fails	Inverse may not exist	Zeros destroy division
+Target	Safe multiplication only	O(1) per query
+Binary Splits	Left half stores suffixes	Right half stores prefixes
+Choose a Level	Find highest bit of left XOR right	Endpoints cross that split
+Answer	Multiply saved suffix and prefix	Singleton reads original value
+Decode Queries	Fresh B pair every 64 queries	Otherwise reuse prior endpoints
+Update State	x = answer + 1 modulo P	Next query depends on x
+Complexity	O(N log N) preprocessing	O(1) each query
+Final Checks	Composite P	Zeros and block boundaries

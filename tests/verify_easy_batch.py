@@ -4848,6 +4848,140 @@ def verify_secret() -> None:
     assert actual == expected
 
 
+def verify_product_on_segment() -> None:
+    def literal_final_state(
+        values: list[int], modulus: int, query_count: int, encoded: list[int]
+    ) -> int:
+        size = len(values)
+        state = 0
+        previous_left = 0
+        previous_right = 0
+        for query_index in range(query_count):
+            if query_index % 64 == 0:
+                block = query_index // 64
+                left = (encoded[block] + state) % size
+                right = (encoded[block + 1] + state) % size
+            else:
+                left = (previous_left + state) % size
+                right = (previous_right + state) % size
+            if left > right:
+                left, right = right, left
+
+            product_value = 1
+            for value in values[left:right + 1]:
+                product_value = product_value * value % modulus
+            state = (product_value + 1) % modulus
+            previous_left = left
+            previous_right = right
+        return state
+
+    # Small random tests use literal range multiplication as an independent
+    # oracle.  Composite moduli and zeros appear frequently on purpose.
+    for _ in range(220):
+        size = RNG.randint(1, 20)
+        modulus = RNG.randint(2, 120)
+        query_count = RNG.randint(1, 150)
+        values = [RNG.randint(0, 500) for _ in range(size)]
+        encoded = [
+            RNG.randrange(size) for _ in range(query_count // 64 + 2)
+        ]
+        expected = literal_final_state(
+            values, modulus, query_count, encoded
+        )
+        input_text = (
+            f'1\n{size} {modulus} {query_count}\n'
+            + ' '.join(map(str, values)) + '\n'
+            + ' '.join(map(str, encoded)) + '\n'
+        )
+        assert int(run('cc-ProductOnSegment', input_text)) == expected
+
+    # Exercise the official maximum query count.  With a singleton zero array,
+    # every range product is zero and the final state is always one modulo two.
+    query_count = 20_000_000
+    encoded_count = query_count // 64 + 2
+    input_text = (
+        f'1\n1 2 {query_count}\n0\n'
+        + '0 ' * (encoded_count - 1) + '0\n'
+    )
+    assert int(run('cc-ProductOnSegment', input_text)) == 1
+
+
+def verify_points_on_plane() -> None:
+    limit = 2_500_000_000
+
+    def check(points: list[tuple[int, int]]) -> None:
+        input_text = str(len(points)) + '\n' + ''.join(
+            f'{x} {y}\n' for x, y in points
+        )
+        order = list(map(int, run('cf-576C', input_text).split()))
+        assert sorted(order) == list(range(1, len(points) + 1))
+
+        distance = 0
+        for first, second in zip(order, order[1:]):
+            x1, y1 = points[first - 1]
+            x2, y2 = points[second - 1]
+            distance += abs(x1 - x2) + abs(y1 - y2)
+        assert distance <= limit
+
+    for _ in range(180):
+        size = RNG.randint(1, 250)
+        points = RNG.sample(
+            [(x, y) for x in range(0, 5001, 37) for y in range(0, 5001, 41)],
+            size,
+        )
+        check(points)
+
+    # One million distinct points exercise the official maximum N while still
+    # allowing a compact deterministic grid within the coordinate limits.
+    check([(index % 1000, index // 1000) for index in range(1_000_000)])
+
+
+def verify_containers() -> None:
+    for _ in range(240):
+        size = RNG.randint(1, 100)
+        operation_count = RNG.randint(1, 130)
+        operations = []
+        expected = [0] * size
+
+        for _ in range(operation_count):
+            first = RNG.randint(1, size)
+            if RNG.random() < 0.15:
+                length = 1
+                step = 1
+            else:
+                step = RNG.randint(1, max(1, size - first + 1))
+                max_length = (size - first) // step + 1
+                length = RNG.randint(1, max_length)
+                if length == 1:
+                    step = 1
+            operations.append((first, length, step))
+            for offset in range(length):
+                expected[first - 1 + offset * step] += 1
+
+        input_text = (
+            f'{size} {operation_count}\n'
+            + ''.join(
+                f'{first} {length} {step}\n'
+                for first, length, step in operations
+            )
+        )
+        actual = list(map(int, run('poi-17-containers', input_text).split()))
+        assert actual == expected
+
+    # Maximum N and K with 50,000 dense full-ramp operations and 50,000
+    # singleton operations.  This stresses grouping and maximum answer counts.
+    size = 100_000
+    dense_count = 50_000
+    input_text = (
+        f'{size} {size}\n'
+        + f'1 {size} 1\n' * dense_count
+        + ''.join(f'{position} 1 1\n' for position in range(1, dense_count + 1))
+    )
+    actual = list(map(int, run('poi-17-containers', input_text).split()))
+    expected = [dense_count + (index < dense_count) for index in range(size)]
+    assert actual == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -4962,6 +5096,9 @@ if __name__ == "__main__":
         verify_lazy_cow,
         verify_forest_queries_two,
         verify_secret,
+        verify_product_on_segment,
+        verify_points_on_plane,
+        verify_containers,
     ):
         verifier()
         print(f"passed {verifier.__name__}")
