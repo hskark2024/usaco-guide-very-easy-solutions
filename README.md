@@ -137,6 +137,8 @@ The official statements remain at their original judge links. These notes intent
 | `cc-ProductOnSegment` | CodeChef | [Product on Segment](problems/cc-ProductOnSegment/README.md) | [Disjoint Sparse Table, Divide and Conquer, Static Range Queries] | [C++](solutions/cc-ProductOnSegment.cpp) | [Package](videos/easy/cc-ProductOnSegment/README.md) |
 | `cf-576C` | Codeforces | [Points on Plane](problems/cf-576C/README.md) | [Square-Root Decomposition, Constructive, Sorting, Geometry] | [C++](solutions/cf-576C.cpp) | [Package](videos/easy/cf-576C/README.md) |
 | `poi-17-containers` | POI | [2017 - Containers](problems/poi-17-containers/README.md) | [Square-Root Decomposition, Difference Arrays, Arithmetic Progressions] | [C++](solutions/poi-17-containers.cpp) | [Package](videos/easy/poi-17-containers/README.md) |
+| `cf-13E` | Codeforces | [Holes](problems/cf-13E/README.md) | [Square-Root Decomposition, Block Rebuilding, Jump Queries] | [C++](solutions/cf-13E.cpp) | [Package](videos/easy/cf-13E/README.md) |
+| `cf-877F` | Codeforces | [Ann and Books](problems/cf-877F/README.md) | [Mo's Algorithm, Prefix Sums, Offline Queries] | [C++](solutions/cf-877F.cpp) | [Package](videos/easy/cf-877F/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

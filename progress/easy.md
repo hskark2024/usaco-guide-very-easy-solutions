@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-10-28 (the live Guide source and selected module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`4027972`](https://github.com/cpinitiative/usaco-guide/commit/40279728a239ff54e35df8626b22f8f63ccbf77a) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 118
-- Complete video packages: 118
+- Last listing check: 2026-11-02 (the live Guide source and selected module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`0c6d8b6`](https://github.com/cpinitiative/usaco-guide/commit/0c6d8b6f91d7e292d1f5b8e48b45ea43a44f7fdf) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 120
+- Complete video packages: 120
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -129,6 +129,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cc-ProductOnSegment` | Product on Segment | complete | complete | complete | generated locally; excluded from Git |
 | `cf-576C` | Points on Plane | complete | complete | complete | generated locally; excluded from Git |
 | `poi-17-containers` | 2017 - Containers | complete | complete | complete | generated locally; excluded from Git |
+| `cf-13E` | Holes | complete | complete | complete | generated locally; excluded from Git |
+| `cf-877F` | Ann and Books | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-02
+
+- New entries: `cf-13E` Holes and `cf-877F` Ann and Books.
+- The live USACO Guide source is at commit `0c6d8b6`; both selected Square Root Decomposition entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Holes rebuilds one block of jump shortcuts after each update; Ann and Books combines signed prefix sums with direction-aware Mo pointer updates and compressed frequency IDs.
+- All 151 C++ solutions compiled with C++17, optimization, and warnings enabled. All 155 smoke cases passed.
+- Today's two independent Easy verifier groups passed randomized literal oracles and official maximum `N`, operation-count, and query-count checks. The multi-hour historical verifier collection was not rerun because its unchanged groups were already green in prior daily runs.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 104.6 seconds (`cf-13E`) and 120.4 seconds (`cf-877F`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Square Root Decomposition is complete. Binary Jumping is the next module with unfinished Easy entries, beginning with `cses-1687` Company Queries I, `cses-1750` Planets Queries I, and `usaco-576` Max Flow. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-10-28
 

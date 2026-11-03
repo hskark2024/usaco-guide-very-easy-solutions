@@ -1,0 +1,6 @@
+Learn how square-root decomposition turns dynamic jump paths into fast block shortcuts.
+
+Official problem: https://codeforces.com/problemset/problem/13/E
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-13E.cpp
+
+Topics: square-root decomposition, block rebuilding, jump queries, C++

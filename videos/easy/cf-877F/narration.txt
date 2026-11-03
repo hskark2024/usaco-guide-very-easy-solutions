@@ -1,0 +1,21 @@
+We have math books and economics books. For each query interval, we count subarrays where math problems minus economics problems equals K.
+
+First turn this into one signed array. A math book contributes a positive value. An economics book contributes a negative value. Now the condition is simply: subarray sum equals K.
+
+Prefix sums change a subarray into a pair of points. The sum from i plus one through j is prefix j minus prefix i. So we need ordered prefix pairs whose difference is K.
+
+A book query from l through r becomes a prefix-index window from l minus one through r. Every valid pair inside that window represents one nonempty subarray inside the original query.
+
+Computing every query from scratch is too slow. Mo's algorithm sorts the query windows so nearby windows are processed together. We slide the left and right boundaries and update one prefix at a time.
+
+Direction matters. When we add a prefix on the right, it is the later index. We count old prefixes equal to the new value minus K.
+
+When we add on the left, it is the earlier index. We count old prefixes equal to the new value plus K. These formulas preserve the required order of the two endpoints, even when K is negative.
+
+Removing an endpoint reverses the matching operation. We remove its own frequency first, so when K is zero, a prefix never pairs with itself.
+
+Prefix sums may be huge, but only values that actually appear need frequency slots. Coordinate compression gives each prefix a small integer ID. We also precompute the IDs for plus K and minus K.
+
+The signed transformation and prefix identity prove that valid subarrays match valid ordered pairs one for one. Each boundary move changes exactly the pairs touching that boundary, so Mo's maintained answer stays correct.
+
+Test positive, negative, and zero K. Include many zero-valued books, repeated prefix sums, singleton intervals, and an all-zero maximum case. The answer must use a sixty-four-bit integer.

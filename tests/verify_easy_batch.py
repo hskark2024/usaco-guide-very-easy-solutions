@@ -4982,6 +4982,118 @@ def verify_containers() -> None:
     assert actual == expected
 
 
+def verify_holes() -> None:
+    # Random mixed operations are compared with a literal ball simulation.
+    # Positive powers guarantee that the oracle always leaves the row.
+    for _ in range(180):
+        size = RNG.randint(1, 100)
+        operation_count = RNG.randint(1, 180)
+        powers = [0] + [RNG.randint(1, size) for _ in range(size)]
+        initial_powers = powers.copy()
+        operations = []
+        expected = []
+
+        for _ in range(operation_count):
+            if RNG.random() < 0.45:
+                hole = RNG.randint(1, size)
+                new_power = RNG.randint(1, size)
+                operations.append(f'0 {hole} {new_power}')
+                powers[hole] = new_power
+            else:
+                start = RNG.randint(1, size)
+                operations.append(f'1 {start}')
+
+                current = start
+                jumps = 0
+                last = start
+                while current <= size:
+                    last = current
+                    current += powers[current]
+                    jumps += 1
+                expected.append((last, jumps))
+
+        input_text = (
+            f'{size} {operation_count}\n'
+            + ' '.join(map(str, initial_powers[1:])) + '\n'
+            + '\n'.join(operations) + '\n'
+        )
+        tokens = list(map(int, run('cf-13E', input_text).split()))
+        actual = list(zip(tokens[::2], tokens[1::2]))
+        assert actual == expected
+
+    # Exercise maximum N and M.  Every query starts at the final hole, so its
+    # literal answer remains one jump even as that hole is repeatedly updated.
+    size = 100_000
+    pairs = 50_000
+    operations = ''.join(
+        f'0 {size} {1 + (index % size)}\n1 {size}\n'
+        for index in range(pairs)
+    )
+    input_text = (
+        f'{size} {pairs * 2}\n'
+        + ' '.join(['1'] * size) + '\n'
+        + operations
+    )
+    actual = list(map(int, run('cf-13E', input_text).split()))
+    assert actual == [value for _ in range(pairs) for value in (size, 1)]
+
+
+def verify_ann_and_books() -> None:
+    # Directly enumerate all subarrays in small random query intervals.  This
+    # independently checks both signs of K and the direction-sensitive Mo
+    # updates at the left and right boundaries.
+    for _ in range(180):
+        size = RNG.randint(1, 18)
+        wanted = RNG.randint(-10, 10)
+        types = [RNG.randint(1, 2) for _ in range(size)]
+        amounts = [RNG.randint(0, 7) for _ in range(size)]
+        signed = [
+            amount if kind == 1 else -amount
+            for kind, amount in zip(types, amounts)
+        ]
+
+        query_count = RNG.randint(1, 35)
+        queries = []
+        expected = []
+        for _ in range(query_count):
+            left = RNG.randint(1, size)
+            right = RNG.randint(left, size)
+            queries.append((left, right))
+
+            count = 0
+            for start in range(left - 1, right):
+                total = 0
+                for end in range(start, right):
+                    total += signed[end]
+                    count += total == wanted
+            expected.append(count)
+
+        input_text = (
+            f'{size} {wanted}\n'
+            + ' '.join(map(str, types)) + '\n'
+            + ' '.join(map(str, amounts)) + '\n'
+            + f'{query_count}\n'
+            + ''.join(f'{left} {right}\n' for left, right in queries)
+        )
+        actual = list(map(int, run('cf-877F', input_text).split()))
+        assert actual == expected
+
+    # At the official maximum N and Q, zero-valued books with K=0 make every
+    # nonempty subarray valid.  This also forces a 64-bit answer.
+    size = 100_000
+    query_count = 100_000
+    expected = size * (size + 1) // 2
+    input_text = (
+        f'{size} 0\n'
+        + ' '.join(['1'] * size) + '\n'
+        + ' '.join(['0'] * size) + '\n'
+        + f'{query_count}\n'
+        + f'1 {size}\n' * query_count
+    )
+    actual = list(map(int, run('cf-877F', input_text).split()))
+    assert actual == [expected] * query_count
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -5099,6 +5211,8 @@ if __name__ == "__main__":
         verify_product_on_segment,
         verify_points_on_plane,
         verify_containers,
+        verify_holes,
+        verify_ann_and_books,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

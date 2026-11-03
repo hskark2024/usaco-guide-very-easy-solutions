@@ -1,0 +1,10 @@
+Ann and Books	Math minus economics	Count valid subarrays per query
+Signed Values	Math is positive	Economics is negative
+Prefix Pair	Subarray sum = pref[j]-pref[i]	Need difference K
+Query Conversion	Books l..r	Prefix indices l-1..r
+Why Offline	Up to 100000 queries	Do not restart each query
+Mo's Ordering	Sort nearby windows	Slide boundaries cheaply
+Add on Right	Right endpoint is later	Match value minus K
+Add on Left	Left endpoint is earlier	Match value plus K
+Compression	Only existing prefix values	Constant-time frequencies
+Final Checks	K signs, zeros, repeats	Use 64-bit answers

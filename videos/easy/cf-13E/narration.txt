@@ -1,0 +1,19 @@
+Imagine a ball moving through a row of holes. Hole i sends it forward by its power. We need fast updates and fast questions about where the ball leaves and how many jumps it makes.
+
+Following every jump is too slow when every power is one. One question could cross all one hundred thousand holes.
+
+Split the row into blocks of about square root of N holes. For each starting hole, save a shortcut for the entire part of its path inside the current block.
+
+That shortcut stores three facts: the first destination outside the block, the number of jumps used to get there, and the last hole visited before leaving the block.
+
+We build a block from right to left. Every power is positive, so a jump that stays in the block lands at a position whose shortcut is already known. We add one jump and copy the rest of that shortcut.
+
+If the jump leaves the block immediately, the destination is already our next position, the jump count is one, and the current hole is the last visited hole in this block.
+
+To answer a question, begin at the requested hole and consume one shortcut at a time. Add its jump count and remember its last visited hole. After only about square root of N block transitions, the next destination is outside the row.
+
+When one power changes, only its own block needs rebuilding. Earlier blocks stop their summaries at the boundary, so they do not store details from this changed block.
+
+The right-to-left construction is correct by induction. The rightmost hole has a direct summary. Each earlier hole either leaves the block or joins a summary we already proved correct.
+
+Test a long chain of power one, jumps across block boundaries, immediate exits, and updates on the edges of blocks. Both an update and a question take about square root of N time.

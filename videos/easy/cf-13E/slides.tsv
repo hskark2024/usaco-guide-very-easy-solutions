@@ -1,0 +1,10 @@
+Codeforces Holes	Dynamic jumps to the right	Report final hole and jump count
+Why Naive Is Slow	Power one creates N jumps	Up to N queries
+Square-Root Blocks	About sqrt(N) holes each	Summarize within each block
+Three Summary Fields	Next position outside block	Jumps used and last visited hole
+Build Right to Left	Every jump moves forward	Destination summary is ready
+Same-Block Jump	Add one jump	Splice destination shortcut
+Leaving the Block	Store direct destination	Current hole is last inside
+Answer a Query	Consume one shortcut per block	Accumulate counts
+Update	Change one power	Rebuild only its block
+Final Checks	Long chains	Boundaries and immediate exits

@@ -1,0 +1,6 @@
+Learn how signed prefix sums and Mo's algorithm answer many subarray-sum queries efficiently.
+
+Official problem: https://codeforces.com/contest/877/problem/F
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-877F.cpp
+
+Topics: Mo's algorithm, prefix sums, offline queries, coordinate compression, C++
