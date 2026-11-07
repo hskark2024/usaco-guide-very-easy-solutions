@@ -5247,6 +5247,190 @@ def verify_max_flow() -> None:
     assert int(run('usaco-576', input_text)) == route_count
 
 
+def verify_sloth_naptime() -> None:
+    # A literal breadth-first path oracle independently finds the unique route
+    # and indexes the min(energy, route length)-th vertex on small random trees.
+    for _ in range(220):
+        size = RNG.randint(1, 70)
+        edges = random_tree(size)
+        graph = [[] for _ in range(size)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+
+        queries = []
+        expected = []
+        for _ in range(RNG.randint(1, 130)):
+            start = RNG.randrange(size)
+            finish = RNG.randrange(size)
+            energy = RNG.randint(0, size + 20)
+            queries.append((start, finish, energy))
+
+            previous = [-1] * size
+            previous[start] = start
+            queue = deque([start])
+            while queue and previous[finish] == -1:
+                vertex = queue.popleft()
+                for next_vertex in graph[vertex]:
+                    if previous[next_vertex] == -1:
+                        previous[next_vertex] = vertex
+                        queue.append(next_vertex)
+            route = []
+            vertex = finish
+            while vertex != start:
+                route.append(vertex)
+                vertex = previous[vertex]
+            route.append(start)
+            route.reverse()
+            expected.append(route[min(energy, len(route) - 1)] + 1)
+
+        input_text = (
+            f'{size}\n'
+            + ''.join(f'{a + 1} {b + 1}\n' for a, b in edges)
+            + f'{len(queries)}\n'
+            + ''.join(f'{a + 1} {b + 1} {e}\n' for a, b, e in queries)
+        )
+        assert list(map(int, run('cfgym-102694C', input_text).split())) == expected
+
+    # A maximum-depth chain checks iterative traversal and every lifting bit.
+    size = 300_000
+    input_text = (
+        f'{size}\n'
+        + ''.join(f'{vertex} {vertex + 1}\n' for vertex in range(1, size))
+        + '5\n'
+        + f'{size} 1 0\n{size} 1 {size - 1}\n1 {size} 131072\n'
+        + f'1 {size} {size + 10}\n{size // 2} {size // 2} 99\n'
+    )
+    assert list(map(int, run('cfgym-102694C', input_text).split())) == [
+        size, 1, 131_073, size, size // 2,
+    ]
+
+
+def verify_path_queries_two() -> None:
+    # Enumerate each tiny query path explicitly; no decomposition or range data
+    # structure is shared with the solution under test.
+    for _ in range(180):
+        size = RNG.randint(1, 55)
+        edges = random_tree(size)
+        graph = [[] for _ in range(size)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+        values = [RNG.randint(1, 10**9) for _ in range(size)]
+        initial_values = values.copy()
+        operations = []
+        expected = []
+        for _ in range(120):
+            if RNG.random() < 0.45:
+                vertex = RNG.randrange(size)
+                value = RNG.randint(1, 10**9)
+                values[vertex] = value
+                operations.append(f'1 {vertex + 1} {value}')
+            else:
+                start = RNG.randrange(size)
+                finish = RNG.randrange(size)
+                previous = [-1] * size
+                previous[start] = start
+                queue = deque([start])
+                while queue and previous[finish] == -1:
+                    vertex = queue.popleft()
+                    for next_vertex in graph[vertex]:
+                        if previous[next_vertex] == -1:
+                            previous[next_vertex] = vertex
+                            queue.append(next_vertex)
+                answer = 0
+                vertex = finish
+                while vertex != start:
+                    answer = max(answer, values[vertex])
+                    vertex = previous[vertex]
+                expected.append(max(answer, values[start]))
+                operations.append(f'2 {start + 1} {finish + 1}')
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ' '.join(map(str, initial_values)) + '\n'
+            + ''.join(f'{a + 1} {b + 1}\n' for a, b in edges)
+            + '\n'.join(operations) + '\n'
+        )
+        assert list(map(int, run('cses-2134', input_text).split())) == expected
+
+    # Maximum N and Q on one heavy chain exercise iterative setup and updates.
+    size = 200_000
+    operations = ['2 1 200000', '1 100000 1000000000',
+                  '2 1 200000', '2 100000 100000']
+    operations += ['2 1 1'] * (200_000 - len(operations))
+    input_text = (
+        f'{size} {len(operations)}\n' + ' '.join(['1'] * size) + '\n'
+        + ''.join(f'{v} {v + 1}\n' for v in range(1, size))
+        + '\n'.join(operations) + '\n'
+    )
+    actual = list(map(int, run('cses-2134', input_text).split()))
+    assert actual[:4] == [1, 1_000_000_000, 1_000_000_000, 1]
+    assert actual[4:] == [1] * (len(actual) - 4)
+
+
+def verify_cow_land() -> None:
+    # Direct path reconstruction checks inclusion of both endpoints, the LCA,
+    # repeated assignments, zero values, and XOR cancellation.
+    for _ in range(180):
+        size = RNG.randint(2, 55)
+        edges = random_tree(size)
+        graph = [[] for _ in range(size)]
+        for first, second in edges:
+            graph[first].append(second)
+            graph[second].append(first)
+        values = [RNG.randint(0, 2**20) for _ in range(size)]
+        initial_values = values.copy()
+        operations = []
+        expected = []
+        for _ in range(120):
+            if RNG.random() < 0.45:
+                vertex = RNG.randrange(size)
+                value = RNG.randint(0, 10**9)
+                values[vertex] = value
+                operations.append(f'1 {vertex + 1} {value}')
+            else:
+                start = RNG.randrange(size)
+                finish = RNG.randrange(size)
+                previous = [-1] * size
+                previous[start] = start
+                queue = deque([start])
+                while queue and previous[finish] == -1:
+                    vertex = queue.popleft()
+                    for next_vertex in graph[vertex]:
+                        if previous[next_vertex] == -1:
+                            previous[next_vertex] = vertex
+                            queue.append(next_vertex)
+                answer = 0
+                vertex = finish
+                while vertex != start:
+                    answer ^= values[vertex]
+                    vertex = previous[vertex]
+                expected.append(answer ^ values[start])
+                operations.append(f'2 {start + 1} {finish + 1}')
+
+        input_text = (
+            f'{size} {len(operations)}\n'
+            + ' '.join(map(str, initial_values)) + '\n'
+            + ''.join(f'{a + 1} {b + 1}\n' for a, b in edges)
+            + '\n'.join(operations) + '\n'
+        )
+        assert list(map(int, run('usaco-921', input_text).split())) == expected
+
+    size = 100_000
+    query_count = 100_000
+    operations = ['2 1 100000', '1 50000 7', '2 1 100000', '2 50000 50000']
+    operations += ['2 1 1'] * (query_count - len(operations))
+    input_text = (
+        f'{size} {query_count}\n' + ' '.join(['0'] * size) + '\n'
+        + ''.join(f'{v} {v + 1}\n' for v in range(1, size))
+        + '\n'.join(operations) + '\n'
+    )
+    actual = list(map(int, run('usaco-921', input_text).split()))
+    assert actual[:4] == [0, 7, 7, 0]
+    assert actual[4:] == [0] * (len(actual) - 4)
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -5369,6 +5553,9 @@ if __name__ == "__main__":
         verify_company_queries_one,
         verify_planets_queries_one,
         verify_max_flow,
+        verify_sloth_naptime,
+        verify_path_queries_two,
+        verify_cow_land,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

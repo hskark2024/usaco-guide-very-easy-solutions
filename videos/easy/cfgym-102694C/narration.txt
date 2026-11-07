@@ -1,0 +1,15 @@
+Imagine a sloth walking through a tree. It starts at one vertex, wants to reach another, and spends one energy unit per edge. A query asks where it stops after using its energy.
+
+Trees give us one huge advantage: there is exactly one path between the two endpoints. Root the tree at vertex one. That path first climbs from the start toward the lowest common ancestor, or LCA, and then descends toward the finish.
+
+Suppose the upward part has length A and the downward part has length B. If the energy is at least A plus B, the sloth reaches the finish. If the energy is at most A, the answer is simply that many ancestors above the start.
+
+The last case is the interesting one. The sloth has passed the LCA and is moving downward. Our ancestor table cannot jump downward, so we look from the other direction. The sloth still has A plus B minus energy edges left before the finish. Climb that many ancestors from the finish, and we land on the same vertex.
+
+To make ancestor jumps fast, build a binary lifting table. Level zero stores each parent. The next levels store ancestors two, four, eight, and more edges above. Any distance is a sum of powers of two, so one climb takes logarithmic time.
+
+The same table finds the LCA. First raise the deeper endpoint until both depths match. Then raise both endpoints with the largest safe jumps until their parents match.
+
+For a small example, take the path four, two, one, three, seven. Its length is four. With zero energy we stay at four. With two energy we reach one. With four or more energy we finish at seven. With three energy, the unwalked suffix has length one, so climbing once from seven reaches three.
+
+The code uses an iterative tree traversal, which stays safe even on a chain of three hundred thousand vertices. Preprocessing takes N log N time and memory. Each query takes log N time. The key trick is to split the path at its LCA and, when needed, measure backward from the finish.

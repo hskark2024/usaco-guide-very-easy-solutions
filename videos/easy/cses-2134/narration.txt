@@ -1,0 +1,17 @@
+Path Queries Two gives us a tree with a value on every vertex. We must replace individual values and answer the maximum value on the path between any two vertices.
+
+A segment tree is great for array intervals, but a tree path is not automatically one interval. Heavy-light decomposition is the bridge between those two worlds.
+
+Root the tree and calculate every subtree size. For each vertex, call its largest child heavy. All other child edges are light. Now follow heavy edges to form chains. We place each chain into consecutive positions of one array.
+
+Why choose the largest child? Whenever a path crosses a light edge, the remaining subtree size is at most half of the previous size. A number can only be halved logarithmically many times. That means any root path crosses only logarithmically many light edges and therefore only logarithmically many heavy chains.
+
+Store the flattened values in a maximum segment tree. A point assignment changes exactly one leaf.
+
+For a path query, compare the chain heads of the two endpoints. If they differ, take the endpoint whose chain head is deeper. Query the array interval from that chain head through the endpoint, combine its maximum into the answer, and move the endpoint to the chain head's parent.
+
+Repeat until both endpoints share one chain. Their remaining route is now one array interval, so one final segment-tree query finishes the answer.
+
+In the CSES sample, the route from vertex three to vertex five goes through vertices three, one, two, and five. Their values are one, two, four, and three, so the maximum is four. After changing vertex two from four to two, the same route has maximum three.
+
+The implementation builds parents, subtree sizes, and chains iteratively, so even a two hundred thousand vertex chain is safe. Each update costs log N. A path crosses log N chains, and every interval query costs log N, for O log squared N per path query. Heavy-light decomposition lets an array data structure answer tree paths.

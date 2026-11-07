@@ -1,0 +1,8 @@
+Path Queries II	Point assignments on a tree	Maximum on any route	CSES 2134
+The mismatch	Segment trees want array intervals	Tree paths bend and branch	We need a mapping
+Choose heavy edges	Compute subtree sizes	Largest child is heavy	Other child edges are light
+Flatten chains	Heavy-chain vertices stay consecutive	Each vertex gets one position	Store values in a segment tree
+Why few chains?	A light edge at least halves subtree size	Only O(log N) light edges	Only O(log N) chain pieces
+Answer a route	Take the deeper chain suffix	Query its maximum	Move above that chain
+Sample	Path 3 to 5 has maximum 4	Update vertex 2 to value 2	New maximum is 3
+Complexity	Update O(log N)	Path query O(log squared N)	Memory O(N)

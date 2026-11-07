@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-06 (the live Guide source and selected module data were checked directly)
+- Last listing check: 2026-11-07 (the live Guide source and selected module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`81e547a`](https://github.com/cpinitiative/usaco-guide/commit/81e547ad50a16109b5b5ed582bc6a6397479ce2b) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 123
-- Complete video packages: 123
+- Completed Easy solutions: 126
+- Complete video packages: 126
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -134,6 +134,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cses-1687` | Company Queries I | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1750` | Planets Queries I | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-576` | Max Flow | complete | complete | complete | generated locally; excluded from Git |
+| `cfgym-102694C` | Sloth Naptime | complete | complete | complete | generated locally; excluded from Git |
+| `cses-2134` | Path Queries II | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-921` | Cow Land | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-07
+
+- New entries: `cfgym-102694C` Sloth Naptime, `cses-2134` Path Queries II, and `usaco-921` Cow Land.
+- The live USACO Guide source remains at commit `81e547a`; all three selected entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Sloth Naptime combines LCA with fixed-distance ancestor jumps; Path Queries II and Cow Land use iterative heavy-light decomposition with maximum and XOR segment trees.
+- All 157 C++ solutions compiled with C++17, optimization, and warnings enabled. All 157 smoke cases passed.
+- Today's three independent verifier groups passed randomized literal path oracles and official maximum `N` and `Q` checks. The multi-hour historical verifier collection was not rerun because its unchanged groups were already green in prior daily runs.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide contact-sheet visual QA passed. Narration durations: 124.3 seconds (`cfgym-102694C`), 124.6 seconds (`cses-2134`), and 126.8 seconds (`usaco-921`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Binary Jumping is complete. Merging has no unfinished Easy entry because its Easy overlap was already solved. Easy Heavy-Light Decomposition remains in progress; the next unfinished entry is `spoj-QueryOnATreeAgain` Query on a tree again!. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-06
 

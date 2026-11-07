@@ -1,0 +1,6 @@
+Solve USACO Gold Cow Land with heavy-light decomposition and an XOR segment tree in C++17. Point assignments and tree-route XOR queries become efficient array operations.
+
+Official problem: https://www.usaco.org/index.php?page=viewproblem2&cpid=921
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/usaco-921
+
+Topics: heavy-light decomposition, XOR, segment tree, tree paths, C++

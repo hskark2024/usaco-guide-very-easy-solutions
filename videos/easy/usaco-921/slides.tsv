@@ -1,0 +1,8 @@
+Cow Land	Change attraction values	XOR every value on a route	USACO Gold 2019
+Unique tree routes	Every endpoint pair has one path	But paths are not array intervals	Use heavy-light decomposition
+Build heavy chains	Largest subtree child is heavy	Light edges start new chains	Flatten each chain consecutively
+XOR segment tree	One leaf per attraction	Point assignments are easy	Intervals return XOR
+Route query	Process the deeper chain suffix	Move above its head	Finish with one same-chain interval
+Why it works	Pieces are disjoint	Pieces cover both endpoints	XOR order does not matter
+Sample	1 XOR 4 XOR 16 is 21	After an update 4 XOR 16 is 20	Self paths include one value
+Complexity	Update O(log N)	Route O(log squared N)	Iterative setup handles deep trees

@@ -1,0 +1,6 @@
+Solve Codeforces Gym Sloth Naptime with LCA and binary lifting in C++17. We split each path at its lowest common ancestor and locate the stopping vertex in logarithmic time.
+
+Official problem: https://codeforces.com/gym/102694/problem/C
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/cfgym-102694C
+
+Topics: trees, LCA, binary lifting, path queries, C++

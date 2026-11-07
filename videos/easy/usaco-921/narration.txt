@@ -1,0 +1,19 @@
+Cow Land has attractions connected as a tree. Each attraction has an enjoyment number. We need to replace individual numbers and compute the bitwise XOR of all numbers on a route.
+
+Because the attractions form a tree, every pair has exactly one route. The hard part is that a segment tree understands array intervals, not bending tree paths. Heavy-light decomposition turns each route into a small collection of intervals.
+
+Root the tree and calculate subtree sizes. At every vertex, mark the edge to its largest child as heavy. Following heavy edges creates chains. Give vertices consecutive array positions along each chain.
+
+A route may use several chains, but not too many. Crossing a light edge moves into a subtree at most half as large, so a root path crosses only logarithmically many light edges.
+
+Build a segment tree over the flattened array, combining values with XOR. A value replacement changes one leaf.
+
+For a route query, look at the two chain heads. If they differ, process the endpoint whose head is deeper. XOR the interval from that head to its endpoint into the answer, then jump the endpoint to the head's parent. Once the endpoints share a chain, XOR the interval between them.
+
+The pieces are disjoint and cover the whole route. XOR is associative and commutative, so it does not matter which side we process first.
+
+In the official sample, the route from attraction one to attraction five contains values one, four, and sixteen. Their XOR is twenty-one. After attraction one changes to sixteen, the route from three to five contains four and sixteen, giving twenty.
+
+Zero values work naturally because XOR with zero changes nothing. A route from a vertex to itself returns that vertex's value. The code also builds the decomposition iteratively to handle a long chain safely.
+
+Each point update takes O log N time. Each route uses O log N chain pieces, and every piece costs O log N to query, so a route costs O log squared N. The same heavy-light structure from maximum queries works here by changing the segment tree's combine operation to XOR.

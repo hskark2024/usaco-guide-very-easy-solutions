@@ -1,0 +1,6 @@
+Solve CSES Path Queries II with heavy-light decomposition and a maximum segment tree in C++17. See why a tree path becomes only O(log N) array intervals.
+
+Official problem: https://cses.fi/problemset/task/2134
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/cses-2134
+
+Topics: heavy-light decomposition, segment tree, tree paths, point updates, C++

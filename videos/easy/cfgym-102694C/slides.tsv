@@ -1,0 +1,8 @@
+Sloth Naptime	Where does limited energy stop?	One edge costs one energy	Tree path queries
+Unique route	Every pair has one tree path	Root the tree	The path bends at its LCA
+Split at the LCA	A edges upward	B edges downward	Total length A + B
+Three energy cases	Stop before the LCA	Stop after the LCA	Or reach the finish
+Binary lifting	Store 1, 2, 4, 8 edge ancestors	Combine set bits	O(log N) climbs
+Backward trick	Past the LCA is downward	Measure the unwalked suffix	Climb from the finish
+Example path	4 to 2 to 1 to 3 to 7	Energy 3 reaches vertex 3	Energy 4 reaches vertex 7
+Complexity	Preprocess O(N log N)	Each query O(log N)	Iterative traversal handles chains
