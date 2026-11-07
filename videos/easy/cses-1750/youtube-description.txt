@@ -1,0 +1,6 @@
+Solve CSES Planets Queries I with binary lifting in C++17. We turn up to one billion repeated teleports into at most 30 powers-of-two jumps, with no special cycle detection.
+
+Official problem: https://cses.fi/problemset/task/1750
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/cses-1750
+
+Topics: binary lifting, functional graphs, doubling, C++

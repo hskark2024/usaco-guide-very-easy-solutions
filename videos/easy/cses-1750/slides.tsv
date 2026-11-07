@@ -1,0 +1,8 @@
+Planets Queries I	Exactly k teleports	CSES 1750	Functional graph
+The challenge	Up to 200,000 queries	k can be one billion	One-by-one simulation is too slow
+Doubling table	jump[v][0] means 1 teleport	Then 2, 4, 8, ...	Only 30 levels are needed
+Compose shortcuts	Reach a middle planet	Repeat the half-length shortcut	Two halves make the full jump
+Binary queries	13 = 8 + 4 + 1	Apply three selected jumps	Their lengths total exactly k
+Cycles need no special case	Tails work	Long cycles work	Self-loops work
+Sample trips	1 after 2 steps returns to 1	3 after 4 steps reaches 2	4 stays at 4
+Complexity	Preprocess O(N log K)	Query O(log K)	Memory O(N log K)

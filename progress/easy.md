@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-02 (the live Guide source and selected module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`0c6d8b6`](https://github.com/cpinitiative/usaco-guide/commit/0c6d8b6f91d7e292d1f5b8e48b45ea43a44f7fdf) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 120
-- Complete video packages: 120
+- Last listing check: 2026-11-06 (the live Guide source and selected module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`81e547a`](https://github.com/cpinitiative/usaco-guide/commit/81e547ad50a16109b5b5ed582bc6a6397479ce2b) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 123
+- Complete video packages: 123
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -131,6 +131,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `poi-17-containers` | 2017 - Containers | complete | complete | complete | generated locally; excluded from Git |
 | `cf-13E` | Holes | complete | complete | complete | generated locally; excluded from Git |
 | `cf-877F` | Ann and Books | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1687` | Company Queries I | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1750` | Planets Queries I | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-576` | Max Flow | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-06
+
+- New entries: `cses-1687` Company Queries I, `cses-1750` Planets Queries I, and `usaco-576` Max Flow.
+- The live USACO Guide source is at commit `81e547a`; all three selected Binary Jumping entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Company Queries I and Planets Queries I compose powers-of-two jumps from query bits; Max Flow combines binary-lifting LCAs with four tree-difference markers per route and one iterative bottom-up accumulation.
+- All 154 C++ solutions compiled with C++17, optimization, and warnings enabled. All 158 smoke cases passed.
+- Today's three independent Easy verifier groups passed randomized literal oracles and official maximum `N`, `Q`, route-count, and step-count checks. The multi-hour historical verifier collection was not rerun because its unchanged groups were already green in prior daily runs.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and every-slide visual QA passed. Narration durations: 108.4 seconds (`cses-1687`), 112.7 seconds (`cses-1750`), and 108.3 seconds (`usaco-576`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Binary Jumping remains in progress; the next unfinished Easy entry is `cfgym-102694C` Sloth Naptime. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-02
 

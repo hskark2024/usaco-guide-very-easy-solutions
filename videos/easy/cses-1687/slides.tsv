@@ -1,0 +1,8 @@
+Company Queries I	Find the k-th manager	CSES 1687	Binary lifting
+Why walking fails	Up to 200,000 employees	Up to 200,000 queries	A chain can be very deep
+Doubling shortcuts	up[v][0] means 1 step	up[v][1] means 2 steps	Then 4, 8, 16, ...
+Build the table	Jump halfway to a middle employee	Jump the same distance again	Two halves make one doubled jump
+Read k in binary	13 = 8 + 4 + 1	Use only set-bit shortcuts	At most 30 jumps
+Safe sentinel	Employee 0 means above the director	Every jump from 0 stays 0	Print -1 when the result is 0
+Sample walkthrough	From 4: one step is 3	Two steps is 1	Three steps does not exist
+Complexity	Preprocess O(N log N)	Query O(log N)	Memory O(N log N)

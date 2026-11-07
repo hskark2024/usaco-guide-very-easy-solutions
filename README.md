@@ -139,6 +139,9 @@ The official statements remain at their original judge links. These notes intent
 | `poi-17-containers` | POI | [2017 - Containers](problems/poi-17-containers/README.md) | [Square-Root Decomposition, Difference Arrays, Arithmetic Progressions] | [C++](solutions/poi-17-containers.cpp) | [Package](videos/easy/poi-17-containers/README.md) |
 | `cf-13E` | Codeforces | [Holes](problems/cf-13E/README.md) | [Square-Root Decomposition, Block Rebuilding, Jump Queries] | [C++](solutions/cf-13E.cpp) | [Package](videos/easy/cf-13E/README.md) |
 | `cf-877F` | Codeforces | [Ann and Books](problems/cf-877F/README.md) | [Mo's Algorithm, Prefix Sums, Offline Queries] | [C++](solutions/cf-877F.cpp) | [Package](videos/easy/cf-877F/README.md) |
+| `cses-1687` | CSES | [Company Queries I](problems/cses-1687/README.md) | [Binary Lifting, K-th Ancestor, Trees] | [C++](solutions/cses-1687.cpp) | [Package](videos/easy/cses-1687/README.md) |
+| `cses-1750` | CSES | [Planets Queries I](problems/cses-1750/README.md) | [Binary Lifting, Functional Graphs] | [C++](solutions/cses-1750.cpp) | [Package](videos/easy/cses-1750/README.md) |
+| `usaco-576` | USACO Platinum | [Max Flow](problems/usaco-576/README.md) | [LCA, Binary Lifting, Tree Difference Arrays] | [C++](solutions/usaco-576.cpp) | [Package](videos/easy/usaco-576/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

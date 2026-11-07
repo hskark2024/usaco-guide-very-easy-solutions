@@ -1,0 +1,15 @@
+Picture a space game with one teleporter on every planet. Each teleporter always leads to the same destination. A query gives a starting planet and asks where we land after exactly k teleports.
+
+Because every planet has one outgoing edge, a trip may follow a tail and then repeat around a cycle. We could detect those cycles, but this problem has an even cleaner solution.
+
+Build doubling shortcuts. For every planet, store its destination after one teleport, two teleports, four, eight, and so on. A four-teleport shortcut is made by taking the two-teleport shortcut to a middle planet and then taking that planet's two-teleport shortcut.
+
+The query limit is one billion, which sounds huge, but it has only thirty binary digits. If k is thirteen, its binary form selects eight, four, and one. Applying those three shortcuts follows exactly thirteen real teleports.
+
+This works whether the current planet is on a tail, inside a cycle, or in a self-loop. Each table entry is just repeated function composition, so we never need special cycle code.
+
+In the sample, planet one teleports to two and planet two returns to one. Starting at one and taking two teleports ends back at one. Starting at three and taking four teleports follows three, one, two, one, two, so the answer is two. Planet four loops to itself, so one teleport still ends at four.
+
+In C++, level zero stores each direct destination. Larger levels combine two half-jumps. For each query, scan thirty bits of k and update the current planet whenever a bit is set.
+
+Preprocessing takes N log k time and memory. Each query takes log k time, which is only thirty quick checks. The lesson is that a billion repeated steps become easy when we prepare powers-of-two shortcuts.

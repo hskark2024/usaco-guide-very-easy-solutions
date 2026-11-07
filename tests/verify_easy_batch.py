@@ -5094,6 +5094,159 @@ def verify_ann_and_books() -> None:
     assert actual == [expected] * query_count
 
 
+def verify_company_queries_one() -> None:
+    # Compare binary lifting against literal parent walking on many small,
+    # irregular trees. Queries include the root, exact-depth ancestors, and
+    # distances that travel above the director into the sentinel.
+    for _ in range(220):
+        size = RNG.randint(1, 70)
+        parents = [0, 0]
+        for employee in range(2, size + 1):
+            parents.append(RNG.randint(1, employee - 1))
+
+        queries = []
+        expected = []
+        for _ in range(RNG.randint(1, 130)):
+            employee = RNG.randint(1, size)
+            distance = RNG.randint(1, size + 20)
+            queries.append((employee, distance))
+
+            ancestor = employee
+            for _ in range(distance):
+                ancestor = parents[ancestor]
+                if ancestor == 0:
+                    break
+            expected.append(-1 if ancestor == 0 else ancestor)
+
+        input_text = (
+            f'{size} {len(queries)}\n'
+            + (' '.join(map(str, parents[2:])) + '\n' if size > 1 else '\n')
+            + ''.join(
+                f'{employee} {distance}\n' for employee, distance in queries
+            )
+        )
+        actual = list(map(int, run('cses-1687', input_text).split()))
+        assert actual == expected
+
+    # Exercise both official maxima on a chain. The alternating queries have
+    # known answers while forcing both successful jumps and sentinel exits.
+    size = 200_000
+    query_count = 200_000
+    input_text = (
+        f'{size} {query_count}\n'
+        + ' '.join(str(employee - 1) for employee in range(2, size + 1))
+        + '\n'
+        + ''.join(
+            f'{size} {size - 1 if query % 2 == 0 else size}\n'
+            for query in range(query_count)
+        )
+    )
+    actual = list(map(int, run('cses-1687', input_text).split()))
+    assert actual == [1 if query % 2 == 0 else -1 for query in range(query_count)]
+
+
+def verify_planets_queries_one() -> None:
+    # A direct simulator is an independent oracle for random functional
+    # graphs. Zero-step queries deliberately verify the identity jump.
+    for _ in range(220):
+        size = RNG.randint(1, 70)
+        teleporter = [0] + [RNG.randint(1, size) for _ in range(size)]
+        queries = []
+        expected = []
+        for _ in range(RNG.randint(1, 130)):
+            planet = RNG.randint(1, size)
+            count = RNG.randint(0, 250)
+            queries.append((planet, count))
+
+            destination = planet
+            for _ in range(count):
+                destination = teleporter[destination]
+            expected.append(destination)
+
+        input_text = (
+            f'{size} {len(queries)}\n'
+            + ' '.join(map(str, teleporter[1:])) + '\n'
+            + ''.join(f'{planet} {count}\n' for planet, count in queries)
+        )
+        actual = list(map(int, run('cses-1750', input_text).split()))
+        assert actual == expected
+
+    # Every planet is a self-loop, so even the largest official step count has
+    # an obvious answer. This reaches maximum N and Q without a huge oracle.
+    size = 200_000
+    query_count = 200_000
+    input_text = (
+        f'{size} {query_count}\n'
+        + ' '.join(map(str, range(1, size + 1))) + '\n'
+        + ''.join(
+            f'{planet} {1_000_000_000 if planet % 2 else 0}\n'
+            for planet in range(1, query_count + 1)
+        )
+    )
+    actual = list(map(int, run('cses-1750', input_text).split()))
+    assert actual == list(range(1, size + 1))
+
+
+def verify_max_flow() -> None:
+    def literal_path(
+        first: int, second: int, parents: list[int], depths: list[int]
+    ) -> list[int]:
+        left_path = []
+        right_path = []
+        while depths[first] > depths[second]:
+            left_path.append(first)
+            first = parents[first]
+        while depths[second] > depths[first]:
+            right_path.append(second)
+            second = parents[second]
+        while first != second:
+            left_path.append(first)
+            right_path.append(second)
+            first = parents[first]
+            second = parents[second]
+        return left_path + [first] + right_path[::-1]
+
+    # Directly enumerate every route path in small random rooted trees. This
+    # independently checks LCA handling, endpoint inclusion, and cancellation
+    # above an LCA—including when that LCA is the root.
+    for _ in range(240):
+        size = RNG.randint(1, 55)
+        parents = [0] * (size + 1)
+        depths = [0] * (size + 1)
+        edges = []
+        for vertex in range(2, size + 1):
+            parents[vertex] = RNG.randint(1, vertex - 1)
+            depths[vertex] = depths[parents[vertex]] + 1
+            edges.append((parents[vertex], vertex))
+
+        routes = [
+            (RNG.randint(1, size), RNG.randint(1, size))
+            for _ in range(RNG.randint(1, 120))
+        ]
+        traffic = [0] * (size + 1)
+        for first, second in routes:
+            for vertex in literal_path(first, second, parents, depths):
+                traffic[vertex] += 1
+
+        input_text = (
+            f'{size} {len(routes)}\n'
+            + ''.join(f'{first} {second}\n' for first, second in edges)
+            + ''.join(f'{first} {second}\n' for first, second in routes)
+        )
+        assert int(run('usaco-576', input_text)) == max(traffic)
+
+    # The maximum-size chain and 50,000 repeated end-to-end routes make every
+    # vertex equally busy. The iterative traversal must avoid stack overflow.
+    size = 50_000
+    route_count = 50_000
+    input_text = (
+        f'{size} {route_count}\n'
+        + ''.join(f'{vertex - 1} {vertex}\n' for vertex in range(2, size + 1))
+        + f'1 {size}\n' * route_count
+    )
+    assert int(run('usaco-576', input_text)) == route_count
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -5213,6 +5366,9 @@ if __name__ == "__main__":
         verify_containers,
         verify_holes,
         verify_ann_and_books,
+        verify_company_queries_one,
+        verify_planets_queries_one,
+        verify_max_flow,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

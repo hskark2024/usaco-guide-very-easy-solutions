@@ -1,0 +1,6 @@
+Learn binary lifting by solving CSES Company Queries I in C++17. We build powers-of-two manager shortcuts, answer k-th ancestor queries from the bits of k, and use a safe sentinel for missing ancestors.
+
+Official problem: https://cses.fi/problemset/task/1687
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/cses-1687
+
+Topics: binary lifting, k-th ancestor, trees, C++

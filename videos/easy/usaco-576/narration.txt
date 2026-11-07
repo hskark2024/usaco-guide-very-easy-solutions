@@ -1,0 +1,15 @@
+We have a tree and many travel routes. Each route uses the unique path between two vertices. Our goal is to find the vertex used by the largest number of routes.
+
+Marking every vertex on every path is too slow. A long route might touch almost the whole tree, and there can be many routes. Instead, we use a tree version of a difference array.
+
+First root the tree and prepare binary lifting so we can find the lowest common ancestor, or LCA, of any two endpoints. The LCA is where their upward paths meet.
+
+For a route from u to v, add one at u and one at v. Let w be their LCA. Subtract one at w and subtract one at the parent of w. Later, we add every child's value into its parent in postorder.
+
+Why do these four markers work? The two positive markers flow upward from the endpoints. Below the LCA, they mark exactly the two path branches. At the LCA, two flows arrive, but subtracting one leaves a single count, so the LCA is included. The second subtraction at its parent stops that remaining count from leaking to strict ancestors.
+
+The root has a safe parent zero. If the LCA is the root, the final negative marker goes to zero and does not affect any real vertex.
+
+We avoid recursive depth problems by recording an iterative parent-before-child traversal. Reversing that order gives children before parents for the final accumulation. As each vertex finishes, update the largest traffic count and add its total to its parent.
+
+Binary lifting preprocessing costs N log N. Each route needs one LCA in log N time, and the final postorder is linear. This technique is powerful: when many tree paths need additive updates, place endpoint and LCA markers first, then collect everything in one bottom-up pass.

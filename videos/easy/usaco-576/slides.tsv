@@ -1,0 +1,8 @@
+USACO Max Flow	Count traffic on tree vertices	Many route paths	Find the busiest vertex
+Why direct marking fails	A route can touch O(N) vertices	There can be many routes	Worst case is too slow
+Prepare the tree	Root at vertex 1	Store depths and parents	Binary lifting answers LCA
+Four markers for u to v	+1 at u	+1 at v	-1 at LCA and its parent
+Bottom-up collection	Process children before parents	Add each subtree total upward	One pass handles all routes
+Why the LCA is counted once	Two endpoint flows arrive	The LCA subtracts one	Its parent stops further flow
+Safe implementation	Iterative traversal avoids stack overflow	Vertex 0 is the root's parent	Track the maximum while collecting
+Complexity	Preprocess O(N log N)	Routes O(K log N)	Final collection O(N)

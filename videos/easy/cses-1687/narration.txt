@@ -1,0 +1,15 @@
+Imagine a company as a family tree. Employee one is the director, and every other employee points to one immediate manager. A query asks: who is exactly k manager steps above employee x?
+
+Walking upward one manager at a time works on tiny examples, but two hundred thousand queries on a long chain could require billions of steps. We need shortcuts.
+
+Binary lifting stores manager jumps whose lengths are powers of two. Column zero means one step. Column one means two steps. Then come four, eight, sixteen, and so on. To build a four-step jump, first take a two-step jump to a middle employee, then use that employee's two-step jump.
+
+Why are powers of two enough? Every whole number has a binary representation. Thirteen is eight plus four plus one. So a thirteen-level query needs only three stored jumps.
+
+We also use employee zero as a safe sentinel above the director. The director's manager is zero, and every jump from zero stays zero. If a query ever reaches zero, the requested manager does not exist, so we print minus one.
+
+Consider the sample tree. Employee four reports to three, and three reports to one. One level above four is three. Two levels above is one. Three levels above crosses past the director, so the answer is minus one.
+
+In code, read each direct manager into level zero. Fill every larger level using two equal half-jumps. For a query, scan the bits of k. Whenever bit j is set, replace the current employee with its two-to-the-j ancestor.
+
+Preprocessing costs N times log N, each query costs log N, and memory is N times log N. The key idea is simple: prepare a small ladder of doubling shortcuts, then spell every requested distance in binary.
