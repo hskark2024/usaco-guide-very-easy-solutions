@@ -5431,6 +5431,116 @@ def verify_cow_land() -> None:
     assert actual[4:] == [0] * (len(actual) - 4)
 
 
+def verify_query_on_a_tree_again() -> None:
+    # A direct parent walk is an independent oracle for the first black node
+    # on each root path in these small random trees.
+    for _ in range(220):
+        size = RNG.randint(1, 45)
+        parent = [-1] * size
+        edges = []
+        for vertex in range(1, size):
+            parent[vertex] = RNG.randrange(vertex)
+            edges.append((parent[vertex], vertex))
+
+        is_black = [False] * size
+        operations = []
+        expected = []
+        for _ in range(120):
+            vertex = RNG.randrange(size)
+            if RNG.random() < 0.48:
+                is_black[vertex] = not is_black[vertex]
+                operations.append(f"0 {vertex + 1}")
+            else:
+                candidate = -1
+                current = vertex
+                while current != -1:
+                    if is_black[current]:
+                        candidate = current + 1
+                    current = parent[current]
+                expected.append(candidate)
+                operations.append(f"1 {vertex + 1}")
+
+        input_text = (
+            f"{size} {len(operations)}\n"
+            + "".join(f"{first + 1} {second + 1}\n" for first, second in edges)
+            + "\n".join(operations)
+            + "\n"
+        )
+        actual = list(map(int, run("spoj-QueryOnATreeAgain", input_text).split()))
+        assert actual == expected
+
+    # Official maximum sizes plus a depth-N chain verify that all tree walks
+    # are iterative and that repeated root-path queries stay efficient.
+    size = 100_000
+    operation_count = 100_000
+    operations = ["1 100000", "0 50000", "1 100000", "0 1", "1 100000"]
+    operations += ["1 1"] * (operation_count - len(operations))
+    input_text = (
+        f"{size} {operation_count}\n"
+        + "".join(f"{vertex} {vertex + 1}\n" for vertex in range(1, size))
+        + "\n".join(operations)
+        + "\n"
+    )
+    actual = list(map(int, run("spoj-QueryOnATreeAgain", input_text).split()))
+    assert actual[:3] == [-1, 50000, 1]
+    assert actual[3:] == [1] * (len(actual) - 3)
+
+
+def verify_ciel_the_commander() -> None:
+    # For each equal-letter pair, reconstruct its literal tree path and check
+    # for a strictly better (alphabetically smaller) rank.
+    for _ in range(240):
+        size = RNG.randint(1, 38)
+        graph = [[] for _ in range(size)]
+        edges = []
+        for vertex in range(1, size):
+            parent = RNG.randrange(vertex)
+            graph[parent].append(vertex)
+            graph[vertex].append(parent)
+            edges.append((parent, vertex))
+
+        input_text = (
+            f"{size}\n"
+            + "".join(f"{first + 1} {second + 1}\n" for first, second in edges)
+        )
+        labels = run("cf-321C", input_text).split()
+        assert len(labels) == size
+        assert all(len(label) == 1 and "A" <= label <= "Z" for label in labels)
+
+        for first in range(size):
+            for second in range(first + 1, size):
+                if labels[first] != labels[second]:
+                    continue
+                previous = [-1] * size
+                previous[first] = first
+                queue = deque([first])
+                while queue and previous[second] == -1:
+                    vertex = queue.popleft()
+                    for next_vertex in graph[vertex]:
+                        if previous[next_vertex] == -1:
+                            previous[next_vertex] = vertex
+                            queue.append(next_vertex)
+                vertex = second
+                has_better_rank = False
+                while True:
+                    has_better_rank |= labels[vertex] < labels[first]
+                    if vertex == first:
+                        break
+                    vertex = previous[vertex]
+                assert has_better_rank
+
+    # A maximum-depth input checks the iterative component traversals and the
+    # logarithmic number of letters used by balanced centroid splits.
+    size = 100_000
+    input_text = f"{size}\n" + "".join(
+        f"{vertex} {vertex + 1}\n" for vertex in range(1, size)
+    )
+    labels = run("cf-321C", input_text).split()
+    assert len(labels) == size
+    assert all("A" <= label <= "Z" for label in labels)
+    assert max(labels) <= "R"  # ceil(log2(100000)) levels are sufficient.
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -5556,6 +5666,8 @@ if __name__ == "__main__":
         verify_sloth_naptime,
         verify_path_queries_two,
         verify_cow_land,
+        verify_query_on_a_tree_again,
+        verify_ciel_the_commander,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

@@ -1,0 +1,8 @@
+SPOJ QTREE3	Toggle a node white or black	Find the first black node from root 1
+Why direct walking is slow	A root path may contain N vertices	Q operations could take O(NQ)
+Heavy-light chains	Choose each largest child as heavy	A root path crosses only O(log N) chains
+Flatten the tree	Each chain receives consecutive positions	One chain piece becomes one array interval
+Segment-tree values	Black node: (depth, vertex)	White node: infinity	Minimum depth means closest to root
+Answer one query	Query head-to-v on the current chain	Jump above the chain head	Finish on the root chain
+Walkthrough	Black 2 makes query 4 return 2	Black root 1 makes it return 1	No black candidate gives -1
+Complexity	Toggle: O(log N)	Query: O(log squared N)	Memory: O(N)

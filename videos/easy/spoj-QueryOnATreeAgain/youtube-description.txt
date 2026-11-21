@@ -1,0 +1,6 @@
+Solve SPOJ QTREE3, Query on a tree again!, with heavy-light decomposition and a minimum segment tree in C++17. Learn how root paths become O(log N) array intervals and why minimum depth finds the first black node.
+
+Official problem: https://www.spoj.com/problems/QTREE3/en/
+GitHub solution and notes: https://github.com/hskark2024/usaco-guide-very-easy-solutions/tree/main/problems/spoj-QueryOnATreeAgain
+
+Topics: heavy-light decomposition, segment tree, tree paths, point updates, C++

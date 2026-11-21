@@ -1,0 +1,11 @@
+Hey everyone. Ciel the Commander asks us to label a tree with ranks A through Z. Whenever two nodes have the same rank, their connecting path must contain a node with a better rank. Since A is best, then B, then C, this sounds like we need a hierarchy built into the tree.
+
+The key idea is a centroid. In any tree component, a centroid is a node whose removal leaves no piece larger than half of the component. Give the first centroid rank A and remove it. The remaining pieces are now independent. Find a centroid inside each piece, give those centroids rank B, remove them, and continue with C, D, and so on.
+
+Why does this labeling work? Pick two nodes that both received rank C. They could not be the one centroid chosen for the same component. So they came from different pieces separated at an earlier step. The path between them must pass through the earlier centroid that split those pieces. That centroid has rank A or B, which is better than C. This is exactly the rule we needed.
+
+Centroids also keep the algorithm fast. Every time a node survives to the next level, its component becomes at most half as large. After only log N levels, the component has size one. With one hundred thousand nodes, that is well below the twenty-six available letters.
+
+In code, we collect one active component without crossing removed centroids. We compute subtree sizes from the collected order in reverse. For each candidate node, we find the largest piece that would remain after removing it. The first node whose largest piece is at most half is a centroid. We label it, mark it removed, and place each neighboring component on a work stack.
+
+For a five-node star, the center is A and all four leaves are B. Any path between two B leaves passes through A. For a chain, the middle becomes A, the middles of the two halves become B, and the pattern keeps balancing. The total work is O of N log N, and iterative traversals keep a long chain safe. That is centroid decomposition: repeatedly choose the best-balanced separator and let those separators define the ranks.

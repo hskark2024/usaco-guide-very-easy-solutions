@@ -1,0 +1,11 @@
+Hey everyone. In SPOJ Query on a Tree Again, every node begins white. We can flip one node between white and black, or ask for the first black node on the path from root one to a chosen node. A direct walk can touch the entire tree, so we need a faster map of each path.
+
+Heavy-light decomposition gives us that map. For every node, we call the edge to its largest child heavy. Following heavy edges creates chains. The important fact is that a root path crosses only logarithmically many light edges, because crossing a light edge moves into a subtree at most half as large.
+
+We write each heavy chain into consecutive array positions, from its shallow end to its deep end. Now one piece of a tree path is one array interval. A segment tree stores a pair for every black node: its depth and node number. A white node stores infinity. The minimum pair in an interval is its shallowest black node.
+
+To answer a query at node v, look at the interval from v's chain head through v. Then jump v to the parent of that chain head. Repeat until v reaches the same chain as the root. Finally query from the root through v. These intervals cover the whole root path exactly once. The candidate with the smallest depth is the first black node from the root. If every interval returns infinity, print negative one.
+
+For a toggle, flip the color and update just one segment-tree leaf. That costs log N. A query visits at most log N chains and spends log N time on each segment-tree query, for O of log squared N.
+
+Try a small tree. If node two is black, asking about its child four returns two. If root one also turns black, the same path returns one. If both turn white, the answer becomes negative one. The code uses iterative tree walks, so even a chain of one hundred thousand nodes is safe. That is heavy-light decomposition: turn a scattered tree path into a few clean array ranges.

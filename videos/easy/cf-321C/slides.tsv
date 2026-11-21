@@ -1,0 +1,8 @@
+Codeforces 321C	Label tree vertices A through Z	Equal ranks need a better rank on their path
+The separator we want	A centroid leaves no piece larger than half	Every tree component has a centroid
+Build level A	Choose the whole-tree centroid	Label it A and remove it
+Build later levels	Choose each remaining component's centroid	Label them B, then C, then D
+Why labels work	Equal-rank nodes come from different pieces	Their path crosses an earlier, better-ranked centroid
+Find a centroid	Collect one active component	Compute subtree sizes backward	Check the largest remaining piece
+Two pictures	Star: center A and leaves B	Chain: middle A and balanced halves
+Complexity	Component sizes halve each level	O(N log N) time	O(N) memory

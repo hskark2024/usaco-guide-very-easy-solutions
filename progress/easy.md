@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-07 (the live Guide source and selected module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`81e547a`](https://github.com/cpinitiative/usaco-guide/commit/81e547ad50a16109b5b5ed582bc6a6397479ce2b) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 126
-- Complete video packages: 126
+- Last listing check: 2026-11-21 (the live Guide source and selected module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`31e29ac`](https://github.com/cpinitiative/usaco-guide/commit/31e29ac00c138376c6f443b0129181261997c270) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 128
+- Complete video packages: 128
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -137,6 +137,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `cfgym-102694C` | Sloth Naptime | complete | complete | complete | generated locally; excluded from Git |
 | `cses-2134` | Path Queries II | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-921` | Cow Land | complete | complete | complete | generated locally; excluded from Git |
+| `spoj-QueryOnATreeAgain` | Query on a tree again! | complete | complete | complete | generated locally; excluded from Git |
+| `cf-321C` | Ciel the Commander | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-21
+
+- New entries: `spoj-QueryOnATreeAgain` Query on a tree again! and `cf-321C` Ciel the Commander.
+- The live USACO Guide source is at commit `31e29ac`; both selected entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Query on a tree again! combines heavy-light root-path intervals with minimum-depth black candidates; Ciel the Commander uses iterative centroid decomposition levels as ranks.
+- All 159 C++ solutions compiled with C++17, optimization, and warnings enabled. All 163 smoke cases passed.
+- Both new independent verifier groups passed randomized literal tree-path checks and official maximum `N` and operation-count checks.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide contact-sheet visual QA passed. Narration durations: 113.9 seconds (`spoj-QueryOnATreeAgain`) and 125.3 seconds (`cf-321C`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Heavy-Light Decomposition is complete. Easy Centroid Decomposition is in progress; the next unfinished entry is `baltic-20-VillageMaximum` 2020 - Village (Maximum). Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-07
 

@@ -145,6 +145,8 @@ The official statements remain at their original judge links. These notes intent
 | `cfgym-102694C` | Codeforces Gym | [Sloth Naptime](problems/cfgym-102694C/README.md) | [LCA, Binary Lifting, Tree Paths] | [C++](solutions/cfgym-102694C.cpp) | [Package](videos/easy/cfgym-102694C/README.md) |
 | `cses-2134` | CSES | [Path Queries II](problems/cses-2134/README.md) | [Heavy-Light Decomposition, Segment Tree, Path Maximum] | [C++](solutions/cses-2134.cpp) | [Package](videos/easy/cses-2134/README.md) |
 | `usaco-921` | USACO Gold | [Cow Land](problems/usaco-921/README.md) | [Heavy-Light Decomposition, Segment Tree, Path XOR] | [C++](solutions/usaco-921.cpp) | [Package](videos/easy/usaco-921/README.md) |
+| `spoj-QueryOnATreeAgain` | SPOJ | [Query on a tree again!](problems/spoj-QueryOnATreeAgain/README.md) | [Heavy-Light Decomposition, Segment Tree, Root Paths] | [C++](solutions/spoj-QueryOnATreeAgain.cpp) | [Package](videos/easy/spoj-QueryOnATreeAgain/README.md) |
+| `cf-321C` | Codeforces | [Ciel the Commander](problems/cf-321C/README.md) | [Centroid Decomposition, Trees, Divide and Conquer] | [C++](solutions/cf-321C.cpp) | [Package](videos/easy/cf-321C/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 
