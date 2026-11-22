@@ -1,0 +1,19 @@
+Hey everyone. Fixed-Length Paths Two asks for the number of tree paths whose lengths are between K one and K two, inclusive.
+
+We will build on centroid decomposition. Pick a centroid of the current component and imagine removing it. The neighboring pieces become separate groups. Any path through the centroid has endpoints in different groups, unless the centroid itself is one endpoint.
+
+If an endpoint has depth d from the centroid and the other has depth e, that path length is d plus e. So we collect how many vertices occur at each depth.
+
+Now we need sums in a range, not one exact sum. A useful trick is to write the range count as: pairs with sum at most K two, minus pairs with sum at most K one minus one.
+
+How do we count pairs at most a limit? Build prefix counts over the depth histogram. For each smaller depth d, the other depth may go only as far as limit minus d. The prefix array tells us how many deeper endpoints fit. If both endpoints have the same depth, add count d choose two. We make the second depth at least d so each unordered pair appears once.
+
+As before, the combined histogram includes some pairs from the same neighbor group. Their real path does not go through this centroid. Subtract the range count of every individual group. What remains is exactly the valid paths assigned to this centroid.
+
+Then remove the centroid and repeat on each smaller component. Every path belongs to its earliest removed centroid, so there is no double counting.
+
+In the sample, lengths two and three are allowed. Six unordered pairs qualify.
+
+We ignore depths above K two because even pairing them with depth zero is already too long. Direct depth arrays and prefix counts make each centroid level linear in its component size. Since centroid components halve, the total is O of N log N, with O of N memory.
+
+The main upgrade from the exact version is simple: change one complementary depth lookup into two at-most counts using histogram prefixes.

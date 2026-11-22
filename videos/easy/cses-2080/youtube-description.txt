@@ -1,0 +1,6 @@
+Learn centroid decomposition by counting every tree path with exactly K edges using depth histograms and inclusion-exclusion.
+
+Official problem: https://cses.fi/problemset/task/2080
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-2080.cpp
+
+Topics: centroid decomposition, tree paths, histograms, C++17.

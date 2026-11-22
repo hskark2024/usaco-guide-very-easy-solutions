@@ -147,6 +147,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-921` | USACO Gold | [Cow Land](problems/usaco-921/README.md) | [Heavy-Light Decomposition, Segment Tree, Path XOR] | [C++](solutions/usaco-921.cpp) | [Package](videos/easy/usaco-921/README.md) |
 | `spoj-QueryOnATreeAgain` | SPOJ | [Query on a tree again!](problems/spoj-QueryOnATreeAgain/README.md) | [Heavy-Light Decomposition, Segment Tree, Root Paths] | [C++](solutions/spoj-QueryOnATreeAgain.cpp) | [Package](videos/easy/spoj-QueryOnATreeAgain/README.md) |
 | `cf-321C` | Codeforces | [Ciel the Commander](problems/cf-321C/README.md) | [Centroid Decomposition, Trees, Divide and Conquer] | [C++](solutions/cf-321C.cpp) | [Package](videos/easy/cf-321C/README.md) |
+| `baltic-20-VillageMaximum` | Baltic OI / Codeforces | [2020 - Village (Maximum)](problems/baltic-20-VillageMaximum/README.md) | [Tree Centroid, Permutation Construction, Edge Contributions] | [C++](solutions/baltic-20-VillageMaximum.cpp) | [Package](videos/easy/baltic-20-VillageMaximum/README.md) |
+| `cses-2080` | CSES | [Fixed-Length Paths I](problems/cses-2080/README.md) | [Centroid Decomposition, Tree Paths, Depth Histograms] | [C++](solutions/cses-2080.cpp) | [Package](videos/easy/cses-2080/README.md) |
+| `cses-2081` | CSES | [Fixed-Length Paths II](problems/cses-2081/README.md) | [Centroid Decomposition, Tree Paths, Prefix Counts] | [C++](solutions/cses-2081.cpp) | [Package](videos/easy/cses-2081/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

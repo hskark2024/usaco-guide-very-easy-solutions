@@ -1,0 +1,19 @@
+Hey everyone. Fixed-Length Paths One asks how many unordered pairs of tree nodes are exactly K edges apart.
+
+Checking every pair is too slow for two hundred thousand nodes. We need a way to count many paths together, and centroid decomposition gives us a balanced center.
+
+Choose a centroid of the current component. Remove it in your imagination. Its neighbors now lead to separate colored groups. Any path that goes through the centroid either uses the centroid as one endpoint, or connects two different groups.
+
+For those paths, the length is simple: depth of the first endpoint from the centroid plus depth of the second endpoint. So collect a histogram where count d tells us how many nodes have depth d. We can pair depth d with depth K minus d.
+
+There is one trap. If both nodes came from the same neighbor group, their path does not go through the centroid. The combined histogram would count them incorrectly. We solve that with inclusion and exclusion: count matching pairs in the combined histogram, then subtract matching pairs inside every single group.
+
+After that, mark the centroid removed and solve each remaining component. Every original path gets counted at exactly one step: the first removed centroid that lies on that path. Earlier, both endpoints stayed together. Later, they have already been separated.
+
+For the sample tree and K equals two, the qualifying paths are one to three, two to four, two to five, and four to five, for a total of four.
+
+The code keeps original-tree traversals iterative, so a very long chain cannot overflow the call stack. Centroid recursion is safe because component sizes at least halve. We also stop collecting depths past K, since those nodes cannot form a length-K path through this centroid.
+
+Each node participates in only logarithmically many centroid levels. That gives O of N log N time and O of N memory.
+
+Remember the core picture: color the components around a centroid, add depths from different colors, and subtract same-color pairs.

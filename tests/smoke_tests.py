@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "baltic-20-VillageMaximum": ("4\n1 2\n2 3\n3 4\n", "8\n4 3 2 1\n"),
+    "cses-2080": ("5 2\n1 2\n2 3\n3 4\n3 5\n", "4\n"),
+    "cses-2081": ("5 2 3\n1 2\n2 3\n3 4\n3 5\n", "6\n"),
     "spoj-QueryOnATreeAgain": ("5 9\n1 2\n1 3\n2 4\n2 5\n1 4\n0 2\n1 4\n0 1\n1 5\n0 1\n1 3\n0 3\n1 3\n", "-1\n2\n1\n-1\n3\n"),
     "cf-321C": ("5\n1 2\n1 3\n1 4\n1 5\n", "A B B B B\n"),
     "cfgym-102694C": ("7\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n5\n4 7 0\n4 7 2\n4 7 4\n4 7 9\n6 5 3\n", "4\n1\n7\n7\n2\n"),

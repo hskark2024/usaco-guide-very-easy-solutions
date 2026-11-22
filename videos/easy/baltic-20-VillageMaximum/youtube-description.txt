@@ -1,0 +1,6 @@
+Learn how a tree centroid, DFS intervals, and a circular shift construct a maximum-distance derangement in linear time.
+
+Official problem: https://codeforces.com/contest/1387/problem/B2
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/baltic-20-VillageMaximum.cpp
+
+Topics: tree centroid, permutation construction, edge contributions, C++17.

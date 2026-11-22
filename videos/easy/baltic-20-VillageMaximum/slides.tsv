@@ -1,0 +1,8 @@
+Village Maximum	Move everyone to a different tree house	Maximize total shortest-path distance
+One edge upper bound	Cut sizes are s and N-s	At most min(s,N-s) cross each way	Contribution at most 2 min(s,N-s)
+Why a centroid	Every remaining piece has at most half the nodes	Rooted subtrees are small enough to shift away
+Make intervals	Take a DFS preorder from the centroid	Every rooted subtree is contiguous
+Circular construction	Place DFS order around a circle	Rotate destinations by floor(N/2)
+Optimality	Every subtree maps outside itself	Every edge reaches its upper bound
+Four-node chain	Rotation by two gives 4 3 2 1	Distances total 8
+Complexity	Iterative tree walks are stack-safe	O(N) time and O(N) memory

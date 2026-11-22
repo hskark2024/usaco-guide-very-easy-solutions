@@ -1,0 +1,8 @@
+Fixed-Length Paths I	Count node pairs exactly K edges apart	N is up to 200,000
+Choose a centroid	No remaining piece exceeds half	This keeps decomposition balanced
+Color the groups	Remove the centroid mentally	Different neighbors become different groups
+Turn paths into sums	A cross-group path uses the centroid	Length equals depth A plus depth B
+Depth histograms	Count nodes at every depth	Pair d with K minus d
+Inclusion-exclusion	Count all groups together	Subtract every same-group count
+Count each path once	Use its first removed centroid	Then endpoints separate forever
+Complexity	Prune depths greater than K	O(N log N) time and O(N) memory

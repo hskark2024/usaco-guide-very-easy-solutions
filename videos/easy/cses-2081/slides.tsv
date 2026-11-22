@@ -1,0 +1,8 @@
+Fixed-Length Paths II	Count tree paths with K1 through K2 edges	Endpoints are unordered
+Centroid groups	Remove a balanced center mentally	Cross-group paths use the centroid
+Path length as a sum	Endpoint depths are d and e	Length equals d plus e
+Convert the range	Answer at most K2	Minus answer at most K1 minus 1
+Prefix depth counts	For each d, partner ends by limit minus d	Count the range in constant time
+Avoid double counting	Handle equal depths with choose two	Only pair d with deeper depths afterward
+Inclusion-exclusion	Count combined histogram	Subtract each same-group histogram
+Complexity	Prune depths beyond K2	O(N log N) time and O(N) memory

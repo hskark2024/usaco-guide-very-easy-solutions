@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-21 (the live Guide source and selected module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`31e29ac`](https://github.com/cpinitiative/usaco-guide/commit/31e29ac00c138376c6f443b0129181261997c270) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 128
-- Complete video packages: 128
+- Last listing check: 2026-11-22 (the live Guide source and selected module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`a426215`](https://github.com/cpinitiative/usaco-guide/commit/a4262152bce8c42a33ac73a631913a84b02a5ea4) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 131
+- Complete video packages: 131
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -139,6 +139,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-921` | Cow Land | complete | complete | complete | generated locally; excluded from Git |
 | `spoj-QueryOnATreeAgain` | Query on a tree again! | complete | complete | complete | generated locally; excluded from Git |
 | `cf-321C` | Ciel the Commander | complete | complete | complete | generated locally; excluded from Git |
+| `baltic-20-VillageMaximum` | 2020 - Village (Maximum) | complete | complete | complete | generated locally; excluded from Git |
+| `cses-2080` | Fixed-Length Paths I | complete | complete | complete | generated locally; excluded from Git |
+| `cses-2081` | Fixed-Length Paths II | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-22
+
+- New entries: `baltic-20-VillageMaximum` 2020 - Village (Maximum), `cses-2080` Fixed-Length Paths I, and `cses-2081` Fixed-Length Paths II.
+- The live USACO Guide source is at commit `a426215`; all three selected entries remain labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Village uses a centroid-rooted DFS rotation to attain every edge's distance upper bound. The two CSES problems use centroid decomposition with direct depth histograms for exact and ranged path lengths.
+- All 162 C++ solutions compiled with C++17, optimization, and warnings enabled. All 166 smoke cases passed.
+- All three new independent verifier groups passed randomized literal or brute-force tree checks and official maximum-size chain checks.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide contact-sheet visual QA passed. Narration durations: 117.4 seconds (`baltic-20-VillageMaximum`), 121.5 seconds (`cses-2080`), and 119.9 seconds (`cses-2081`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending explicit confirmation of channel `USACO Submission`, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Centroid Decomposition remains in progress; the next unfinished entry is `usaco-286` Yin and Yang. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-21
 

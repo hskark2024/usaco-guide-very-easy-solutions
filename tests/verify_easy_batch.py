@@ -5541,6 +5541,181 @@ def verify_ciel_the_commander() -> None:
     assert max(labels) <= "R"  # ceil(log2(100000)) levels are sufficient.
 
 
+def verify_village_maximum() -> None:
+    def distance_matrix(graph: list[list[int]]) -> list[list[int]]:
+        size = len(graph)
+        distances = [[-1] * size for _ in range(size)]
+        for source in range(size):
+            distances[source][source] = 0
+            queue = deque([source])
+            while queue:
+                vertex = queue.popleft()
+                for next_vertex in graph[vertex]:
+                    if distances[source][next_vertex] == -1:
+                        distances[source][next_vertex] = distances[source][vertex] + 1
+                        queue.append(next_vertex)
+        return distances
+
+    def edge_upper_bound(graph: list[list[int]]) -> int:
+        size = len(graph)
+        parent = [-1] * size
+        order = [0]
+        for vertex in order:
+            for next_vertex in graph[vertex]:
+                if next_vertex != parent[vertex]:
+                    parent[next_vertex] = vertex
+                    order.append(next_vertex)
+        subtree_size = [1] * size
+        for vertex in reversed(order[1:]):
+            subtree_size[parent[vertex]] += subtree_size[vertex]
+        return sum(
+            2 * min(subtree_size[vertex], size - subtree_size[vertex])
+            for vertex in range(1, size)
+        )
+
+    # Tiny trees compare the edge formula against every derangement.  This is
+    # independent of the centroid construction used by the submitted program.
+    for _ in range(24):
+        size = RNG.randint(2, 7)
+        graph = [[] for _ in range(size)]
+        edges = []
+        for vertex in range(1, size):
+            parent = RNG.randrange(vertex)
+            graph[parent].append(vertex)
+            graph[vertex].append(parent)
+            edges.append((parent, vertex))
+        distances = distance_matrix(graph)
+        brute_maximum = max(
+            sum(distances[vertex][permutation[vertex]] for vertex in range(size))
+            for permutation in permutations(range(size))
+            if all(permutation[vertex] != vertex for vertex in range(size))
+        )
+        assert brute_maximum == edge_upper_bound(graph)
+
+    # Larger random trees validate the printed construction and its literal
+    # travel distance, not merely the claimed objective value.
+    for _ in range(180):
+        size = RNG.randint(2, 42)
+        graph = [[] for _ in range(size)]
+        edges = []
+        for vertex in range(1, size):
+            parent = RNG.randrange(vertex)
+            graph[parent].append(vertex)
+            graph[vertex].append(parent)
+            edges.append((parent, vertex))
+        input_text = f"{size}\n" + "".join(
+            f"{first + 1} {second + 1}\n" for first, second in edges
+        )
+        output = list(map(int, run("baltic-20-VillageMaximum", input_text).split()))
+        claimed, destinations = output[0], [value - 1 for value in output[1:]]
+        assert len(destinations) == size
+        assert sorted(destinations) == list(range(size))
+        assert all(destinations[vertex] != vertex for vertex in range(size))
+        distances = distance_matrix(graph)
+        literal_total = sum(
+            distances[vertex][destinations[vertex]] for vertex in range(size)
+        )
+        assert claimed == literal_total == edge_upper_bound(graph)
+
+    # The official maximum chain checks iterative traversals and 64-bit output.
+    size = 100_000
+    input_text = f"{size}\n" + "".join(
+        f"{vertex} {vertex + 1}\n" for vertex in range(1, size)
+    )
+    output = list(map(int, run("baltic-20-VillageMaximum", input_text).split()))
+    claimed, destinations = output[0], output[1:]
+    expected = sum(2 * min(split, size - split) for split in range(1, size))
+    assert claimed == expected
+    assert len(destinations) == size
+    assert len(set(destinations)) == size
+    assert all(destination != vertex for vertex, destination in enumerate(destinations, 1))
+
+
+def verify_fixed_length_paths_one() -> None:
+    # BFS supplies literal all-pairs distances on small random trees.
+    for _ in range(240):
+        size = RNG.randint(1, 48)
+        target = RNG.randint(1, size)
+        graph = [[] for _ in range(size)]
+        edges = []
+        for vertex in range(1, size):
+            parent = RNG.randrange(vertex)
+            graph[parent].append(vertex)
+            graph[vertex].append(parent)
+            edges.append((parent, vertex))
+
+        expected = 0
+        for source in range(size):
+            distances = [-1] * size
+            distances[source] = 0
+            queue = deque([source])
+            while queue:
+                vertex = queue.popleft()
+                for next_vertex in graph[vertex]:
+                    if distances[next_vertex] == -1:
+                        distances[next_vertex] = distances[vertex] + 1
+                        queue.append(next_vertex)
+            expected += sum(
+                distances[target_vertex] == target
+                for target_vertex in range(source + 1, size)
+            )
+
+        input_text = f"{size} {target}\n" + "".join(
+            f"{first + 1} {second + 1}\n" for first, second in edges
+        )
+        assert int(run("cses-2080", input_text)) == expected
+
+    size = 200_000
+    target = 100_000
+    input_text = f"{size} {target}\n" + "".join(
+        f"{vertex} {vertex + 1}\n" for vertex in range(1, size)
+    )
+    assert int(run("cses-2080", input_text)) == size - target
+
+
+def verify_fixed_length_paths_two() -> None:
+    for _ in range(240):
+        size = RNG.randint(1, 48)
+        minimum = RNG.randint(1, size)
+        maximum = RNG.randint(minimum, size)
+        graph = [[] for _ in range(size)]
+        edges = []
+        for vertex in range(1, size):
+            parent = RNG.randrange(vertex)
+            graph[parent].append(vertex)
+            graph[vertex].append(parent)
+            edges.append((parent, vertex))
+
+        expected = 0
+        for source in range(size):
+            distances = [-1] * size
+            distances[source] = 0
+            queue = deque([source])
+            while queue:
+                vertex = queue.popleft()
+                for next_vertex in graph[vertex]:
+                    if distances[next_vertex] == -1:
+                        distances[next_vertex] = distances[vertex] + 1
+                        queue.append(next_vertex)
+            expected += sum(
+                minimum <= distances[target_vertex] <= maximum
+                for target_vertex in range(source + 1, size)
+            )
+
+        input_text = f"{size} {minimum} {maximum}\n" + "".join(
+            f"{first + 1} {second + 1}\n" for first, second in edges
+        )
+        assert int(run("cses-2081", input_text)) == expected
+
+    size = 200_000
+    minimum, maximum = 99_999, 100_001
+    input_text = f"{size} {minimum} {maximum}\n" + "".join(
+        f"{vertex} {vertex + 1}\n" for vertex in range(1, size)
+    )
+    expected = sum(size - distance for distance in range(minimum, maximum + 1))
+    assert int(run("cses-2081", input_text)) == expected
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -5668,6 +5843,9 @@ if __name__ == "__main__":
         verify_cow_land,
         verify_query_on_a_tree_again,
         verify_ciel_the_commander,
+        verify_village_maximum,
+        verify_fixed_length_paths_one,
+        verify_fixed_length_paths_two,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

@@ -1,0 +1,6 @@
+Count tree paths with lengths in an inclusive range using centroid decomposition, depth histograms, and prefix counts.
+
+Official problem: https://cses.fi/problemset/task/2081
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cses-2081.cpp
+
+Topics: centroid decomposition, tree paths, prefix counts, C++17.

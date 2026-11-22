@@ -1,0 +1,17 @@
+Hey everyone. In Village Maximum, every person must move to a different house in a tree, and we want the largest total travel distance.
+
+Let us first look at one road. Cutting it splits the village into sides of sizes s and N minus s. At most the smaller side's residents can leave that side. Because destinations form a permutation, the same number must cross back. So this road contributes at most two times the smaller side size.
+
+The clever goal is to reach that upper bound on every road at once.
+
+Choose a centroid. A centroid is a house whose removal leaves no piece larger than half the tree. Now root the tree there and make a depth-first preorder. Every rooted subtree occupies one continuous interval in this order.
+
+Imagine writing that order around a circle. Send each person to the house floor of N over two positions ahead. Since every centroid-rooted subtree has at most half the positions, its interval and shifted interval do not overlap. Everyone inside that subtree moves outside it. Therefore they all cross the edge above the subtree, and the same number of people enter.
+
+That reaches the best possible contribution for every edge, so the whole assignment is optimal. The shift is positive and smaller than N, so nobody stays home. It is also a rotation, so every destination appears exactly once.
+
+In code, we use iterative walks. First compute subtree sizes and find the centroid. Second, build a true DFS preorder from it. Third, fill destination of order i with order i plus N over two, wrapping around. Finally, add two times the smaller side for every edge.
+
+For a four-node chain, the centroid-rooted order can rotate by two. The ends swap across the center, the two middle nodes swap, and the total distance is eight.
+
+The algorithm is linear time and linear memory. The big lesson is powerful: prove a per-edge upper bound, then use a centroid and circular shift to hit all those bounds simultaneously.
