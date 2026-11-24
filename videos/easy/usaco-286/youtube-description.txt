@@ -1,0 +1,6 @@
+Learn how centroid decomposition and repeated prefix balances count tree paths with a valid balanced rest stop.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=286
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-286.cpp
+
+Topics: centroid decomposition, tree paths, prefix sums, frequency counting, C++17.

@@ -1,0 +1,8 @@
+Yin and Yang	Count tree paths with a balanced internal rest stop	N is up to 100,000
+Turn colors into numbers	One color is +1 and the other is -1	Equal color counts mean sum zero
+Choose a centroid	Every remaining piece has at most half the nodes	Cross-branch paths pass through the center
+Label each endpoint	Use the sum from centroid to vertex	Opposite labels make the whole path balanced
+Find a rest stop	Equal prefix labels enclose sum zero	Two zero labels can rest at the centroid
+Merge branches	Query opposite labels from earlier groups	Subtract pairs where neither side can rest
+Count once	Use the first centroid separating the endpoints	Then recurse into the remaining pieces
+Complexity	Iterative tree walks avoid stack overflow	O(N log N) time and O(N) memory

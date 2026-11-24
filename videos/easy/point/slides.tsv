@@ -1,0 +1,8 @@
+Point Location Test	Look from P1 toward P2	Where is P3?
+Use two arrows	P1 to P2 is the viewing direction	P1 to P3 points at the query
+Signed area	Cross equals dx1 times dy2 minus dy1 times dx2	No slopes or division
+Positive sign	The turn is counterclockwise	Print LEFT
+Negative sign	The turn is clockwise	Print RIGHT
+Zero sign	The arrows are collinear	Print TOUCH
+Sample check	Six, negative six, and zero	All three cases appear
+Safe and fast	Use exact 128-bit integers	O(1) per query and O(T) total

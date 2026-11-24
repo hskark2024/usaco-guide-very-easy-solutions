@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-22 (the live Guide source and selected module data were checked directly)
+- Last listing check: 2026-11-23 (the live Guide source and selected module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`a426215`](https://github.com/cpinitiative/usaco-guide/commit/a4262152bce8c42a33ac73a631913a84b02a5ea4) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 131
-- Complete video packages: 131
+- Completed Easy solutions: 134
+- Complete video packages: 134
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -142,6 +142,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `baltic-20-VillageMaximum` | 2020 - Village (Maximum) | complete | complete | complete | generated locally; excluded from Git |
 | `cses-2080` | Fixed-Length Paths I | complete | complete | complete | generated locally; excluded from Git |
 | `cses-2081` | Fixed-Length Paths II | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-286` | Yin and Yang | complete | complete | complete | generated locally; excluded from Git |
+| `point` | Point Location Test | complete | complete | complete | generated locally; excluded from Git |
+| `kattis-segmentintersection` | Segment Intersection | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-23
+
+- New entries: `usaco-286` Yin and Yang, `point` Point Location Test, and `kattis-segmentintersection` Segment Intersection.
+- The live USACO Guide source remains at commit `a426215`; all three selected entries are labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Yin and Yang combines centroid decomposition with opposite path-balance histograms and repeated-prefix detection. The geometry entries use exact wide-integer orientation tests, with rationally verified floating-point output only for a unique segment crossing.
+- All 165 C++ solutions compiled with C++17, optimization, and warnings enabled. All 169 smoke cases passed.
+- All three new independent verifier groups passed randomized literal tree-path, big-integer orientation, and rational segment-intersection checks; the Yin and Yang group also passed the official maximum-size chain check.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide visual QA passed. Narration durations: 100.2 seconds (`usaco-286`), 86.9 seconds (`point`), and 93.7 seconds (`kattis-segmentintersection`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending action-time confirmation of the signed-in channel, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Centroid Decomposition is complete. Virtual Trees and Kruskal Reconstruction Trees have no unfinished Easy entries. Easy Geometry Primitives is in progress; the next unfinished entry is `kattis-segmentdistance` Segment Distance. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-22
 

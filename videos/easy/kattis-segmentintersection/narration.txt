@@ -1,0 +1,9 @@
+Two closed line segments can share nothing, one point, or an entire smaller segment. This problem asks us to identify and print the exact kind of intersection, including tricky endpoint and overlap cases.
+
+Start with orientation. The signed cross product tells whether a point is left of, right of, or on a directed line. Test both endpoints of segment C D against line A B, and both endpoints of A B against line C D. For nonparallel segments, they intersect exactly when each pair lies on opposite sides or touches the line. Once that is true, solve A plus t times B minus A equals C plus u times D minus C. The value of t gives the unique intersection point.
+
+Parallel lines need separate handling. If they are not collinear, the answer is none. If all endpoints are collinear, the two-dimensional problem becomes an interval overlap. Check which of the four endpoints lie on both closed segments and place them in sorted order. No common endpoint means none. One unique point means the segments only touch. Two extremes describe the shared segment.
+
+Exact classification matters, so the code uses one-hundred-twenty-eight-bit integer cross products. Floating point appears only after we know there is one unique crossing point. Tiny negative zero values are normalized before printing two decimals.
+
+The algorithm handles proper crossings, endpoint touches, reversed endpoints, vertical overlaps, and even segments that are single points. Every test case takes constant time and constant extra memory.

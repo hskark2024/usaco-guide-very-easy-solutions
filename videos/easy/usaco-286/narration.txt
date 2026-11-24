@@ -1,0 +1,9 @@
+Imagine every white edge is plus one and every black edge is minus one. A path has equal colors exactly when its sum is zero. Yin and Yang asks for something stronger: an internal rest stop must split the route into two zero-sum pieces.
+
+Checking every pair of barns is already quadratic, so we need a way to organize all paths. Choose a centroid, a vertex whose removal leaves no piece larger than half the current tree. Any path handled at this level either starts at the centroid or joins two different branches.
+
+Label each vertex by the sum from the centroid to that vertex. Two endpoints in different branches form a balanced whole path when their labels are opposites. Now comes the key idea. Suppose an endpoint has label two, and an earlier vertex on the same centroid path also had label two. The edges between those equal prefixes sum to zero, so that earlier vertex can become the rest stop. A label of zero also works across branches, because the centroid itself is internal.
+
+We process branches one at a time. A histogram stores labels from earlier branches. For each new endpoint, we count the opposite label. A second histogram tracks endpoints with no repeated prefix, letting us subtract pairs where neither side supplies a rest stop. Paths from the centroid need extra care: the centroid is an endpoint there, so we require another internal zero.
+
+After counting, remove the centroid and repeat in every remaining component. Each path is counted when its endpoints are first separated, exactly once. Every level does linear work, and component sizes keep halving, giving O N log N time and O N memory.

@@ -1,0 +1,9 @@
+You are standing at point P one and looking toward point P two. Is point P three on your left, on your right, or directly on the same line? A signed cross product answers all three cases with one exact calculation.
+
+First form two arrows that both start at P one. The first arrow goes to P two, and the second goes to P three. If their coordinates are D X one, D Y one and D X two, D Y two, compute D X one times D Y two minus D Y one times D X two.
+
+This number is the signed area of the parallelogram made by the arrows. A positive area means turning counterclockwise from the line arrow to the point arrow, so P three is on the left. A negative area means a clockwise turn, so it is on the right. Zero area means the arrows are parallel, placing all three points on the same line, which the problem calls touch.
+
+For the sample line from one, one to five, three, the point two, three gives a positive cross product, so it is left. Point four, one gives a negative value, so it is right. Point three, two gives zero and touches the line.
+
+The coordinate limits make ordinary thirty-two-bit integers unsafe. The solution uses one-hundred-twenty-eight-bit integer arithmetic, so even extreme products and their subtraction remain exact. Each test uses constant time and constant memory, making one hundred thousand tests easy to handle.

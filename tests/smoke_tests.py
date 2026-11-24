@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "usaco-286": ("7\n1 2 0\n3 1 1\n2 4 0\n5 2 0\n6 3 1\n5 7 1\n", "1\n"),
+    "point": ("3\n1 1 5 3 2 3\n1 1 5 3 4 1\n1 1 5 3 3 2\n", "LEFT\nRIGHT\nTOUCH\n"),
+    "kattis-segmentintersection": ("4\n0 0 4 4 0 4 4 0\n0 0 1 0 2 0 3 0\n0 0 4 0 2 0 6 0\n0 0 1 1 1 1 2 0\n", "2.00 2.00\nnone\n2 0 4 0\n1.00 1.00\n"),
     "baltic-20-VillageMaximum": ("4\n1 2\n2 3\n3 4\n", "8\n4 3 2 1\n"),
     "cses-2080": ("5 2\n1 2\n2 3\n3 4\n3 5\n", "4\n"),
     "cses-2081": ("5 2 3\n1 2\n2 3\n3 4\n3 5\n", "6\n"),

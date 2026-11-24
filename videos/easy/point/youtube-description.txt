@@ -1,0 +1,6 @@
+Learn the signed cross-product test for deciding whether a point lies left, right, or on a directed line.
+
+Official problem: https://cses.fi/problemset/task/2189
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/point.cpp
+
+Topics: computational geometry, orientation, cross product, C++17.

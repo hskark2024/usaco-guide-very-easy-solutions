@@ -1,0 +1,6 @@
+Handle proper crossings, endpoint touches, parallel lines, overlapping collinear segments, and point segments with exact orientation tests.
+
+Official problem: https://open.kattis.com/problems/segmentintersection
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/kattis-segmentintersection.cpp
+
+Topics: computational geometry, line segments, orientation, cross products, C++17.

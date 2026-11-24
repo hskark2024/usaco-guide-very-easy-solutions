@@ -5716,6 +5716,167 @@ def verify_fixed_length_paths_two() -> None:
     assert int(run("cses-2081", input_text)) == expected
 
 
+def verify_yin_and_yang() -> None:
+    # Enumerate every unordered path and test every internal rest stop directly.
+    for _ in range(260):
+        size = RNG.randint(2, 34)
+        graph = [[] for _ in range(size)]
+        edges = []
+        for vertex in range(1, size):
+            parent = RNG.randrange(vertex)
+            edge_type = RNG.randrange(2)
+            weight = 1 if edge_type == 0 else -1
+            graph[parent].append((vertex, weight))
+            graph[vertex].append((parent, weight))
+            edges.append((parent, vertex, edge_type))
+
+        expected = 0
+        for source in range(size):
+            parent = [-1] * size
+            parent_weight = [0] * size
+            order = [source]
+            parent[source] = source
+            for vertex in order:
+                for next_vertex, weight in graph[vertex]:
+                    if parent[next_vertex] == -1:
+                        parent[next_vertex] = vertex
+                        parent_weight[next_vertex] = weight
+                        order.append(next_vertex)
+
+            for target in range(source + 1, size):
+                weights = []
+                vertex = target
+                while vertex != source:
+                    weights.append(parent_weight[vertex])
+                    vertex = parent[vertex]
+                weights.reverse()
+                total = sum(weights)
+                prefix = 0
+                valid = False
+                for weight in weights[:-1]:
+                    prefix += weight
+                    if prefix == 0 and total - prefix == 0:
+                        valid = True
+                expected += valid
+
+        input_text = f"{size}\n" + "".join(
+            f"{first + 1} {second + 1} {edge_type}\n"
+            for first, second, edge_type in edges
+        )
+        assert int(run("usaco-286", input_text)) == expected
+
+    # A maximum chain alternates colors.  This primarily checks iterative
+    # component/path traversals and 64-bit counting under the official limit.
+    size = 100_000
+    input_text = f"{size}\n" + "".join(
+        f"{vertex} {vertex + 1} {vertex % 2}\n"
+        for vertex in range(1, size)
+    )
+    output = int(run("usaco-286", input_text))
+    assert 0 <= output <= size * (size - 1) // 2
+
+
+def verify_point_location() -> None:
+    tests = []
+    expected = []
+    for _ in range(1200):
+        while True:
+            first = (RNG.randint(-10**9, 10**9), RNG.randint(-10**9, 10**9))
+            second = (RNG.randint(-10**9, 10**9), RNG.randint(-10**9, 10**9))
+            if first != second:
+                break
+        point = (RNG.randint(-10**9, 10**9), RNG.randint(-10**9, 10**9))
+        cross_value = (
+            (second[0] - first[0]) * (point[1] - first[1])
+            - (second[1] - first[1]) * (point[0] - first[0])
+        )
+        expected.append("LEFT" if cross_value > 0 else "RIGHT" if cross_value < 0 else "TOUCH")
+        tests.append((*first, *second, *point))
+    # Force collinear and extreme-coordinate cases instead of hoping random
+    # generation happens to produce them.
+    tests.extend([
+        (-10**9, -10**9, 10**9, 10**9, 0, 0),
+        (-10**9, 10**9, 10**9, -10**9, 10**9, 10**9),
+    ])
+    expected.extend(["TOUCH", "LEFT"])
+    input_text = f"{len(tests)}\n" + "".join(
+        " ".join(map(str, test)) + "\n" for test in tests
+    )
+    assert run("point", input_text).split() == expected
+
+
+def verify_segment_intersection() -> None:
+    def orientation(a, b, c):
+        value = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+        return (value > 0) - (value < 0)
+
+    def on_segment(a, b, p):
+        return (
+            orientation(a, b, p) == 0
+            and min(a[0], b[0]) <= p[0] <= max(a[0], b[0])
+            and min(a[1], b[1]) <= p[1] <= max(a[1], b[1])
+        )
+
+    def exact_intersection(points):
+        a, b, c, d = points
+        if a == b:
+            return [(Fraction(a[0]), Fraction(a[1]))] if on_segment(c, d, a) else []
+        if c == d:
+            return [(Fraction(c[0]), Fraction(c[1]))] if on_segment(a, b, c) else []
+
+        ab_c = orientation(a, b, c)
+        ab_d = orientation(a, b, d)
+        cd_a = orientation(c, d, a)
+        cd_b = orientation(c, d, b)
+        if ab_c == ab_d == cd_a == cd_b == 0:
+            common = sorted({
+                point for point in points
+                if on_segment(a, b, point) and on_segment(c, d, point)
+            })
+            if not common:
+                return []
+            endpoints = [common[0]] if len(common) == 1 else [common[0], common[-1]]
+            return [(Fraction(x), Fraction(y)) for x, y in endpoints]
+
+        if ab_c * ab_d > 0 or cd_a * cd_b > 0:
+            return []
+
+        rx, ry = b[0] - a[0], b[1] - a[1]
+        sx, sy = d[0] - c[0], d[1] - c[1]
+        denominator = rx * sy - ry * sx
+        if denominator == 0:
+            return []
+        parameter = Fraction((c[0] - a[0]) * sy - (c[1] - a[1]) * sx, denominator)
+        return [(Fraction(a[0]) + parameter * rx, Fraction(a[1]) + parameter * ry)]
+
+    cases = []
+    expected_points = []
+    for _ in range(1000):
+        points = [
+            (RNG.randint(-15, 15), RNG.randint(-15, 15)) for _ in range(4)
+        ]
+        expected_points.append(exact_intersection(points))
+        cases.append(points)
+
+    input_text = f"{len(cases)}\n" + "".join(
+        " ".join(str(value) for point in points for value in point) + "\n"
+        for points in cases
+    )
+    lines = run("kattis-segmentintersection", input_text).splitlines()
+    assert len(lines) == len(cases)
+    for line, expected in zip(lines, expected_points):
+        tokens = line.split()
+        if not expected:
+            assert tokens == ["none"]
+            continue
+        values = list(map(float, tokens))
+        actual = list(zip(values[::2], values[1::2]))
+        assert len(actual) == len(expected)
+        for (actual_x, actual_y), (expected_x, expected_y) in zip(actual, expected):
+            assert abs(actual_x - float(expected_x)) <= 0.011
+            assert abs(actual_y - float(expected_y)) <= 0.011
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -5846,6 +6007,9 @@ if __name__ == "__main__":
         verify_village_maximum,
         verify_fixed_length_paths_one,
         verify_fixed_length_paths_two,
+        verify_yin_and_yang,
+        verify_point_location,
+        verify_segment_intersection,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

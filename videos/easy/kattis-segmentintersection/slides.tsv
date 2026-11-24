@@ -1,0 +1,8 @@
+Segment Intersection	The common part can have zero, one, or many points	Handle every case
+Orientation tests	Cross products say left, right, or on	Use exact integer arithmetic
+Straddle rule	Each segment must cross the other's line	Zero includes endpoint touches
+Unique crossing	Solve A plus t times B minus A	Print the point to two decimals
+Parallel lines	Noncollinear means none	Collinear needs interval overlap
+Collinear overlap	Collect endpoints lying on both segments	Keep the sorted extremes
+Tricky inputs	Reversed endpoints and point segments still work	Normalize negative zero
+Complexity	A fixed number of arithmetic operations	O(1) time and memory per case
