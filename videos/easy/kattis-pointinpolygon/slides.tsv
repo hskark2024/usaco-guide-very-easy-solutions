@@ -1,0 +1,8 @@
+Point in Polygon	Three answers: in, on, or out	Scan every polygon edge
+Boundary first	Cross product zero means collinear	Coordinate bounds confirm on the edge
+Ray casting	Send a horizontal ray to the right	Each crossing flips inside and outside
+Parity	Odd crossings mean inside	Even crossings mean outside
+Vertex trap	A ray may pass through a shared vertex	Do not count both incident edges
+Half-open rule	Exactly one endpoint must be above the query	Horizontal edges are skipped
+No division	Orientation plus edge direction locates the crossing	Integer decisions stay exact
+Complexity	One full edge scan per query	O(N) time and O(1) extra space

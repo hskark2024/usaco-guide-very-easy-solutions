@@ -1,0 +1,8 @@
+Polygon Area	Find area and traversal direction together	One pass around the boundary
+Shoelace term	For edge i to next, add x_i y_next minus y_i x_next	Close last back to first
+Signed area	The sum is twice the signed area	Magnitude gives size
+Direction	Positive means counterclockwise	Negative means clockwise
+Exact output	Even doubled area ends in .0	Odd doubled area ends in .5
+Triangle example	Doubled area 100 becomes 50.0	Reversing order flips only the sign
+Robust arithmetic	Use wide integers for every product and sum	No floating-point rounding
+Complexity	Each directed edge contributes once	O(N) time and O(N) stored points

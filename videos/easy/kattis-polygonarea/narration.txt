@@ -1,0 +1,11 @@
+The shoelace formula finds a polygon's area and its direction in one pass. The input lists vertices as we walk around the boundary, either clockwise or counterclockwise.
+
+For every directed edge from point i to the next point, add x i times y next, then subtract y i times x next. The final vertex connects back to the first, so the polygon is closed. The total is not the area yet. It is twice the signed area.
+
+Why is it signed? Each edge contributes an oriented cross product. Walking counterclockwise makes the total positive. Walking clockwise reverses every edge and makes the total negative. That sign directly gives the label C C W or C W.
+
+The magnitude gives twice the ordinary area. Divide it by two for the answer. Since all coordinates are integers, twice the area is also an integer. An even total ends in point zero, and an odd total ends in point five. We can format those endings ourselves without any floating-point arithmetic.
+
+For example, the triangle at zero zero, ten zero, and zero ten has doubled area one hundred. Its order is counterclockwise, so we print C C W and fifty point zero. Reversing the last two vertices keeps the same magnitude but changes the sign and direction.
+
+The code uses one-hundred-twenty-eight-bit integers for the products and sum. It works for convex or concave simple polygons, any starting vertex, and either traversal direction in linear time.

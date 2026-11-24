@@ -1,0 +1,6 @@
+Find the minimum distance between two closed line segments using exact intersection tests, dot-product projection, and four endpoint candidates.
+
+Official problem: https://open.kattis.com/problems/segmentdistance
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/kattis-segmentdistance.cpp
+
+Topics: computational geometry, segment distance, projection, dot products, C++17.

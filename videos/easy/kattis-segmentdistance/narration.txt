@@ -1,0 +1,11 @@
+How do we measure the shortest gap between two line segments? The nearest points could look like they are anywhere, but a small geometry idea reduces the problem to only a few checks.
+
+First test whether the segments intersect. We use exact cross products to compare which side of a directed line each endpoint lies on. Opposite sides in both directions mean a proper crossing. A zero cross product plus coordinate bounds catches touches and collinear overlap. Every one of those cases has distance zero.
+
+For disjoint segments, at least one point in a closest pair can be chosen as an endpoint. So we measure from both endpoints of the first segment to the second, then from both endpoints of the second segment to the first, and take the smallest answer.
+
+To measure from point P to segment A B, project P onto the infinite line. The dot product gives a parameter t. If t is between zero and one, the perpendicular foot lies on the segment. If t is below zero, endpoint A is closest. If t is above one, endpoint B is closest. Clamping t into the range zero through one handles all three situations at once.
+
+There is one special case: A and B might be the same point. Then the segment length squared is zero, so we skip projection and directly measure to A.
+
+The algorithm uses exact integer arithmetic for intersection and long double only for distances. It handles crossings, parallel lines, collinear overlap, endpoint touches, and point segments in constant time per test case.

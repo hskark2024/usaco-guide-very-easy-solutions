@@ -153,6 +153,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-286` | USACO Gold | [Yin and Yang](problems/usaco-286/README.md) | [Centroid Decomposition, Path Sums, Frequency Counting] | [C++](solutions/usaco-286.cpp) | [Package](videos/easy/usaco-286/README.md) |
 | `point` | CSES | [Point Location Test](problems/point/README.md) | [Geometry, Orientation, Cross Product] | [C++](solutions/point.cpp) | [Package](videos/easy/point/README.md) |
 | `kattis-segmentintersection` | Kattis | [Segment Intersection](problems/kattis-segmentintersection/README.md) | [Geometry, Orientation, Line Intersection] | [C++](solutions/kattis-segmentintersection.cpp) | [Package](videos/easy/kattis-segmentintersection/README.md) |
+| `kattis-segmentdistance` | Kattis | [Segment Distance](problems/kattis-segmentdistance/README.md) | [Geometry, Projection, Segment Distance] | [C++](solutions/kattis-segmentdistance.cpp) | [Package](videos/easy/kattis-segmentdistance/README.md) |
+| `kattis-pointinpolygon` | Kattis | [Point in Polygon](problems/kattis-pointinpolygon/README.md) | [Geometry, Ray Casting, Orientation] | [C++](solutions/kattis-pointinpolygon.cpp) | [Package](videos/easy/kattis-pointinpolygon/README.md) |
+| `kattis-polygonarea` | Kattis | [Polygon Area](problems/kattis-polygonarea/README.md) | [Geometry, Shoelace Formula, Orientation] | [C++](solutions/kattis-polygonarea.cpp) | [Package](videos/easy/kattis-polygonarea/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

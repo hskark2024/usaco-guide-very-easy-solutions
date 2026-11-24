@@ -1,0 +1,6 @@
+Compute exact polygon area and detect clockwise versus counterclockwise vertex order with the shoelace formula.
+
+Official problem: https://open.kattis.com/problems/polygonarea
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/kattis-polygonarea.cpp
+
+Topics: computational geometry, polygon area, shoelace formula, orientation, C++17.

@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-23 (the live Guide source and selected module data were checked directly)
+- Last listing check: 2026-11-24 (the live Guide source and selected module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`a426215`](https://github.com/cpinitiative/usaco-guide/commit/a4262152bce8c42a33ac73a631913a84b02a5ea4) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 134
-- Complete video packages: 134
+- Completed Easy solutions: 137
+- Complete video packages: 137
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -145,6 +145,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-286` | Yin and Yang | complete | complete | complete | generated locally; excluded from Git |
 | `point` | Point Location Test | complete | complete | complete | generated locally; excluded from Git |
 | `kattis-segmentintersection` | Segment Intersection | complete | complete | complete | generated locally; excluded from Git |
+| `kattis-segmentdistance` | Segment Distance | complete | complete | complete | generated locally; excluded from Git |
+| `kattis-pointinpolygon` | Point in Polygon | complete | complete | complete | generated locally; excluded from Git |
+| `kattis-polygonarea` | Polygon Area | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-24
+
+- New entries: `kattis-segmentdistance` Segment Distance, `kattis-pointinpolygon` Point in Polygon, and `kattis-polygonarea` Polygon Area.
+- The live USACO Guide source remains at commit `a426215`; all three selected Geometry Primitives entries are labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Segment Distance combines exact closed-segment intersection with clamped point projections. Point in Polygon uses exact boundary checks and half-open ray parity. Polygon Area uses an exact wide-integer shoelace sum for both area and traversal direction.
+- All 168 C++ solutions compiled with C++17, optimization, and warnings enabled. All 172 smoke cases passed.
+- All three new independent verifier groups passed randomized projection/intersection, winding-number classification, and signed-area checks, including large-coordinate and degenerate cases.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide contact-sheet visual QA passed. Narration durations: 91.6 seconds (`kattis-segmentdistance`), 93.6 seconds (`kattis-pointinpolygon`), and 88.8 seconds (`kattis-polygonarea`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending action-time confirmation of the signed-in channel, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Geometry Primitives remains in progress; the next unfinished entry is `leetcode-149` Max Points on a Line. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-23
 

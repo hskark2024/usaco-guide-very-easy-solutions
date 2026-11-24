@@ -1,0 +1,6 @@
+Classify points as inside, on the boundary, or outside a polygon with exact orientation tests and a robust half-open ray-casting rule.
+
+Official problem: https://open.kattis.com/problems/pointinpolygon
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/kattis-pointinpolygon.cpp
+
+Topics: computational geometry, point in polygon, ray casting, cross products, C++17.

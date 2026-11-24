@@ -5877,6 +5877,178 @@ def verify_segment_intersection() -> None:
             assert abs(actual_y - float(expected_y)) <= 0.011
 
 
+def verify_segment_distance() -> None:
+    def orientation(a, b, p):
+        value = (b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0])
+        return (value > 0) - (value < 0)
+
+    def on_segment(a, b, p):
+        return (
+            orientation(a, b, p) == 0
+            and min(a[0], b[0]) <= p[0] <= max(a[0], b[0])
+            and min(a[1], b[1]) <= p[1] <= max(a[1], b[1])
+        )
+
+    def intersects(a, b, c, d):
+        values = (
+            orientation(a, b, c),
+            orientation(a, b, d),
+            orientation(c, d, a),
+            orientation(c, d, b),
+        )
+        if values[0] == 0 and on_segment(a, b, c):
+            return True
+        if values[1] == 0 and on_segment(a, b, d):
+            return True
+        if values[2] == 0 and on_segment(c, d, a):
+            return True
+        if values[3] == 0 and on_segment(c, d, b):
+            return True
+        return values[0] * values[1] < 0 and values[2] * values[3] < 0
+
+    def point_distance(point, first, second):
+        dx = second[0] - first[0]
+        dy = second[1] - first[1]
+        length_squared = dx * dx + dy * dy
+        if length_squared == 0:
+            return sqrt((point[0] - first[0]) ** 2 + (point[1] - first[1]) ** 2)
+        parameter = (
+            (point[0] - first[0]) * dx + (point[1] - first[1]) * dy
+        ) / length_squared
+        parameter = max(0.0, min(1.0, parameter))
+        closest = (first[0] + parameter * dx, first[1] + parameter * dy)
+        return sqrt((point[0] - closest[0]) ** 2 + (point[1] - closest[1]) ** 2)
+
+    def expected_distance(points):
+        a, b, c, d = points
+        if intersects(a, b, c, d):
+            return 0.0
+        return min(
+            point_distance(a, c, d),
+            point_distance(b, c, d),
+            point_distance(c, a, b),
+            point_distance(d, a, b),
+        )
+
+    cases = [
+        ((0, 0), (0, 0), (3, 4), (3, 4)),
+        ((-10**9, 0), (10**9, 0), (0, 1), (0, 2)),
+        ((0, 0), (5, 0), (2, 0), (8, 0)),
+    ]
+    for _ in range(1200):
+        cases.append(tuple(
+            (RNG.randint(-10**6, 10**6), RNG.randint(-10**6, 10**6))
+            for _ in range(4)
+        ))
+
+    input_text = f"{len(cases)}\n" + "".join(
+        " ".join(str(value) for point in points for value in point) + "\n"
+        for points in cases
+    )
+    actual = list(map(float, run("kattis-segmentdistance", input_text).split()))
+    expected = [expected_distance(points) for points in cases]
+    assert len(actual) == len(expected)
+    for observed, wanted in zip(actual, expected):
+        assert abs(observed - wanted) <= 0.011
+
+
+def verify_point_in_polygon() -> None:
+    def orientation(a, b, p):
+        return (b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0])
+
+    def on_segment(a, b, p):
+        return (
+            orientation(a, b, p) == 0
+            and min(a[0], b[0]) <= p[0] <= max(a[0], b[0])
+            and min(a[1], b[1]) <= p[1] <= max(a[1], b[1])
+        )
+
+    # Use the winding-number rule as an independent oracle.  Unlike the C++
+    # solution's horizontal parity ray, it counts signed upward/downward edge
+    # crossings around the query.
+    def classify(polygon, query):
+        winding = 0
+        for index, first in enumerate(polygon):
+            second = polygon[(index + 1) % len(polygon)]
+            if on_segment(first, second, query):
+                return "on"
+            turn = orientation(first, second, query)
+            if first[1] <= query[1] < second[1] and turn > 0:
+                winding += 1
+            elif second[1] <= query[1] < first[1] and turn < 0:
+                winding -= 1
+        return "in" if winding else "out"
+
+    # A concave L shape makes sure bounding-box membership is not confused
+    # with polygon membership.  It also supplies horizontal/vertical boundary
+    # queries before the randomized rectangles below.
+    concave = [(0, 0), (6, 0), (6, 2), (2, 2), (2, 6), (0, 6)]
+    concave_queries = [(1, 1), (4, 4), (2, 4), (6, 2), (-1, 1)]
+    batches = [(concave, concave_queries)]
+    expected = [classify(concave, query) for query in concave_queries]
+    for _ in range(450):
+        left = RNG.randint(-1000, 900)
+        bottom = RNG.randint(-1000, 900)
+        right = RNG.randint(left + 1, 1000)
+        top = RNG.randint(bottom + 1, 1000)
+        polygon = [(left, bottom), (right, bottom), (right, top), (left, top)]
+        if RNG.randrange(2):
+            polygon.reverse()
+        queries = [
+            (RNG.randint(-1100, 1100), RNG.randint(-1100, 1100))
+            for _ in range(10)
+        ]
+        queries.extend([polygon[0], ((left + right) // 2, bottom)])
+        batches.append((polygon, queries))
+        expected.extend(classify(polygon, query) for query in queries)
+
+    input_text = "".join(
+        f"{len(polygon)}\n"
+        + "".join(f"{x} {y}\n" for x, y in polygon)
+        + f"{len(queries)}\n"
+        + "".join(f"{x} {y}\n" for x, y in queries)
+        for polygon, queries in batches
+    ) + "0\n"
+    assert run("kattis-pointinpolygon", input_text).split() == expected
+
+
+def verify_polygon_area() -> None:
+    def format_answer(polygon):
+        doubled = sum(
+            polygon[index][0] * polygon[(index + 1) % len(polygon)][1]
+            - polygon[index][1] * polygon[(index + 1) % len(polygon)][0]
+            for index in range(len(polygon))
+        )
+        direction = "CCW" if doubled > 0 else "CW"
+        magnitude = abs(doubled)
+        return f"{direction} {magnitude // 2}.{'5' if magnitude % 2 else '0'}"
+
+    polygons = [
+        [(0, 0), (1, 0), (0, 1)],
+        [(0, 0), (0, 1), (1, 0)],
+        [(-10**9, -10**9), (10**9, -10**9), (10**9, 10**9), (-10**9, 10**9)],
+    ]
+    for _ in range(900):
+        left = RNG.randint(-10**6, 10**6 - 2)
+        bottom = RNG.randint(-10**6, 10**6 - 2)
+        right = RNG.randint(left + 1, 10**6)
+        top = RNG.randint(bottom + 1, 10**6)
+        polygon = [(left, bottom), (right, bottom), (right, top), (left, top)]
+        if RNG.randrange(2):
+            polygon.reverse()
+        shift = RNG.randrange(4)
+        polygon = polygon[shift:] + polygon[:shift]
+        polygons.append(polygon)
+
+    input_text = "".join(
+        f"{len(polygon)}\n" + "".join(f"{x} {y}\n" for x, y in polygon)
+        for polygon in polygons
+    ) + "0\n"
+    assert run("kattis-polygonarea", input_text).splitlines() == [
+        format_answer(polygon) for polygon in polygons
+    ]
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -6010,6 +6182,9 @@ if __name__ == "__main__":
         verify_yin_and_yang,
         verify_point_location,
         verify_segment_intersection,
+        verify_segment_distance,
+        verify_point_in_polygon,
+        verify_polygon_area,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

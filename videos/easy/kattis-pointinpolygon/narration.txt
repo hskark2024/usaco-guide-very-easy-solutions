@@ -1,0 +1,11 @@
+Is a point inside a polygon, outside it, or exactly on its edge? We can answer by imagining a horizontal ray starting at the point and traveling forever to the right.
+
+Before counting crossings, check the boundary. For each polygon edge, an exact cross product tells whether the query is collinear with the edge. Coordinate ranges then tell whether it lies between the endpoints. If both tests pass, the answer is on.
+
+For every other point, start with an even crossing count, meaning outside. Each time the ray crosses the polygon boundary, our state flips: outside becomes inside, then inside becomes outside. An odd number of crossings means in; an even number means out.
+
+Vertices need careful handling. If the ray passes directly through a polygon vertex, the two edges meeting there must not both count it. We use a half-open rule: an edge is considered only when exactly one endpoint is strictly above the query. Horizontal edges are skipped automatically, and each shared vertex belongs to one vertical range instead of two.
+
+We also avoid division. The cross-product sign, together with whether the edge travels upward or downward, tells whether its horizontal intersection is to the right of the query. That keeps the decision exact even for large integer coordinates.
+
+For a polygon with N vertices, each query scans N edges, using constant extra space beyond the stored polygon. The same logic handles convex shapes, concave shapes, vertical edges, horizontal edges, and queries exactly at vertices.

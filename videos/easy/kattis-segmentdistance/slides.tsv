@@ -1,0 +1,8 @@
+Segment Distance	Find the smallest gap between two closed segments	Crossing means distance zero
+Exact intersection	Use four orientation tests	Include touches and collinear overlap
+Point to segment	Project P onto the line through A and B	The dot product gives parameter t
+Clamp the projection	t below 0 selects A	t above 1 selects B
+Four candidates	Try both endpoints against the other segment	Take the minimum
+Why endpoints work	A disjoint closest pair can include an endpoint	Parallel lines also have an endpoint optimum
+Degenerate segments	If A equals B, measure directly to A	Never divide by zero
+Complexity	Exact classification plus four projections	O(1) time and memory
