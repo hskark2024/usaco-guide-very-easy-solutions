@@ -1,0 +1,8 @@
+Square Overlap	Equal axis-aligned squares	Find zero one or many overlapping pairs
+Overlap condition	Both center gaps must be below K	Touching borders have zero area
+Sort by x	Sweep centers from left to right	Keep only nearby earlier centers
+Active window	Remove centers with x gap at least K	They can never overlap later
+Query by y	Ordered set finds y gap below K	Every candidate is a real overlap
+Compute area	Width is K minus absolute dx	Height is K minus absolute dy
+Three outputs	No pair gives zero	One gives area and two gives minus one
+Complexity	Each center enters and leaves once	O(N log N) time and O(N) memory

@@ -1,0 +1,13 @@
+We have up to fifty thousand equal squares, but we only need to know whether zero, one, or more than one pair overlaps. A sweep line avoids checking every pair.
+
+Every square is axis aligned and has side length K. For two squares to share positive width, the absolute difference between their center x coordinates must be less than K. Sharing only a border does not count. The same strict rule applies to their y coordinates.
+
+Sort all centers by x. As we visit a new center, keep an active set of earlier centers whose x difference is still below K. Once a center is K or more units behind, remove it forever. It can never overlap this square or any later one.
+
+Order the active set by y. We only search from current y minus K plus one through current y plus K minus one. Integer coordinates make this exactly the strict condition that the y difference is below K.
+
+Every center returned by that range overlaps the current square. If it is the first pair, compute the shared width as K minus the x gap and the shared height as K minus the y gap. Their product is the area.
+
+If we ever find a second pair, print negative one immediately. This early stop is also important for speed when many squares crowd together. If no pair appears, the stored area stays zero.
+
+Each center enters and leaves the active set once. Sorting and set operations take N log N time, while the active set and sorted centers use linear memory.

@@ -1,0 +1,13 @@
+How can we find the most points on one line without trusting decimal slopes? We can turn every slope into a small pair of integers.
+
+Pick one point as an anchor. Draw a direction vector from the anchor to every other point. If several points lie on the same line through the anchor, their vectors are scaled copies. A vector of two, three and a vector of four, six point the same way.
+
+We remove that scale with the greatest common divisor. Divide both coordinate differences by the G C D of their absolute values. Two, three stays two, three. Four, six also becomes two, three.
+
+There is one more detail. A line has two directions. The vectors two, three and negative two, negative three still describe the same line. We choose one official sign by making the x part positive. For a vertical line, we make the y part positive.
+
+Now a map counts how many other points produce each normalized pair. The largest frequency plus one includes the anchor. We repeat this for every possible anchor and keep the global maximum.
+
+Vertical lines become zero, one. Horizontal lines become one, zero. Negative slopes also have stable integer keys. No division into decimals means no rounding errors.
+
+With at most three hundred points, checking every pair is fast enough. The method takes quadratic pair checks, with a small logarithmic map cost, and linear extra memory for one anchor.

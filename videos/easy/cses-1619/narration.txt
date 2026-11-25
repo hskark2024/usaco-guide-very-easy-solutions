@@ -1,0 +1,13 @@
+Imagine watching a restaurant doorway all day. Every arrival adds one customer, and every departure removes one. That simple story becomes a sweep line algorithm.
+
+Each visit gives us an interval from arrival time to departure time. Instead of comparing every pair of intervals, create two events. Put plus one at the arrival and minus one at the departure.
+
+Next, sort all events by time. As we scan from earliest to latest, keep a variable named currently inside. Add the event change to it. After an arrival the count rises, and after a departure it falls.
+
+The running count is exact because it equals all arrivals we have passed minus all departures we have passed. That is precisely the number of visits still active at that moment. We record the largest value ever reached.
+
+The official problem says every arrival and departure time is distinct. Our event pairs also place a departure before an arrival if a tie ever appears. This treats visits as ending before a new visit at the same instant, which is a useful half-open interval convention.
+
+For the sample visits five to eight, two to four, and three to nine, the sorted changes are plus one, plus one, minus one, plus one, minus one, minus one. The maximum running count is two.
+
+There are two events per customer. Sorting takes N log N time, the scan is linear, and the event list uses linear memory.

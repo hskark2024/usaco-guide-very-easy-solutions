@@ -1,0 +1,6 @@
+Find the largest collinear set with exact GCD-normalized direction vectors, canonical signs, and no floating-point slope errors.
+
+Official problem: https://leetcode.com/problems/max-points-on-a-line/description/
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/leetcode-149.cpp
+
+Topics: computational geometry, complete search, normalized slopes, GCD, C++17.

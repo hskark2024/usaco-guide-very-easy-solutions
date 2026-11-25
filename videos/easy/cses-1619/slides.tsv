@@ -1,0 +1,8 @@
+Restaurant Customers	Find the busiest moment	Visits are time intervals
+Create events	Arrival adds one customer	Departure removes one
+Sort by time	Process the whole day left to right	This is a sweep line
+Running count	Add each plus or minus event	Count equals active visits
+Record the peak	Update the maximum after every event	Occupancy changes only here
+Sample walkthrough	Three visits create a peak of two	Follow the sorted changes
+Why it works	Arrivals passed minus departures passed	Exactly the customers inside
+Complexity	Two events per customer	O(N log N) time and O(N) memory

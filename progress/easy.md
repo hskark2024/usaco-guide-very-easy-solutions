@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-24 (the live Guide source and selected module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`a426215`](https://github.com/cpinitiative/usaco-guide/commit/a4262152bce8c42a33ac73a631913a84b02a5ea4) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 137
-- Complete video packages: 137
+- Last listing check: 2026-11-25 (the live Guide source and selected module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`5addb3e`](https://github.com/cpinitiative/usaco-guide/commit/5addb3eedcaddea38292dd70129482ae7057155c) (425 unique module-listed Easy IDs in today's full recursive scan)
+- Completed Easy solutions: 140
+- Complete video packages: 140
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -148,6 +148,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `kattis-segmentdistance` | Segment Distance | complete | complete | complete | generated locally; excluded from Git |
 | `kattis-pointinpolygon` | Point in Polygon | complete | complete | complete | generated locally; excluded from Git |
 | `kattis-polygonarea` | Polygon Area | complete | complete | complete | generated locally; excluded from Git |
+| `leetcode-149` | Max Points on a Line | complete | complete | complete | generated locally; excluded from Git |
+| `cses-1619` | Restaurant Customers | complete | complete | complete | generated locally; excluded from Git |
+| `usaco-227` | Square Overlap | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-25
+
+- New entries: `leetcode-149` Max Points on a Line, `cses-1619` Restaurant Customers, and `usaco-227` Square Overlap.
+- The live USACO Guide source is at commit `5addb3e`; all three selected entries are labeled Easy. Today's full recursive module-data scan contains 425 unique Easy IDs.
+- Max Points on a Line uses exact GCD-normalized integer directions. Restaurant Customers uses a chronological event sweep. Square Overlap combines an x-window with a y-ordered active set and stops on the second overlapping pair.
+- All 171 C++ solutions compiled with C++17, optimization, and warnings enabled. All 175 smoke cases passed.
+- All three new independent verifier groups passed randomized cross-product, direct interval-occupancy, and all-pairs square checks, plus official maximum-size performance cases for the two sweep-line problems.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide contact-sheet visual QA passed. Narration durations: 87.6 seconds (`leetcode-149`), 84.7 seconds (`cses-1619`), and 85.1 seconds (`usaco-227`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending action-time confirmation of the signed-in channel, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Geometry Primitives is complete. Easy Sweep Line is in progress; the next unfinished entry is `ioi-03-SeeingTheBoundary` 2003 - Seeing the Boundary. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-24
 

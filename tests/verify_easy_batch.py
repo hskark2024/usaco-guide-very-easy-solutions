@@ -6049,6 +6049,124 @@ def verify_polygon_area() -> None:
     ]
 
 
+def verify_max_points_on_line() -> None:
+    def brute(points):
+        if len(points) <= 2:
+            return len(points)
+
+        best = 2
+        # This oracle never computes or normalizes a slope.  It tests the
+        # determinant equation for every candidate line and every point.
+        for first, second in combinations(points, 2):
+            count = sum(
+                (second[0] - first[0]) * (point[1] - first[1])
+                == (second[1] - first[1]) * (point[0] - first[0])
+                for point in points
+            )
+            best = max(best, count)
+        return best
+
+    cases = [
+        [(0, 0)],
+        [(0, -3), (0, 2), (0, 9), (4, 1)],
+        [(-4, -6), (0, 0), (2, 3), (4, 6), (1, 0)],
+        [(-10**4, -10**4), (0, 0), (10**4, 10**4)],
+    ]
+    for _ in range(500):
+        size = RNG.randint(1, 12)
+        points = set()
+        while len(points) < size:
+            points.add((RNG.randint(-20, 20), RNG.randint(-20, 20)))
+        cases.append(list(points))
+
+    for points in cases:
+        input_text = f"{len(points)}\n" + "".join(
+            f"{x} {y}\n" for x, y in points
+        )
+        assert int(run("leetcode-149", input_text)) == brute(points)
+
+
+def verify_restaurant_customers() -> None:
+    cases = [
+        [(5, 8), (2, 4), (3, 9)],
+        [(1, 2)],
+        [(1, 10), (2, 9), (3, 8), (4, 7)],
+    ]
+    for _ in range(600):
+        customer_count = RNG.randint(1, 25)
+        # Sampling distinct endpoints follows the official guarantee and also
+        # makes each randomly paired interval nonempty after sorting its ends.
+        endpoints = RNG.sample(range(1, 500), 2 * customer_count)
+        visits = []
+        for index in range(0, len(endpoints), 2):
+            first, second = sorted(endpoints[index:index + 2])
+            visits.append((first, second))
+        cases.append(visits)
+
+    for visits in cases:
+        # Directly ask how many half-open visits contain every event time.
+        # This shares no event-counter state with the solution.
+        times = [time for visit in visits for time in visit]
+        expected = max(
+            sum(arrival <= time < departure for arrival, departure in visits)
+            for time in times
+        )
+        input_text = f"{len(visits)}\n" + "".join(
+            f"{arrival} {departure}\n" for arrival, departure in visits
+        )
+        assert int(run("cses-1619", input_text)) == expected
+
+    # The maximum official N checks the sort and allocation sizes.  Every
+    # interval is disjoint, so the expected peak is visibly one.
+    customer_count = 200_000
+    input_text = f"{customer_count}\n" + "".join(
+        f"{2 * index + 1} {2 * index + 2}\n"
+        for index in range(customer_count)
+    )
+    assert int(run("cses-1619", input_text)) == 1
+
+
+def verify_square_overlap() -> None:
+    def brute(centers, side_length):
+        overlaps = []
+        for first, second in combinations(centers, 2):
+            dx = abs(first[0] - second[0])
+            dy = abs(first[1] - second[1])
+            if dx < side_length and dy < side_length:
+                overlaps.append((side_length - dx) * (side_length - dy))
+        if len(overlaps) > 1:
+            return -1
+        return overlaps[0] if overlaps else 0
+
+    cases = [
+        (6, [(0, 0), (8, 4), (-2, 1), (0, 7)]),
+        (4, [(0, 0), (4, 0), (0, 4), (4, 4)]),
+        (10, [(0, 0), (3, 4), (100, 100)]),
+        (2, [(-10**6, -10**6), (10**6, 10**6)]),
+    ]
+    for _ in range(900):
+        side_length = 2 * RNG.randint(1, 15)
+        size = RNG.randint(2, 18)
+        centers = set()
+        while len(centers) < size:
+            centers.add((RNG.randint(-60, 60), RNG.randint(-60, 60)))
+        cases.append((side_length, list(centers)))
+
+    for side_length, centers in cases:
+        input_text = f"{len(centers)} {side_length}\n" + "".join(
+            f"{x} {y}\n" for x, y in centers
+        )
+        assert int(run("usaco-227", input_text)) == brute(centers, side_length)
+
+    # Maximum N with centers spaced farther apart than K checks the intended
+    # O(N log N) behavior and keeps every coordinate inside the official range.
+    square_count = 50_000
+    input_text = f"{square_count} 2\n" + "".join(
+        f"{-1_000_000 + 3 * index} 0\n" for index in range(square_count)
+    )
+    assert int(run("usaco-227", input_text)) == 0
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -6185,6 +6303,9 @@ if __name__ == "__main__":
         verify_segment_distance,
         verify_point_in_polygon,
         verify_polygon_area,
+        verify_max_points_on_line,
+        verify_restaurant_customers,
+        verify_square_overlap,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

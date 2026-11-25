@@ -156,6 +156,9 @@ The official statements remain at their original judge links. These notes intent
 | `kattis-segmentdistance` | Kattis | [Segment Distance](problems/kattis-segmentdistance/README.md) | [Geometry, Projection, Segment Distance] | [C++](solutions/kattis-segmentdistance.cpp) | [Package](videos/easy/kattis-segmentdistance/README.md) |
 | `kattis-pointinpolygon` | Kattis | [Point in Polygon](problems/kattis-pointinpolygon/README.md) | [Geometry, Ray Casting, Orientation] | [C++](solutions/kattis-pointinpolygon.cpp) | [Package](videos/easy/kattis-pointinpolygon/README.md) |
 | `kattis-polygonarea` | Kattis | [Polygon Area](problems/kattis-polygonarea/README.md) | [Geometry, Shoelace Formula, Orientation] | [C++](solutions/kattis-polygonarea.cpp) | [Package](videos/easy/kattis-polygonarea/README.md) |
+| `leetcode-149` | LeetCode | [Max Points on a Line](problems/leetcode-149/README.md) | [Geometry, Complete Search, Normalized Slopes] | [C++](solutions/leetcode-149.cpp) | [Package](videos/easy/leetcode-149/README.md) |
+| `cses-1619` | CSES | [Restaurant Customers](problems/cses-1619/README.md) | [Sweep Line, Event Sorting, Intervals] | [C++](solutions/cses-1619.cpp) | [Package](videos/easy/cses-1619/README.md) |
+| `usaco-227` | USACO Silver | [Square Overlap](problems/usaco-227/README.md) | [Sweep Line, Ordered Sets, Rectangle Intersection] | [C++](solutions/usaco-227.cpp) | [Package](videos/easy/usaco-227/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

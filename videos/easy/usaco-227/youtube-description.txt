@@ -1,0 +1,6 @@
+Use an x-coordinate sweep line and a y-ordered active set to detect equal-square overlaps and compute the unique shared area.
+
+Official problem: https://usaco.org/index.php?page=viewproblem2&cpid=227
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/usaco-227.cpp
+
+Topics: sweep line, ordered set, square intersection, USACO Silver, C++17.

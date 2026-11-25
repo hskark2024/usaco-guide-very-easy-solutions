@@ -6,6 +6,9 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "leetcode-149": ("6\n1 1\n3 2\n5 3\n4 1\n2 3\n1 4\n", "4\n"),
+    "cses-1619": ("3\n5 8\n2 4\n3 9\n", "2\n"),
+    "usaco-227": ("4 6\n0 0\n8 4\n-2 1\n0 7\n", "20\n"),
     "kattis-segmentdistance": ("5\n-10 0 10 0 0 -10 0 10\n-10 0 10 0 -5 0 5 0\n1 1 1 1 1 1 2 1\n1 1 1 1 2 1 2 1\n1871 5789 216 -517 189 -1518 3851 1895\n", "0.00\n0.00\n0.00\n1.00\n713.86\n"),
     "kattis-pointinpolygon": ("3\n0 0\n10 0\n0 10\n3\n4 5\n5 5\n6 5\n5\n41 -6\n-24 -74\n-51 -6\n73 17\n-30 -34\n2\n-12 -26\n39 -8\n0\n", "in\non\nout\nout\nin\n"),
     "kattis-polygonarea": ("3\n0 0\n10 0\n0 10\n5\n41 -6\n-24 -74\n-51 -6\n73 17\n-30 -34\n0\n", "CCW 50.0\nCW 3817.5\n"),

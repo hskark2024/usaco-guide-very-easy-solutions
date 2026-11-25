@@ -1,0 +1,8 @@
+Max Points on a Line	Find the largest collinear group	Avoid decimal slope errors
+Fix one anchor	Draw a vector to every other point	Same line means scaled vectors
+Remove scale	Divide dx and dy by their GCD	Four six becomes two three
+Choose one sign	Opposite vectors describe one line	Make dx positive
+Special directions	Vertical becomes zero one	Horizontal becomes one zero
+Count directions	Use a map for normalized pairs	Best frequency plus the anchor
+Why it works	Every best line has a first anchor	Equal keys mean one exact line
+Complexity	Check every pair of points	O(N squared log N) time
