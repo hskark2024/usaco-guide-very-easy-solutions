@@ -1,0 +1,17 @@
+We need one circular antenna signal that reaches at least K households, and we want the smallest possible radius. The center may be anywhere, so trying grid positions will not work.
+
+First, binary search the radius. If a radius works, every larger radius works too. The interesting part is checking one trial radius R.
+
+Take one household A and force it to lie on the circle boundary. The antenna center must be exactly distance R from A, so the center can rotate around A like the hand of a clock.
+
+Consider another household B. If A and B are more than two R apart, no radius-R circle can contain both. Otherwise, B is covered during one interval of center angles.
+
+Let alpha be the direction from A to B. A small triangle gives beta equals arccos of distance A B divided by two R. The valid angles run from alpha minus beta through alpha plus beta.
+
+Turn each interval into an entering event and an exiting event. Duplicate the events one full turn later so intervals crossing angle zero need no special case. Sort the events, with entering before exiting when angles tie because points on the circle count as covered.
+
+Sweep the events. The counter starts at one for anchor A. If it reaches K, the trial radius works. The current angle also tells us a valid center: move distance R from A in that direction.
+
+Why may we insist on an anchor? A smallest covering circle cannot have every covered point strictly inside. If it did, we could shrink it. So some household touches the boundary, and we eventually try it.
+
+Repeat this check during binary search and keep the latest valid center. With five hundred points, the N squared log N sweep is fast enough, and eighty search steps give much more precision than the judge requires.

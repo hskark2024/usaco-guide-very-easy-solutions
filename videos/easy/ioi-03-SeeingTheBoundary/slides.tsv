@@ -1,0 +1,8 @@
+Seeing the Boundary	IOI 2003 radial sweep	Count visible integer fence posts
+One rock one wedge	Convex rock directions are continuous	Two tangent rays form the endpoints
+Find tangents	Sort vertex angles	Largest cyclic gap is outside the rock
+Hit the fence	Extend tangents to the square	Number the perimeter counterclockwise
+Stay exact	Store hit positions as fractions	Aligned endpoint posts must be blocked
+Integer interval	First is ceiling of start	Last is floor of end
+Union shadows	Split wraparound ranges	Merge overlaps so posts count once
+Complexity	Tiny per-rock angle sort	O(P plus R log R) overall

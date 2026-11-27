@@ -1,0 +1,6 @@
+Learn how tangent rays, exact perimeter fractions, and interval union solve IOI 2003 Seeing the Boundary without checking every post against every rock.
+
+Official problem: https://ioinformatics.org/files/ioi2003problem6.pdf
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ioi-03-SeeingTheBoundary.cpp
+
+Topics: radial sweep, convex geometry, exact arithmetic, interval union, C++17.

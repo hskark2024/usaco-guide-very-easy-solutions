@@ -1,0 +1,8 @@
+Minimum Antenna Radius	CEOI 2006 Antenna	Cover at least K households
+Binary search R	Larger radii stay feasible	Need a fixed-radius checker
+Choose anchor A	Put A on the circle boundary	Center rotates distance R around A
+Household B	Possible only when distance is at most 2R	Valid centers form one angle interval
+Compute interval	alpha points from A to B	beta is acos of d over 2R
+Radial events	Duplicate intervals one full turn later	Enter before exit on ties
+Find witness	Counter starts at one for A	K overlaps give a center
+Correct and fast	An optimum has a boundary household	O(iterations N squared log N)

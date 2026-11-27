@@ -6167,6 +6167,165 @@ def verify_square_overlap() -> None:
     assert int(run("usaco-227", input_text)) == 0
 
 
+def verify_seeing_the_boundary() -> None:
+    def orientation(first, second, third):
+        return ((second[0] - first[0]) * (third[1] - first[1])
+                - (second[1] - first[1]) * (third[0] - first[0]))
+
+    def on_segment(first, second, point):
+        return (
+            orientation(first, second, point) == 0
+            and min(first[0], second[0]) <= point[0] <= max(first[0], second[0])
+            and min(first[1], second[1]) <= point[1] <= max(first[1], second[1])
+        )
+
+    def segments_intersect(first, second, third, fourth):
+        turns = (
+            orientation(first, second, third),
+            orientation(first, second, fourth),
+            orientation(third, fourth, first),
+            orientation(third, fourth, second),
+        )
+        if turns[0] == 0 and on_segment(first, second, third):
+            return True
+        if turns[1] == 0 and on_segment(first, second, fourth):
+            return True
+        if turns[2] == 0 and on_segment(third, fourth, first):
+            return True
+        if turns[3] == 0 and on_segment(third, fourth, second):
+            return True
+        return ((turns[0] > 0) != (turns[1] > 0)
+                and (turns[2] > 0) != (turns[3] > 0))
+
+    def fence_posts(side):
+        # Generate each of the 4*N posts once in counterclockwise order.
+        return (
+            [(coordinate, 0) for coordinate in range(side)]
+            + [(side, coordinate) for coordinate in range(side)]
+            + [(coordinate, side) for coordinate in range(side, 0, -1)]
+            + [(0, coordinate) for coordinate in range(side, 0, -1)]
+        )
+
+    def brute(side, observer, rocks):
+        visible = 0
+        for post in fence_posts(side):
+            blocked = False
+            for polygon in rocks:
+                for index, first in enumerate(polygon):
+                    second = polygon[(index + 1) % len(polygon)]
+                    if segments_intersect(observer, post, first, second):
+                        blocked = True
+                        break
+                if blocked:
+                    break
+            visible += not blocked
+        return visible
+
+    cases = [
+        (100, (60, 50), [[
+            (70, 40), (75, 40), (80, 40), (80, 50), (70, 60)
+        ]]),
+        (10, (5, 5), [[(7, 4), (8, 4), (8, 6), (7, 6)]]),
+        (12, (2, 7), [[(5, 2), (8, 2), (8, 4), (5, 4)],
+                       [(7, 8), (9, 8), (9, 10), (7, 10)]]),
+    ]
+
+    for _ in range(500):
+        side = RNG.randint(7, 24)
+        observer = (RNG.randint(1, side - 1), RNG.randint(1, side - 1))
+        while True:
+            x1, x2 = sorted(RNG.sample(range(1, side), 2))
+            y1, y2 = sorted(RNG.sample(range(1, side), 2))
+            if not (x1 <= observer[0] <= x2 and y1 <= observer[1] <= y2):
+                break
+        cases.append((side, observer, [[
+            (x1, y1), (x2, y1), (x2, y2), (x1, y2)
+        ]]))
+
+    for side, observer, rocks in cases:
+        input_text = f'{side} {len(rocks)}\n{observer[0]} {observer[1]}\n'
+        input_text += ''.join(
+            f'{len(polygon)}\n'
+            + ''.join(f'{x} {y}\n' for x, y in polygon)
+            for polygon in rocks
+        )
+        assert int(run('ioi-03-SeeingTheBoundary', input_text)) == brute(
+            side, observer, rocks
+        )
+
+
+def verify_antenna() -> None:
+    def circle_from_three(first, second, third):
+        ax, ay = first
+        bx, by = second
+        cx, cy = third
+        determinant = 2.0 * (
+            ax * (by - cy) + bx * (cy - ay) + cx * (ay - by)
+        )
+        if abs(determinant) < 1e-12:
+            return None
+        ux = (
+            (ax * ax + ay * ay) * (by - cy)
+            + (bx * bx + by * by) * (cy - ay)
+            + (cx * cx + cy * cy) * (ay - by)
+        ) / determinant
+        uy = (
+            (ax * ax + ay * ay) * (cx - bx)
+            + (bx * bx + by * by) * (ax - cx)
+            + (cx * cx + cy * cy) * (bx - ax)
+        ) / determinant
+        return (ux, uy, sqrt((ux - ax) ** 2 + (uy - ay) ** 2))
+
+    def brute(points, required):
+        candidates = []
+        for first, second in combinations(points, 2):
+            center_x = (first[0] + second[0]) / 2.0
+            center_y = (first[1] + second[1]) / 2.0
+            radius = sqrt((first[0] - second[0]) ** 2
+                          + (first[1] - second[1]) ** 2) / 2.0
+            candidates.append((center_x, center_y, radius))
+        for triple in combinations(points, 3):
+            circle = circle_from_three(*triple)
+            if circle is not None:
+                candidates.append(circle)
+
+        return min(
+            radius
+            for center_x, center_y, radius in candidates
+            if sum(
+                (x - center_x) ** 2 + (y - center_y) ** 2
+                <= (radius + 1e-8) ** 2
+                for x, y in points
+            ) >= required
+        )
+
+    cases = [
+        ([(2, 2), (6, 2), (6, 5), (2, 8)], 3),
+        ([(0, 0), (2, 0)], 2),
+        ([(0, 0), (4, 0), (0, 3)], 3),
+    ]
+    for _ in range(160):
+        size = RNG.randint(2, 8)
+        points = set()
+        while len(points) < size:
+            points.add((RNG.randint(0, 20), RNG.randint(0, 20)))
+        cases.append((list(points), RNG.randint(2, size)))
+
+    for points, required in cases:
+        input_text = f'{len(points)} {required}\n' + ''.join(
+            f'{x} {y}\n' for x, y in points
+        )
+        output = list(map(float, run('ceoi-06-antenna', input_text).split()))
+        radius, center_x, center_y = output
+        expected = brute(points, required)
+        assert abs(radius - expected) <= 2e-6
+        assert sum(
+            (x - center_x) ** 2 + (y - center_y) ** 2
+            <= (radius + 0.0002 + 1e-8) ** 2
+            for x, y in points
+        ) >= required
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -6306,6 +6465,8 @@ if __name__ == "__main__":
         verify_max_points_on_line,
         verify_restaurant_customers,
         verify_square_overlap,
+        verify_seeing_the_boundary,
+        verify_antenna,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

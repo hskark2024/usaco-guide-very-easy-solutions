@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-25 (the live Guide source and selected module data were checked directly)
-- Listing snapshot: USACO Guide source commit [`5addb3e`](https://github.com/cpinitiative/usaco-guide/commit/5addb3eedcaddea38292dd70129482ae7057155c) (425 unique module-listed Easy IDs in today's full recursive scan)
-- Completed Easy solutions: 140
-- Complete video packages: 140
+- Last listing check: 2026-11-26 (the live Guide source and selected module data were checked directly)
+- Listing snapshot: USACO Guide source commit [`70bfb31`](https://github.com/cpinitiative/usaco-guide/commit/70bfb314cd0be2e8102215a8a3efb0a8cc558a06)
+- Completed Easy solutions: 142
+- Complete video packages: 142
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -151,6 +151,20 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `leetcode-149` | Max Points on a Line | complete | complete | complete | generated locally; excluded from Git |
 | `cses-1619` | Restaurant Customers | complete | complete | complete | generated locally; excluded from Git |
 | `usaco-227` | Square Overlap | complete | complete | complete | generated locally; excluded from Git |
+| `ioi-03-SeeingTheBoundary` | 2003 — Seeing the Boundary | complete | complete | complete | generated locally; excluded from Git |
+| `ceoi-06-antenna` | 2006 — Antenna | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-26
+
+- New entries: `ioi-03-SeeingTheBoundary` 2003 — Seeing the Boundary and `ceoi-06-antenna` 2006 — Antenna.
+- The live USACO Guide source is at commit `70bfb31`; both remaining radial-sweep entries are labeled Easy.
+- Seeing the Boundary maps exact tangent rays to rational square-perimeter intervals and merges their inclusive integer-post union. Antenna binary-searches the radius and uses doubled angular coverage events to produce a valid center.
+- All 173 C++ solutions compiled with C++17, optimization, and warnings enabled. All 177 smoke cases and all 139 independent verifier groups passed.
+- New verifier groups passed exact segment-intersection enumeration on randomized small fields and exhaustive two/three-point circle enumeration on randomized household sets.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide contact-sheet visual QA passed. Narration durations: 104.8 seconds (`ioi-03-SeeingTheBoundary`) and 105.9 seconds (`ceoi-06-antenna`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending action-time confirmation of the signed-in channel, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Sweep Line is complete. The next Easy module is Convex Hull, beginning with `kattis-convexhull`, `kattis-roberthood`, and `cf-1299C`. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-25
 

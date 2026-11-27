@@ -6,6 +6,8 @@ root = Path(__file__).resolve().parents[1]
 build = root / "tests" / "build"
 
 tests = {
+    "ioi-03-SeeingTheBoundary": ("100 1\n60 50\n5\n70 40\n75 40\n80 40\n80 50\n70 60\n", "319\n"),
+    "ceoi-06-antenna": ("2 2\n0 0\n2 0\n", "1.0000000000\n1.0000000000 0.0000000000\n"),
     "leetcode-149": ("6\n1 1\n3 2\n5 3\n4 1\n2 3\n1 4\n", "4\n"),
     "cses-1619": ("3\n5 8\n2 4\n3 9\n", "2\n"),
     "usaco-227": ("4 6\n0 0\n8 4\n-2 1\n0 7\n", "20\n"),

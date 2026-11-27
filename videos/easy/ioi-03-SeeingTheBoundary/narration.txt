@@ -1,0 +1,15 @@
+Picture yourself standing inside a square field and slowly turning in a full circle. Fence posts sit at every whole meter around the boundary. Rocks block some of those posts.
+
+Checking every post against every rock is much too slow. Instead, look at one convex rock. From your position, it fills one continuous wedge of directions. The two edge directions are tangent rays that just touch the rock.
+
+We find those rays from the rock's vertices. Sort their viewing angles around the observer. Because the observer is outside a convex rock, all rock directions fit inside less than half a turn. The largest gap between consecutive angles is outside the rock. The rays immediately after and before that gap are the two tangents.
+
+Now extend each tangent until it hits the square fence. Number the boundary counterclockwise from zero to four N. A bottom point uses its x coordinate. Then the right, top, and left sides continue the same counterclockwise numbering.
+
+We keep these hit positions as fractions. That matters because the statement says a post exactly lined up with a rock vertex is blocked. Exact fractions let us include it without a rounding guess.
+
+The first blocked integer post is the ceiling of the starting position. The last is the floor of the ending position. If the interval crosses perimeter position zero, split it into two ordinary intervals.
+
+Do this for every rock. Sort the intervals and merge overlaps. Their total integer length is the number of blocked posts, counted once even if two rocks cover the same direction. Subtract from four N.
+
+Sorting at most twenty vertices per rock is tiny. The main cost is sorting the rock intervals, so the method handles the full input comfortably and keeps the delicate geometry exact.

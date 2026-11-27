@@ -159,6 +159,8 @@ The official statements remain at their original judge links. These notes intent
 | `leetcode-149` | LeetCode | [Max Points on a Line](problems/leetcode-149/README.md) | [Geometry, Complete Search, Normalized Slopes] | [C++](solutions/leetcode-149.cpp) | [Package](videos/easy/leetcode-149/README.md) |
 | `cses-1619` | CSES | [Restaurant Customers](problems/cses-1619/README.md) | [Sweep Line, Event Sorting, Intervals] | [C++](solutions/cses-1619.cpp) | [Package](videos/easy/cses-1619/README.md) |
 | `usaco-227` | USACO Silver | [Square Overlap](problems/usaco-227/README.md) | [Sweep Line, Ordered Sets, Rectangle Intersection] | [C++](solutions/usaco-227.cpp) | [Package](videos/easy/usaco-227/README.md) |
+| `ioi-03-SeeingTheBoundary` | IOI | [2003 — Seeing the Boundary](problems/ioi-03-SeeingTheBoundary/README.md) | [Radial Sweep, Convex Geometry, Interval Union] | [C++](solutions/ioi-03-SeeingTheBoundary.cpp) | [Package](videos/easy/ioi-03-SeeingTheBoundary/README.md) |
+| `ceoi-06-antenna` | CEOI | [2006 — Antenna](problems/ceoi-06-antenna/README.md) | [Binary Search, Radial Sweep, Circles] | [C++](solutions/ceoi-06-antenna.cpp) | [Package](videos/easy/ceoi-06-antenna/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

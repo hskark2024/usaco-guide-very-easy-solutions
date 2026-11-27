@@ -1,0 +1,6 @@
+Binary-search the minimum signal radius and use a radial event sweep to place a circle covering at least K households.
+
+Official problem: https://qoj.ac/problem/17234
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/ceoi-06-antenna.cpp
+
+Topics: binary search on answer, radial sweep, circle geometry, event sorting, C++17.
