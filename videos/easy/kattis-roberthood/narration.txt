@@ -1,0 +1,15 @@
+We are given arrow-hit coordinates and need the longest distance between any pair. Checking every pair would take N squared time, which is far too slow for one hundred thousand shots.
+
+Start with one geometric fact: a farthest pair can be chosen from the convex hull. If one endpoint were strictly inside, extend the line away from the other endpoint until it reaches the boundary. The distance would get larger. So interior points cannot be required.
+
+Build the convex hull with monotone chain. This usually shrinks the input a lot, but we still want a linear scan of the hull instead of checking all hull pairs.
+
+Rotating calipers gives that scan. Picture two parallel lines touching opposite sides of the polygon. Choose one hull edge, and let J be a point on the opposite side.
+
+The absolute cross product of the edge and point J is twice the triangle area. As J moves counterclockwise, this area increases until the supporting point is reached, then decreases. Advance J only while the next area is larger.
+
+For the current edge, test the distance from J to both edge endpoints. Then rotate to the next edge. Convexity means J never needs to move backward, so it makes only one trip around the hull.
+
+Keep squared distances as integers. This avoids square roots and floating-point rounding during comparisons. Take one square root only after finding the maximum, then print enough decimal places.
+
+Handle two unique points directly. Duplicate and collinear shots are already simplified by the hull builder. The hull costs N log N time, the calipers cost H time, and the complete method is fast enough for the largest case.

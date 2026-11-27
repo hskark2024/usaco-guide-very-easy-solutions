@@ -1,0 +1,15 @@
+Imagine every input point is a nail in a board. If we stretch a rubber band around all the nails, the nails touched by the tight band are the convex hull. Our job is to print those outer corners counterclockwise.
+
+We will use Andrew's monotone chain algorithm. First, sort every point from left to right, breaking ties from bottom to top. Remove duplicate coordinates because the same nail should appear only once.
+
+Now build the lower hull. Read the sorted points in order and keep a stack. Before pushing a new point, inspect the last two stack points and the new point.
+
+The cross product tells us how they turn. A positive value means a left turn. A negative value means a right turn, and zero means the three points are on one straight line.
+
+The lower boundary must keep making strict left turns. If the cross product is zero or negative, the middle point is not a needed lower corner, so pop it and test again. Then push the new point.
+
+Build the upper hull with the same rule while reading the sorted points backward. The lower and upper chains share their leftmost and rightmost endpoints. Join the chains and remove the repeated starting point.
+
+Why is popping safe? When three points do not turn left, the middle point lies on or inside the boundary formed by the other two. A tight rubber band skips it. The same argument works on both chains, so together they contain every outer corner and no extra edge point.
+
+Be careful with repeated points, one-point cases, and a set where every point is collinear. Sorting costs N log N time, and the two scans are linear because each point is pushed and popped at most once.

@@ -6326,6 +6326,159 @@ def verify_antenna() -> None:
         ) >= required
 
 
+def verify_convex_hull() -> None:
+    def turn(first, second, third):
+        return ((second[0] - first[0]) * (third[1] - first[1])
+                - (second[1] - first[1]) * (third[0] - first[0]))
+
+    def distance_squared(first, second):
+        return ((first[0] - second[0]) ** 2
+                + (first[1] - second[1]) ** 2)
+
+    def gift_wrap(points):
+        # Jarvis march is deliberately different from the C++ monotone-chain
+        # implementation.  It chooses the next supporting point directly.
+        unique = sorted(set(points))
+        if len(unique) <= 1:
+            return unique
+        start = unique[0]
+        hull = []
+        current = start
+        while True:
+            hull.append(current)
+            candidate = next(point for point in unique if point != current)
+            for point in unique:
+                direction = turn(current, candidate, point)
+                if (direction < 0 or
+                        (direction == 0
+                         and distance_squared(current, point)
+                         > distance_squared(current, candidate))):
+                    candidate = point
+            current = candidate
+            if current == start:
+                return hull
+
+    cases = [
+        [(0, 0)],
+        [(5, 5), (5, 5), (5, 5)],
+        [(0, 0), (1, 0), (2, 0), (3, 0)],
+        [(0, 0), (4, 0), (4, 3), (0, 3), (2, 1), (4, 0)],
+    ]
+    for _ in range(700):
+        cases.append([
+            (RNG.randint(-25, 25), RNG.randint(-25, 25))
+            for _ in range(RNG.randint(1, 35))
+        ])
+
+    for points in cases:
+        input_text = f'{len(points)}\n' + ''.join(
+            f'{x} {y}\n' for x, y in points
+        ) + '0\n'
+        tokens = list(map(int, run('kattis-convexhull', input_text).split()))
+        hull_size = tokens[0]
+        actual = list(zip(tokens[1::2], tokens[2::2]))
+        assert len(actual) == hull_size
+        assert actual == gift_wrap(points)
+        if hull_size >= 3:
+            assert all(
+                turn(actual[index - 2], actual[index - 1], actual[index]) > 0
+                for index in range(hull_size)
+            )
+
+    # Exercise the official per-case limit and duplicate removal.
+    points = [(index, (index * index) % 997) for index in range(10_000)]
+    output = run(
+        'kattis-convexhull',
+        '10000\n' + ''.join(f'{x} {y}\n' for x, y in points) + '0\n',
+    )
+    assert int(output.split()[0]) >= 2
+
+
+def verify_robert_hood() -> None:
+    cases = [
+        [(2, 2), (-1, -2)],
+        [(0, 0), (4, 0), (4, 3), (0, 3), (2, 1)],
+        [(0, 0), (1, 0), (2, 0), (3, 0)],
+        [(5, 5), (5, 5)],
+    ]
+    for _ in range(800):
+        cases.append([
+            (RNG.randint(-40, 40), RNG.randint(-40, 40))
+            for _ in range(RNG.randint(2, 45))
+        ])
+
+    for points in cases:
+        expected_squared = max(
+            (first[0] - second[0]) ** 2 + (first[1] - second[1]) ** 2
+            for first, second in combinations(points, 2)
+        )
+        input_text = f'{len(points)}\n' + ''.join(
+            f'{x} {y}\n' for x, y in points
+        )
+        actual = float(run('kattis-roberthood', input_text))
+        assert abs(actual - sqrt(expected_squared)) <= 1e-7
+
+    # Maximum input-size read with a tiny hull verifies the intended scaling.
+    points = [(-1000, -1000), (1000, -1000),
+              (1000, 1000), (-1000, 1000)]
+    input_text = '100000\n' + ''.join(
+        f'{points[index % 4][0]} {points[index % 4][1]}\n'
+        for index in range(100_000)
+    )
+    assert abs(float(run('kattis-roberthood', input_text))
+               - sqrt(8_000_000)) <= 1e-7
+
+
+def verify_water_balance() -> None:
+    def exact_oracle(values):
+        # The first answer is the smallest prefix average.  Remove the longest
+        # prefix attaining it and repeat; Fraction keeps this oracle exact.
+        answer = []
+        start = 0
+        while start < len(values):
+            running_sum = 0
+            best_average = None
+            best_end = start
+            for end in range(start, len(values)):
+                running_sum += values[end]
+                average = Fraction(running_sum, end - start + 1)
+                if best_average is None or average <= best_average:
+                    best_average = average
+                    best_end = end
+            answer.extend([best_average] * (best_end - start + 1))
+            start = best_end + 1
+        return answer
+
+    cases = [
+        [7, 5, 5, 7],
+        [7, 8, 8, 10, 12],
+        [4, 3, 2, 1],
+        [1],
+        [3, 9, 5, 5, 1, 7, 5, 3, 8, 7],
+    ]
+    for _ in range(900):
+        cases.append([
+            RNG.randint(1, 30) for _ in range(RNG.randint(1, 14))
+        ])
+
+    for values in cases:
+        input_text = f'{len(values)}\n' + ' '.join(map(str, values)) + '\n'
+        actual = list(map(float, run('cf-1299C', input_text).split()))
+        expected = exact_oracle(values)
+        assert len(actual) == len(values)
+        assert all(abs(got - float(want)) <= 1e-9
+                   for got, want in zip(actual, expected))
+        assert all(left <= right + 1e-12
+                   for left, right in zip(actual, actual[1:]))
+        assert abs(sum(actual) - sum(values)) <= 1e-6
+
+    # The full official N limit catches accidental quadratic behavior.
+    size = 1_000_000
+    output = run('cf-1299C', f'{size}\n' + '1 ' * size + '\n').split()
+    assert len(output) == size
+    assert output[0] == '1.0000000000' and output[-1] == '1.0000000000'
+
+
 if __name__ == "__main__":
     for verifier in (
         verify_static_rmq,
@@ -6467,6 +6620,9 @@ if __name__ == "__main__":
         verify_square_overlap,
         verify_seeing_the_boundary,
         verify_antenna,
+        verify_convex_hull,
+        verify_robert_hood,
+        verify_water_balance,
     ):
         verifier()
         print(f"passed {verifier.__name__}")

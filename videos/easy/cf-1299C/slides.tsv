@@ -1,0 +1,8 @@
+Water Balance	Codeforces 1299C	Smallest reachable sequence
+What operations do	Average any consecutive segment	Preserve its total water
+Final shape	Block averages must be nondecreasing	Earlier values should be as small as possible
+Represent blocks	Store sum and length	Average equals sum divided by length
+Find a violation	Left average greater than right	Merge the two blocks
+Keep merging	A merge may violate the block to its left	Stop when averages are ordered
+Exact comparison	Cross multiply integers	Avoid rounding merge decisions
+Correct and fast	Minimum-prefix-average proof	O(N) time

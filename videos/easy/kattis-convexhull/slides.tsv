@@ -1,0 +1,8 @@
+Convex Hull	Kattis Convex Hull	Find the outer corners
+Rubber-band picture	Points are nails	A tight band touches the hull
+Sort and deduplicate	Left to right	Bottom to top on ties
+Build lower chain	Keep a point stack	Require strict left turns
+Cross product	Positive is left	Zero or negative means pop
+Build upper chain	Scan the sorted points backward	Use the same rule
+Join the chains	Shared endpoints appear twice	Remove the repeated start
+Correct and fast	Skipped points are not corners	O(N log N) time

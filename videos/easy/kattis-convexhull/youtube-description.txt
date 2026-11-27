@@ -1,0 +1,6 @@
+Build a strict counterclockwise convex hull with sorting, cross products, and Andrew's monotone-chain algorithm.
+
+Official problem: https://open.kattis.com/problems/convexhull
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/kattis-convexhull.cpp
+
+Topics: computational geometry, convex hull, monotone chain, cross product, C++17.

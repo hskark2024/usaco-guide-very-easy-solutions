@@ -1,0 +1,6 @@
+Find the farthest pair of points by reducing to the convex hull and scanning antipodal pairs with rotating calipers.
+
+Official problem: https://open.kattis.com/problems/roberthood
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/kattis-roberthood.cpp
+
+Topics: convex hull, rotating calipers, diameter, computational geometry, C++17.

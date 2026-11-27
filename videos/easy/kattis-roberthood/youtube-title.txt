@@ -1,0 +1,1 @@
+Farthest Pair with Rotating Calipers | Kattis Robert Hood C++

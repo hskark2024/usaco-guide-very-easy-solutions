@@ -1,0 +1,8 @@
+Robert Hood	Longest distance between arrow hits	Avoid all N squared pairs
+Outer points only	A farthest pair lies on the convex hull	Interior points cannot be required
+Build the hull	Sort and use cross products	Keep strict outer corners
+Rotating calipers	One hull edge	One opposite contact point J
+Triangle area	Absolute cross product	Advance J while area grows
+Check candidates	Test both edge endpoints	Keep maximum squared distance
+Why linear	J never moves backward	One trip around the hull
+Finish safely	One square root	O(N log N) total

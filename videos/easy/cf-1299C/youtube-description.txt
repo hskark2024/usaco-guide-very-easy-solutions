@@ -1,0 +1,6 @@
+Derive the linear-time block-merging solution for the lexicographically smallest reachable water sequence.
+
+Official problem: https://codeforces.com/problemset/problem/1299/C
+GitHub solution: https://github.com/hskark2024/usaco-guide-very-easy-solutions/blob/main/solutions/cf-1299C.cpp
+
+Topics: greedy, pool adjacent violators, prefix sums, convex hull slopes, C++17.

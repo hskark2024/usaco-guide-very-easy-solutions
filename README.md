@@ -161,6 +161,9 @@ The official statements remain at their original judge links. These notes intent
 | `usaco-227` | USACO Silver | [Square Overlap](problems/usaco-227/README.md) | [Sweep Line, Ordered Sets, Rectangle Intersection] | [C++](solutions/usaco-227.cpp) | [Package](videos/easy/usaco-227/README.md) |
 | `ioi-03-SeeingTheBoundary` | IOI | [2003 — Seeing the Boundary](problems/ioi-03-SeeingTheBoundary/README.md) | [Radial Sweep, Convex Geometry, Interval Union] | [C++](solutions/ioi-03-SeeingTheBoundary.cpp) | [Package](videos/easy/ioi-03-SeeingTheBoundary/README.md) |
 | `ceoi-06-antenna` | CEOI | [2006 — Antenna](problems/ceoi-06-antenna/README.md) | [Binary Search, Radial Sweep, Circles] | [C++](solutions/ceoi-06-antenna.cpp) | [Package](videos/easy/ceoi-06-antenna/README.md) |
+| `kattis-convexhull` | Kattis | [Convex Hull](problems/kattis-convexhull/README.md) | [Geometry, Convex Hull, Monotone Chain] | [C++](solutions/kattis-convexhull.cpp) | [Package](videos/easy/kattis-convexhull/README.md) |
+| `kattis-roberthood` | Kattis | [Robert Hood](problems/kattis-roberthood/README.md) | [Convex Hull, Rotating Calipers, Diameter] | [C++](solutions/kattis-roberthood.cpp) | [Package](videos/easy/kattis-roberthood/README.md) |
+| `cf-1299C` | Codeforces | [Water Balance](problems/cf-1299C/README.md) | [Greedy, Pool Adjacent Violators, Convex Hull Slopes] | [C++](solutions/cf-1299C.cpp) | [Package](videos/easy/cf-1299C/README.md) |
 
 See [Easy Progress](progress/easy.md) for the source-of-truth check date and completion status.
 

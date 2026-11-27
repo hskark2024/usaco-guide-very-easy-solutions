@@ -1,0 +1,15 @@
+We have a row of water tanks. In one move, we can choose a consecutive group and replace every amount in that group by its average. We want the lexicographically smallest sequence we can reach.
+
+The final sequence must be nondecreasing. If a left amount is larger than a right amount, averaging the interval between them can lower an earlier position, making a smaller sequence.
+
+Think of every tank as a block. A block stores its total water and its number of tanks, so its height is sum divided by length.
+
+Read tanks from left to right and push a one-tank block. If the previous block has a larger average than the new block, their heights decrease. They cannot stay separate in the final answer, so merge their sums and lengths.
+
+After a merge, the new average may be smaller than the block before it. Keep merging leftward until all block averages are nondecreasing. This is called the pool adjacent violators algorithm.
+
+Compare two averages with cross multiplication. Check left sum times right length against right sum times left length. This makes every merge decision exact, even when an average is a repeating decimal.
+
+Why is the greedy rule correct? The first final value cannot be greater than the average of any prefix. Averaging that prefix would make the first value smaller. Therefore the first block ends where the minimum prefix average is achieved. The merging process finds exactly that block, then repeats the same logic on the remaining suffix.
+
+At the end, print each block average once for every tank in that block. Every block is pushed once and merged at most once, so the algorithm is linear. Use enough decimal places to meet the strict output tolerance.

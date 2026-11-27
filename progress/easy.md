@@ -1,10 +1,10 @@
 # Easy Progress
 
 - Listing: [USACO Guide problems filtered to Easy](https://usaco.guide/problems?difficulty=Easy)
-- Last listing check: 2026-11-26 (the live Guide source and selected module data were checked directly)
+- Last listing check: 2026-11-27 (the live Guide source and selected module data were checked directly)
 - Listing snapshot: USACO Guide source commit [`70bfb31`](https://github.com/cpinitiative/usaco-guide/commit/70bfb314cd0be2e8102215a8a3efb0a8cc558a06)
-- Completed Easy solutions: 142
-- Complete video packages: 142
+- Completed Easy solutions: 145
+- Complete video packages: 145
 - Current status: in progress
 
 The listing is dynamic, so each automation run must recheck it before choosing new work. A row is complete only when its problem notes, C++ solution, smoke test, and video package exist.
@@ -153,6 +153,21 @@ The listing is dynamic, so each automation run must recheck it before choosing n
 | `usaco-227` | Square Overlap | complete | complete | complete | generated locally; excluded from Git |
 | `ioi-03-SeeingTheBoundary` | 2003 — Seeing the Boundary | complete | complete | complete | generated locally; excluded from Git |
 | `ceoi-06-antenna` | 2006 — Antenna | complete | complete | complete | generated locally; excluded from Git |
+| `kattis-convexhull` | Convex Hull | complete | complete | complete | generated locally; excluded from Git |
+| `kattis-roberthood` | Robert Hood | complete | complete | complete | generated locally; excluded from Git |
+| `cf-1299C` | Water Balance | complete | complete | complete | generated locally; excluded from Git |
+
+## Batch verification — 2026-11-27
+
+- New entries: `kattis-convexhull` Convex Hull, `kattis-roberthood` Robert Hood, and `cf-1299C` Water Balance.
+- The live USACO Guide source remains at commit `70bfb31`; all three Convex Hull module entries are labeled Easy. The full recursive module-data scan contains 425 unique Easy IDs.
+- Convex Hull uses a strict monotone chain, Robert Hood combines monotone chain with rotating calipers, and Water Balance uses exact pool-adjacent-violators block merging.
+- All 176 C++ solutions compiled with C++17, optimization, and warnings enabled. All 180 smoke cases and all 142 independent verifier groups passed.
+- New verifiers passed Jarvis-march hull comparisons, all-pairs diameter checks, and exact rational minimum-prefix averaging, plus official maximum-size performance cases.
+- Complete Daniel narration packages and local 1280×720 H.264/AAC MP4s were generated; full-stream decode and eight-slide contact-sheet visual QA passed. Narration durations: 96.1 seconds (`kattis-convexhull`), 98.7 seconds (`kattis-roberthood`), and 100.3 seconds (`cf-1299C`).
+- Source, notes, tests, and text video assets are included in today's Git commit; MP4 and AIFF files remain local only.
+- YouTube uploads remain pending action-time confirmation of the signed-in channel, playlist `USACO Guide Easy C++ Solutions`, `Private` visibility, and `Not made for kids` audience.
+- Easy Convex Hull is complete. The next Easy module is Convex Hull Trick, beginning with `cf-1083E`, `apio-10-Commando`, and `ceoi-04-TwoSawmills`. Overall Easy work remains in progress.
 
 ## Batch verification — 2026-11-26
 
